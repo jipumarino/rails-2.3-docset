@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Rollback.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:02 GMT -->
+<head>
+    <title>ActiveRecord::Rollback</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::Rollback 
+            
+                <span class="parent">&lt; 
+                    
+                    ActiveRecordError
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activerecord/lib/active_record/base_rb.html">activerecord/lib/active_record/base.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a
+href="Transactions/ClassMethods.html#M000822">ActiveRecord::Transactions::ClassMethods.transaction</a>
+uses this exception to distinguish a deliberate rollback from other
+exceptional situations. Normally, raising an exception will cause the
+<tt>transaction</tt> method to rollback the database transaction <b>and</b>
+pass on the exception. But if you raise an <a
+href="Rollback.html">ActiveRecord::Rollback</a> exception, then the
+database transaction will be rolled back, without passing on the exception.
+</p>
+<p>
+For example, you could do this in your controller to rollback a
+transaction:
+</p>
+<pre>
+  class BooksController &lt; ActionController::Base
+    def create
+      Book.transaction do
+        book = Book.new(params[:book])
+        book.save!
+        if today_is_friday?
+          # The system must fail on Friday so that our support department
+          # won't be out of job. We silently rollback this transaction
+          # without telling the user.
+          raise ActiveRecord::Rollback, &quot;Call tech support!&quot;
+        end
+      end
+      # ActiveRecord::Rollback is the only exception that won't be passed on
+      # by ActiveRecord::Base.transaction, so this line will still be reached
+      # even on Friday.
+      redirect_to root_url
+    end
+  end
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Rollback.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:02 GMT -->
+</html>    

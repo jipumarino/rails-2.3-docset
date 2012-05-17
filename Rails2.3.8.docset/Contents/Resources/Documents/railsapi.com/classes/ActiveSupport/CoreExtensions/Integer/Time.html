@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/Integer/Time.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+<head>
+    <title>ActiveSupport::CoreExtensions::Integer::Time</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::CoreExtensions::Integer::Time 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/activesupport/lib/active_support/core_ext/integer/time_rb.html">activesupport/lib/active_support/core_ext/integer/time.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Enables the use of time calculations and declarations, like 45.minutes +
+2.hours + 4.years.
+</p>
+<p>
+These methods use Time#advance for precise date calculations when using
+from_now, ago, etc. as well as adding or subtracting their results from a
+<a href="Time.html">Time</a> object. For example:
+</p>
+<pre>
+  # equivalent to Time.now.advance(:months =&gt; 1)
+  1.month.from_now
+
+  # equivalent to Time.now.advance(:years =&gt; 2)
+  2.years.from_now
+
+  # equivalent to Time.now.advance(:months =&gt; 4, :years =&gt; 5)
+  (4.months + 5.years).from_now
+</pre>
+<p>
+While these methods provide precise calculation when used as in the
+examples above, care should be taken to note that this is not true if the
+result of `months&#8217;, `years&#8217;, etc is converted before use:
+</p>
+<pre>
+  # equivalent to 30.days.to_i.from_now
+  1.month.to_i.from_now
+
+  # equivalent to 365.25.days.to_f.from_now
+  1.year.to_f.from_now
+</pre>
+<p>
+In such cases, Ruby&#8217;s core <a
+href="http://stdlib.rubyonrails.org/libdoc/date/rdoc/index.html">Date</a>
+and <a
+href="http://stdlib.rubyonrails.org/libdoc/time/rdoc/index.html">Time</a>
+should be used for precision date and time arithmetic
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002946">month</a>,</li>
+                
+                <li><a href="#M002945">months</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>Y</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002948">year</a>,</li>
+                
+                <li><a href="#M002947">years</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002946">
+                    
+                    <a name="M002946"></a><b>month</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Time.html#M002945">months</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002945">
+                    
+                    <a name="M002945"></a><b>months</b>()
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Time.html#M002946">month</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002945_source')" id="l_M002945_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d599b8000968047b4095dd8ff6c8ef10bb4ed462/activesupport/lib/active_support/core_ext/integer/time.rb#L33" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002945_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/integer/time.rb, line 33</span>
+33:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">months</span>
+34:           <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Duration</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-value">30</span>.<span class="ruby-identifier">days</span>, [[<span class="ruby-identifier">:months</span>, <span class="ruby-keyword kw">self</span>]])
+35:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002948">
+                    
+                    <a name="M002948"></a><b>year</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Time.html#M002947">years</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002947">
+                    
+                    <a name="M002947"></a><b>years</b>()
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Time.html#M002948">year</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002947_source')" id="l_M002947_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d599b8000968047b4095dd8ff6c8ef10bb4ed462/activesupport/lib/active_support/core_ext/integer/time.rb#L38" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002947_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/integer/time.rb, line 38</span>
+38:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">years</span>
+39:           <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Duration</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-value">365.25</span>.<span class="ruby-identifier">days</span>, [[<span class="ruby-identifier">:years</span>, <span class="ruby-keyword kw">self</span>]])
+40:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/Integer/Time.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+</html>    

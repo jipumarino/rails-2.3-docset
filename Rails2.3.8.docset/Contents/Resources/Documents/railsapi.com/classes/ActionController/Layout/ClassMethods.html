@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Layout/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:42 GMT -->
+<head>
+    <title>ActionController::Layout::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Layout::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/layout_rb.html">actionpack/lib/action_controller/layout.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Layouts reverse the common pattern of including shared headers and footers
+in many templates to isolate changes in repeated setups. The inclusion
+pattern has pages that look like this:
+</p>
+<pre>
+  &lt;%= render &quot;shared/header&quot; %&gt;
+  Hello World
+  &lt;%= render &quot;shared/footer&quot; %&gt;
+</pre>
+<p>
+This approach is a decent way of keeping common structures isolated from
+the changing content, but it&#8217;s verbose and if you ever want to change
+the structure of these two includes, you&#8217;ll have to change all the
+templates.
+</p>
+<p>
+With layouts, you can flip it around and have the common structure know
+where to insert changing content. This means that the header and footer are
+only mentioned in one place, like this:
+</p>
+<pre>
+  // The header part of this layout
+  &lt;%= yield %&gt;
+  // The footer part of this layout
+</pre>
+<p>
+And then you have content pages that look like this:
+</p>
+<pre>
+   hello world
+</pre>
+<p>
+At rendering time, the content page is computed and then inserted in the
+layout, like this:
+</p>
+<pre>
+  // The header part of this layout
+  hello world
+  // The footer part of this layout
+</pre>
+<p>
+NOTE: The old notation for rendering the view from a layout was to expose
+the magic <tt>@content_for_layout</tt> instance variable. The preferred
+notation now is to use <tt>yield</tt>, as documented above.
+</p>
+<h2>Accessing shared variables</h2>
+<p>
+Layouts have access to variables specified in the content pages and vice
+versa. This allows you to have layouts with references that won&#8217;t
+materialize before rendering time:
+</p>
+<pre>
+  &lt;h1&gt;&lt;%= @page_title %&gt;&lt;/h1&gt;
+  &lt;%= yield %&gt;
+</pre>
+<p>
+&#8230;and content pages that fulfill these references <em>at</em>
+rendering time:
+</p>
+<pre>
+   &lt;% @page_title = &quot;Welcome&quot; %&gt;
+   Off-world colonies offers you a chance to start a new life
+</pre>
+<p>
+The result after rendering is:
+</p>
+<pre>
+  &lt;h1&gt;Welcome&lt;/h1&gt;
+  Off-world colonies offers you a chance to start a new life
+</pre>
+<h2>Automatic layout assignment</h2>
+<p>
+If there is a template in <tt>app/views/layouts/</tt> with the same name as
+the current controller then it will be automatically set as that
+controller&#8217;s layout unless explicitly told otherwise. Say you have a
+WeblogController, for example. If a template named
+<tt>app/views/layouts/weblog.erb</tt> or
+<tt>app/views/layouts/weblog.builder</tt> exists then it will be
+automatically set as the layout for your WeblogController. You can create a
+layout with the name <tt>application.erb</tt> or
+<tt>application.builder</tt> and this will be set as the default controller
+if there is no layout with the same name as the current controller and
+there is no layout explicitly assigned with the <tt>layout</tt> method.
+Nested controllers use the same folder structure for automatic layout.
+assignment. So an Admin::WeblogController will look for a template named
+<tt>app/views/layouts/admin/weblog.erb</tt>. Setting a layout explicitly
+will always override the automatic behaviour for the controller where the
+layout is set. Explicitly setting the layout in a parent class, though,
+will not override the child class&#8217;s layout assignment if the child
+class has a layout with the same name.
+</p>
+<h2>Inheritance for layouts</h2>
+<p>
+Layouts are shared downwards in the inheritance hierarchy, but not upwards.
+Examples:
+</p>
+<pre>
+  class BankController &lt; ActionController::Base
+    layout &quot;bank_standard&quot;
+
+  class InformationController &lt; BankController
+
+  class VaultController &lt; BankController
+    layout :access_level_layout
+
+  class EmployeeController &lt; BankController
+    layout nil
+</pre>
+<p>
+The InformationController uses &#8220;bank_standard&#8220; inherited from
+the BankController, the VaultController overwrites and picks the layout
+dynamically, and the EmployeeController doesn&#8217;t want to use a layout
+at all.
+</p>
+<h2>Types of layouts</h2>
+<p>
+Layouts are basically just regular templates, but the name of this template
+needs not be specified statically. Sometimes you want to alternate layouts
+depending on runtime information, such as whether someone is logged in or
+not. This can be done either by specifying a method reference as a symbol
+or using an inline method (as a proc).
+</p>
+<p>
+The method reference is the preferred approach to variable layouts and is
+used like this:
+</p>
+<pre>
+  class WeblogController &lt; ActionController::Base
+    layout :writers_and_readers
+
+    def index
+      # fetching posts
+    end
+
+    private
+      def writers_and_readers
+        logged_in? ? &quot;writer_layout&quot; : &quot;reader_layout&quot;
+      end
+</pre>
+<p>
+Now when a new request for the index action is processed, the layout will
+vary depending on whether the person accessing is logged in or not.
+</p>
+<p>
+If you want to use an inline method, such as a proc, do something like
+this:
+</p>
+<pre>
+  class WeblogController &lt; ActionController::Base
+    layout proc{ |controller| controller.logged_in? ? &quot;writer_layout&quot; : &quot;reader_layout&quot; }
+</pre>
+<p>
+Of course, the most common way of specifying a layout is still just as a
+plain template name:
+</p>
+<pre>
+  class WeblogController &lt; ActionController::Base
+    layout &quot;weblog_standard&quot;
+</pre>
+<p>
+If no directory is specified for the template name, the template will by
+default be looked for in <tt>app/views/layouts/</tt>. Otherwise, it will be
+looked up relative to the template root.
+</p>
+<h2>Conditional layouts</h2>
+<p>
+If you have a layout that by default is applied to all the actions of a
+controller, you still have the option of rendering a given action or set of
+actions without a layout, or restricting a layout to only a single action
+or a set of actions. The <tt>:only</tt> and <tt>:except</tt> options can be
+passed to the layout call. For example:
+</p>
+<pre>
+  class WeblogController &lt; ActionController::Base
+    layout &quot;weblog_standard&quot;, :except =&gt; :rss
+
+    # ...
+
+  end
+</pre>
+<p>
+This will assign &#8220;weblog_standard&#8220; as the
+WeblogController&#8217;s layout except for the <tt>rss</tt> action, which
+will not wrap a layout around the rendered view.
+</p>
+<p>
+Both the <tt>:only</tt> and <tt>:except</tt> condition can accept an
+arbitrary number of method references, so #<tt>:except =&gt; [ :rss,
+:text_only ]</tt> is valid, as is <tt>:except =&gt; :rss</tt>.
+</p>
+<h2>Using a different layout in the action render call</h2>
+<p>
+If most of your actions use the same layout, it makes perfect sense to
+define a controller-wide layout as described above. Sometimes you&#8217;ll
+have exceptions where one action wants to use a different layout than the
+rest of the controller. You can do this by passing a <tt>:layout</tt>
+option to the <tt>render</tt> call. For example:
+</p>
+<pre>
+  class WeblogController &lt; ActionController::Base
+    layout &quot;weblog_standard&quot;
+
+    def help
+      render :action =&gt; &quot;help&quot;, :layout =&gt; &quot;help&quot;
+    end
+  end
+</pre>
+<p>
+This will render the help action with the &#8220;help&#8221; layout instead
+of the controller-wide &#8220;weblog_standard&#8220; layout.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>L</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001596">layout</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001596">
+                    
+                    <a name="M001596"></a><b>layout</b>(template_name, conditions = {}, auto = false)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+If a layout is specified, all rendered actions will have their result
+rendered when the layout <tt>yield</tt>s. This layout can itself depend on
+instance variables assigned during action performance and have access to
+them as any normal template would.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001596_source')" id="l_M001596_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a0d28dcfd485bcf8e9ce7d8f9c142eb149465cdb/actionpack/lib/action_controller/layout.rb#L165" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001596_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/layout.rb, line 165</span>
+165:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">layout</span>(<span class="ruby-identifier">template_name</span>, <span class="ruby-identifier">conditions</span> = {}, <span class="ruby-identifier">auto</span> = <span class="ruby-keyword kw">false</span>)
+166:         <span class="ruby-identifier">add_layout_conditions</span>(<span class="ruby-identifier">conditions</span>)
+167:         <span class="ruby-identifier">write_inheritable_attribute</span>(<span class="ruby-identifier">:layout</span>, <span class="ruby-identifier">template_name</span>)
+168:         <span class="ruby-identifier">write_inheritable_attribute</span>(<span class="ruby-identifier">:auto_layout</span>, <span class="ruby-identifier">auto</span>)
+169:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Layout/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:42 GMT -->
+</html>    

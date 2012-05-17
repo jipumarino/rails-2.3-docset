@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Dirty/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+<head>
+    <title>ActiveRecord::Dirty::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Dirty::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/dirty_rb.html">activerecord/lib/active_record/dirty.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001344">alias_attribute_with_dirty</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001343">extended</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001343">
+                    
+                    <a name="M001343"></a><b>extended</b>(base)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001343_source')" id="l_M001343_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/dirty.rb#L169" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001343_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/dirty.rb, line 169</span>
+169:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">extended</span>(<span class="ruby-identifier">base</span>)
+170:         <span class="ruby-identifier">base</span>.<span class="ruby-identifier">singleton_class</span>.<span class="ruby-identifier">alias_method_chain</span>(<span class="ruby-identifier">:alias_attribute</span>, <span class="ruby-identifier">:dirty</span>)
+171:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001344">
+                    
+                    <a name="M001344"></a><b>alias_attribute_with_dirty</b>(new_name, old_name)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001344_source')" id="l_M001344_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/dirty.rb#L173" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001344_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/dirty.rb, line 173</span>
+173:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">alias_attribute_with_dirty</span>(<span class="ruby-identifier">new_name</span>, <span class="ruby-identifier">old_name</span>)
+174:         <span class="ruby-identifier">alias_attribute_without_dirty</span>(<span class="ruby-identifier">new_name</span>, <span class="ruby-identifier">old_name</span>)
+175:         <span class="ruby-constant">DIRTY_SUFFIXES</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">suffix</span><span class="ruby-operator">|</span>
+176:           <span class="ruby-identifier">module_eval</span> <span class="ruby-value str">&quot;def \#{new_name}\#{suffix}; self.\#{old_name}\#{suffix}; end  # def subject_changed?; self.title_changed?; end\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+177:         <span class="ruby-keyword kw">end</span>
+178:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Dirty/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+</html>    

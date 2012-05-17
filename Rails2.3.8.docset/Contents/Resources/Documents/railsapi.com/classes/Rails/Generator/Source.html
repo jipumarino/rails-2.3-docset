@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Rails/Generator/Source.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:10:43 GMT -->
+<head>
+    <title>Rails::Generator::Source</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Rails::Generator::Source 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/railties/lib/rails_generator/lookup_rb.html">railties/lib/rails_generator/lookup.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Sources enumerate (yield from <a href="Source.html#M000371">each</a>)
+generator specs which describe where to find and how to create generators.
+<a href="../../Enumerable.html">Enumerable</a> is mixed in so, for example,
+source.collect will retrieve every generator. Sources may be assigned a
+label to distinguish them.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000371">each</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000372">names</a>,</li>
+                
+                <li><a href="#M000370">new</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="../../ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>label</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000370">
+                    
+                    <a name="M000370"></a><b>new</b>(label)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000370_source')" id="l_M000370_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/326036de46b0a89d8f23eabfde8b772bd31a7ad6/railties/lib/rails_generator/lookup.rb#L164" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000370_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/lookup.rb, line 164</span>
+164:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">label</span>)
+165:         <span class="ruby-ivar">@label</span> = <span class="ruby-identifier">label</span>
+166:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000371">
+                    
+                    <a name="M000371"></a><b>each</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+The each method must be implemented in subclasses. The base implementation
+raises an error.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000371_source')" id="l_M000371_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/326036de46b0a89d8f23eabfde8b772bd31a7ad6/railties/lib/rails_generator/lookup.rb#L170" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000371_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/lookup.rb, line 170</span>
+170:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>
+171:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+172:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000372">
+                    
+                    <a name="M000372"></a><b>names</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Return a convenient sorted list of all generator names.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000372_source')" id="l_M000372_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/326036de46b0a89d8f23eabfde8b772bd31a7ad6/railties/lib/rails_generator/lookup.rb#L175" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000372_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/lookup.rb, line 175</span>
+175:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">names</span>
+176:         <span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">spec</span><span class="ruby-operator">|</span> <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">name</span> }.<span class="ruby-identifier">sort</span>
+177:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Rails/Generator/Source.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:10:43 GMT -->
+</html>    

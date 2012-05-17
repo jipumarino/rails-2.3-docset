@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Validations.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:12 GMT -->
+<head>
+    <title>ActiveRecord::Validations</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Validations 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activerecord/lib/active_record/validations_rb.html">activerecord/lib/active_record/validations.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Please do have a look at <a
+href="Validations/ClassMethods.html">ActiveRecord::Validations::ClassMethods</a>
+for a higher level of validations.
+</p>
+<p>
+Active Records implement validation by overwriting Base#validate (or the
+variations, <tt><a
+href="Validations.html#M001322">validate_on_create</a></tt> and <tt><a
+href="Validations.html#M001323">validate_on_update</a></tt>). Each of these
+methods can inspect the state of the object, which usually means ensuring
+that a number of attributes have a certain value (such as not empty, within
+a given range, matching a certain regular expression).
+</p>
+<p>
+Example:
+</p>
+<pre>
+  class Person &lt; ActiveRecord::Base
+    protected
+      def validate
+        errors.add_on_empty %w( first_name last_name )
+        errors.add(&quot;phone_number&quot;, &quot;has invalid format&quot;) unless phone_number =~ /[0-9]*/
+      end
+
+      def validate_on_create # is only run the first time a new object is saved
+        unless valid_discount?(membership_discount)
+          errors.add(&quot;membership_discount&quot;, &quot;has expired&quot;)
+        end
+      end
+
+      def validate_on_update
+        errors.add_to_base(&quot;No changes have occurred&quot;) if unchanged_attributes?
+      end
+  end
+
+  person = Person.new(&quot;first_name&quot; =&gt; &quot;David&quot;, &quot;phone_number&quot; =&gt; &quot;what?&quot;)
+  person.save                         # =&gt; false (and doesn't do the save)
+  person.errors.empty?                # =&gt; false
+  person.errors.count                 # =&gt; 2
+  person.errors.on &quot;last_name&quot;        # =&gt; &quot;can't be empty&quot;
+  person.errors.on &quot;phone_number&quot;     # =&gt; &quot;has invalid format&quot;
+  person.errors.each_full { |msg| puts msg }
+                                      # =&gt; &quot;Last name can't be empty\n&quot; +
+                                      #    &quot;Phone number has invalid format&quot;
+
+  person.attributes = { &quot;last_name&quot; =&gt; &quot;Heinemeier&quot;, &quot;phone_number&quot; =&gt; &quot;555-555&quot; }
+  person.save # =&gt; true (and person is now saved in the database)
+</pre>
+<p>
+An <a href="Errors.html">Errors</a> object is automatically created for
+every Active Record.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001320">errors</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001319">invalid?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001316">save_with_validation</a>,</li>
+                
+                <li><a href="#M001317">save_with_validation!</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>V</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001318">valid?</a>,</li>
+                
+                <li><a href="#M001321">validate</a>,</li>
+                
+                <li><a href="#M001322">validate_on_create</a>,</li>
+                
+                <li><a href="#M001323">validate_on_update</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Validations/ClassMethods.html">ActiveRecord::Validations::ClassMethods</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">VALIDATIONS</td>
+            <td>=</td>
+            <td class="attr-value">%w( validate validate_on_create validate_on_update )</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001320">
+                    
+                    <a name="M001320"></a><b>errors</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the <a href="Errors.html">Errors</a> object that holds all
+information about attribute error messages.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001320_source')" id="l_M001320_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L1130" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001320_source" class="dyn-source">
+                        <pre>      <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 1130</span>
+1130:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">errors</span>
+1131:       <span class="ruby-ivar">@errors</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Errors</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+1132:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001319">
+                    
+                    <a name="M001319"></a><b>invalid?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Performs the opposite of <tt>valid?</tt>. Returns true if errors were
+added, false otherwise.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001319_source')" id="l_M001319_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L1125" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001319_source" class="dyn-source">
+                        <pre>      <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 1125</span>
+1125:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">invalid?</span>
+1126:       <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>
+1127:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001316">
+                    
+                    <a name="M001316"></a><b>save_with_validation</b>(perform_validation = true)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+The validation process on save can be skipped by passing false. The regular
+<a href="Base.html#M001108">Base#save</a> method is replaced with this when
+the validations module is mixed in, which it is by default.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001316_source')" id="l_M001316_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L1088" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001316_source" class="dyn-source">
+                        <pre>      <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 1088</span>
+1088:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_with_validation</span>(<span class="ruby-identifier">perform_validation</span> = <span class="ruby-keyword kw">true</span>)
+1089:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">perform_validation</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">valid?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">perform_validation</span>
+1090:         <span class="ruby-identifier">save_without_validation</span>
+1091:       <span class="ruby-keyword kw">else</span>
+1092:         <span class="ruby-keyword kw">false</span>
+1093:       <span class="ruby-keyword kw">end</span>
+1094:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001317">
+                    
+                    <a name="M001317"></a><b>save_with_validation!</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Attempts to save the record just like <a
+href="Base.html#M001108">Base#save</a> but will raise a <a
+href="RecordInvalid.html">RecordInvalid</a> exception instead of returning
+false if the record is not valid.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001317_source')" id="l_M001317_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L1098" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001317_source" class="dyn-source">
+                        <pre>      <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 1098</span>
+1098:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_with_validation!</span>
+1099:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">valid?</span>
+1100:         <span class="ruby-identifier">save_without_validation!</span>
+1101:       <span class="ruby-keyword kw">else</span>
+1102:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordInvalid</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+1103:       <span class="ruby-keyword kw">end</span>
+1104:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001318">
+                    
+                    <a name="M001318"></a><b>valid?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Runs <tt>validate</tt> and <tt><a
+href="Validations.html#M001322">validate_on_create</a></tt> or <tt><a
+href="Validations.html#M001323">validate_on_update</a></tt> and returns
+true if no errors were added otherwise false.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001318_source')" id="l_M001318_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L1107" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001318_source" class="dyn-source">
+                        <pre>      <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 1107</span>
+1107:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid?</span>
+1108:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">clear</span>
+1109: 
+1110:       <span class="ruby-identifier">run_callbacks</span>(<span class="ruby-identifier">:validate</span>)
+1111:       <span class="ruby-identifier">validate</span>
+1112: 
+1113:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">new_record?</span>
+1114:         <span class="ruby-identifier">run_callbacks</span>(<span class="ruby-identifier">:validate_on_create</span>)
+1115:         <span class="ruby-identifier">validate_on_create</span>
+1116:       <span class="ruby-keyword kw">else</span>
+1117:         <span class="ruby-identifier">run_callbacks</span>(<span class="ruby-identifier">:validate_on_update</span>)
+1118:         <span class="ruby-identifier">validate_on_update</span>
+1119:       <span class="ruby-keyword kw">end</span>
+1120: 
+1121:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>
+1122:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001321">
+                    
+                    <a name="M001321"></a><b>validate</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Overwrite this method for validation checks on all saves and use <tt><a
+href="Errors.html#M001267">Errors.add</a>(field, msg)</tt> for invalid
+attributes.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001321_source')" id="l_M001321_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L1136" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001321_source" class="dyn-source">
+                        <pre>      <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 1136</span>
+1136:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate</span>
+1137:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001322">
+                    
+                    <a name="M001322"></a><b>validate_on_create</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Overwrite this method for validation checks used only on creation.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001322_source')" id="l_M001322_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L1140" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001322_source" class="dyn-source">
+                        <pre>      <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 1140</span>
+1140:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_on_create</span>
+1141:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001323">
+                    
+                    <a name="M001323"></a><b>validate_on_update</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Overwrite this method for validation checks used only on updates.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001323_source')" id="l_M001323_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L1144" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001323_source" class="dyn-source">
+                        <pre>      <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 1144</span>
+1144:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">validate_on_update</span>
+1145:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Validations.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:12 GMT -->
+</html>    

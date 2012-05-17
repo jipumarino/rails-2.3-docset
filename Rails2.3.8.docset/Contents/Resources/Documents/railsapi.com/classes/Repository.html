@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Repository.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:10 GMT -->
+<head>
+    <title>Repository</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Repository 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/railties/lib/commands/plugin_rb.html">railties/lib/commands/plugin.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000180">each</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000178">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000179">plugins</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>uri</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>plugins</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000178">
+                    
+                    <a name="M000178"></a><b>new</b>(uri)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000178_source')" id="l_M000178_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L407" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000178_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 407</span>
+407:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">uri</span>)
+408:     <span class="ruby-ivar">@uri</span> = <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-value str">'/'</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">&quot;/&quot;</span>
+409:     <span class="ruby-ivar">@plugins</span> = <span class="ruby-keyword kw">nil</span>
+410:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000180">
+                    
+                    <a name="M000180"></a><b>each</b>(&amp;block)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000180_source')" id="l_M000180_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L426" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000180_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 426</span>
+426:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+427:     <span class="ruby-identifier">plugins</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+428:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000179">
+                    
+                    <a name="M000179"></a><b>plugins</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000179_source')" id="l_M000179_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L412" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000179_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 412</span>
+412:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">plugins</span>
+413:     <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@plugins</span>
+414:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$verbose</span>
+415:         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Discovering plugins in #{@uri}&quot;</span> 
+416:         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">index</span>
+417:       <span class="ruby-keyword kw">end</span>
+418: 
+419:       <span class="ruby-ivar">@plugins</span> = <span class="ruby-identifier">index</span>.<span class="ruby-identifier">reject</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/\/$/</span> }
+420:       <span class="ruby-ivar">@plugins</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@uri</span>, <span class="ruby-identifier">name</span>), <span class="ruby-identifier">name</span>) }
+421:     <span class="ruby-keyword kw">end</span>
+422: 
+423:     <span class="ruby-ivar">@plugins</span>
+424:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Repository.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:10 GMT -->
+</html>    

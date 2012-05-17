@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/ReloadableTemplate.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:36 GMT -->
+<head>
+    <title>ActionView::ReloadableTemplate</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionView::ReloadableTemplate 
+            
+                <span class="parent">&lt; 
+                    
+                    Template
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/actionpack/lib/action_view/reloadable_template_rb.html">actionpack/lib/action_view/reloadable_template.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002163">mtime</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002162">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002165">reset_cache_if_stale!</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002164">stale?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>U</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002166">undef_my_compiled_methods!</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="ReloadableTemplate/Unfreezable.html">ActionView::ReloadableTemplate::Unfreezable</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ReloadableTemplate/ReloadablePath.html">ActionView::ReloadableTemplate::ReloadablePath</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ReloadableTemplate/TemplateDeleted.html">ActionView::ReloadableTemplate::TemplateDeleted</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>previously_last_modified</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002162">
+                    
+                    <a name="M002162"></a><b>new</b>(*args)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002162_source')" id="l_M002162_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/f8ea9f85d4f1e3e6f3b5d895bef6b013aa4b0690/actionpack/lib/action_view/reloadable_template.rb#L80" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002162_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/reloadable_template.rb, line 80</span>
+80:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+81:       <span class="ruby-keyword kw">super</span>
+82:       
+83:       <span class="ruby-comment cmt"># we don't ever want to get frozen</span>
+84:       <span class="ruby-identifier">extend</span> <span class="ruby-constant">Unfreezable</span>
+85:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002163">
+                    
+                    <a name="M002163"></a><b>mtime</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002163_source')" id="l_M002163_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/f8ea9f85d4f1e3e6f3b5d895bef6b013aa4b0690/actionpack/lib/action_view/reloadable_template.rb#L87" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002163_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/reloadable_template.rb, line 87</span>
+87:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mtime</span>
+88:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">mtime</span>(<span class="ruby-identifier">filename</span>)
+89:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002165">
+                    
+                    <a name="M002165"></a><b>reset_cache_if_stale!</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002165_source')" id="l_M002165_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/f8ea9f85d4f1e3e6f3b5d895bef6b013aa4b0690/actionpack/lib/action_view/reloadable_template.rb#L100" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002165_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/reloadable_template.rb, line 100</span>
+100:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reset_cache_if_stale!</span>
+101:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">stale?</span>
+102:         <span class="ruby-identifier">flush_cache</span> <span class="ruby-value str">'source'</span>, <span class="ruby-value str">'compiled_source'</span>
+103:         <span class="ruby-identifier">undef_my_compiled_methods!</span>
+104:         <span class="ruby-ivar">@previously_last_modified</span> = <span class="ruby-identifier">mtime</span>
+105:       <span class="ruby-keyword kw">end</span>
+106:       <span class="ruby-keyword kw">self</span>
+107:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002164">
+                    
+                    <a name="M002164"></a><b>stale?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002164_source')" id="l_M002164_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/f8ea9f85d4f1e3e6f3b5d895bef6b013aa4b0690/actionpack/lib/action_view/reloadable_template.rb#L93" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002164_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/reloadable_template.rb, line 93</span>
+93:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stale?</span>
+94:       <span class="ruby-identifier">previously_last_modified</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">previously_last_modified</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">mtime</span>
+95:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+96:       <span class="ruby-identifier">undef_my_compiled_methods!</span>
+97:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">TemplateDeleted</span>
+98:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002166">
+                    
+                    <a name="M002166"></a><b>undef_my_compiled_methods!</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+remove any compiled methods that look like they might belong to me
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002166_source')" id="l_M002166_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/f8ea9f85d4f1e3e6f3b5d895bef6b013aa4b0690/actionpack/lib/action_view/reloadable_template.rb#L110" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002166_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/reloadable_template.rb, line 110</span>
+110:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">undef_my_compiled_methods!</span>
+111:       <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span><span class="ruby-operator">::</span><span class="ruby-constant">CompiledTemplates</span>.<span class="ruby-identifier">public_instance_methods</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-node">/#{Regexp.escape(method_name_without_locals)}(?:_locals_)?/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+112:         <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span><span class="ruby-operator">::</span><span class="ruby-constant">CompiledTemplates</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:remove_method</span>, <span class="ruby-identifier">m</span>)
+113:       <span class="ruby-keyword kw">end</span>
+114:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/ReloadableTemplate.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:36 GMT -->
+</html>    

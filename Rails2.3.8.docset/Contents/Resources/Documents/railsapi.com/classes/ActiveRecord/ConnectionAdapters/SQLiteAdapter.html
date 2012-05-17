@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/SQLiteAdapter.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:17 GMT -->
+<head>
+    <title>ActiveRecord::ConnectionAdapters::SQLiteAdapter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::ConnectionAdapters::SQLiteAdapter 
+            
+                <span class="parent">&lt; 
+                    
+                    AbstractAdapter
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/connection_adapters/sqlite_adapter_rb.html">activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+The SQLite adapter works with both the 2.x and 3.x series of SQLite with
+the sqlite-ruby drivers (available both as gems and from <a
+href="http://rubyforge.org/projects/sqlite-ruby">rubyforge.org/projects/sqlite-ruby</a>/).
+</p>
+<p>
+Options:
+</p>
+<ul>
+<li><tt>:database</tt> - Path to the database file.
+
+</li>
+</ul>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000600">catch_schema_changes</a>,</li>
+                
+                <li><a href="#M000564">change_column_null</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000602">default_primary_key_type</a>,</li>
+                
+                <li><a href="#M000500">disconnect!</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000567">empty_insert_statement</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000493">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000559">rename_table</a>,</li>
+                
+                <li><a href="#M000498">requires_reloading?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000517">select_rows</a>,</li>
+                
+                <li><a href="#M000601">sqlite_version</a>,</li>
+                
+                <li><a href="#M000499">supports_add_column?</a>,</li>
+                
+                <li><a href="#M000495">supports_ddl_transactions?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000569">table_structure</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>V</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000560">valid_alter_table_options</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="SQLiteAdapter/Version.html">ActiveRecord::ConnectionAdapters::SQLiteAdapter::Version</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000493">
+                    
+                    <a name="M000493"></a><b>new</b>(connection, logger, config)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000493_source')" id="l_M000493_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L98" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000493_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 98</span>
+ 98:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">connection</span>, <span class="ruby-identifier">logger</span>, <span class="ruby-identifier">config</span>)
+ 99:         <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">connection</span>, <span class="ruby-identifier">logger</span>)
+100:         <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">config</span>
+101:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000564">
+                    
+                    <a name="M000564"></a><b>change_column_null</b>(table_name, column_name, null, default = nil)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000564_source')" id="l_M000564_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L287" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000564_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 287</span>
+287:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">change_column_null</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">null</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword kw">nil</span>)
+288:         <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">null</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">default</span>.<span class="ruby-identifier">nil?</span>
+289:           <span class="ruby-identifier">execute</span>(<span class="ruby-node">&quot;UPDATE #{quote_table_name(table_name)} SET #{quote_column_name(column_name)}=#{quote(default)} WHERE #{quote_column_name(column_name)} IS NULL&quot;</span>)
+290:         <span class="ruby-keyword kw">end</span>
+291:         <span class="ruby-identifier">alter_table</span>(<span class="ruby-identifier">table_name</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">definition</span><span class="ruby-operator">|</span>
+292:           <span class="ruby-identifier">definition</span>[<span class="ruby-identifier">column_name</span>].<span class="ruby-identifier">null</span> = <span class="ruby-identifier">null</span>
+293:         <span class="ruby-keyword kw">end</span>
+294:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000500">
+                    
+                    <a name="M000500"></a><b>disconnect!</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000500_source')" id="l_M000500_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L127" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000500_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 127</span>
+127:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">disconnect!</span>
+128:         <span class="ruby-keyword kw">super</span>
+129:         <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+130:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000567">
+                    
+                    <a name="M000567"></a><b>empty_insert_statement</b>(table_name)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000567_source')" id="l_M000567_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L315" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000567_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 315</span>
+315:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">empty_insert_statement</span>(<span class="ruby-identifier">table_name</span>)
+316:         <span class="ruby-node">&quot;INSERT INTO #{table_name} VALUES(NULL)&quot;</span>
+317:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000559">
+                    
+                    <a name="M000559"></a><b>rename_table</b>(name, new_name)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000559_source')" id="l_M000559_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L252" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000559_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 252</span>
+252:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rename_table</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">new_name</span>)
+253:         <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;ALTER TABLE #{name} RENAME TO #{new_name}&quot;</span>
+254:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000498">
+                    
+                    <a name="M000498"></a><b>requires_reloading?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000498_source')" id="l_M000498_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L119" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000498_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 119</span>
+119:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">requires_reloading?</span>
+120:         <span class="ruby-keyword kw">true</span>
+121:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000517">
+                    
+                    <a name="M000517"></a><b>select_rows</b>(sql, name = nil)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000517_source')" id="l_M000517_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L189" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000517_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 189</span>
+189:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">select_rows</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword kw">nil</span>)
+190:         <span class="ruby-identifier">execute</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
+191:           (<span class="ruby-value">0</span><span class="ruby-operator">...</span>(<span class="ruby-identifier">row</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">/</span> <span class="ruby-value">2</span>)).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">i</span>] }
+192:         <span class="ruby-keyword kw">end</span>
+193:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000499">
+                    
+                    <a name="M000499"></a><b>supports_add_column?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000499_source')" id="l_M000499_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L123" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000499_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 123</span>
+123:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">supports_add_column?</span>
+124:         <span class="ruby-identifier">sqlite_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value str">'3.1.6'</span>
+125:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000495">
+                    
+                    <a name="M000495"></a><b>supports_ddl_transactions?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000495_source')" id="l_M000495_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L107" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000495_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 107</span>
+107:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">supports_ddl_transactions?</span>
+108:         <span class="ruby-identifier">sqlite_version</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value str">'2.0.0'</span>
+109:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000560">
+                    
+                    <a name="M000560"></a><b>valid_alter_table_options</b>( type, options)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+See: <a
+href="http://www.sqlite.org/lang_altertable.html">www.sqlite.org/lang_altertable.html</a>
+SQLite has an additional restriction on the ALTER TABLE statement
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000560_source')" id="l_M000560_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L258" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000560_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 258</span>
+258:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid_alter_table_options</span>( <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
+259:         <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:primary_key</span>
+260:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000600">
+                    
+                    <a name="M000600"></a><b>catch_schema_changes</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000600_source')" id="l_M000600_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L417" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000600_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 417</span>
+417:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">catch_schema_changes</span>
+418:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">yield</span>
+419:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">StatementInvalid</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">exception</span>
+420:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">message</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/database schema has changed/</span>
+421:             <span class="ruby-identifier">reconnect!</span>
+422:             <span class="ruby-keyword kw">retry</span>
+423:           <span class="ruby-keyword kw">else</span>
+424:             <span class="ruby-identifier">raise</span>
+425:           <span class="ruby-keyword kw">end</span>
+426:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000602">
+                    
+                    <a name="M000602"></a><b>default_primary_key_type</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000602_source')" id="l_M000602_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L432" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000602_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 432</span>
+432:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default_primary_key_type</span>
+433:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">supports_autoincrement?</span>
+434:             <span class="ruby-value str">'INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL'</span>.<span class="ruby-identifier">freeze</span>
+435:           <span class="ruby-keyword kw">else</span>
+436:             <span class="ruby-value str">'INTEGER PRIMARY KEY NOT NULL'</span>.<span class="ruby-identifier">freeze</span>
+437:           <span class="ruby-keyword kw">end</span>
+438:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000601">
+                    
+                    <a name="M000601"></a><b>sqlite_version</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000601_source')" id="l_M000601_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L428" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000601_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 428</span>
+428:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sqlite_version</span>
+429:           <span class="ruby-ivar">@sqlite_version</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">SQLiteAdapter</span><span class="ruby-operator">::</span><span class="ruby-constant">Version</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">select_value</span>(<span class="ruby-value str">'select sqlite_version(*)'</span>))
+430:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000569">
+                    
+                    <a name="M000569"></a><b>table_structure</b>(table_name)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000569_source')" id="l_M000569_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/240f4e944cd90fca138aba8467456043952110cc/activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb#L332" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000569_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/sqlite_adapter.rb, line 332</span>
+332:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">table_structure</span>(<span class="ruby-identifier">table_name</span>)
+333:           <span class="ruby-identifier">returning</span> <span class="ruby-identifier">structure</span> = <span class="ruby-identifier">execute</span>(<span class="ruby-node">&quot;PRAGMA table_info(#{quote_table_name(table_name)})&quot;</span>) <span class="ruby-keyword kw">do</span>
+334:             <span class="ruby-identifier">raise</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">StatementInvalid</span>, <span class="ruby-node">&quot;Could not find table '#{table_name}'&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">structure</span>.<span class="ruby-identifier">empty?</span>
+335:           <span class="ruby-keyword kw">end</span>
+336:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/SQLiteAdapter.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:17 GMT -->
+</html>    

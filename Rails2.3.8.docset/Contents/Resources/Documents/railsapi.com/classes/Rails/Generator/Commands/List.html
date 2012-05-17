@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Rails/Generator/Commands/List.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:11:51 GMT -->
+<head>
+    <title>Rails::Generator::Commands::List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Rails::Generator::Commands::List 
+            
+                <span class="parent">&lt; 
+                    
+                    Base
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/railties/lib/rails_generator/commands_rb.html">railties/lib/rails_generator/commands.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a href="List.html">List</a> a generator&#8217;s action manifest.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000413">class_collisions</a>,</li>
+                
+                <li><a href="#M000416">complex_template</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000412">dependency</a>,</li>
+                
+                <li><a href="#M000417">directory</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000414">file</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000419">migration_template</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000418">readme</a>,</li>
+                
+                <li><a href="#M000420">route_resources</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000415">template</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000413">
+                    
+                    <a name="M000413"></a><b>class_collisions</b>(*class_names)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000413_source')" id="l_M000413_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/eb217b2cf02af3d6533fb5b0e3fe87efa78cf43a/railties/lib/rails_generator/commands.rb#L549" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000413_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/commands.rb, line 549</span>
+549:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">class_collisions</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">class_names</span>)
+550:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">class_collisions</span> <span class="ruby-identifier">class_names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)
+551:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000416">
+                    
+                    <a name="M000416"></a><b>complex_template</b>(relative_source, relative_destination, options = {})
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000416_source')" id="l_M000416_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/eb217b2cf02af3d6533fb5b0e3fe87efa78cf43a/railties/lib/rails_generator/commands.rb#L561" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000416_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/commands.rb, line 561</span>
+561:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">complex_template</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">options</span> = {})
+562:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">template</span> <span class="ruby-node">&quot;#{options[:insert]} inside #{relative_destination}&quot;</span>
+563:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000412">
+                    
+                    <a name="M000412"></a><b>dependency</b>(generator_name, args, options = {})
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000412_source')" id="l_M000412_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/eb217b2cf02af3d6533fb5b0e3fe87efa78cf43a/railties/lib/rails_generator/commands.rb#L545" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000412_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/commands.rb, line 545</span>
+545:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dependency</span>(<span class="ruby-identifier">generator_name</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">options</span> = {})
+546:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">dependency</span> <span class="ruby-node">&quot;#{generator_name}(#{args.join(', ')}, #{options.inspect})&quot;</span>
+547:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000417">
+                    
+                    <a name="M000417"></a><b>directory</b>(relative_path)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000417_source')" id="l_M000417_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/eb217b2cf02af3d6533fb5b0e3fe87efa78cf43a/railties/lib/rails_generator/commands.rb#L565" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000417_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/commands.rb, line 565</span>
+565:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">directory</span>(<span class="ruby-identifier">relative_path</span>)
+566:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">directory</span> <span class="ruby-node">&quot;#{destination_path(relative_path)}/&quot;</span>
+567:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000414">
+                    
+                    <a name="M000414"></a><b>file</b>(relative_source, relative_destination, options = {})
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000414_source')" id="l_M000414_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/eb217b2cf02af3d6533fb5b0e3fe87efa78cf43a/railties/lib/rails_generator/commands.rb#L553" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000414_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/commands.rb, line 553</span>
+553:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">options</span> = {})
+554:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">file</span> <span class="ruby-identifier">relative_destination</span>
+555:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000419">
+                    
+                    <a name="M000419"></a><b>migration_template</b>(relative_source, relative_destination, options = {})
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000419_source')" id="l_M000419_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/eb217b2cf02af3d6533fb5b0e3fe87efa78cf43a/railties/lib/rails_generator/commands.rb#L573" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000419_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/commands.rb, line 573</span>
+573:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">migration_template</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">options</span> = {})
+574:           <span class="ruby-identifier">migration_directory</span> <span class="ruby-identifier">relative_destination</span>
+575:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">migration_template</span> <span class="ruby-identifier">file_name</span>
+576:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000418">
+                    
+                    <a name="M000418"></a><b>readme</b>(*args)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000418_source')" id="l_M000418_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/eb217b2cf02af3d6533fb5b0e3fe87efa78cf43a/railties/lib/rails_generator/commands.rb#L569" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000418_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/commands.rb, line 569</span>
+569:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">readme</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+570:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">readme</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)
+571:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000420">
+                    
+                    <a name="M000420"></a><b>route_resources</b>(*resources)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000420_source')" id="l_M000420_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/eb217b2cf02af3d6533fb5b0e3fe87efa78cf43a/railties/lib/rails_generator/commands.rb#L578" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000420_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/commands.rb, line 578</span>
+578:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">route_resources</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">resources</span>)
+579:           <span class="ruby-identifier">resource_list</span> = <span class="ruby-identifier">resources</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_sym</span>.<span class="ruby-identifier">inspect</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)
+580:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">route</span> <span class="ruby-node">&quot;map.resources #{resource_list}&quot;</span>
+581:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000415">
+                    
+                    <a name="M000415"></a><b>template</b>(relative_source, relative_destination, options = {})
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000415_source')" id="l_M000415_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/eb217b2cf02af3d6533fb5b0e3fe87efa78cf43a/railties/lib/rails_generator/commands.rb#L557" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000415_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/rails_generator/commands.rb, line 557</span>
+557:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">template</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">options</span> = {})
+558:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">template</span> <span class="ruby-identifier">relative_destination</span>
+559:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Rails/Generator/Commands/List.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:11:51 GMT -->
+</html>    

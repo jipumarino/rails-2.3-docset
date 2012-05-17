@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/QueryCache/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+<head>
+    <title>ActiveRecord::QueryCache::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::QueryCache::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/query_cache_rb.html">activerecord/lib/active_record/query_cache.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001370">cache</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>U</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001371">uncached</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001370">
+                    
+                    <a name="M001370"></a><b>cache</b>(&amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Enable the query cache within the block if Active Record is configured.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001370_source')" id="l_M001370_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/aa002c0e86afdc83693f14667a710107843f0fbd/activerecord/lib/active_record/query_cache.rb#L5" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001370_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/query_cache.rb, line 5</span>
+ 5:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+ 6:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">configurations</span>.<span class="ruby-identifier">blank?</span>
+ 7:           <span class="ruby-keyword kw">yield</span>
+ 8:         <span class="ruby-keyword kw">else</span>
+ 9:           <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">cache</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+10:         <span class="ruby-keyword kw">end</span>
+11:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001371">
+                    
+                    <a name="M001371"></a><b>uncached</b>(&amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Disable the query cache within the block if Active Record is configured.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001371_source')" id="l_M001371_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/aa002c0e86afdc83693f14667a710107843f0fbd/activerecord/lib/active_record/query_cache.rb#L14" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001371_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/query_cache.rb, line 14</span>
+14:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">uncached</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+15:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">configurations</span>.<span class="ruby-identifier">blank?</span>
+16:           <span class="ruby-keyword kw">yield</span>
+17:         <span class="ruby-keyword kw">else</span>
+18:           <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">uncached</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+19:         <span class="ruby-keyword kw">end</span>
+20:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/QueryCache/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+</html>    

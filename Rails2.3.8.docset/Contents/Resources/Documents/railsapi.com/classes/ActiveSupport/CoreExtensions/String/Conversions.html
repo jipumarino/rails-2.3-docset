@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/String/Conversions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+<head>
+    <title>ActiveSupport::CoreExtensions::String::Conversions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::CoreExtensions::String::Conversions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/activesupport/lib/active_support/core_ext/string/conversions_rb.html">activesupport/lib/active_support/core_ext/string/conversions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Converting strings to other objects
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>O</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002873">ord</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002875">to_date</a>,</li>
+                
+                <li><a href="#M002876">to_datetime</a>,</li>
+                
+                <li><a href="#M002874">to_time</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002873">
+                    
+                    <a name="M002873"></a><b>ord</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+&#8216;a&#8217;.ord == &#8216;a&#8217;[0] for Ruby 1.9 forward
+compatibility.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002873_source')" id="l_M002873_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/05a4db5ecabeca9e04a48baffc7b0ef2febc3d70/activesupport/lib/active_support/core_ext/string/conversions.rb#L9" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002873_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/string/conversions.rb, line 9</span>
+ 9:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ord</span>
+10:           <span class="ruby-keyword kw">self</span>[<span class="ruby-value">0</span>]
+11:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002875">
+                    
+                    <a name="M002875"></a><b>to_date</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002875_source')" id="l_M002875_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/05a4db5ecabeca9e04a48baffc7b0ef2febc3d70/activesupport/lib/active_support/core_ext/string/conversions.rb#L18" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002875_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/string/conversions.rb, line 18</span>
+18:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_date</span>
+19:           <span class="ruby-operator">::</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-operator">::</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">_parse</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-keyword kw">false</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-identifier">:year</span>, <span class="ruby-identifier">:mon</span>, <span class="ruby-identifier">:mday</span>))
+20:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002876">
+                    
+                    <a name="M002876"></a><b>to_datetime</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002876_source')" id="l_M002876_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/05a4db5ecabeca9e04a48baffc7b0ef2febc3d70/activesupport/lib/active_support/core_ext/string/conversions.rb#L22" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002876_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/string/conversions.rb, line 22</span>
+22:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_datetime</span>
+23:           <span class="ruby-operator">::</span><span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">civil</span>(<span class="ruby-operator">*</span><span class="ruby-operator">::</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">_parse</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-keyword kw">false</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-identifier">:year</span>, <span class="ruby-identifier">:mon</span>, <span class="ruby-identifier">:mday</span>, <span class="ruby-identifier">:hour</span>, <span class="ruby-identifier">:min</span>, <span class="ruby-identifier">:sec</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">arg</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span> })
+24:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002874">
+                    
+                    <a name="M002874"></a><b>to_time</b>(form = :utc)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Form can be either :utc (default) or :local.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002874_source')" id="l_M002874_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/05a4db5ecabeca9e04a48baffc7b0ef2febc3d70/activesupport/lib/active_support/core_ext/string/conversions.rb#L14" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002874_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/string/conversions.rb, line 14</span>
+14:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_time</span>(<span class="ruby-identifier">form</span> = <span class="ruby-identifier">:utc</span>)
+15:           <span class="ruby-operator">::</span><span class="ruby-constant">Time</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{form}_time&quot;</span>, <span class="ruby-operator">*</span><span class="ruby-operator">::</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">_parse</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-keyword kw">false</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-identifier">:year</span>, <span class="ruby-identifier">:mon</span>, <span class="ruby-identifier">:mday</span>, <span class="ruby-identifier">:hour</span>, <span class="ruby-identifier">:min</span>, <span class="ruby-identifier">:sec</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">arg</span> <span class="ruby-operator">||</span> <span class="ruby-value">0</span> })
+16:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/String/Conversions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+</html>    

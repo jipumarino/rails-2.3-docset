@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:25 GMT -->
+<head>
+    <title>ActiveSupport::CoreExtensions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::CoreExtensions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/string/inflections_rb.html">activesupport/lib/active_support/core_ext/string/inflections.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/string/iterators_rb.html">activesupport/lib/active_support/core_ext/string/iterators.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/string/multibyte_rb.html">activesupport/lib/active_support/core_ext/string/multibyte.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/string/conversions_rb.html">activesupport/lib/active_support/core_ext/string/conversions.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/string/starts_ends_with_rb.html">activesupport/lib/active_support/core_ext/string/starts_ends_with.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/string/filters_rb.html">activesupport/lib/active_support/core_ext/string/filters.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/string/behavior_rb.html">activesupport/lib/active_support/core_ext/string/behavior.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/string/access_rb.html">activesupport/lib/active_support/core_ext/string/access.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/date_time/conversions_rb.html">activesupport/lib/active_support/core_ext/date_time/conversions.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/date_time/calculations_rb.html">activesupport/lib/active_support/core_ext/date_time/calculations.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/range/blockless_step_rb.html">activesupport/lib/active_support/core_ext/range/blockless_step.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/range/overlaps_rb.html">activesupport/lib/active_support/core_ext/range/overlaps.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/range/conversions_rb.html">activesupport/lib/active_support/core_ext/range/conversions.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/range/include_range_rb.html">activesupport/lib/active_support/core_ext/range/include_range.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/integer/inflections_rb.html">activesupport/lib/active_support/core_ext/integer/inflections.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/integer/even_odd_rb.html">activesupport/lib/active_support/core_ext/integer/even_odd.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/integer/time_rb.html">activesupport/lib/active_support/core_ext/integer/time.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/module_rb.html">activesupport/lib/active_support/core_ext/module.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/base64/encoding_rb.html">activesupport/lib/active_support/core_ext/base64/encoding.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/cgi/escape_skipping_slashes_rb.html">activesupport/lib/active_support/core_ext/cgi/escape_skipping_slashes.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/load_error_rb.html">activesupport/lib/active_support/core_ext/load_error.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/hash/slice_rb.html">activesupport/lib/active_support/core_ext/hash/slice.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/hash/reverse_merge_rb.html">activesupport/lib/active_support/core_ext/hash/reverse_merge.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/hash/deep_merge_rb.html">activesupport/lib/active_support/core_ext/hash/deep_merge.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/hash/diff_rb.html">activesupport/lib/active_support/core_ext/hash/diff.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/hash/except_rb.html">activesupport/lib/active_support/core_ext/hash/except.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/hash/conversions_rb.html">activesupport/lib/active_support/core_ext/hash/conversions.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/hash/keys_rb.html">activesupport/lib/active_support/core_ext/hash/keys.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/float/time_rb.html">activesupport/lib/active_support/core_ext/float/time.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/float/rounding_rb.html">activesupport/lib/active_support/core_ext/float/rounding.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/pathname/clean_within_rb.html">activesupport/lib/active_support/core_ext/pathname/clean_within.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/file/atomic_rb.html">activesupport/lib/active_support/core_ext/file/atomic.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/module/model_naming_rb.html">activesupport/lib/active_support/core_ext/module/model_naming.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/module/aliasing_rb.html">activesupport/lib/active_support/core_ext/module/aliasing.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/module/introspection_rb.html">activesupport/lib/active_support/core_ext/module/introspection.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/array/random_access_rb.html">activesupport/lib/active_support/core_ext/array/random_access.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/array/grouping_rb.html">activesupport/lib/active_support/core_ext/array/grouping.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/array/wrapper_rb.html">activesupport/lib/active_support/core_ext/array/wrapper.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/array/extract_options_rb.html">activesupport/lib/active_support/core_ext/array/extract_options.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/array/conversions_rb.html">activesupport/lib/active_support/core_ext/array/conversions.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/array/access_rb.html">activesupport/lib/active_support/core_ext/array/access.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/numeric/conversions_rb.html">activesupport/lib/active_support/core_ext/numeric/conversions.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/numeric/time_rb.html">activesupport/lib/active_support/core_ext/numeric/time.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/numeric/bytes_rb.html">activesupport/lib/active_support/core_ext/numeric/bytes.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/time/zones_rb.html">activesupport/lib/active_support/core_ext/time/zones.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/time/conversions_rb.html">activesupport/lib/active_support/core_ext/time/conversions.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/time/behavior_rb.html">activesupport/lib/active_support/core_ext/time/behavior.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/time/calculations_rb.html">activesupport/lib/active_support/core_ext/time/calculations.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/date/conversions_rb.html">activesupport/lib/active_support/core_ext/date/conversions.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/date/behavior_rb.html">activesupport/lib/active_support/core_ext/date/behavior.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/date/calculations_rb.html">activesupport/lib/active_support/core_ext/date/calculations.rb</a></li>
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/bigdecimal/conversions_rb.html">activesupport/lib/active_support/core_ext/bigdecimal/conversions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Array.html">ActiveSupport::CoreExtensions::Array</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Base64.html">ActiveSupport::CoreExtensions::Base64</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/BigDecimal.html">ActiveSupport::CoreExtensions::BigDecimal</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/CGI.html">ActiveSupport::CoreExtensions::CGI</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Date.html">ActiveSupport::CoreExtensions::Date</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/DateTime.html">ActiveSupport::CoreExtensions::DateTime</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/File.html">ActiveSupport::CoreExtensions::File</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Float.html">ActiveSupport::CoreExtensions::Float</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Hash.html">ActiveSupport::CoreExtensions::Hash</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Integer.html">ActiveSupport::CoreExtensions::Integer</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/LoadErrorExtensions.html">ActiveSupport::CoreExtensions::LoadErrorExtensions</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Module.html">ActiveSupport::CoreExtensions::Module</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Numeric.html">ActiveSupport::CoreExtensions::Numeric</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Pathname.html">ActiveSupport::CoreExtensions::Pathname</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Range.html">ActiveSupport::CoreExtensions::Range</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/String.html">ActiveSupport::CoreExtensions::String</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CoreExtensions/Time.html">ActiveSupport::CoreExtensions::Time</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:30 GMT -->
+</html>    

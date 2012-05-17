@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/RecursiveHTTPFetcher.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:10 GMT -->
+<head>
+    <title>RecursiveHTTPFetcher</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            RecursiveHTTPFetcher 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/railties/lib/commands/plugin_rb.html">railties/lib/commands/plugin.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000223">download</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000224">fetch</a>,</li>
+                
+                <li><a href="#M000225">fetch_dir</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>L</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000222">links</a>,</li>
+                
+                <li><a href="#M000219">ls</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000218">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000221">pop_d</a>,</li>
+                
+                <li><a href="#M000220">push_d</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>quiet</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000218">
+                    
+                    <a name="M000218"></a><b>new</b>(urls_to_fetch, level = 1, cwd = &quot;.&quot;)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000218_source')" id="l_M000218_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L903" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000218_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 903</span>
+903:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">urls_to_fetch</span>, <span class="ruby-identifier">level</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">cwd</span> = <span class="ruby-value str">&quot;.&quot;</span>)
+904:     <span class="ruby-ivar">@level</span> = <span class="ruby-identifier">level</span>
+905:     <span class="ruby-ivar">@cwd</span> = <span class="ruby-identifier">cwd</span>
+906:     <span class="ruby-ivar">@urls_to_fetch</span> = <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value str">'1.9'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">urls_to_fetch</span>.<span class="ruby-identifier">lines</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">urls_to_fetch</span>.<span class="ruby-identifier">to_a</span>
+907:     <span class="ruby-ivar">@quiet</span> = <span class="ruby-keyword kw">false</span>
+908:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000223">
+                    
+                    <a name="M000223"></a><b>download</b>(link)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000223_source')" id="l_M000223_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L942" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000223_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 942</span>
+942:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">download</span>(<span class="ruby-identifier">link</span>)
+943:     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;+ #{File.join(@cwd, File.basename(link))}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@quiet</span>
+944:     <span class="ruby-identifier">open</span>(<span class="ruby-identifier">link</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">stream</span><span class="ruby-operator">|</span>
+945:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@cwd</span>, <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">link</span>)), <span class="ruby-value str">&quot;wb&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+946:         <span class="ruby-identifier">file</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">read</span>)
+947:       <span class="ruby-keyword kw">end</span>
+948:     <span class="ruby-keyword kw">end</span>
+949:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000224">
+                    
+                    <a name="M000224"></a><b>fetch</b>(links = @urls_to_fetch)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000224_source')" id="l_M000224_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L951" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000224_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 951</span>
+951:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">links</span> = <span class="ruby-ivar">@urls_to_fetch</span>)
+952:     <span class="ruby-identifier">links</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span>
+953:       (<span class="ruby-identifier">l</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\/$/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">links</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@urls_to_fetch</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">fetch_dir</span>(<span class="ruby-identifier">l</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">download</span>(<span class="ruby-identifier">l</span>)
+954:     <span class="ruby-keyword kw">end</span>
+955:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000225">
+                    
+                    <a name="M000225"></a><b>fetch_dir</b>(url)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000225_source')" id="l_M000225_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L957" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000225_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 957</span>
+957:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fetch_dir</span>(<span class="ruby-identifier">url</span>)
+958:     <span class="ruby-ivar">@level</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+959:     <span class="ruby-identifier">push_d</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">url</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+960:     <span class="ruby-identifier">open</span>(<span class="ruby-identifier">url</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">stream</span><span class="ruby-operator">|</span>
+961:       <span class="ruby-identifier">contents</span> =  <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">read</span>
+962:       <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">links</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">contents</span>))
+963:     <span class="ruby-keyword kw">end</span>
+964:     <span class="ruby-identifier">pop_d</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+965:     <span class="ruby-ivar">@level</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+966:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000222">
+                    
+                    <a name="M000222"></a><b>links</b>(base_url, contents)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000222_source')" id="l_M000222_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L931" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000222_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 931</span>
+931:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">links</span>(<span class="ruby-identifier">base_url</span>, <span class="ruby-identifier">contents</span>)
+932:     <span class="ruby-identifier">links</span> = []
+933:     <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/href\s*=\s*\&quot;*[^\&quot;&gt;]*/i</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">link</span><span class="ruby-operator">|</span>
+934:       <span class="ruby-identifier">link</span> = <span class="ruby-identifier">link</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/href=&quot;/i</span>, <span class="ruby-value str">&quot;&quot;</span>)
+935:       <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/svnindex.xsl$/</span>
+936:       <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">link</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^(\w*:|)\/\//</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">link</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\./</span>
+937:       <span class="ruby-identifier">links</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">base_url</span>, <span class="ruby-identifier">link</span>)
+938:     <span class="ruby-keyword kw">end</span>
+939:     <span class="ruby-identifier">links</span>
+940:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000219">
+                    
+                    <a name="M000219"></a><b>ls</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000219_source')" id="l_M000219_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L910" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000219_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 910</span>
+910:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ls</span>
+911:     <span class="ruby-ivar">@urls_to_fetch</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">url</span><span class="ruby-operator">|</span>
+912:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">url</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^svn(\+ssh)?:\/\/.*/</span>
+913:         <span class="ruby-node">`svn ls #{url}`</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\n&quot;</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;/#{entry}&quot;</span>} <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+914:       <span class="ruby-keyword kw">else</span>
+915:         <span class="ruby-identifier">open</span>(<span class="ruby-identifier">url</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">stream</span><span class="ruby-operator">|</span>
+916:           <span class="ruby-identifier">links</span>(<span class="ruby-value str">&quot;&quot;</span>, <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">read</span>)
+917:         <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+918:       <span class="ruby-keyword kw">end</span>
+919:     <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">flatten</span>
+920:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000221">
+                    
+                    <a name="M000221"></a><b>pop_d</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000221_source')" id="l_M000221_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L927" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000221_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 927</span>
+927:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pop_d</span>
+928:     <span class="ruby-ivar">@cwd</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@cwd</span>)
+929:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000220">
+                    
+                    <a name="M000220"></a><b>push_d</b>(dir)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000220_source')" id="l_M000220_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L922" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000220_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 922</span>
+922:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">push_d</span>(<span class="ruby-identifier">dir</span>)
+923:     <span class="ruby-ivar">@cwd</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@cwd</span>, <span class="ruby-identifier">dir</span>)
+924:     <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-ivar">@cwd</span>)
+925:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/RecursiveHTTPFetcher.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:10 GMT -->
+</html>    

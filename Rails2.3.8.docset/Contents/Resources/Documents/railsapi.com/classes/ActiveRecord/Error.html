@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Error.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:02 GMT -->
+<head>
+    <title>ActiveRecord::Error</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::Error 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activerecord/lib/active_record/validations_rb.html">activerecord/lib/active_record/validations.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001263">default_options</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001258">full_message</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>G</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001262">generate_full_message</a>,</li>
+                
+                <li><a href="#M001261">generate_message</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001257">message</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001256">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001259">to_s</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>V</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001260">value</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>base</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>attribute</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>type</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>message</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>options</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001256">
+                    
+                    <a name="M001256"></a><b>new</b>(base, attribute, type = nil, options = {})
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001256_source')" id="l_M001256_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L21" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001256_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 21</span>
+21:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">base</span>, <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">options</span> = {})
+22:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">base</span>      = <span class="ruby-identifier">base</span>
+23:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">attribute</span> = <span class="ruby-identifier">attribute</span>
+24:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span>      = <span class="ruby-identifier">type</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">:invalid</span>
+25:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">options</span>   = <span class="ruby-identifier">options</span>
+26:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">message</span>   = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:message</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span>
+27:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001258">
+                    
+                    <a name="M001258"></a><b>full_message</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001258_source')" id="l_M001258_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L35" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001258_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 35</span>
+35:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">full_message</span>
+36:       <span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'base'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">message</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">generate_full_message</span>(<span class="ruby-identifier">default_options</span>)
+37:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001257">
+                    
+                    <a name="M001257"></a><b>message</b>()
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Error.html#M001259">to_s</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001257_source')" id="l_M001257_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L29" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001257_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 29</span>
+29:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">message</span>
+30:       <span class="ruby-comment cmt"># When type is a string, it means that we do not have to do a lookup, because</span>
+31:       <span class="ruby-comment cmt"># the user already sent the &quot;final&quot; message.</span>
+32:       <span class="ruby-identifier">type</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">generate_message</span>(<span class="ruby-identifier">default_options</span>)
+33:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001259">
+                    
+                    <a name="M001259"></a><b>to_s</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Error.html#M001257">message</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001260">
+                    
+                    <a name="M001260"></a><b>value</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001260_source')" id="l_M001260_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L41" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001260_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 41</span>
+41:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">value</span>
+42:       <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">attribute</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">attribute</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+43:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001263">
+                    
+                    <a name="M001263"></a><b>default_options</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Return user options with default options.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001263_source')" id="l_M001263_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L121" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001263_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 121</span>
+121:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default_options</span>
+122:         <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge</span> <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:activerecord</span>, <span class="ruby-identifier">:errors</span>],
+123:                               <span class="ruby-identifier">:model</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">human_name</span>,
+124:                               <span class="ruby-identifier">:attribute</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_s</span>),
+125:                               <span class="ruby-identifier">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">value</span>
+126:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001262">
+                    
+                    <a name="M001262"></a><b>generate_full_message</b>(options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Wraps an error message into a <a href="Error.html#M001258">full_message</a>
+format.
+</p>
+<p>
+The default <a href="Error.html#M001258">full_message</a> format for any
+locale is <tt>&quot;{{attribute}} {{message}}&quot;</tt>. One can specify
+locale specific default <a href="Error.html#M001258">full_message</a>
+format by storing it as a translation for the key
+<tt>:&quot;activerecord.errors.full_messages.format&quot;</tt>.
+</p>
+<p>
+Additionally one can specify a validation specific error message format by
+storing a translation for
+<tt>:&quot;activerecord.errors.full_messages.[message_key]&quot;</tt>. E.g.
+the <a href="Error.html#M001258">full_message</a> format for any validation
+that uses :blank as a message key (such as validates_presence_of) can be
+stored to <tt>:&quot;activerecord.errors.full_messages.blank&quot;.</tt>
+</p>
+<p>
+Because the message key used by a validation can be overwritten on the
+<tt>validates_*</tt> class macro level one can customize the <a
+href="Error.html#M001258">full_message</a> format for any particular
+validation:
+</p>
+<pre>
+  # app/models/article.rb
+  class Article &lt; ActiveRecord::Base
+    validates_presence_of :title, :message =&gt; :&quot;title.blank&quot;
+  end
+
+  # config/locales/en.yml
+  en:
+    activerecord:
+      errors:
+        full_messages:
+          title:
+            blank: This title is screwed!
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001262_source')" id="l_M001262_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L108" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001262_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 108</span>
+108:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_full_message</span>(<span class="ruby-identifier">options</span> = {})
+109:         <span class="ruby-identifier">keys</span> = [
+110:           <span class="ruby-identifier">:&quot;full_messages.#{@message}&quot;</span>,
+111:           <span class="ruby-identifier">:'full_messages.format'</span>,
+112:           <span class="ruby-value str">'{{attribute}} {{message}}'</span>
+113:         ]
+114: 
+115:         <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">keys</span>, <span class="ruby-identifier">:message</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">message</span>)
+116:         <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">shift</span>, <span class="ruby-identifier">options</span>)
+117:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001261">
+                    
+                    <a name="M001261"></a><b>generate_message</b>(options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Translates an error message in it&#8217;s default scope
+(<tt>activerecord.errrors.messages</tt>). <a href="Error.html">Error</a>
+messages are first looked up in
+<tt>models.MODEL.attributes.ATTRIBUTE.MESSAGE</tt>, if it&#8217;s not
+there, it&#8217;s looked up in <tt>models.MODEL.MESSAGE</tt> and if that is
+not there it returns the translation of the default message (e.g.
+<tt>activerecord.errors.messages.MESSAGE</tt>). The translated model name,
+translated attribute name and the value are available for interpolation.
+</p>
+<p>
+When using inheritence in your models, it will check all the inherited
+models too, but only if the model itself hasn&#8217;t been found. Say you
+have <tt>class Admin &lt; User; end</tt> and you wanted the translation for
+the <tt>:blank</tt> error <tt>message</tt> for the <tt>title</tt>
+<tt>attribute</tt>, it looks for these translations:
+</p>
+<p>
+<ol>
+<li><tt>activerecord.errors.models.admin.attributes.title.blank</tt></li>
+<li><tt>activerecord.errors.models.admin.blank</tt></li>
+<li><tt>activerecord.errors.models.user.attributes.title.blank</tt></li>
+<li><tt>activerecord.errors.models.user.blank</tt></li>
+<li><tt>activerecord.errors.messages.blank</tt></li> <li>any default you
+provided through the <tt>options</tt> hash (in the activerecord.errors
+scope)</li> </ol>
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001261_source')" id="l_M001261_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0706bdce603897a869b9af753fddb81a9c9dc7ec/activerecord/lib/active_record/validations.rb#L65" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001261_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/validations.rb, line 65</span>
+65:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_message</span>(<span class="ruby-identifier">options</span> = {})
+66:         <span class="ruby-identifier">keys</span> = <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">self_and_descendants_from_active_record</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span><span class="ruby-operator">|</span>
+67:           [ <span class="ruby-identifier">:&quot;models.#{klass.name.underscore}.attributes.#{attribute}.#{@message}&quot;</span>,
+68:             <span class="ruby-identifier">:&quot;models.#{klass.name.underscore}.#{@message}&quot;</span> ]
+69:         <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">flatten</span>
+70: 
+71:         <span class="ruby-identifier">keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:default</span>)
+72:         <span class="ruby-identifier">keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">:&quot;messages.#{@message}&quot;</span>
+73:         <span class="ruby-identifier">keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@message</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@message</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+74:         <span class="ruby-identifier">keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@type</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@type</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@message</span>
+75:         <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">compact!</span>
+76: 
+77:         <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">keys</span>)
+78:         <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">shift</span>, <span class="ruby-identifier">options</span>)
+79:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Error.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:02 GMT -->
+</html>    

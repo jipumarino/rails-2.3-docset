@@ -1,0 +1,1098 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/Column.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+<head>
+    <title>ActiveRecord::ConnectionAdapters::Column</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::ConnectionAdapters::Column 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions_rb.html">activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+An abstract definition of a column in a table.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>B</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000535">binary_to_string</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000533">extract_default</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000546">fallback_string_to_date</a>,</li>
+                
+                <li><a href="#M000547">fallback_string_to_time</a>,</li>
+                
+                <li><a href="#M000544">fast_string_to_date</a>,</li>
+                
+                <li><a href="#M000545">fast_string_to_time</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>H</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000528">has_default?</a>,</li>
+                
+                <li><a href="#M000532">human_name</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>K</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000529">klass</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000541">microseconds</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000525">new</a>,</li>
+                
+                <li><a href="#M000542">new_date</a>,</li>
+                
+                <li><a href="#M000543">new_time</a>,</li>
+                
+                <li><a href="#M000527">number?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000534">string_to_binary</a>,</li>
+                
+                <li><a href="#M000536">string_to_date</a>,</li>
+                
+                <li><a href="#M000538">string_to_dummy_time</a>,</li>
+                
+                <li><a href="#M000537">string_to_time</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000526">text?</a>,</li>
+                
+                <li><a href="#M000530">type_cast</a>,</li>
+                
+                <li><a href="#M000531">type_cast_code</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>V</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000539">value_to_boolean</a>,</li>
+                
+                <li><a href="#M000540">value_to_decimal</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Column/Format.html">ActiveRecord::ConnectionAdapters::Column::Format</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">TRUE_VALUES</td>
+            <td>=</td>
+            <td class="attr-value">[true, 1, '1', 't', 'T', 'true', 'TRUE'].to_set</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">FALSE_VALUES</td>
+            <td>=</td>
+            <td class="attr-value">[false, 0, '0', 'f', 'F', 'false', 'FALSE'].to_set</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>name</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>default</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>type</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>limit</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>null</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>sql_type</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>precision</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>scale</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>primary</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000535">
+                    
+                    <a name="M000535"></a><b>binary_to_string</b>(value)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Used to convert from BLOBs to Strings
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000535_source')" id="l_M000535_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L121" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000535_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 121</span>
+121:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">binary_to_string</span>(<span class="ruby-identifier">value</span>)
+122:           <span class="ruby-identifier">value</span>
+123:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000525">
+                    
+                    <a name="M000525"></a><b>new</b>(name, default, sql_type = nil, null = true)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Instantiates a new column in the table.
+</p>
+<p>
+<tt>name</tt> is the column&#8217;s name, such as <tt>supplier_id</tt> in
+<tt>supplier_id int(11)</tt>. <tt>default</tt> is the type-casted default
+value, such as <tt>new</tt> in <tt>sales_stage varchar(20) default
+'new'</tt>. <tt><a href="Column.html#sql_type">sql_type</a></tt> is only
+used to extract the column&#8217;s length, if necessary. For example
+<tt>60</tt> in <tt>company_name varchar(60)</tt>. <tt>null</tt> determines
+if this column allows <tt>NULL</tt> values.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000525_source')" id="l_M000525_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L27" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000525_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 27</span>
+27:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">default</span>, <span class="ruby-identifier">sql_type</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">null</span> = <span class="ruby-keyword kw">true</span>)
+28:         <span class="ruby-ivar">@name</span>, <span class="ruby-ivar">@sql_type</span>, <span class="ruby-ivar">@null</span> = <span class="ruby-identifier">name</span>, <span class="ruby-identifier">sql_type</span>, <span class="ruby-identifier">null</span>
+29:         <span class="ruby-ivar">@limit</span>, <span class="ruby-ivar">@precision</span>, <span class="ruby-ivar">@scale</span> = <span class="ruby-identifier">extract_limit</span>(<span class="ruby-identifier">sql_type</span>), <span class="ruby-identifier">extract_precision</span>(<span class="ruby-identifier">sql_type</span>), <span class="ruby-identifier">extract_scale</span>(<span class="ruby-identifier">sql_type</span>)
+30:         <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">simplified_type</span>(<span class="ruby-identifier">sql_type</span>)
+31:         <span class="ruby-ivar">@default</span> = <span class="ruby-identifier">extract_default</span>(<span class="ruby-identifier">default</span>)
+32: 
+33:         <span class="ruby-ivar">@primary</span> = <span class="ruby-keyword kw">nil</span>
+34:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000534">
+                    
+                    <a name="M000534"></a><b>string_to_binary</b>(value)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Used to convert from Strings to BLOBs
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000534_source')" id="l_M000534_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L116" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000534_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 116</span>
+116:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_to_binary</span>(<span class="ruby-identifier">value</span>)
+117:           <span class="ruby-identifier">value</span>
+118:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000536">
+                    
+                    <a name="M000536"></a><b>string_to_date</b>(string)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000536_source')" id="l_M000536_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L125" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000536_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 125</span>
+125:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_to_date</span>(<span class="ruby-identifier">string</span>)
+126:           <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">string</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+127:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">empty?</span>
+128: 
+129:           <span class="ruby-identifier">fast_string_to_date</span>(<span class="ruby-identifier">string</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">fallback_string_to_date</span>(<span class="ruby-identifier">string</span>)
+130:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000538">
+                    
+                    <a name="M000538"></a><b>string_to_dummy_time</b>(string)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000538_source')" id="l_M000538_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L139" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000538_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 139</span>
+139:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_to_dummy_time</span>(<span class="ruby-identifier">string</span>)
+140:           <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">string</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+141:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">empty?</span>
+142: 
+143:           <span class="ruby-identifier">string_to_time</span> <span class="ruby-node">&quot;2000-01-01 #{string}&quot;</span>
+144:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000537">
+                    
+                    <a name="M000537"></a><b>string_to_time</b>(string)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000537_source')" id="l_M000537_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L132" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000537_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 132</span>
+132:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">string_to_time</span>(<span class="ruby-identifier">string</span>)
+133:           <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">string</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+134:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">empty?</span>
+135: 
+136:           <span class="ruby-identifier">fast_string_to_time</span>(<span class="ruby-identifier">string</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">fallback_string_to_time</span>(<span class="ruby-identifier">string</span>)
+137:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000539">
+                    
+                    <a name="M000539"></a><b>value_to_boolean</b>(value)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+convert something to a boolean
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000539_source')" id="l_M000539_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L147" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000539_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 147</span>
+147:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">value_to_boolean</span>(<span class="ruby-identifier">value</span>)
+148:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">blank?</span>
+149:             <span class="ruby-keyword kw">nil</span>
+150:           <span class="ruby-keyword kw">else</span>
+151:             <span class="ruby-constant">TRUE_VALUES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>)
+152:           <span class="ruby-keyword kw">end</span>
+153:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000540">
+                    
+                    <a name="M000540"></a><b>value_to_decimal</b>(value)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+convert something to a BigDecimal
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000540_source')" id="l_M000540_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L156" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000540_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 156</span>
+156:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">value_to_decimal</span>(<span class="ruby-identifier">value</span>)
+157:           <span class="ruby-comment cmt"># Using .class is faster than .is_a? and</span>
+158:           <span class="ruby-comment cmt"># subclasses of BigDecimal will be handled</span>
+159:           <span class="ruby-comment cmt"># in the else clause</span>
+160:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">BigDecimal</span>
+161:             <span class="ruby-identifier">value</span>
+162:           <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_d</span>)
+163:             <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_d</span>
+164:           <span class="ruby-keyword kw">else</span>
+165:             <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">to_d</span>
+166:           <span class="ruby-keyword kw">end</span>
+167:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Class Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000546">
+                    
+                    <a name="M000546"></a><b>fallback_string_to_date</b>(string)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000546_source')" id="l_M000546_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L203" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000546_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 203</span>
+203:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fallback_string_to_date</span>(<span class="ruby-identifier">string</span>)
+204:             <span class="ruby-identifier">new_date</span>(<span class="ruby-operator">*</span><span class="ruby-operator">::</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">_parse</span>(<span class="ruby-identifier">string</span>, <span class="ruby-keyword kw">false</span>).<span class="ruby-identifier">values_at</span>(<span class="ruby-identifier">:year</span>, <span class="ruby-identifier">:mon</span>, <span class="ruby-identifier">:mday</span>))
+205:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000547">
+                    
+                    <a name="M000547"></a><b>fallback_string_to_time</b>(string)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000547_source')" id="l_M000547_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L207" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000547_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 207</span>
+207:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fallback_string_to_time</span>(<span class="ruby-identifier">string</span>)
+208:             <span class="ruby-identifier">time_hash</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">_parse</span>(<span class="ruby-identifier">string</span>)
+209:             <span class="ruby-identifier">time_hash</span>[<span class="ruby-identifier">:sec_fraction</span>] = <span class="ruby-identifier">microseconds</span>(<span class="ruby-identifier">time_hash</span>)
+210: 
+211:             <span class="ruby-identifier">new_time</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">time_hash</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-identifier">:year</span>, <span class="ruby-identifier">:mon</span>, <span class="ruby-identifier">:mday</span>, <span class="ruby-identifier">:hour</span>, <span class="ruby-identifier">:min</span>, <span class="ruby-identifier">:sec</span>, <span class="ruby-identifier">:sec_fraction</span>))
+212:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000544">
+                    
+                    <a name="M000544"></a><b>fast_string_to_date</b>(string)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000544_source')" id="l_M000544_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L189" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000544_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 189</span>
+189:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fast_string_to_date</span>(<span class="ruby-identifier">string</span>)
+190:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">string</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">Format</span><span class="ruby-operator">::</span><span class="ruby-constant">ISO_DATE</span>
+191:               <span class="ruby-identifier">new_date</span> <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">$2</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">$3</span>.<span class="ruby-identifier">to_i</span>
+192:             <span class="ruby-keyword kw">end</span>
+193:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000545">
+                    
+                    <a name="M000545"></a><b>fast_string_to_time</b>(string)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Doesn&#8217;t handle time zones.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000545_source')" id="l_M000545_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L196" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000545_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 196</span>
+196:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fast_string_to_time</span>(<span class="ruby-identifier">string</span>)
+197:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">string</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">Format</span><span class="ruby-operator">::</span><span class="ruby-constant">ISO_DATETIME</span>
+198:               <span class="ruby-identifier">microsec</span> = (<span class="ruby-identifier">$7</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">*</span> <span class="ruby-value">1_000_000</span>).<span class="ruby-identifier">to_i</span>
+199:               <span class="ruby-identifier">new_time</span> <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">$2</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">$3</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">$4</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">$5</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">$6</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">microsec</span>
+200:             <span class="ruby-keyword kw">end</span>
+201:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000541">
+                    
+                    <a name="M000541"></a><b>microseconds</b>(time)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+&#8216;0.123456&#8217; -> 123456 &#8216;1.123456&#8217; -> 123456
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000541_source')" id="l_M000541_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L172" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000541_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 172</span>
+172:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">microseconds</span>(<span class="ruby-identifier">time</span>)
+173:             ((<span class="ruby-identifier">time</span>[<span class="ruby-identifier">:sec_fraction</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">%</span> <span class="ruby-value">1</span>) <span class="ruby-operator">*</span> <span class="ruby-value">1_000_000</span>).<span class="ruby-identifier">to_i</span>
+174:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000542">
+                    
+                    <a name="M000542"></a><b>new_date</b>(year, mon, mday)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000542_source')" id="l_M000542_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L176" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000542_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 176</span>
+176:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_date</span>(<span class="ruby-identifier">year</span>, <span class="ruby-identifier">mon</span>, <span class="ruby-identifier">mday</span>)
+177:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">year</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">year</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+178:               <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">year</span>, <span class="ruby-identifier">mon</span>, <span class="ruby-identifier">mday</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+179:             <span class="ruby-keyword kw">end</span>
+180:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000543">
+                    
+                    <a name="M000543"></a><b>new_time</b>(year, mon, mday, hour, min, sec, microsec)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000543_source')" id="l_M000543_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L182" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000543_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 182</span>
+182:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_time</span>(<span class="ruby-identifier">year</span>, <span class="ruby-identifier">mon</span>, <span class="ruby-identifier">mday</span>, <span class="ruby-identifier">hour</span>, <span class="ruby-identifier">min</span>, <span class="ruby-identifier">sec</span>, <span class="ruby-identifier">microsec</span>)
+183:             <span class="ruby-comment cmt"># Treat 0000-00-00 00:00:00 as nil.</span>
+184:             <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">year</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">year</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+185: 
+186:             <span class="ruby-constant">Time</span>.<span class="ruby-identifier">time_with_datetime_fallback</span>(<span class="ruby-constant">Base</span>.<span class="ruby-identifier">default_timezone</span>, <span class="ruby-identifier">year</span>, <span class="ruby-identifier">mon</span>, <span class="ruby-identifier">mday</span>, <span class="ruby-identifier">hour</span>, <span class="ruby-identifier">min</span>, <span class="ruby-identifier">sec</span>, <span class="ruby-identifier">microsec</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+187:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000533">
+                    
+                    <a name="M000533"></a><b>extract_default</b>(default)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000533_source')" id="l_M000533_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L110" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000533_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 110</span>
+110:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">extract_default</span>(<span class="ruby-identifier">default</span>)
+111:         <span class="ruby-identifier">type_cast</span>(<span class="ruby-identifier">default</span>)
+112:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000528">
+                    
+                    <a name="M000528"></a><b>has_default?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000528_source')" id="l_M000528_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L46" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000528_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 46</span>
+46:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_default?</span>
+47:         <span class="ruby-operator">!</span><span class="ruby-identifier">default</span>.<span class="ruby-identifier">nil?</span>
+48:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000532">
+                    
+                    <a name="M000532"></a><b>human_name</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the human name of the column name.
+</p>
+<h5>Examples</h5>
+<pre>
+ Column.new('sales_stage', ...).human_name # =&gt; 'Sales stage'
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000532_source')" id="l_M000532_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L106" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000532_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 106</span>
+106:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">human_name</span>
+107:         <span class="ruby-constant">Base</span>.<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-ivar">@name</span>)
+108:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000529">
+                    
+                    <a name="M000529"></a><b>klass</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the Ruby class that corresponds to the abstract data type.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000529_source')" id="l_M000529_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L51" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000529_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 51</span>
+51:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">klass</span>
+52:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+53:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:integer</span>       <span class="ruby-keyword kw">then</span> <span class="ruby-constant">Fixnum</span>
+54:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:float</span>         <span class="ruby-keyword kw">then</span> <span class="ruby-constant">Float</span>
+55:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:decimal</span>       <span class="ruby-keyword kw">then</span> <span class="ruby-constant">BigDecimal</span>
+56:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:datetime</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-constant">Time</span>
+57:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:date</span>          <span class="ruby-keyword kw">then</span> <span class="ruby-constant">Date</span>
+58:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:timestamp</span>     <span class="ruby-keyword kw">then</span> <span class="ruby-constant">Time</span>
+59:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:time</span>          <span class="ruby-keyword kw">then</span> <span class="ruby-constant">Time</span>
+60:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:text</span>, <span class="ruby-identifier">:string</span> <span class="ruby-keyword kw">then</span> <span class="ruby-constant">String</span>
+61:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:binary</span>        <span class="ruby-keyword kw">then</span> <span class="ruby-constant">String</span>
+62:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:boolean</span>       <span class="ruby-keyword kw">then</span> <span class="ruby-constant">Object</span>
+63:         <span class="ruby-keyword kw">end</span>
+64:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000527">
+                    
+                    <a name="M000527"></a><b>number?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns <tt>true</tt> if the column is either of type integer, float or
+decimal.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000527_source')" id="l_M000527_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L42" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000527_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 42</span>
+42:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">number?</span>
+43:         <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:integer</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:float</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:decimal</span>
+44:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000526">
+                    
+                    <a name="M000526"></a><b>text?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns <tt>true</tt> if the column is either of type string or text.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000526_source')" id="l_M000526_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L37" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000526_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 37</span>
+37:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">text?</span>
+38:         <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:string</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:text</span>
+39:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000530">
+                    
+                    <a name="M000530"></a><b>type_cast</b>(value)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Casts value (which is a String) to an appropriate instance.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000530_source')" id="l_M000530_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L67" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000530_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 67</span>
+67:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">type_cast</span>(<span class="ruby-identifier">value</span>)
+68:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
+69:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+70:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:string</span>    <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">value</span>
+71:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:text</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">value</span>
+72:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:integer</span>   <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">?</span> <span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+73:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:float</span>     <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_f</span>
+74:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:decimal</span>   <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">value_to_decimal</span>(<span class="ruby-identifier">value</span>)
+75:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:datetime</span>  <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">string_to_time</span>(<span class="ruby-identifier">value</span>)
+76:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:timestamp</span> <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">string_to_time</span>(<span class="ruby-identifier">value</span>)
+77:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:time</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">string_to_dummy_time</span>(<span class="ruby-identifier">value</span>)
+78:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:date</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">string_to_date</span>(<span class="ruby-identifier">value</span>)
+79:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:binary</span>    <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">binary_to_string</span>(<span class="ruby-identifier">value</span>)
+80:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:boolean</span>   <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">value_to_boolean</span>(<span class="ruby-identifier">value</span>)
+81:           <span class="ruby-keyword kw">else</span> <span class="ruby-identifier">value</span>
+82:         <span class="ruby-keyword kw">end</span>
+83:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000531">
+                    
+                    <a name="M000531"></a><b>type_cast_code</b>(var_name)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000531_source')" id="l_M000531_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/77adb4bc2019e3a5b64ae8678310d176e30834d0/activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb#L85" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000531_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 85</span>
+ 85:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">type_cast_code</span>(<span class="ruby-identifier">var_name</span>)
+ 86:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+ 87:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:string</span>    <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">nil</span>
+ 88:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:text</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">nil</span>
+ 89:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:integer</span>   <span class="ruby-keyword kw">then</span> <span class="ruby-node">&quot;(#{var_name}.to_i rescue #{var_name} ? 1 : 0)&quot;</span>
+ 90:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:float</span>     <span class="ruby-keyword kw">then</span> <span class="ruby-node">&quot;#{var_name}.to_f&quot;</span>
+ 91:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:decimal</span>   <span class="ruby-keyword kw">then</span> <span class="ruby-node">&quot;#{self.class.name}.value_to_decimal(#{var_name})&quot;</span>
+ 92:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:datetime</span>  <span class="ruby-keyword kw">then</span> <span class="ruby-node">&quot;#{self.class.name}.string_to_time(#{var_name})&quot;</span>
+ 93:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:timestamp</span> <span class="ruby-keyword kw">then</span> <span class="ruby-node">&quot;#{self.class.name}.string_to_time(#{var_name})&quot;</span>
+ 94:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:time</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-node">&quot;#{self.class.name}.string_to_dummy_time(#{var_name})&quot;</span>
+ 95:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:date</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-node">&quot;#{self.class.name}.string_to_date(#{var_name})&quot;</span>
+ 96:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:binary</span>    <span class="ruby-keyword kw">then</span> <span class="ruby-node">&quot;#{self.class.name}.binary_to_string(#{var_name})&quot;</span>
+ 97:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:boolean</span>   <span class="ruby-keyword kw">then</span> <span class="ruby-node">&quot;#{self.class.name}.value_to_boolean(#{var_name})&quot;</span>
+ 98:           <span class="ruby-keyword kw">else</span> <span class="ruby-keyword kw">nil</span>
+ 99:         <span class="ruby-keyword kw">end</span>
+100:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/Column.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:17 GMT -->
+</html>    

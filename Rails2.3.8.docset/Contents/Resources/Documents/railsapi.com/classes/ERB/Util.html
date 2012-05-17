@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ERB/Util.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:20 GMT -->
+<head>
+    <title>ERB::Util</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ERB::Util 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activesupport/lib/active_support/core_ext/string/output_safety_rb.html">activesupport/lib/active_support/core_ext/string/output_safety.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>H</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002850">h</a>,</li>
+                
+                <li><a href="#M002849">html_escape</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>J</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002852">j</a>,</li>
+                
+                <li><a href="#M002851">json_escape</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">HTML_ESCAPE</td>
+            <td>=</td>
+            <td class="attr-value">{ '&amp;' =&gt; '&amp;amp;',  '&gt;' =&gt; '&amp;gt;',   '&lt;' =&gt; '&amp;lt;', '&quot;' =&gt; '&amp;quot;' }</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">JSON_ESCAPE</td>
+            <td>=</td>
+            <td class="attr-value">{ '&amp;' =&gt; '\u0026', '&gt;' =&gt; '\u003E', '&lt;' =&gt; '\u003C' }</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002850">
+                    
+                    <a name="M002850"></a><b>h</b>(s)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Util.html#M002849">html_escape</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002849">
+                    
+                    <a name="M002849"></a><b>html_escape</b>(s)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+A utility method for escaping HTML tag characters. This method is also
+aliased as <tt>h</tt>.
+</p>
+<p>
+In your ERb templates, use this method to escape any unsafe content. For
+example:
+</p>
+<pre>
+  &lt;%=h @person.name %&gt;
+</pre>
+<h4>Example:</h4>
+<pre>
+  puts html_escape(&quot;is a &gt; 0 &amp; a &lt; 10?&quot;)
+  # =&gt; is a &amp;gt; 0 &amp;amp; a &amp;lt; 10?
+</pre>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Util.html#M002850">h</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002849_source')" id="l_M002849_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/60e82a3ca2fe6058292db659c3411794888d1418/activesupport/lib/active_support/core_ext/string/output_safety.rb#L17" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002849_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/string/output_safety.rb, line 17</span>
+17:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">html_escape</span>(<span class="ruby-identifier">s</span>)
+18:       <span class="ruby-identifier">s</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>
+19:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">html_safe?</span>
+20:         <span class="ruby-identifier">s</span>
+21:       <span class="ruby-keyword kw">else</span>
+22:         <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[&amp;&quot;&gt;&lt;]/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">special</span><span class="ruby-operator">|</span> <span class="ruby-constant">HTML_ESCAPE</span>[<span class="ruby-identifier">special</span>] }.<span class="ruby-identifier">html_safe</span>
+23:       <span class="ruby-keyword kw">end</span>
+24:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002852">
+                    
+                    <a name="M002852"></a><b>j</b>(s)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Util.html#M002851">json_escape</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002851">
+                    
+                    <a name="M002851"></a><b>json_escape</b>(s)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+A utility method for escaping HTML entities in JSON strings. This method is
+also aliased as <tt>j</tt>.
+</p>
+<p>
+In your ERb templates, use this method to escape any HTML entities:
+</p>
+<pre>
+  &lt;%=j @person.to_json %&gt;
+</pre>
+<h4>Example:</h4>
+<pre>
+  puts json_escape(&quot;is a &gt; 0 &amp; a &lt; 10?&quot;)
+  # =&gt; is a \u003E 0 \u0026 a \u003C 10?
+</pre>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Util.html#M002852">j</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002851_source')" id="l_M002851_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/60e82a3ca2fe6058292db659c3411794888d1418/activesupport/lib/active_support/core_ext/string/output_safety.rb#L41" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002851_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/string/output_safety.rb, line 41</span>
+41:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">json_escape</span>(<span class="ruby-identifier">s</span>)
+42:       <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/[&amp;&quot;&gt;&lt;]/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">special</span><span class="ruby-operator">|</span> <span class="ruby-constant">JSON_ESCAPE</span>[<span class="ruby-identifier">special</span>] }
+43:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ERB/Util.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:20 GMT -->
+</html>    

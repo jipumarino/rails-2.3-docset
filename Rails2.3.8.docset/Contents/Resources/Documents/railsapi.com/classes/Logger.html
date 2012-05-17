@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Logger.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:12:30 GMT -->
+<head>
+    <title>Logger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Logger 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/logger_rb.html">activesupport/lib/active_support/core_ext/logger.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Extensions to the built in Ruby logger.
+</p>
+<p>
+If you want to use the default log formatter as defined in the Ruby core,
+then you will need to set the formatter for the logger as in:
+</p>
+<pre>
+  logger.formatter = Formatter.new
+</pre>
+<p>
+You can then specify the datetime format, for example:
+</p>
+<pre>
+  logger.datetime_format = &quot;%Y-%m-%d&quot;
+</pre>
+<p>
+Note: This logger is deprecated in favor of <a
+href="ActiveSupport/BufferedLogger.html">ActiveSupport::BufferedLogger</a>
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003211">datetime_format</a>,</li>
+                
+                <li><a href="#M003209">datetime_format=</a>,</li>
+                
+                <li><a href="#M003206">define_around_helper</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003213">formatter</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>O</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003212">old_datetime_format</a>,</li>
+                
+                <li><a href="#M003210">old_datetime_format=</a>,</li>
+                
+                <li><a href="#M003214">old_formatter</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003208">silence</a>,</li>
+                
+                <li><a href="#M003207">silencer</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="Logger/Formatter.html">Logger::Formatter</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Logger/SimpleFormatter.html">Logger::SimpleFormatter</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003206">
+                    
+                    <a name="M003206"></a><b>define_around_helper</b>(level)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003206_source')" id="l_M003206_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a2270ef2594b97891994848138614657363f2806/activesupport/lib/active_support/core_ext/logger.rb#L4" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003206_source" class="dyn-source">
+                        <pre>   <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/logger.rb, line 4</span>
+4:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">define_around_helper</span>(<span class="ruby-identifier">level</span>)
+5:     <span class="ruby-identifier">module_eval</span> <span class="ruby-value str">&quot;def around_\#{level}(before_message, after_message, &amp;block)  # def around_debug(before_message, after_message, &amp;block)\nself.\#{level}(before_message)                             #   self.debug(before_message)\nreturn_value = block.call(self)                           #   return_value = block.call(self)\nself.\#{level}(after_message)                              #   self.debug(after_message)\nreturn return_value                                       #   return return_value\nend                                                         # end\n&quot;</span>
+6:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003207">
+                    
+                    <a name="M003207"></a><b>silencer</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Set to false to disable the silencer
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003207_source')" id="l_M003207_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a2270ef2594b97891994848138614657363f2806/activesupport/lib/active_support/core_ext/logger.rb#L37" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003207_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/logger.rb, line 37</span>
+37:   <span class="ruby-identifier">cattr_accessor</span> <span class="ruby-identifier">:silencer</span>
+</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003211">
+                    
+                    <a name="M003211"></a><b>datetime_format</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Get the logging datetime format. Returns nil if the formatter does not
+support datetime formatting.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Logger.html#M003212">old_datetime_format</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003211_source')" id="l_M003211_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a2270ef2594b97891994848138614657363f2806/activesupport/lib/active_support/core_ext/logger.rb#L64" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003211_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/logger.rb, line 64</span>
+64:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">datetime_format</span>
+65:     <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">datetime_format</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:datetime_format</span>)
+66:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003209">
+                    
+                    <a name="M003209"></a><b>datetime_format=</b>(datetime_format)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Logging date-time format (string passed to <tt>strftime</tt>). Ignored if
+the formatter does not respond to <a
+href="Logger.html#M003211">datetime_format</a>=.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Logger.html#M003210">old_datetime_format=</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003209_source')" id="l_M003209_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a2270ef2594b97891994848138614657363f2806/activesupport/lib/active_support/core_ext/logger.rb#L57" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003209_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/logger.rb, line 57</span>
+57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">datetime_format=</span>(<span class="ruby-identifier">datetime_format</span>)
+58:     <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">datetime_format</span> = <span class="ruby-identifier">datetime_format</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:datetime_format=</span>)
+59:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003213">
+                    
+                    <a name="M003213"></a><b>formatter</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Get the current formatter. The default formatter is a <a
+href="Logger/SimpleFormatter.html">SimpleFormatter</a> which only displays
+the log message
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Logger.html#M003214">old_formatter</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003213_source')" id="l_M003213_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a2270ef2594b97891994848138614657363f2806/activesupport/lib/active_support/core_ext/logger.rb#L71" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003213_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/logger.rb, line 71</span>
+71:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">formatter</span>
+72:     <span class="ruby-ivar">@formatter</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">SimpleFormatter</span>.<span class="ruby-identifier">new</span>
+73:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003212">
+                    
+                    <a name="M003212"></a><b>old_datetime_format</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Logger.html#M003211">datetime_format</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003210">
+                    
+                    <a name="M003210"></a><b>old_datetime_format=</b>(datetime_format)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Logger.html#M003209">datetime_format=</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003214">
+                    
+                    <a name="M003214"></a><b>old_formatter</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Logger.html#M003213">formatter</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003208">
+                    
+                    <a name="M003208"></a><b>silence</b>(temporary_level = Logger::ERROR)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Silences the logger for the duration of the block.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003208_source')" id="l_M003208_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a2270ef2594b97891994848138614657363f2806/activesupport/lib/active_support/core_ext/logger.rb#L41" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003208_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/logger.rb, line 41</span>
+41:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silence</span>(<span class="ruby-identifier">temporary_level</span> = <span class="ruby-constant">Logger</span><span class="ruby-operator">::</span><span class="ruby-constant">ERROR</span>)
+42:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">silencer</span>
+43:       <span class="ruby-keyword kw">begin</span>
+44:         <span class="ruby-identifier">old_logger_level</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">level</span> = <span class="ruby-identifier">level</span>, <span class="ruby-identifier">temporary_level</span>
+45:         <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">self</span>
+46:       <span class="ruby-keyword kw">ensure</span>
+47:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">level</span> = <span class="ruby-identifier">old_logger_level</span>
+48:       <span class="ruby-keyword kw">end</span>
+49:     <span class="ruby-keyword kw">else</span>
+50:       <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">self</span>
+51:     <span class="ruby-keyword kw">end</span>
+52:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Logger.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:12:31 GMT -->
+</html>    

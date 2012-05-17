@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Reloader/BodyWrapper.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+<head>
+    <title>ActionController::Reloader::BodyWrapper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::Reloader::BodyWrapper 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/reloader_rb.html">actionpack/lib/action_controller/reloader.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002069">close</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002070">method_missing</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002068">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002071">respond_to?</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002068">
+                    
+                    <a name="M002068"></a><b>new</b>(body, lock)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002068_source')" id="l_M002068_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/14b6ab0f013f01541fca9fd42b33da96313e0a2e/actionpack/lib/action_controller/reloader.rb#L9" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002068_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/reloader.rb, line 9</span>
+ 9:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">body</span>, <span class="ruby-identifier">lock</span>)
+10:         <span class="ruby-ivar">@body</span> = <span class="ruby-identifier">body</span>
+11:         <span class="ruby-ivar">@lock</span> = <span class="ruby-identifier">lock</span>
+12:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002069">
+                    
+                    <a name="M002069"></a><b>close</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002069_source')" id="l_M002069_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/14b6ab0f013f01541fca9fd42b33da96313e0a2e/actionpack/lib/action_controller/reloader.rb#L14" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002069_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/reloader.rb, line 14</span>
+14:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">close</span>
+15:         <span class="ruby-ivar">@body</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@body</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:close</span>)
+16:       <span class="ruby-keyword kw">ensure</span>
+17:         <span class="ruby-constant">Dispatcher</span>.<span class="ruby-identifier">cleanup_application</span>
+18:         <span class="ruby-ivar">@lock</span>.<span class="ruby-identifier">unlock</span>
+19:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002070">
+                    
+                    <a name="M002070"></a><b>method_missing</b>(*args, &amp;block)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002070_source')" id="l_M002070_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/14b6ab0f013f01541fca9fd42b33da96313e0a2e/actionpack/lib/action_controller/reloader.rb#L21" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002070_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/reloader.rb, line 21</span>
+21:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+22:         <span class="ruby-ivar">@body</span>.<span class="ruby-identifier">send</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+23:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002071">
+                    
+                    <a name="M002071"></a><b>respond_to?</b>(symbol, include_private = false)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002071_source')" id="l_M002071_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/14b6ab0f013f01541fca9fd42b33da96313e0a2e/actionpack/lib/action_controller/reloader.rb#L25" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002071_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/reloader.rb, line 25</span>
+25:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">symbol</span>, <span class="ruby-identifier">include_private</span> = <span class="ruby-keyword kw">false</span>)
+26:         <span class="ruby-identifier">symbol</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:close</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@body</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">symbol</span>, <span class="ruby-identifier">include_private</span>)
+27:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Reloader/BodyWrapper.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+</html>    

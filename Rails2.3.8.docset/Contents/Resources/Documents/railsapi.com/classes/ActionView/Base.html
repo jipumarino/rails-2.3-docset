@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/Base.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:10:47 GMT -->
+<head>
+    <title>ActionView::Base</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionView::Base 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/actionpack/lib/action_view/test_case_rb.html">actionpack/lib/action_view/test_case.rb</a></li>
+            
+            <li><a href="../../files/actionpack/lib/action_view/base_rb.html">actionpack/lib/action_view/base.rb</a></li>
+            
+            <li><a href="../../files/actionpack/lib/action_view/helpers/active_record_helper_rb.html">actionpack/lib/action_view/helpers/active_record_helper.rb</a></li>
+            
+            <li><a href="../../files/actionpack/lib/action_view/helpers/form_helper_rb.html">actionpack/lib/action_view/helpers/form_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Action View templates can be written in three ways. If the template file
+has a <tt>.erb</tt> (or <tt>.rhtml</tt>) extension then it uses a mixture
+of ERb (included in Ruby) and HTML. If the template file has a
+<tt>.builder</tt> (or <tt>.rxml</tt>) extension then Jim Weirich&#8217;s
+Builder::XmlMarkup library is used. If the template file has a
+<tt>.rjs</tt> extension then it will use
+ActionView::Helpers::PrototypeHelper::JavaScriptGenerator.
+</p>
+<h1>ERb</h1>
+<p>
+You trigger ERb by using embeddings such as <% %>, <% -%>, and <%= %>. The
+<%= %> tag set is used when you want output. Consider the following loop
+for names:
+</p>
+<pre>
+  &lt;b&gt;Names of all the people&lt;/b&gt;
+  &lt;% for person in @people %&gt;
+    Name: &lt;%= person.name %&gt;&lt;br/&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+The loop is setup in regular embedding tags <% %> and the name is written
+using the output embedding tag <%= %>. Note that this is not just a usage
+suggestion. Regular output functions like print or puts won&#8217;t work
+with ERb templates. So this would be wrong:
+</p>
+<pre>
+  Hi, Mr. &lt;% puts &quot;Frodo&quot; %&gt;
+</pre>
+<p>
+If you absolutely must write from within a function, you can use the
+TextHelper#concat.
+</p>
+<p>
+<%- and -%> suppress leading and trailing whitespace, including the
+trailing newline, and can be used interchangeably with <% and %>.
+</p>
+<h2>Using sub templates</h2>
+<p>
+Using sub templates allows you to sidestep tedious replication and extract
+common display structures in shared templates. The classic example is the
+use of a header and footer (even though the Action Pack-way would be to use
+Layouts):
+</p>
+<pre>
+  &lt;%= render &quot;shared/header&quot; %&gt;
+  Something really specific and terrific
+  &lt;%= render &quot;shared/footer&quot; %&gt;
+</pre>
+<p>
+As you see, we use the output embeddings for the render methods. The render
+call itself will just return a string holding the result of the rendering.
+The output embedding writes it to the current template.
+</p>
+<p>
+But you don&#8217;t have to restrict yourself to static includes. Templates
+can share variables amongst themselves by using instance variables defined
+using the regular embedding tags. Like this:
+</p>
+<pre>
+  &lt;% @page_title = &quot;A Wonderful Hello&quot; %&gt;
+  &lt;%= render &quot;shared/header&quot; %&gt;
+</pre>
+<p>
+Now the header can pick up on the <tt>@page_title</tt> variable and use it
+for outputting a title tag:
+</p>
+<pre>
+  &lt;title&gt;&lt;%= @page_title %&gt;&lt;/title&gt;
+</pre>
+<h2>Passing local variables to sub templates</h2>
+<p>
+You can pass local variables to sub templates by using a hash with the
+variable names as keys and the objects as values:
+</p>
+<pre>
+  &lt;%= render &quot;shared/header&quot;, { :headline =&gt; &quot;Welcome&quot;, :person =&gt; person } %&gt;
+</pre>
+<p>
+These can now be accessed in <tt>shared/header</tt> with:
+</p>
+<pre>
+  Headline: &lt;%= headline %&gt;
+  First name: &lt;%= person.first_name %&gt;
+</pre>
+<p>
+If you need to find out whether a certain local variable has been assigned
+a value in a particular render call, you need to use the following pattern:
+</p>
+<pre>
+  &lt;% if local_assigns.has_key? :headline %&gt;
+    Headline: &lt;%= headline %&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+Testing using <tt>defined? headline</tt> will not work. This is an
+implementation restriction.
+</p>
+<h2><a href="Template.html">Template</a> caching</h2>
+<p>
+By default, <a href="../Rails.html">Rails</a> will compile each template to
+a method in order to render it. When you alter a template, <a
+href="../Rails.html">Rails</a> will check the file&#8217;s modification
+time and recompile it.
+</p>
+<h2>Builder</h2>
+<p>
+Builder templates are a more programmatic alternative to ERb. They are
+especially useful for generating XML content. An XmlMarkup object named
+<tt>xml</tt> is automatically made available to templates with a
+<tt>.builder</tt> extension.
+</p>
+<p>
+Here are some basic examples:
+</p>
+<pre>
+  xml.em(&quot;emphasized&quot;)                              # =&gt; &lt;em&gt;emphasized&lt;/em&gt;
+  xml.em { xml.b(&quot;emph &amp; bold&quot;) }                   # =&gt; &lt;em&gt;&lt;b&gt;emph &amp;amp; bold&lt;/b&gt;&lt;/em&gt;
+  xml.a(&quot;A Link&quot;, &quot;href&quot;=&gt;&quot;http://onestepback.org&quot;) # =&gt; &lt;a href=&quot;http://onestepback.org&quot;&gt;A Link&lt;/a&gt;
+  xml.target(&quot;name&quot;=&gt;&quot;compile&quot;, &quot;option&quot;=&gt;&quot;fast&quot;)   # =&gt; &lt;target option=&quot;fast&quot; name=&quot;compile&quot;\&gt;
+                                                    # NOTE: order of attributes is not specified.
+</pre>
+<p>
+Any method with a block will be treated as an XML markup tag with nested
+markup in the block. For example, the following:
+</p>
+<pre>
+  xml.div {
+    xml.h1(@person.name)
+    xml.p(@person.bio)
+  }
+</pre>
+<p>
+would produce something like:
+</p>
+<pre>
+  &lt;div&gt;
+    &lt;h1&gt;David Heinemeier Hansson&lt;/h1&gt;
+    &lt;p&gt;A product of Danish Design during the Winter of '79...&lt;/p&gt;
+  &lt;/div&gt;
+</pre>
+<p>
+A full-length RSS example actually used on Basecamp:
+</p>
+<pre>
+  xml.rss(&quot;version&quot; =&gt; &quot;2.0&quot;, &quot;xmlns:dc&quot; =&gt; &quot;http://purl.org/dc/elements/1.1/&quot;) do
+    xml.channel do
+      xml.title(@feed_title)
+      xml.link(@url)
+      xml.description &quot;Basecamp: Recent items&quot;
+      xml.language &quot;en-us&quot;
+      xml.ttl &quot;40&quot;
+
+      for item in @recent_items
+        xml.item do
+          xml.title(item_title(item))
+          xml.description(item_description(item)) if item_description(item)
+          xml.pubDate(item_pubDate(item))
+          xml.guid(@person.firm.account.url + @recent_items.url(item))
+          xml.link(@person.firm.account.url + @recent_items.url(item))
+
+          xml.tag!(&quot;dc:creator&quot;, item.author_name) if item_has_creator?(item)
+        end
+      end
+    end
+  end
+</pre>
+<p>
+More builder documentation can be found at <a
+href="http://builder.rubyforge.org./">builder.rubyforge.org.</a>
+</p>
+<h2>JavaScriptGenerator</h2>
+<p>
+JavaScriptGenerator templates end in <tt>.rjs</tt>. Unlike conventional
+templates which are used to render the results of an action, these
+templates generate instructions on how to modify an already rendered page.
+This makes it easy to modify multiple elements on your page in one
+declarative Ajax response. Actions with these templates are called in the
+background with Ajax and make updates to the page where the request
+originated from.
+</p>
+<p>
+An instance of the JavaScriptGenerator object named <tt>page</tt> is
+automatically made available to your template, which is implicitly wrapped
+in an <a
+href="Helpers/PrototypeHelper.html#M002362">ActionView::Helpers::PrototypeHelper#update_page</a>
+block.
+</p>
+<p>
+When an <tt>.rjs</tt> action is called with <tt>link_to_remote</tt>, the
+generated JavaScript is automatically evaluated. Example:
+</p>
+<pre>
+  link_to_remote :url =&gt; {:action =&gt; 'delete'}
+</pre>
+<p>
+The subsequently rendered <tt>delete.rjs</tt> might look like:
+</p>
+<pre>
+  page.replace_html  'sidebar', :partial =&gt; 'sidebar'
+  page.remove        &quot;person-#{@person.id}&quot;
+  page.visual_effect :highlight, 'user-list'
+</pre>
+<p>
+This refreshes the sidebar, removes a person element and highlights the
+user list.
+</p>
+<p>
+See the ActionView::Helpers::PrototypeHelper::GeneratorMethods
+documentation for more details.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002209">cache_template_loading?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002201">debug_rjs</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002168">initialize_without_template_tracking</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002167">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002210">process_view_paths</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002217">template</a>,</li>
+                
+                <li><a href="#M002216">template_format</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>V</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002214">view_paths=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>W</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002219">with_template</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>X</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002208">xss_safe?</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="../ActionController.html">ActionController</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="../ActionView.html">ActionView</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <span>::ERB::Util</span>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="Base/CompiledTemplates.html">ActionView::Base::CompiledTemplates</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Base/CompiledTemplates.html">ActionView::Base::CompiledTemplates</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Base/ProxyModule.html">ActionView::Base::ProxyModule</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>base_path</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>assigns</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>template_extension</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>controller</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [W]
+            </td>
+            <td class='attr-name'>template_format</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>output_buffer</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>helpers</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>view_paths</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002209">
+                    
+                    <a name="M002209"></a><b>cache_template_loading?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002209_source')" id="l_M002209_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/b68861a00fe522037c7f668a606c37851a0541e1/actionpack/lib/action_view/base.rb#L195" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002209_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/base.rb, line 195</span>
+195:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">cache_template_loading?</span>
+196:       <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">allow_concurrency</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">cache_template_loading</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-value">? </span><span class="ruby-operator">!</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Dependencies</span>.<span class="ruby-identifier">load?</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">cache_template_loading</span>)
+197:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002201">
+                    
+                    <a name="M002201"></a><b>debug_rjs</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Specify whether RJS responses should be wrapped in a try/catch block that
+alert()s the caught exception (and then re-raises it).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002201_source')" id="l_M002201_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/b68861a00fe522037c7f668a606c37851a0541e1/actionpack/lib/action_view/base.rb#L183" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002201_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/base.rb, line 183</span>
+183:     <span class="ruby-identifier">cattr_accessor</span> <span class="ruby-identifier">:debug_rjs</span>
+</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002167">
+                    
+                    <a name="M002167"></a><b>new</b>(*args)
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Base.html#M002168">initialize_without_template_tracking</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002167_source')" id="l_M002167_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c66013e2c5dc77e9bfa06111fb8841b9b0e41ceb/actionpack/lib/action_view/test_case.rb#L6" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002167_source" class="dyn-source">
+                        <pre>   <span class="ruby-comment cmt"># File actionpack/lib/action_view/test_case.rb, line 6</span>
+6:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+7:       <span class="ruby-ivar">@_rendered</span> = { <span class="ruby-identifier">:template</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:partials</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>) }
+8:       <span class="ruby-identifier">initialize_without_template_tracking</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+9:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002210">
+                    
+                    <a name="M002210"></a><b>process_view_paths</b>(value)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002210_source')" id="l_M002210_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/b68861a00fe522037c7f668a606c37851a0541e1/actionpack/lib/action_view/base.rb#L209" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002210_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/base.rb, line 209</span>
+209:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">process_view_paths</span>(<span class="ruby-identifier">value</span>)
+210:       <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">PathSet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Array</span>(<span class="ruby-identifier">value</span>))
+211:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002208">
+                    
+                    <a name="M002208"></a><b>xss_safe?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+:nodoc:
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002208_source')" id="l_M002208_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/b68861a00fe522037c7f668a606c37851a0541e1/actionpack/lib/action_view/base.rb#L191" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002208_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/base.rb, line 191</span>
+191:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">xss_safe?</span>
+192:       <span class="ruby-keyword kw">false</span>
+193:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002168">
+                    
+                    <a name="M002168"></a><b>initialize_without_template_tracking</b>(*args)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for initialize
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002217">
+                    
+                    <a name="M002217"></a><b>template</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Access the current template being rendered. Returns a <a
+href="Template.html">ActionView::Template</a> object.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002217_source')" id="l_M002217_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/b68861a00fe522037c7f668a606c37851a0541e1/actionpack/lib/action_view/base.rb#L295" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002217_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/base.rb, line 295</span>
+295:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">template</span>
+296:       <span class="ruby-ivar">@_current_render</span>
+297:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002216">
+                    
+                    <a name="M002216"></a><b>template_format</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+The format to be used when choosing between multiple templates with the
+same name but differing formats. See +Request#template_format+ for more
+details.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002216_source')" id="l_M002216_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/b68861a00fe522037c7f668a606c37851a0541e1/actionpack/lib/action_view/base.rb#L283" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002216_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/base.rb, line 283</span>
+283:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">template_format</span>
+284:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-ivar">@template_format</span>
+285:         <span class="ruby-ivar">@template_format</span>
+286:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">controller</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:request</span>)
+287:         <span class="ruby-ivar">@template_format</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">request</span>.<span class="ruby-identifier">template_format</span>.<span class="ruby-identifier">to_sym</span>
+288:       <span class="ruby-keyword kw">else</span>
+289:         <span class="ruby-ivar">@template_format</span> = <span class="ruby-identifier">:html</span>
+290:       <span class="ruby-keyword kw">end</span>
+291:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002214">
+                    
+                    <a name="M002214"></a><b>view_paths=</b>(paths)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002214_source')" id="l_M002214_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/b68861a00fe522037c7f668a606c37851a0541e1/actionpack/lib/action_view/base.rb#L239" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002214_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/base.rb, line 239</span>
+239:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">view_paths=</span>(<span class="ruby-identifier">paths</span>)
+240:       <span class="ruby-ivar">@view_paths</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">process_view_paths</span>(<span class="ruby-identifier">paths</span>)
+241:       <span class="ruby-comment cmt"># we might be using ReloadableTemplates, so we need to let them know this a new request</span>
+242:       <span class="ruby-ivar">@view_paths</span>.<span class="ruby-identifier">load!</span>
+243:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002219">
+                    
+                    <a name="M002219"></a><b>with_template</b>(current_template)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002219_source')" id="l_M002219_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/b68861a00fe522037c7f668a606c37851a0541e1/actionpack/lib/action_view/base.rb#L304" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002219_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/base.rb, line 304</span>
+304:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_template</span>(<span class="ruby-identifier">current_template</span>)
+305:       <span class="ruby-identifier">last_template</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">template</span> = <span class="ruby-identifier">template</span>, <span class="ruby-identifier">current_template</span>
+306:       <span class="ruby-keyword kw">yield</span>
+307:     <span class="ruby-keyword kw">ensure</span>
+308:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">template</span> = <span class="ruby-identifier">last_template</span>
+309:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/Base.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:10:52 GMT -->
+</html>    

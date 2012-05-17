@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/TestCase/RaiseActionExceptions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+<head>
+    <title>ActionController::TestCase::RaiseActionExceptions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::TestCase::RaiseActionExceptions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/test_case_rb.html">actionpack/lib/action_controller/test_case.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+When the request.remote_addr remains the default for testing, which is
+0.0.0.0, the exception is simply raised inline (bystepping the regular
+exception handling from rescue_action). If the request.remote_addr is
+anything else, the regular rescue_action process takes place. This means
+you can test your rescue_action code by setting remote_addr to something
+else than 0.0.0.0.
+</p>
+<p>
+The exception is stored in the exception accessor for further inspection.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001737">included</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001738">rescue_action_without_handler</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001737">
+                    
+                    <a name="M001737"></a><b>included</b>(base)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001737_source')" id="l_M001737_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L135" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001737_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 135</span>
+135:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+136:         <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+137:           <span class="ruby-identifier">attr_accessor</span> <span class="ruby-identifier">:exception</span>
+138:           <span class="ruby-identifier">protected</span> <span class="ruby-identifier">:exception</span>, <span class="ruby-identifier">:exception=</span>
+139:         <span class="ruby-keyword kw">end</span>
+140:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001738">
+                    
+                    <a name="M001738"></a><b>rescue_action_without_handler</b>(e)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001738_source')" id="l_M001738_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L143" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001738_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 143</span>
+143:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_action_without_handler</span>(<span class="ruby-identifier">e</span>)
+144:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">exception</span> = <span class="ruby-identifier">e</span>
+145: 
+146:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">remote_addr</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;0.0.0.0&quot;</span>
+147:             <span class="ruby-identifier">raise</span>(<span class="ruby-identifier">e</span>)
+148:           <span class="ruby-keyword kw">else</span>
+149:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">e</span>)
+150:           <span class="ruby-keyword kw">end</span>
+151:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/TestCase/RaiseActionExceptions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+</html>    

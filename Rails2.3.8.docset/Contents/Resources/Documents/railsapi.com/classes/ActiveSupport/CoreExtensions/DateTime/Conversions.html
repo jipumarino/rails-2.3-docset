@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/DateTime/Conversions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+<head>
+    <title>ActiveSupport::CoreExtensions::DateTime::Conversions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::CoreExtensions::DateTime::Conversions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/activesupport/lib/active_support/core_ext/date_time/conversions_rb.html">activesupport/lib/active_support/core_ext/date_time/conversions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Converting datetimes to formatted strings, dates, and times.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002890">formatted_offset</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002891">readable_inspect</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002892">to_date</a>,</li>
+                
+                <li><a href="#M002894">to_datetime</a>,</li>
+                
+                <li><a href="#M002896">to_f</a>,</li>
+                
+                <li><a href="#M002889">to_formatted_s</a>,</li>
+                
+                <li><a href="#M002897">to_i</a>,</li>
+                
+                <li><a href="#M002893">to_time</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>X</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002895">xmlschema</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002890">
+                    
+                    <a name="M002890"></a><b>formatted_offset</b>(colon = true, alternate_utc_string = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the <tt>utc_offset</tt> as an +HH:MM formatted string. Examples:
+</p>
+<pre>
+  datetime = DateTime.civil(2000, 1, 1, 0, 0, 0, Rational(-6, 24))
+  datetime.formatted_offset         # =&gt; &quot;-06:00&quot;
+  datetime.formatted_offset(false)  # =&gt; &quot;-0600&quot;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002890_source')" id="l_M002890_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/754bbaaf37f21f51b345f88ca42b423032800e91/activesupport/lib/active_support/core_ext/date_time/conversions.rb#L58" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002890_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/date_time/conversions.rb, line 58</span>
+58:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">formatted_offset</span>(<span class="ruby-identifier">colon</span> = <span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">alternate_utc_string</span> = <span class="ruby-keyword kw">nil</span>)
+59:           <span class="ruby-identifier">utc?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">alternate_utc_string</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">utc_offset</span>.<span class="ruby-identifier">to_utc_offset_s</span>(<span class="ruby-identifier">colon</span>)
+60:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002891">
+                    
+                    <a name="M002891"></a><b>readable_inspect</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Overrides the default inspect method with a human readable one, e.g.,
+&#8220;Mon, 21 Feb 2005 14:30:00 +0000&#8220;
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002891_source')" id="l_M002891_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/754bbaaf37f21f51b345f88ca42b423032800e91/activesupport/lib/active_support/core_ext/date_time/conversions.rb#L63" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002891_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/date_time/conversions.rb, line 63</span>
+63:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">readable_inspect</span>
+64:           <span class="ruby-identifier">to_s</span>(<span class="ruby-identifier">:rfc822</span>)
+65:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002892">
+                    
+                    <a name="M002892"></a><b>to_date</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Converts self to a Ruby Date object; time portion is discarded
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002892_source')" id="l_M002892_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/754bbaaf37f21f51b345f88ca42b423032800e91/activesupport/lib/active_support/core_ext/date_time/conversions.rb#L68" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002892_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/date_time/conversions.rb, line 68</span>
+68:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_date</span>
+69:           <span class="ruby-operator">::</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">year</span>, <span class="ruby-identifier">month</span>, <span class="ruby-identifier">day</span>)
+70:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002894">
+                    
+                    <a name="M002894"></a><b>to_datetime</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+To be able to keep Times, Dates and DateTimes interchangeable on
+conversions
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002894_source')" id="l_M002894_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/754bbaaf37f21f51b345f88ca42b423032800e91/activesupport/lib/active_support/core_ext/date_time/conversions.rb#L79" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002894_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/date_time/conversions.rb, line 79</span>
+79:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_datetime</span>
+80:           <span class="ruby-keyword kw">self</span>
+81:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002896">
+                    
+                    <a name="M002896"></a><b>to_f</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Converts self to a floating-point number of seconds since the Unix epoch
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002896_source')" id="l_M002896_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/754bbaaf37f21f51b345f88ca42b423032800e91/activesupport/lib/active_support/core_ext/date_time/conversions.rb#L89" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002896_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/date_time/conversions.rb, line 89</span>
+89:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_f</span>
+90:           <span class="ruby-identifier">seconds_since_unix_epoch</span>.<span class="ruby-identifier">to_f</span>
+91:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002889">
+                    
+                    <a name="M002889"></a><b>to_formatted_s</b>(format = :default)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Convert to a formatted string. See Time::DATE_FORMATS for predefined
+formats.
+</p>
+<p>
+This method is aliased to <tt>to_s</tt>.
+</p>
+<h3>Examples</h3>
+<pre>
+  datetime = DateTime.civil(2007, 12, 4, 0, 0, 0, 0)   # =&gt; Tue, 04 Dec 2007 00:00:00 +0000
+
+  datetime.to_formatted_s(:db)            # =&gt; &quot;2007-12-04 00:00:00&quot;
+  datetime.to_s(:db)                      # =&gt; &quot;2007-12-04 00:00:00&quot;
+  datetime.to_s(:number)                  # =&gt; &quot;20071204000000&quot;
+  datetime.to_formatted_s(:short)         # =&gt; &quot;04 Dec 00:00&quot;
+  datetime.to_formatted_s(:long)          # =&gt; &quot;December 04, 2007 00:00&quot;
+  datetime.to_formatted_s(:long_ordinal)  # =&gt; &quot;December 4th, 2007 00:00&quot;
+  datetime.to_formatted_s(:rfc822)        # =&gt; &quot;Tue, 04 Dec 2007 00:00:00 +0000&quot;
+</pre>
+<h2>Adding your own datetime formats to <a href="Conversions.html#M002889">to_formatted_s</a></h2>
+<p>
+DateTime formats are shared with Time. You can add your own to the
+Time::DATE_FORMATS hash. Use the format name as the hash key and either a
+strftime string or Proc instance that takes a time or datetime argument as
+the value.
+</p>
+<pre>
+  # config/initializers/time_formats.rb
+  Time::DATE_FORMATS[:month_and_year] = &quot;%B %Y&quot;
+  Time::DATE_FORMATS[:short_ordinal] = lambda { |time| time.strftime(&quot;%B #{time.day.ordinalize}&quot;) }
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002889_source')" id="l_M002889_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/754bbaaf37f21f51b345f88ca42b423032800e91/activesupport/lib/active_support/core_ext/date_time/conversions.rb#L48" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002889_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/date_time/conversions.rb, line 48</span>
+48:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_formatted_s</span>(<span class="ruby-identifier">format</span> = <span class="ruby-identifier">:default</span>)
+49:           <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">to_default_s</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">formatter</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Time</span><span class="ruby-operator">::</span><span class="ruby-constant">DATE_FORMATS</span>[<span class="ruby-identifier">format</span>]
+50:           <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">call</span>(<span class="ruby-keyword kw">self</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">strftime</span>(<span class="ruby-identifier">formatter</span>)
+51:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002897">
+                    
+                    <a name="M002897"></a><b>to_i</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Converts self to an integer number of seconds since the Unix epoch
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002897_source')" id="l_M002897_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/754bbaaf37f21f51b345f88ca42b423032800e91/activesupport/lib/active_support/core_ext/date_time/conversions.rb#L94" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002897_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/date_time/conversions.rb, line 94</span>
+94:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_i</span>
+95:           <span class="ruby-identifier">seconds_since_unix_epoch</span>.<span class="ruby-identifier">to_i</span>
+96:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002893">
+                    
+                    <a name="M002893"></a><b>to_time</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Attempts to convert self to a Ruby Time object; returns self if out of
+range of Ruby Time class If self has an offset other than 0, self will just
+be returned unaltered, since there&#8217;s no clean way to map it to a Time
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002893_source')" id="l_M002893_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/754bbaaf37f21f51b345f88ca42b423032800e91/activesupport/lib/active_support/core_ext/date_time/conversions.rb#L74" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002893_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/date_time/conversions.rb, line 74</span>
+74:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_time</span>
+75:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">offset</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-operator">::</span><span class="ruby-constant">Time</span>.<span class="ruby-identifier">utc_time</span>(<span class="ruby-identifier">year</span>, <span class="ruby-identifier">month</span>, <span class="ruby-identifier">day</span>, <span class="ruby-identifier">hour</span>, <span class="ruby-identifier">min</span>, <span class="ruby-identifier">sec</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword kw">self</span>
+76:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002895">
+                    
+                    <a name="M002895"></a><b>xmlschema</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Converts datetime to an appropriate format for use in XML
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002895_source')" id="l_M002895_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/754bbaaf37f21f51b345f88ca42b423032800e91/activesupport/lib/active_support/core_ext/date_time/conversions.rb#L84" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002895_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/date_time/conversions.rb, line 84</span>
+84:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">xmlschema</span>
+85:           <span class="ruby-identifier">strftime</span>(<span class="ruby-value str">&quot;%Y-%m-%dT%H:%M:%S%Z&quot;</span>)
+86:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/DateTime/Conversions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+</html>    

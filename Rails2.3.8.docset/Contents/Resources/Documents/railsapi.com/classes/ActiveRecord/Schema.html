@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Schema.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:11 GMT -->
+<head>
+    <title>ActiveRecord::Schema</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::Schema 
+            
+                <span class="parent">&lt; 
+                    
+                    Migration
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activerecord/lib/active_record/schema_rb.html">activerecord/lib/active_record/schema.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Allows programmers to programmatically define a schema in a portable DSL.
+This means you can define tables, indexes, etc. without using SQL directly,
+so your applications can more easily support multiple databases.
+</p>
+<p>
+Usage:
+</p>
+<pre>
+  ActiveRecord::Schema.define do
+    create_table :authors do |t|
+      t.string :name, :null =&gt; false
+    end
+
+    add_index :authors, :name, :unique
+
+    create_table :posts do |t|
+      t.integer :author_id, :null =&gt; false
+      t.string :subject
+      t.text :body
+      t.boolean :private, :default =&gt; false
+    end
+
+    add_index :posts, :author_id
+  end
+</pre>
+<p>
+<a href="Schema.html">ActiveRecord::Schema</a> is only supported by
+database adapters that also support migrations, the two features being very
+similar.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000426">define</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000425">migrations_path</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000426">
+                    
+                    <a name="M000426"></a><b>define</b>(info={}, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Eval the given block. All methods available to the current connection
+adapter are available within the block, so you can easily use the database
+definition DSL to build up your schema (<tt>create_table</tt>,
+<tt>add_index</tt>, etc.).
+</p>
+<p>
+The <tt>info</tt> hash is optional, and if given is used to define metadata
+about the current schema (currently, only the schema&#8217;s version):
+</p>
+<pre>
+  ActiveRecord::Schema.define(:version =&gt; 20380119000001) do
+    ...
+  end
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000426_source')" id="l_M000426_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/6e9b01fddb5a461b4e010f07eda7f758c607e677/activerecord/lib/active_record/schema.rb#L46" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000426_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/schema.rb, line 46</span>
+46:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">define</span>(<span class="ruby-identifier">info</span>={}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+47:       <span class="ruby-identifier">instance_eval</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+48: 
+49:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">info</span>[<span class="ruby-identifier">:version</span>].<span class="ruby-identifier">blank?</span>
+50:         <span class="ruby-identifier">initialize_schema_migrations_table</span>
+51:         <span class="ruby-identifier">assume_migrated_upto_version</span>(<span class="ruby-identifier">info</span>[<span class="ruby-identifier">:version</span>], <span class="ruby-identifier">migrations_path</span>)
+52:       <span class="ruby-keyword kw">end</span>
+53:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000425">
+                    
+                    <a name="M000425"></a><b>migrations_path</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000425_source')" id="l_M000425_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/6e9b01fddb5a461b4e010f07eda7f758c607e677/activerecord/lib/active_record/schema.rb#L31" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000425_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/schema.rb, line 31</span>
+31:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">migrations_path</span>
+32:       <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migrator</span>.<span class="ruby-identifier">migrations_path</span>
+33:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Schema.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:12 GMT -->
+</html>    

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveResource/CustomMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:15 GMT -->
+<head>
+    <title>ActiveResource::CustomMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveResource::CustomMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activeresource/lib/active_resource/custom_methods_rb.html">activeresource/lib/active_resource/custom_methods.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+A module to support custom REST methods and sub-resources, allowing you to
+break out of the &#8220;default&#8221; REST methods with your own custom
+resource requests. For example, say you use <a
+href="../Rails.html">Rails</a> to expose a REST service and configure your
+routes with:
+</p>
+<pre>
+   map.resources :people, :new =&gt; { :register =&gt; :post },
+                          :member =&gt; { :promote =&gt; :put, :deactivate =&gt; :delete }
+                          :collection =&gt; { :active =&gt; :get }
+
+ This route set creates routes for the following HTTP requests:
+
+   POST    /people/new/register.xml # PeopleController.register
+   PUT     /people/1/promote.xml    # PeopleController.promote with :id =&gt; 1
+   DELETE  /people/1/deactivate.xml # PeopleController.deactivate with :id =&gt; 1
+   GET     /people/active.xml       # PeopleController.active
+</pre>
+<p>
+Using this module, Active Resource can use these custom REST methods just
+like the standard methods.
+</p>
+<pre>
+  class Person &lt; ActiveResource::Base
+    self.site = &quot;http://37s.sunrise.i:3000&quot;
+  end
+
+  Person.new(:name =&gt; 'Ryan).post(:register)  # POST /people/new/register.xml
+  # =&gt; { :id =&gt; 1, :name =&gt; 'Ryan' }
+
+  Person.find(1).put(:promote, :position =&gt; 'Manager') # PUT /people/1/promote.xml
+  Person.find(1).delete(:deactivate) # DELETE /people/1/deactivate.xml
+
+  Person.get(:active)  # GET /people/active.xml
+  # =&gt; [{:id =&gt; 1, :name =&gt; 'Ryan'}, {:id =&gt; 2, :name =&gt; 'Joe'}]
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001549">delete</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>G</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001546">get</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001545">included</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>O</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001550">orig_delete</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001547">post</a>,</li>
+                
+                <li><a href="#M001548">put</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="../ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="CustomMethods/ClassMethods.html">ActiveResource::CustomMethods::ClassMethods</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="CustomMethods/InstanceMethods.html">ActiveResource::CustomMethods::InstanceMethods</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001549">
+                    
+                    <a name="M001549"></a><b>delete</b>(custom_method_name, options = {})
+                    
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="CustomMethods.html#M001550">orig_delete</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001549_source')" id="l_M001549_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/dffc2e2b64c89fdb0303bd18eccc7351ed0a0a58/activeresource/lib/active_resource/custom_methods.rb#L68" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001549_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activeresource/lib/active_resource/custom_methods.rb, line 68</span>
+68:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span> = {})
+69:             <span class="ruby-comment cmt"># Need to jump through some hoops to retain the original class 'delete' method</span>
+70:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">custom_method_name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+71:               <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">custom_method_collection_url</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">headers</span>)
+72:             <span class="ruby-keyword kw">else</span>
+73:               <span class="ruby-identifier">orig_delete</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>)
+74:             <span class="ruby-keyword kw">end</span>
+75:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001546">
+                    
+                    <a name="M001546"></a><b>get</b>(custom_method_name, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Invokes a GET to a given custom REST method. For example:
+</p>
+<pre>
+  Person.get(:active)  # GET /people/active.xml
+  # =&gt; [{:id =&gt; 1, :name =&gt; 'Ryan'}, {:id =&gt; 2, :name =&gt; 'Joe'}]
+
+  Person.get(:active, :awesome =&gt; true)  # GET /people/active.xml?awesome=true
+  # =&gt; [{:id =&gt; 1, :name =&gt; 'Ryan'}]
+</pre>
+<p>
+Note: the objects returned from this method are not automatically converted
+into <a href="Base.html">ActiveResource::Base</a> instances - they are
+ordinary Hashes. If you are expecting <a
+href="Base.html">ActiveResource::Base</a> instances, use the <tt>find</tt>
+class method with the <tt>:from</tt> option. For example:
+</p>
+<pre>
+  Person.find(:all, :from =&gt; :active)
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001546_source')" id="l_M001546_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/dffc2e2b64c89fdb0303bd18eccc7351ed0a0a58/activeresource/lib/active_resource/custom_methods.rb#L56" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001546_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activeresource/lib/active_resource/custom_methods.rb, line 56</span>
+56:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span> = {})
+57:             <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">custom_method_collection_url</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">headers</span>)
+58:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001545">
+                    
+                    <a name="M001545"></a><b>included</b>(base)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001545_source')" id="l_M001545_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/dffc2e2b64c89fdb0303bd18eccc7351ed0a0a58/activeresource/lib/active_resource/custom_methods.rb#L34" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001545_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activeresource/lib/active_resource/custom_methods.rb, line 34</span>
+34:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+35:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+36:         <span class="ruby-identifier">extend</span> <span class="ruby-constant">ActiveResource</span><span class="ruby-operator">::</span><span class="ruby-constant">CustomMethods</span><span class="ruby-operator">::</span><span class="ruby-constant">ClassMethods</span>
+37:         <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveResource</span><span class="ruby-operator">::</span><span class="ruby-constant">CustomMethods</span><span class="ruby-operator">::</span><span class="ruby-constant">InstanceMethods</span>
+38: 
+39:         <span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">self</span>
+40:           <span class="ruby-keyword kw">alias</span> <span class="ruby-identifier">:orig_delete</span> <span class="ruby-identifier">:delete</span>
+41: 
+42:           <span class="ruby-comment cmt"># Invokes a GET to a given custom REST method. For example:</span>
+43:           <span class="ruby-comment cmt">#</span>
+44:           <span class="ruby-comment cmt">#   Person.get(:active)  # GET /people/active.xml</span>
+45:           <span class="ruby-comment cmt">#   # =&gt; [{:id =&gt; 1, :name =&gt; 'Ryan'}, {:id =&gt; 2, :name =&gt; 'Joe'}]</span>
+46:           <span class="ruby-comment cmt">#</span>
+47:           <span class="ruby-comment cmt">#   Person.get(:active, :awesome =&gt; true)  # GET /people/active.xml?awesome=true</span>
+48:           <span class="ruby-comment cmt">#   # =&gt; [{:id =&gt; 1, :name =&gt; 'Ryan'}]</span>
+49:           <span class="ruby-comment cmt">#</span>
+50:           <span class="ruby-comment cmt"># Note: the objects returned from this method are not automatically converted</span>
+51:           <span class="ruby-comment cmt"># into ActiveResource::Base instances - they are ordinary Hashes. If you are expecting</span>
+52:           <span class="ruby-comment cmt"># ActiveResource::Base instances, use the &lt;tt&gt;find&lt;/tt&gt; class method with the</span>
+53:           <span class="ruby-comment cmt"># &lt;tt&gt;:from&lt;/tt&gt; option. For example:</span>
+54:           <span class="ruby-comment cmt">#</span>
+55:           <span class="ruby-comment cmt">#   Person.find(:all, :from =&gt; :active)</span>
+56:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span> = {})
+57:             <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">custom_method_collection_url</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">headers</span>)
+58:           <span class="ruby-keyword kw">end</span>
+59: 
+60:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">post</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">body</span> = <span class="ruby-value str">''</span>)
+61:             <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">custom_method_collection_url</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">body</span>, <span class="ruby-identifier">headers</span>)
+62:           <span class="ruby-keyword kw">end</span>
+63: 
+64:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">put</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">body</span> = <span class="ruby-value str">''</span>)
+65:             <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">put</span>(<span class="ruby-identifier">custom_method_collection_url</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">body</span>, <span class="ruby-identifier">headers</span>)
+66:           <span class="ruby-keyword kw">end</span>
+67: 
+68:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span> = {})
+69:             <span class="ruby-comment cmt"># Need to jump through some hoops to retain the original class 'delete' method</span>
+70:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">custom_method_name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+71:               <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">custom_method_collection_url</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">headers</span>)
+72:             <span class="ruby-keyword kw">else</span>
+73:               <span class="ruby-identifier">orig_delete</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>)
+74:             <span class="ruby-keyword kw">end</span>
+75:           <span class="ruby-keyword kw">end</span>
+76:         <span class="ruby-keyword kw">end</span>
+77:       <span class="ruby-keyword kw">end</span>
+78:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001550">
+                    
+                    <a name="M001550"></a><b>orig_delete</b>(custom_method_name, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="CustomMethods.html#M001549">delete</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001547">
+                    
+                    <a name="M001547"></a><b>post</b>(custom_method_name, options = {}, body = '')
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001547_source')" id="l_M001547_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/dffc2e2b64c89fdb0303bd18eccc7351ed0a0a58/activeresource/lib/active_resource/custom_methods.rb#L60" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001547_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activeresource/lib/active_resource/custom_methods.rb, line 60</span>
+60:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">post</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">body</span> = <span class="ruby-value str">''</span>)
+61:             <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">custom_method_collection_url</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">body</span>, <span class="ruby-identifier">headers</span>)
+62:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001548">
+                    
+                    <a name="M001548"></a><b>put</b>(custom_method_name, options = {}, body = '')
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001548_source')" id="l_M001548_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/dffc2e2b64c89fdb0303bd18eccc7351ed0a0a58/activeresource/lib/active_resource/custom_methods.rb#L64" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001548_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activeresource/lib/active_resource/custom_methods.rb, line 64</span>
+64:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">put</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">body</span> = <span class="ruby-value str">''</span>)
+65:             <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">put</span>(<span class="ruby-identifier">custom_method_collection_url</span>(<span class="ruby-identifier">custom_method_name</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">body</span>, <span class="ruby-identifier">headers</span>)
+66:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveResource/CustomMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:16 GMT -->
+</html>    

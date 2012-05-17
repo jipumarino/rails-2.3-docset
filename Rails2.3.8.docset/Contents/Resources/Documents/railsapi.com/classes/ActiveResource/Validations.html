@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveResource/Validations.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:16 GMT -->
+<head>
+    <title>ActiveResource::Validations</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveResource::Validations 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activeresource/lib/active_resource/validations_rb.html">activeresource/lib/active_resource/validations.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a href="../Module.html">Module</a> to support validation and errors with
+Active Resource objects. The module overrides <a
+href="Base.html#M001485">Base#save</a> to rescue
+ActiveResource::ResourceInvalid exceptions and parse the errors returned in
+the web service response. The module also adds an <tt>errors</tt>
+collection that mimics the interface of the errors provided by <a
+href="../ActiveRecord/Errors.html">ActiveRecord::Errors</a>.
+</p>
+<h4>Example</h4>
+<p>
+Consider a Person resource on the server requiring both a
+<tt>first_name</tt> and a <tt>last_name</tt> with a
+<tt>validates_presence_of :first_name, :last_name</tt> declaration in the
+model:
+</p>
+<pre>
+  person = Person.new(:first_name =&gt; &quot;Jim&quot;, :last_name =&gt; &quot;&quot;)
+  person.save                   # =&gt; false (server returns an HTTP 422 status code and errors)
+  person.valid?                 # =&gt; false
+  person.errors.empty?          # =&gt; false
+  person.errors.count           # =&gt; 1
+  person.errors.full_messages   # =&gt; [&quot;Last name can't be empty&quot;]
+  person.errors.on(:last_name)  # =&gt; &quot;can't be empty&quot;
+  person.last_name = &quot;Halpert&quot;
+  person.save                   # =&gt; true (and person is now saved to the remote service)
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001437">errors</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001435">save_with_validation</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>V</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001436">valid?</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001437">
+                    
+                    <a name="M001437"></a><b>errors</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the <a href="Errors.html">Errors</a> object that holds all
+information about attribute error messages.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001437_source')" id="l_M001437_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/158e7b63ab83dbcb9cdc7f951be920faf16fe3c0/activeresource/lib/active_resource/validations.rb#L286" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001437_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activeresource/lib/active_resource/validations.rb, line 286</span>
+286:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">errors</span>
+287:       <span class="ruby-ivar">@errors</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Errors</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+288:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001435">
+                    
+                    <a name="M001435"></a><b>save_with_validation</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Validate a resource and save (POST) it to the remote web service.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001435_source')" id="l_M001435_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/158e7b63ab83dbcb9cdc7f951be920faf16fe3c0/activeresource/lib/active_resource/validations.rb#L258" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001435_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activeresource/lib/active_resource/validations.rb, line 258</span>
+258:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save_with_validation</span>
+259:       <span class="ruby-identifier">save_without_validation</span>
+260:       <span class="ruby-keyword kw">true</span>
+261:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ResourceInvalid</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
+262:       <span class="ruby-keyword kw">case</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">format</span>
+263:       <span class="ruby-keyword kw">when</span> <span class="ruby-constant">ActiveResource</span><span class="ruby-operator">::</span><span class="ruby-constant">Formats</span>[<span class="ruby-identifier">:xml</span>]
+264:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">from_xml</span>(<span class="ruby-identifier">error</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+265:       <span class="ruby-keyword kw">when</span> <span class="ruby-constant">ActiveResource</span><span class="ruby-operator">::</span><span class="ruby-constant">Formats</span>[<span class="ruby-identifier">:json</span>]
+266:         <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">from_json</span>(<span class="ruby-identifier">error</span>.<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+267:       <span class="ruby-keyword kw">end</span>
+268:       <span class="ruby-keyword kw">false</span>
+269:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001436">
+                    
+                    <a name="M001436"></a><b>valid?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Checks for errors on an object (i.e., is resource.errors empty?).
+</p>
+<h4>Examples</h4>
+<pre>
+  my_person = Person.create(params[:person])
+  my_person.valid?
+  # =&gt; true
+
+  my_person.errors.add('login', 'can not be empty') if my_person.login == ''
+  my_person.valid?
+  # =&gt; false
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001436_source')" id="l_M001436_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/158e7b63ab83dbcb9cdc7f951be920faf16fe3c0/activeresource/lib/active_resource/validations.rb#L281" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001436_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activeresource/lib/active_resource/validations.rb, line 281</span>
+281:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">valid?</span>
+282:       <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>
+283:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveResource/Validations.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:16 GMT -->
+</html>    

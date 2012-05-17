@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Cache/CompressedMemCacheStore.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:05 GMT -->
+<head>
+    <title>ActiveSupport::Cache::CompressedMemCacheStore</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::Cache::CompressedMemCacheStore 
+            
+                <span class="parent">&lt; 
+                    
+                    MemCacheStore
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activesupport/lib/active_support/cache/compressed_mem_cache_store_rb.html">activesupport/lib/active_support/cache/compressed_mem_cache_store.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002713">read</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>W</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002714">write</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002713">
+                    
+                    <a name="M002713"></a><b>read</b>(name, options = nil)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002713_source')" id="l_M002713_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/4b63c2700ffc5c646af0e728d4ec2fcb6770671b/activesupport/lib/active_support/cache/compressed_mem_cache_store.rb#L4" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002713_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/cache/compressed_mem_cache_store.rb, line 4</span>
+ 4:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+ 5:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">name</span>, (<span class="ruby-identifier">options</span> <span class="ruby-operator">||</span> {}).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:raw</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>))
+ 6:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">raw?</span>(<span class="ruby-identifier">options</span>)
+ 7:             <span class="ruby-identifier">value</span>
+ 8:           <span class="ruby-keyword kw">else</span>
+ 9:             <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>(<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Gzip</span>.<span class="ruby-identifier">decompress</span>(<span class="ruby-identifier">value</span>))
+10:           <span class="ruby-keyword kw">end</span>
+11:         <span class="ruby-keyword kw">end</span>
+12:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002714">
+                    
+                    <a name="M002714"></a><b>write</b>(name, value, options = nil)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002714_source')" id="l_M002714_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/4b63c2700ffc5c646af0e728d4ec2fcb6770671b/activesupport/lib/active_support/cache/compressed_mem_cache_store.rb#L14" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002714_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/cache/compressed_mem_cache_store.rb, line 14</span>
+14:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+15:         <span class="ruby-identifier">value</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Gzip</span>.<span class="ruby-identifier">compress</span>(<span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">value</span>)) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">raw?</span>(<span class="ruby-identifier">options</span>)
+16:         <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span>, (<span class="ruby-identifier">options</span> <span class="ruby-operator">||</span> {}).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:raw</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>))
+17:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Cache/CompressedMemCacheStore.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:05 GMT -->
+</html>    

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Testing/Performance/Metrics.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:05 GMT -->
+<head>
+    <title>ActiveSupport::Testing::Performance::Metrics</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Testing::Performance::Metrics 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/activesupport/lib/active_support/testing/performance_rb.html">activesupport/lib/active_support/testing/performance.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>#</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003332">[]</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="Metrics/Base.html">ActiveSupport::Testing::Performance::Metrics::Base</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Metrics/CpuTime.html">ActiveSupport::Testing::Performance::Metrics::CpuTime</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Metrics/GcRuns.html">ActiveSupport::Testing::Performance::Metrics::GcRuns</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Metrics/GcTime.html">ActiveSupport::Testing::Performance::Metrics::GcTime</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Metrics/Memory.html">ActiveSupport::Testing::Performance::Metrics::Memory</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Metrics/Objects.html">ActiveSupport::Testing::Performance::Metrics::Objects</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Metrics/ProcessTime.html">ActiveSupport::Testing::Performance::Metrics::ProcessTime</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Metrics/Time.html">ActiveSupport::Testing::Performance::Metrics::Time</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Metrics/WallTime.html">ActiveSupport::Testing::Performance::Metrics::WallTime</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003332">
+                    
+                    <a name="M003332"></a><b>[]</b>(name)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003332_source')" id="l_M003332_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/e0fa041fce963744eaa4ef98a55d90ed895a6a00/activesupport/lib/active_support/testing/performance.rb#L221" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003332_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/performance.rb, line 221</span>
+221:         <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-operator">[]</span>(<span class="ruby-identifier">name</span>)
+222:           <span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">camelize</span>)
+223:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">NameError</span>
+224:           <span class="ruby-keyword kw">nil</span>
+225:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Testing/Performance/Metrics.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:08 GMT -->
+</html>    

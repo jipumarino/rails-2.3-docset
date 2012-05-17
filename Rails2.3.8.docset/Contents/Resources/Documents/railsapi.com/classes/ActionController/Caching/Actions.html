@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Actions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:39 GMT -->
+<head>
+    <title>ActionController::Caching::Actions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Caching::Actions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/caching/actions_rb.html">actionpack/lib/action_controller/caching/actions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Action caching is similar to page caching by the fact that the entire
+output of the response is cached, but unlike page caching, every request
+still goes through the Action Pack. The key benefit of this is that filters
+are run before the cache is served, which allows for authentication and
+other restrictions on whether someone is allowed to see the cache. Example:
+</p>
+<pre>
+  class ListsController &lt; ApplicationController
+    before_filter :authenticate, :except =&gt; :public
+    caches_page   :public
+    caches_action :index, :show, :feed
+  end
+</pre>
+<p>
+In this example, the public action doesn&#8217;t require authentication, so
+it&#8217;s possible to use the faster page caching method. But both the
+show and feed action are to be shielded behind the authenticate filter, so
+we need to implement those as action caches.
+</p>
+<p>
+Action caching internally uses the fragment caching and an around filter to
+do the job. The fragment cache is named according to both the current host
+and the path. So a page that is accessed at <a
+href="http://david.somewhere.com/lists/show/1">david.somewhere.com/lists/show/1</a>
+will result in a fragment named
+&#8220;david.somewhere.com/lists/show/1&#8220;. This allows the cacher to
+differentiate between &#8220;david.somewhere.com/lists/&#8220; and
+&#8220;jamis.somewhere.com/lists/&#8220; &#8212; which is a helpful way of
+assisting the subdomain-as-account-key pattern.
+</p>
+<p>
+Different representations of the same resource, e.g. <tt><a
+href="http://david.somewhere.com/lists">david.somewhere.com/lists</a></tt>
+and <tt><a
+href="http://david.somewhere.com/lists.xml">david.somewhere.com/lists.xml</a></tt>
+are treated like separate requests and so are cached separately. Keep in
+mind when expiring an action cache that <tt>:action =&gt; 'lists'</tt> is
+not the same as <tt>:action =&gt; 'list', :format =&gt; :xml</tt>.
+</p>
+<p>
+You can set modify the default action cache path by passing a :cache_path
+option. This will be passed directly to <a
+href="Actions/ActionCachePath.html#M001581">ActionCachePath.path_for</a>.
+This is handy for actions with multiple possible routes that should be
+cached differently. If a block is given, it is called with the current
+controller instance.
+</p>
+<p>
+And you can also use :if (or :unless) to pass a Proc that specifies when
+the action should be cached.
+</p>
+<p>
+Finally, if you are using memcached, you can also pass :expires_in.
+</p>
+<pre>
+  class ListsController &lt; ApplicationController
+    before_filter :authenticate, :except =&gt; :public
+    caches_page   :public
+    caches_action :index, :if =&gt; Proc.new { |c| !c.request.format.json? } # cache if is not a JSON request
+    caches_action :show, :cache_path =&gt; { :project =&gt; 1 }, :expires_in =&gt; 1.hour
+    caches_action :feed, :cache_path =&gt; Proc.new { |controller|
+      controller.params[:user_id] ?
+        controller.send(:user_list_url, controller.params[:user_id], controller.params[:id]) :
+        controller.send(:list_url, controller.params[:id]) }
+  end
+</pre>
+<p>
+If you pass :layout => false, it will only cache your action content. It is
+useful when your layout has dynamic information.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001580">expire_action</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Actions/ClassMethods.html">ActionController::Caching::Actions::ClassMethods</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Actions/ActionCacheFilter.html">ActionController::Caching::Actions::ActionCacheFilter</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Actions/ActionCachePath.html">ActionController::Caching::Actions::ActionCachePath</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001580">
+                    
+                    <a name="M001580"></a><b>expire_action</b>(options = {})
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001580_source')" id="l_M001580_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d1d1894c2f38b7b116a2f756fb879ef0e68ade3f/actionpack/lib/action_controller/caching/actions.rb#L71" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001580_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/actions.rb, line 71</span>
+71:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">expire_action</span>(<span class="ruby-identifier">options</span> = {})
+72:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">cache_configured?</span>
+73: 
+74:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:action</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+75:             <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:action</span>].<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">action</span><span class="ruby-operator">|</span>
+76:               <span class="ruby-identifier">expire_fragment</span>(<span class="ruby-constant">ActionCachePath</span>.<span class="ruby-identifier">path_for</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>({ <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span> }), <span class="ruby-keyword kw">false</span>))
+77:             <span class="ruby-keyword kw">end</span>
+78:           <span class="ruby-keyword kw">else</span>
+79:             <span class="ruby-identifier">expire_fragment</span>(<span class="ruby-constant">ActionCachePath</span>.<span class="ruby-identifier">path_for</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">options</span>, <span class="ruby-keyword kw">false</span>))
+80:           <span class="ruby-keyword kw">end</span>
+81:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Actions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:40 GMT -->
+</html>    

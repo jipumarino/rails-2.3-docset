@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/Helpers/ScriptaculousHelper.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+<head>
+    <title>ActionView::Helpers::ScriptaculousHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::ScriptaculousHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_view/helpers/scriptaculous_helper_rb.html">actionpack/lib/action_view/helpers/scriptaculous_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Provides a set of helpers for calling Scriptaculous JavaScript functions,
+including those which create Ajax controls and visual effects.
+</p>
+<p>
+To be able to use these helpers, you must include the Prototype JavaScript
+framework and the Scriptaculous JavaScript library in your pages. See the
+documentation for <a
+href="JavaScriptHelper.html">ActionView::Helpers::JavaScriptHelper</a> for
+more information on including the necessary JavaScript.
+</p>
+<p>
+The Scriptaculous helpers&#8217; behavior can be tweaked with various
+options. See the documentation at <a
+href="http://script.aculo.us/">script.aculo.us</a> for more information on
+using these helpers in your application.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002245">draggable_element</a>,</li>
+                
+                <li><a href="#M002247">drop_receiving_element</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002243">sortable_element</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>V</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002242">visual_effect</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">TOGGLE_EFFECTS</td>
+            <td>=</td>
+            <td class="attr-value">[:toggle_appear, :toggle_slide, :toggle_blind]</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002245">
+                    
+                    <a name="M002245"></a><b>draggable_element</b>(element_id, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Makes the element with the DOM ID specified by <tt>element_id</tt>
+draggable.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  &lt;%= draggable_element(&quot;my_image&quot;, :revert =&gt; true)
+</pre>
+<p>
+You can change the behaviour with various options, see <a
+href="http://script.aculo.us/">script.aculo.us</a> for more documentation.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002245_source')" id="l_M002245_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d052e9fb5868a10df33a84bf61f40a32df9e78ec/actionpack/lib/action_view/helpers/scriptaculous_helper.rb#L162" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002245_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/scriptaculous_helper.rb, line 162</span>
+162:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draggable_element</span>(<span class="ruby-identifier">element_id</span>, <span class="ruby-identifier">options</span> = {})
+163:         <span class="ruby-identifier">javascript_tag</span>(<span class="ruby-identifier">draggable_element_js</span>(<span class="ruby-identifier">element_id</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">chop!</span>)
+164:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002247">
+                    
+                    <a name="M002247"></a><b>drop_receiving_element</b>(element_id, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Makes the element with the DOM ID specified by <tt>element_id</tt> receive
+dropped draggable elements (created by <tt><a
+href="ScriptaculousHelper.html#M002245">draggable_element</a></tt>). and
+make an AJAX call. By default, the action called gets the DOM ID of the
+element as parameter.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  &lt;%= drop_receiving_element(&quot;my_cart&quot;, :url =&gt;
+    { :controller =&gt; &quot;cart&quot;, :action =&gt; &quot;add&quot; }) %&gt;
+</pre>
+<p>
+You can change the behaviour with various options, see <a
+href="http://script.aculo.us/">script.aculo.us</a> for more documentation.
+</p>
+<p>
+Some of these <tt>options</tt> include:
+</p>
+<ul>
+<li><tt>:accept</tt> - Set this to a string or an array of strings describing
+the allowable CSS classes that the <tt><a
+href="ScriptaculousHelper.html#M002245">draggable_element</a></tt> must
+have in order to be accepted by this <tt><a
+href="ScriptaculousHelper.html#M002247">drop_receiving_element</a></tt>.
+
+</li>
+<li><tt>:confirm</tt> - Adds a confirmation dialog. Example:
+
+<pre>
+  :confirm =&gt; &quot;Are you sure you want to do this?&quot;
+</pre>
+</li>
+<li><tt>:hoverclass</tt> - If set, the <tt><a
+href="ScriptaculousHelper.html#M002247">drop_receiving_element</a></tt>
+will have this additional CSS class when an accepted <tt><a
+href="ScriptaculousHelper.html#M002245">draggable_element</a></tt> is
+hovered over it.
+
+</li>
+<li><tt>:onDrop</tt> - Called when a <tt><a
+href="ScriptaculousHelper.html#M002245">draggable_element</a></tt> is
+dropped onto this element. Override this callback with a JavaScript
+expression to change the default drop behaviour. Example:
+
+<pre>
+  :onDrop =&gt; &quot;function(draggable_element, droppable_element, event) { alert('I like bananas') }&quot;
+</pre>
+<p>
+This callback gets three parameters: The Draggable element, the Droppable
+element and the Event object. You can extract additional information about
+the drop - like if the Ctrl or Shift keys were pressed - from the Event
+object.
+</p>
+</li>
+<li><tt>:with</tt> - A JavaScript expression specifying the parameters for the
+XMLHttpRequest. Any expressions should return a valid URL query string.
+
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002247_source')" id="l_M002247_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d052e9fb5868a10df33a84bf61f40a32df9e78ec/actionpack/lib/action_view/helpers/scriptaculous_helper.rb#L207" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002247_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/scriptaculous_helper.rb, line 207</span>
+207:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">drop_receiving_element</span>(<span class="ruby-identifier">element_id</span>, <span class="ruby-identifier">options</span> = {})
+208:         <span class="ruby-identifier">javascript_tag</span>(<span class="ruby-identifier">drop_receiving_element_js</span>(<span class="ruby-identifier">element_id</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">chop!</span>)
+209:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002243">
+                    
+                    <a name="M002243"></a><b>sortable_element</b>(element_id, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Makes the element with the DOM ID specified by <tt>element_id</tt> sortable
+by drag-and-drop and make an Ajax call whenever the sort order has changed.
+By default, the action called gets the serialized sortable element as
+parameters.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  &lt;%= sortable_element(&quot;my_list&quot;, :url =&gt; { :action =&gt; &quot;order&quot; }) %&gt;
+</pre>
+<p>
+In the example, the action gets a &#8220;my_list&#8220; array parameter
+containing the values of the ids of elements the sortable consists of, in
+the current order.
+</p>
+<p>
+Important: For this to work, the sortable elements must have id attributes
+in the form &#8220;string_identifier&#8220;. For example,
+&#8220;item_1&#8220;. Only the identifier part of the id attribute will be
+serialized.
+</p>
+<p>
+Additional <tt>options</tt> are:
+</p>
+<ul>
+<li><tt>:format</tt> - A regular expression to determine what to send as the
+serialized id to the server (the default is <tt>/^[^_]*_(.*)$/</tt>).
+
+</li>
+<li><tt>:constraint</tt> - Whether to constrain the dragging to either
+<tt>:horizontal</tt> or <tt>:vertical</tt> (or false to make it
+unconstrained).
+
+</li>
+<li><tt>:overlap</tt> - Calculate the item overlap in the <tt>:horizontal</tt>
+or <tt>:vertical</tt> direction.
+
+</li>
+<li><tt>:tag</tt> - Which children of the container element to treat as
+sortable (default is <tt>li</tt>).
+
+</li>
+<li><tt>:containment</tt> - Takes an element or array of elements to treat as
+potential drop targets (defaults to the original target element).
+
+</li>
+<li><tt>:only</tt> - A CSS class name or array of class names used to filter
+out child elements as candidates.
+
+</li>
+<li><tt>:scroll</tt> - Determines whether to scroll the list during drag
+operations if the list runs past the visual border.
+
+</li>
+<li><tt>:tree</tt> - Determines whether to treat nested lists as part of the
+main sortable list. This means that you can create multi-layer lists, and
+not only sort items at the same level, but drag and sort items between
+levels.
+
+</li>
+<li><tt>:hoverclass</tt> - If set, the Droppable will have this additional CSS
+class when an accepted Draggable is hovered over it.
+
+</li>
+<li><tt>:handle</tt> - Sets whether the element should only be draggable by an
+embedded handle. The value may be a string referencing a CSS class value
+(as of script.aculo.us V1.5). The first child/grandchild/etc. element found
+within the element that has this CSS class value will be used as the
+handle.
+
+</li>
+<li><tt>:ghosting</tt> - Clones the element and drags the clone, leaving the
+original in place until the clone is dropped (default is <tt>false</tt>).
+
+</li>
+<li><tt>:dropOnEmpty</tt> - If true the Sortable container will be made into a
+Droppable, that can receive a Draggable (as according to the containment
+rules) as a child element when there are no more elements inside (default
+is <tt>false</tt>).
+
+</li>
+<li><tt>:onChange</tt> - Called whenever the sort order changes while dragging.
+When dragging from one Sortable to another, the callback is called once on
+each Sortable. Gets the affected element as its parameter.
+
+</li>
+<li><tt>:onUpdate</tt> - Called when the drag ends and the Sortable&#8217;s
+order is changed in any way. When dragging from one Sortable to another,
+the callback is called once on each Sortable. Gets the container as its
+parameter.
+
+</li>
+</ul>
+<p>
+See <a href="http://script.aculo.us/">script.aculo.us</a> for more
+documentation.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002243_source')" id="l_M002243_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d052e9fb5868a10df33a84bf61f40a32df9e78ec/actionpack/lib/action_view/helpers/scriptaculous_helper.rb#L136" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002243_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/scriptaculous_helper.rb, line 136</span>
+136:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sortable_element</span>(<span class="ruby-identifier">element_id</span>, <span class="ruby-identifier">options</span> = {})
+137:         <span class="ruby-identifier">javascript_tag</span>(<span class="ruby-identifier">sortable_element_js</span>(<span class="ruby-identifier">element_id</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">chop!</span>)
+138:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002242">
+                    
+                    <a name="M002242"></a><b>visual_effect</b>(name, element_id = false, js_options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns a JavaScript snippet to be used on the Ajax callbacks for starting
+visual effects.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  &lt;%= link_to_remote &quot;Reload&quot;, :update =&gt; &quot;posts&quot;,
+        :url =&gt; { :action =&gt; &quot;reload&quot; },
+        :complete =&gt; visual_effect(:highlight, &quot;posts&quot;, :duration =&gt; 0.5)
+</pre>
+<p>
+If no <tt>element_id</tt> is given, it assumes &#8220;element&#8221; which
+should be a local variable in the generated JavaScript execution context.
+This can be used for example with <tt><a
+href="ScriptaculousHelper.html#M002247">drop_receiving_element</a></tt>:
+</p>
+<pre>
+  &lt;%= drop_receiving_element (...), :loading =&gt; visual_effect(:fade) %&gt;
+</pre>
+<p>
+This would fade the element that was dropped on the drop receiving element.
+</p>
+<p>
+For toggling visual effects, you can use <tt>:toggle_appear</tt>,
+<tt>:toggle_slide</tt>, and <tt>:toggle_blind</tt> which will alternate
+between appear/fade, slidedown/slideup, and blinddown/blindup respectively.
+</p>
+<p>
+You can change the behaviour with various options, see <a
+href="http://script.aculo.us/">script.aculo.us</a> for more documentation.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002242_source')" id="l_M002242_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d052e9fb5868a10df33a84bf61f40a32df9e78ec/actionpack/lib/action_view/helpers/scriptaculous_helper.rb#L45" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002242_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/scriptaculous_helper.rb, line 45</span>
+45:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">visual_effect</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">element_id</span> = <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">js_options</span> = {})
+46:         <span class="ruby-identifier">element</span> = <span class="ruby-identifier">element_id</span> <span class="ruby-value">? </span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">element_id</span>) <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;element&quot;</span>
+47:         
+48:         <span class="ruby-identifier">js_options</span>[<span class="ruby-identifier">:queue</span>] = <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">js_options</span>[<span class="ruby-identifier">:queue</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+49:           <span class="ruby-value str">'{'</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">js_options</span>[<span class="ruby-identifier">:queue</span>].<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:limit</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{k}:#{v}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{k}:'#{v}'&quot;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">','</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">'}'</span>
+50:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">js_options</span>[<span class="ruby-identifier">:queue</span>]
+51:           <span class="ruby-node">&quot;'#{js_options[:queue]}'&quot;</span>
+52:         <span class="ruby-keyword kw">end</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">js_options</span>[<span class="ruby-identifier">:queue</span>]
+53:         
+54:         [<span class="ruby-identifier">:endcolor</span>, <span class="ruby-identifier">:direction</span>, <span class="ruby-identifier">:startcolor</span>, <span class="ruby-identifier">:scaleMode</span>, <span class="ruby-identifier">:restorecolor</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">option</span><span class="ruby-operator">|</span>
+55:           <span class="ruby-identifier">js_options</span>[<span class="ruby-identifier">option</span>] = <span class="ruby-node">&quot;'#{js_options[option]}'&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">js_options</span>[<span class="ruby-identifier">option</span>]
+56:         <span class="ruby-keyword kw">end</span>
+57: 
+58:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">TOGGLE_EFFECTS</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
+59:           <span class="ruby-node">&quot;Effect.toggle(#{element},'#{name.to_s.gsub(/^toggle_/,'')}',#{options_for_javascript(js_options)});&quot;</span>
+60:         <span class="ruby-keyword kw">else</span>
+61:           <span class="ruby-node">&quot;new Effect.#{name.to_s.camelize}(#{element},#{options_for_javascript(js_options)});&quot;</span>
+62:         <span class="ruby-keyword kw">end</span>
+63:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/Helpers/ScriptaculousHelper.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+</html>    

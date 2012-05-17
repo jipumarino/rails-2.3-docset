@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Associations/AssociationProxy.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+<head>
+    <title>ActiveRecord::Associations::AssociationProxy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::Associations::AssociationProxy 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/associations/association_proxy_rb.html">activerecord/lib/active_record/associations/association_proxy.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+This is the root class of all association proxies:
+</p>
+<pre>
+  AssociationProxy
+    BelongsToAssociation
+      HasOneAssociation
+    BelongsToPolymorphicAssociation
+    AssociationCollection
+      HasAndBelongsToManyAssociation
+      HasManyAssociation
+        HasManyThroughAssociation
+           HasOneThroughAssociation
+</pre>
+<p>
+Association proxies in Active Record are middlemen between the object that
+holds the association, known as the <tt>@owner</tt>, and the actual
+associated object, known as the <tt>@target</tt>. The kind of association
+any proxy is about is available in <tt>@reflection</tt>. That&#8217;s an
+instance of the class ActiveRecord::Reflection::AssociationReflection.
+</p>
+<p>
+For example, given
+</p>
+<pre>
+  class Blog &lt; ActiveRecord::Base
+    has_many :posts
+  end
+
+  blog = Blog.find(:first)
+</pre>
+<p>
+the association proxy in <tt>blog.posts</tt> has the object in
+<tt>blog</tt> as <tt>@owner</tt>, the collection of its posts as
+<tt>@target</tt>, and the <tt>@reflection</tt> object represents a
+<tt>:has_many</tt> macro.
+</p>
+<p>
+This class has most of the basic instance methods removed, and delegates
+unknown methods to <tt>@target</tt> via <tt>method_missing</tt>. As a
+corner case, it even removes the <tt>class</tt> method and that&#8217;s why
+you get
+</p>
+<pre>
+  blog.posts.class # =&gt; Array
+</pre>
+<p>
+though the object behind <tt>blog.posts</tt> is not an Array, but an
+ActiveRecord::Associations::HasManyAssociation.
+</p>
+<p>
+The <tt>@target</tt> object is not loaded until needed. For example,
+</p>
+<pre>
+  blog.posts.count
+</pre>
+<p>
+is computed directly through SQL and does not trigger by itself the
+instantiation of the actual post records.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Associations/AssociationProxy.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+</html>    

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/MessageEncryptor.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:42 GMT -->
+<head>
+    <title>ActiveSupport::MessageEncryptor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::MessageEncryptor 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activesupport/lib/active_support/message_encryptor_rb.html">activesupport/lib/active_support/message_encryptor.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a href="MessageEncryptor.html">MessageEncryptor</a> is a simple way to
+encrypt values which get stored somewhere you don&#8217;t trust.
+</p>
+<p>
+The cipher text and initialization vector are base64 encoded and returned
+to you.
+</p>
+<p>
+This can be used in situations similar to the <a
+href="MessageVerifier.html">MessageVerifier</a>, but where you don&#8217;t
+want users to be able to determine the value of the payload.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002592">decrypt</a>,</li>
+                
+                <li><a href="#M002594">decrypt_and_verify</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002591">encrypt</a>,</li>
+                
+                <li><a href="#M002593">encrypt_and_sign</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002590">new</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="MessageEncryptor/InvalidMessage.html">ActiveSupport::MessageEncryptor::InvalidMessage</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">OpenSSLCipherError</td>
+            <td>=</td>
+            <td class="attr-value">OpenSSL::Cipher.const_defined?(:CipherError) ? OpenSSL::Cipher::CipherError : OpenSSL::CipherError</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002590">
+                    
+                    <a name="M002590"></a><b>new</b>(secret, cipher = 'aes-256-cbc')
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002590_source')" id="l_M002590_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d1213fa4024143edaa060ee0ed326d9d2fcbe919/activesupport/lib/active_support/message_encryptor.rb#L15" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002590_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/message_encryptor.rb, line 15</span>
+15:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">cipher</span> = <span class="ruby-value str">'aes-256-cbc'</span>)
+16:       <span class="ruby-ivar">@secret</span> = <span class="ruby-identifier">secret</span>
+17:       <span class="ruby-ivar">@cipher</span> = <span class="ruby-identifier">cipher</span>
+18:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002592">
+                    
+                    <a name="M002592"></a><b>decrypt</b>(encrypted_message)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002592_source')" id="l_M002592_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d1213fa4024143edaa060ee0ed326d9d2fcbe919/activesupport/lib/active_support/message_encryptor.rb#L35" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002592_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/message_encryptor.rb, line 35</span>
+35:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">encrypted_message</span>)
+36:       <span class="ruby-identifier">cipher</span> = <span class="ruby-identifier">new_cipher</span>
+37:       <span class="ruby-identifier">encrypted_data</span>, <span class="ruby-identifier">iv</span> = <span class="ruby-identifier">encrypted_message</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;--&quot;</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Base64</span>.<span class="ruby-identifier">decode64</span>(<span class="ruby-identifier">v</span>)}
+38:       
+39:       <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">decrypt</span>
+40:       <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">key</span> = <span class="ruby-ivar">@secret</span>
+41:       <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">iv</span>  = <span class="ruby-identifier">iv</span>
+42: 
+43:       <span class="ruby-identifier">decrypted_data</span> = <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">encrypted_data</span>)
+44:       <span class="ruby-identifier">decrypted_data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">final</span>
+45:       
+46:       <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">decrypted_data</span>)
+47:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">OpenSSLCipherError</span>, <span class="ruby-constant">TypeError</span>
+48:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">InvalidMessage</span>
+49:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002594">
+                    
+                    <a name="M002594"></a><b>decrypt_and_verify</b>(value)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002594_source')" id="l_M002594_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d1213fa4024143edaa060ee0ed326d9d2fcbe919/activesupport/lib/active_support/message_encryptor.rb#L55" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002594_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/message_encryptor.rb, line 55</span>
+55:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrypt_and_verify</span>(<span class="ruby-identifier">value</span>)
+56:       <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">verifier</span>.<span class="ruby-identifier">verify</span>(<span class="ruby-identifier">value</span>))
+57:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002591">
+                    
+                    <a name="M002591"></a><b>encrypt</b>(value)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002591_source')" id="l_M002591_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d1213fa4024143edaa060ee0ed326d9d2fcbe919/activesupport/lib/active_support/message_encryptor.rb#L20" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002591_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/message_encryptor.rb, line 20</span>
+20:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">value</span>)
+21:       <span class="ruby-identifier">cipher</span> = <span class="ruby-identifier">new_cipher</span>
+22:       <span class="ruby-comment cmt"># Rely on OpenSSL for the initialization vector</span>
+23:       <span class="ruby-identifier">iv</span> = <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">random_iv</span>
+24:       
+25:       <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">encrypt</span> 
+26:       <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">key</span> = <span class="ruby-ivar">@secret</span>
+27:       <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">iv</span>  = <span class="ruby-identifier">iv</span>
+28:       
+29:       <span class="ruby-identifier">encrypted_data</span> = <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">update</span>(<span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">value</span>)) 
+30:       <span class="ruby-identifier">encrypted_data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">cipher</span>.<span class="ruby-identifier">final</span>
+31: 
+32:       [<span class="ruby-identifier">encrypted_data</span>, <span class="ruby-identifier">iv</span>].<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Base64</span>.<span class="ruby-identifier">encode64s</span>(<span class="ruby-identifier">v</span>)}.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;--&quot;</span>)
+33:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002593">
+                    
+                    <a name="M002593"></a><b>encrypt_and_sign</b>(value)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002593_source')" id="l_M002593_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d1213fa4024143edaa060ee0ed326d9d2fcbe919/activesupport/lib/active_support/message_encryptor.rb#L51" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002593_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/message_encryptor.rb, line 51</span>
+51:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">encrypt_and_sign</span>(<span class="ruby-identifier">value</span>)
+52:       <span class="ruby-identifier">verifier</span>.<span class="ruby-identifier">generate</span>(<span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">value</span>))
+53:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/MessageEncryptor.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:43 GMT -->
+</html>    

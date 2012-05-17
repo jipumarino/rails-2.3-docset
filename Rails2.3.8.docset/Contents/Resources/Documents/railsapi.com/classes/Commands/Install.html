@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Commands/Install.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+<head>
+    <title>Commands::Install</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Commands::Install 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/railties/lib/commands/plugin_rb.html">railties/lib/commands/plugin.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000207">determine_install_method</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000205">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>O</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000206">options</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000208">parse!</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000205">
+                    
+                    <a name="M000205"></a><b>new</b>(base_command)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000205_source')" id="l_M000205_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L752" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000205_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 752</span>
+752:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">base_command</span>)
+753:       <span class="ruby-ivar">@base_command</span> = <span class="ruby-identifier">base_command</span>
+754:       <span class="ruby-ivar">@method</span> = <span class="ruby-identifier">:http</span>
+755:       <span class="ruby-ivar">@options</span> = { <span class="ruby-identifier">:quiet</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>, <span class="ruby-identifier">:revision</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:force</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+756:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000207">
+                    
+                    <a name="M000207"></a><b>determine_install_method</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000207_source')" id="l_M000207_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L788" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000207_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 788</span>
+788:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">determine_install_method</span>
+789:       <span class="ruby-identifier">best</span> = <span class="ruby-ivar">@base_command</span>.<span class="ruby-identifier">environment</span>.<span class="ruby-identifier">best_install_method</span>
+790:       <span class="ruby-ivar">@method</span> = <span class="ruby-identifier">:http</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">best</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:http</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:export</span>
+791:       <span class="ruby-keyword kw">case</span>
+792:       <span class="ruby-keyword kw">when</span> (<span class="ruby-identifier">best</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:http</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@method</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:http</span>)
+793:         <span class="ruby-identifier">msg</span> = <span class="ruby-value str">&quot;Cannot install using subversion because `svn' cannot be found in your PATH&quot;</span>
+794:       <span class="ruby-keyword kw">when</span> (<span class="ruby-identifier">best</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:export</span> <span class="ruby-keyword kw">and</span> (<span class="ruby-ivar">@method</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:export</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@method</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:http</span>))
+795:         <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;Cannot install using #{@method} because this project is not under subversion.&quot;</span>
+796:       <span class="ruby-keyword kw">when</span> (<span class="ruby-identifier">best</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">:externals</span> <span class="ruby-keyword kw">and</span> <span class="ruby-ivar">@method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:externals</span>)
+797:         <span class="ruby-identifier">msg</span> = <span class="ruby-value str">&quot;Cannot install using externals because vendor/plugins is not under subversion.&quot;</span>
+798:       <span class="ruby-keyword kw">end</span>
+799:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">msg</span>
+800:         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span>
+801:         <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+802:       <span class="ruby-keyword kw">end</span>
+803:       <span class="ruby-ivar">@method</span>
+804:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000206">
+                    
+                    <a name="M000206"></a><b>options</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000206_source')" id="l_M000206_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L758" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000206_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 758</span>
+758:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">options</span>
+759:       <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+760:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">set_summary_indent</span>(<span class="ruby-value str">'  '</span>)
+761:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">banner</span> =    <span class="ruby-node">&quot;Usage: #{@base_command.script_name} install PLUGIN [PLUGIN [PLUGIN] ...]&quot;</span>
+762:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">define_head</span> <span class="ruby-value str">&quot;Install one or more plugins.&quot;</span>
+763:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span>   <span class="ruby-value str">&quot;&quot;</span>
+764:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span>   <span class="ruby-value str">&quot;Options:&quot;</span>
+765:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(         <span class="ruby-value str">&quot;-x&quot;</span>, <span class="ruby-value str">&quot;--externals&quot;</span>, 
+766:                       <span class="ruby-value str">&quot;Use svn:externals to grab the plugin.&quot;</span>, 
+767:                       <span class="ruby-value str">&quot;Enables plugin updates and plugin versioning.&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@method</span> = <span class="ruby-identifier">:externals</span> }
+768:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(         <span class="ruby-value str">&quot;-o&quot;</span>, <span class="ruby-value str">&quot;--checkout&quot;</span>,
+769:                       <span class="ruby-value str">&quot;Use svn checkout to grab the plugin.&quot;</span>,
+770:                       <span class="ruby-value str">&quot;Enables updating but does not add a svn:externals entry.&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@method</span> = <span class="ruby-identifier">:checkout</span> }
+771:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(         <span class="ruby-value str">&quot;-e&quot;</span>, <span class="ruby-value str">&quot;--export&quot;</span>,
+772:                       <span class="ruby-value str">&quot;Use svn export to grab the plugin.&quot;</span>,
+773:                       <span class="ruby-value str">&quot;Exports the plugin, allowing you to check it into your local repository. Does not enable updates, or add an svn:externals entry.&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@method</span> = <span class="ruby-identifier">:export</span> }
+774:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(         <span class="ruby-value str">&quot;-q&quot;</span>, <span class="ruby-value str">&quot;--quiet&quot;</span>,
+775:                       <span class="ruby-value str">&quot;Suppresses the output from installation.&quot;</span>,
+776:                       <span class="ruby-value str">&quot;Ignored if -v is passed (./script/plugin -v install ...)&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:quiet</span>] = <span class="ruby-keyword kw">true</span> }
+777:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(         <span class="ruby-value str">&quot;-r REVISION&quot;</span>, <span class="ruby-value str">&quot;--revision REVISION&quot;</span>,
+778:                       <span class="ruby-value str">&quot;Checks out the given revision from subversion or git.&quot;</span>,
+779:                       <span class="ruby-value str">&quot;Ignored if subversion/git is not used.&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:revision</span>] = <span class="ruby-identifier">v</span> }
+780:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(         <span class="ruby-value str">&quot;-f&quot;</span>, <span class="ruby-value str">&quot;--force&quot;</span>,
+781:                       <span class="ruby-value str">&quot;Reinstalls a plugin if it's already installed.&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@options</span>[<span class="ruby-identifier">:force</span>] = <span class="ruby-keyword kw">true</span> }
+782:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span>   <span class="ruby-value str">&quot;&quot;</span>
+783:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span>   <span class="ruby-value str">&quot;You can specify plugin names as given in 'plugin list' output or absolute URLs to &quot;</span>
+784:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span>   <span class="ruby-value str">&quot;a plugin repository.&quot;</span>
+785:       <span class="ruby-keyword kw">end</span>
+786:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000208">
+                    
+                    <a name="M000208"></a><b>parse!</b>(args)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000208_source')" id="l_M000208_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L806" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000208_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 806</span>
+806:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">args</span>)
+807:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">args</span>)
+808:       <span class="ruby-identifier">environment</span> = <span class="ruby-ivar">@base_command</span>.<span class="ruby-identifier">environment</span>
+809:       <span class="ruby-identifier">install_method</span> = <span class="ruby-identifier">determine_install_method</span>
+810:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Plugins will be installed using #{install_method}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$verbose</span>
+811:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+812:         <span class="ruby-operator">::</span><span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">install</span>(<span class="ruby-identifier">install_method</span>, <span class="ruby-ivar">@options</span>)
+813:       <span class="ruby-keyword kw">end</span>
+814:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+815:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Plugin not found: #{args.inspect}&quot;</span>
+816:       <span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">inspect</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$verbose</span>
+817:       <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+818:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Commands/Install.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+</html>    

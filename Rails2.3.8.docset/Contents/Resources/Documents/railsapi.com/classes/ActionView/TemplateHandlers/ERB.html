@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/TemplateHandlers/ERB.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:46 GMT -->
+<head>
+    <title>ActionView::TemplateHandlers::ERB</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionView::TemplateHandlers::ERB 
+            
+                <span class="parent">&lt; 
+                    
+                    TemplateHandler
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_view/template_handlers/erb_rb.html">actionpack/lib/action_view/template_handlers/erb.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002149">compile</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002148">erb_trim_mode</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="../TemplateHandlers.html">ActionView::TemplateHandlers</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002148">
+                    
+                    <a name="M002148"></a><b>erb_trim_mode</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Specify trim mode for the <a href="ERB.html">ERB</a> compiler. Defaults to
+&#8217;-&#8217;. See ERb documentation for suitable values.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002148_source')" id="l_M002148_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/8e6a044b2b8baad14044bc615a0662f3510e54d5/actionpack/lib/action_view/template_handlers/erb.rb#L10" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002148_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/template_handlers/erb.rb, line 10</span>
+10:       <span class="ruby-identifier">cattr_accessor</span> <span class="ruby-identifier">:erb_trim_mode</span>
+</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002149">
+                    
+                    <a name="M002149"></a><b>compile</b>(template)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002149_source')" id="l_M002149_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/8e6a044b2b8baad14044bc615a0662f3510e54d5/actionpack/lib/action_view/template_handlers/erb.rb#L13" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002149_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/template_handlers/erb.rb, line 13</span>
+13:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compile</span>(<span class="ruby-identifier">template</span>)
+14:         <span class="ruby-identifier">magic</span> = <span class="ruby-identifier">$1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">template</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\A(&lt;%#.*coding[:=]\s*(\S+)\s*-?%&gt;)/</span>
+15:         <span class="ruby-identifier">erb</span> = <span class="ruby-node">&quot;#{magic}&lt;% __in_erb_template=true %&gt;#{template.source}&quot;</span>
+16: 
+17:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">erb</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:force_encoding</span>)
+18:           <span class="ruby-identifier">erb</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-identifier">template</span>.<span class="ruby-identifier">source</span>.<span class="ruby-identifier">encoding</span>)
+19:         <span class="ruby-keyword kw">end</span>
+20: 
+21:         <span class="ruby-operator">::</span><span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">erb</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">erb_trim_mode</span>, <span class="ruby-value str">'@output_buffer'</span>).<span class="ruby-identifier">src</span>
+22:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/TemplateHandlers/ERB.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:46 GMT -->
+</html>    

@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Kernel.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:46 GMT -->
+<head>
+    <title>Kernel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            Kernel 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/kernel/requires_rb.html">activesupport/lib/active_support/core_ext/kernel/requires.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/kernel/reporting_rb.html">activesupport/lib/active_support/core_ext/kernel/reporting.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/kernel/daemonizing_rb.html">activesupport/lib/active_support/core_ext/kernel/daemonizing.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/kernel/debugger_rb.html">activesupport/lib/active_support/core_ext/kernel/debugger.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>B</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002937">breakpoint</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002934">daemonize</a>,</li>
+                
+                <li><a href="#M002936">debugger</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002930">enable_warnings</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002928">require_library_or_gem</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002932">silence_stream</a>,</li>
+                
+                <li><a href="#M002929">silence_warnings</a>,</li>
+                
+                <li><a href="#M002933">suppress</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002937">
+                    
+                    <a name="M002937"></a><b>breakpoint</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002937_source')" id="l_M002937_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d988507dcaa93b7e83bb3f836a4b7d0dac8dfafc/activesupport/lib/active_support/core_ext/kernel/debugger.rb#L11" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002937_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/kernel/debugger.rb, line 11</span>
+11:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">breakpoint</span>
+12:     <span class="ruby-identifier">message</span> = <span class="ruby-value str">&quot;\n***** The 'breakpoint' command has been renamed 'debugger' -- please change *****\n&quot;</span>
+13:     <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">Rails</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">message</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">message</span>)
+14:     <span class="ruby-identifier">debugger</span>
+15:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002934">
+                    
+                    <a name="M002934"></a><b>daemonize</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Turns the current script into a daemon process that detaches from the
+console. It can be shut down with a TERM signal.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002934_source')" id="l_M002934_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/3cffe92ff066c2b35eef409547db93652c5cccfc/activesupport/lib/active_support/core_ext/kernel/daemonizing.rb#L4" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002934_source" class="dyn-source">
+                        <pre>   <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/kernel/daemonizing.rb, line 4</span>
+4:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">daemonize</span>
+5:     <span class="ruby-constant">Process</span>.<span class="ruby-identifier">daemon</span>
+6:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002936">
+                    
+                    <a name="M002936"></a><b>debugger</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Starts a debugging session if ruby-debug has been loaded (call
+script/server &#8212;debugger to do load it).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002936_source')" id="l_M002936_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d988507dcaa93b7e83bb3f836a4b7d0dac8dfafc/activesupport/lib/active_support/core_ext/kernel/debugger.rb#L4" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002936_source" class="dyn-source">
+                        <pre>   <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/kernel/debugger.rb, line 4</span>
+4:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debugger</span>
+5:       <span class="ruby-identifier">message</span> = <span class="ruby-value str">&quot;\n***** Debugger requested, but was not available: Start server with --debugger to enable *****\n&quot;</span>
+6:       <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">Rails</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span>(<span class="ruby-identifier">message</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">message</span>)
+7:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002930">
+                    
+                    <a name="M002930"></a><b>enable_warnings</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets $VERBOSE to true for the duration of the block and back to its
+original value afterwards.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002930_source')" id="l_M002930_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c69dc1afaa06c956624e20528adb2540fda0eb18/activesupport/lib/active_support/core_ext/kernel/reporting.rb#L17" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002930_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/kernel/reporting.rb, line 17</span>
+17:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">enable_warnings</span>
+18:     <span class="ruby-identifier">old_verbose</span>, <span class="ruby-identifier">$VERBOSE</span> = <span class="ruby-identifier">$VERBOSE</span>, <span class="ruby-keyword kw">true</span>
+19:     <span class="ruby-keyword kw">yield</span>
+20:   <span class="ruby-keyword kw">ensure</span>
+21:     <span class="ruby-identifier">$VERBOSE</span> = <span class="ruby-identifier">old_verbose</span>
+22:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002928">
+                    
+                    <a name="M002928"></a><b>require_library_or_gem</b>(library_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Require a library with fallback to RubyGems. Warnings during library
+loading are silenced to increase signal/noise for application warnings.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002928_source')" id="l_M002928_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/420ffb79e317aeb555d38390baf70df32a9b71a2/activesupport/lib/active_support/core_ext/kernel/requires.rb#L4" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002928_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/kernel/requires.rb, line 4</span>
+ 4:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_library_or_gem</span>(<span class="ruby-identifier">library_name</span>)
+ 5:     <span class="ruby-identifier">silence_warnings</span> <span class="ruby-keyword kw">do</span>
+ 6:       <span class="ruby-keyword kw">begin</span>
+ 7:         <span class="ruby-identifier">require</span> <span class="ruby-identifier">library_name</span>
+ 8:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cannot_require</span>
+ 9:         <span class="ruby-comment cmt"># 1. Requiring the module is unsuccessful, maybe it's a gem and nobody required rubygems yet. Try.</span>
+10:         <span class="ruby-keyword kw">begin</span>
+11:           <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubygems'</span>
+12:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">rubygems_not_installed</span>
+13:           <span class="ruby-identifier">raise</span> <span class="ruby-identifier">cannot_require</span>
+14:         <span class="ruby-keyword kw">end</span>
+15:         <span class="ruby-comment cmt"># 2. Rubygems is installed and loaded. Try to load the library again</span>
+16:         <span class="ruby-keyword kw">begin</span>
+17:           <span class="ruby-identifier">require</span> <span class="ruby-identifier">library_name</span>
+18:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">gem_not_installed</span>
+19:           <span class="ruby-identifier">raise</span> <span class="ruby-identifier">cannot_require</span>
+20:         <span class="ruby-keyword kw">end</span>
+21:       <span class="ruby-keyword kw">end</span>
+22:     <span class="ruby-keyword kw">end</span>
+23:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002932">
+                    
+                    <a name="M002932"></a><b>silence_stream</b>(stream)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Silences any stream for the duration of the block.
+</p>
+<pre>
+  silence_stream(STDOUT) do
+    puts 'This will never be seen'
+  end
+
+  puts 'But this will'
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002932_source')" id="l_M002932_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c69dc1afaa06c956624e20528adb2540fda0eb18/activesupport/lib/active_support/core_ext/kernel/reporting.rb#L36" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002932_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/kernel/reporting.rb, line 36</span>
+36:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silence_stream</span>(<span class="ruby-identifier">stream</span>)
+37:     <span class="ruby-identifier">old_stream</span> = <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">dup</span>
+38:     <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">reopen</span>(<span class="ruby-constant">RUBY_PLATFORM</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(:?mswin|mingw)/</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'NUL:'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'/dev/null'</span>)
+39:     <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">sync</span> = <span class="ruby-keyword kw">true</span>
+40:     <span class="ruby-keyword kw">yield</span>
+41:   <span class="ruby-keyword kw">ensure</span>
+42:     <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">reopen</span>(<span class="ruby-identifier">old_stream</span>)
+43:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002929">
+                    
+                    <a name="M002929"></a><b>silence_warnings</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets $VERBOSE to nil for the duration of the block and back to its original
+value afterwards.
+</p>
+<pre>
+  silence_warnings do
+    value = noisy_call # no warning voiced
+  end
+
+  noisy_call # warning voiced
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002929_source')" id="l_M002929_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c69dc1afaa06c956624e20528adb2540fda0eb18/activesupport/lib/active_support/core_ext/kernel/reporting.rb#L9" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002929_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/kernel/reporting.rb, line 9</span>
+ 9:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">silence_warnings</span>
+10:     <span class="ruby-identifier">old_verbose</span>, <span class="ruby-identifier">$VERBOSE</span> = <span class="ruby-identifier">$VERBOSE</span>, <span class="ruby-keyword kw">nil</span>
+11:     <span class="ruby-keyword kw">yield</span>
+12:   <span class="ruby-keyword kw">ensure</span>
+13:     <span class="ruby-identifier">$VERBOSE</span> = <span class="ruby-identifier">old_verbose</span>
+14:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002933">
+                    
+                    <a name="M002933"></a><b>suppress</b>(*exception_classes)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Blocks and ignores any exception passed as argument if raised within the
+block.
+</p>
+<pre>
+  suppress(ZeroDivisionError) do
+    1/0
+    puts &quot;This code is NOT reached&quot;
+  end
+
+  puts &quot;This code gets executed and nothing related to ZeroDivisionError was seen&quot;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002933_source')" id="l_M002933_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c69dc1afaa06c956624e20528adb2540fda0eb18/activesupport/lib/active_support/core_ext/kernel/reporting.rb#L53" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002933_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/kernel/reporting.rb, line 53</span>
+53:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">suppress</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">exception_classes</span>)
+54:     <span class="ruby-keyword kw">begin</span> <span class="ruby-keyword kw">yield</span>
+55:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+56:       <span class="ruby-identifier">raise</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">exception_classes</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cls</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-identifier">cls</span>) }
+57:     <span class="ruby-keyword kw">end</span>
+58:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Kernel.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:47 GMT -->
+</html>    

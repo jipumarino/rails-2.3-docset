@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveResource/SSLError.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+<head>
+    <title>ActiveResource::SSLError</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveResource::SSLError 
+            
+                <span class="parent">&lt; 
+                    
+                    ConnectionError
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activeresource/lib/active_resource/exceptions_rb.html">activeresource/lib/active_resource/exceptions.rb</a></li>
+            
+            <li><a href="../../files/activeresource/lib/active_resource/connection_rb.html">activeresource/lib/active_resource/connection.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Raised when a OpenSSL::SSL::SSLError occurs.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001415">new</a>,</li>
+                
+                <li><a href="#M001509">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001416">to_s</a>,</li>
+                
+                <li><a href="#M001510">to_s</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001415">
+                    
+                    <a name="M001415"></a><b>new</b>(message)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001415_source')" id="l_M001415_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/be017fd7d54c9203dc574d8e1a6f22d80df0e899/activeresource/lib/active_resource/exceptions.rb#L25" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001415_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activeresource/lib/active_resource/exceptions.rb, line 25</span>
+25:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">message</span>)
+26:       <span class="ruby-ivar">@message</span> = <span class="ruby-identifier">message</span>
+27:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001509">
+                    
+                    <a name="M001509"></a><b>new</b>(message)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001509_source')" id="l_M001509_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/be017fd7d54c9203dc574d8e1a6f22d80df0e899/activeresource/lib/active_resource/connection.rb#L31" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001509_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activeresource/lib/active_resource/connection.rb, line 31</span>
+31:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">message</span>)
+32:       <span class="ruby-ivar">@message</span> = <span class="ruby-identifier">message</span>
+33:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001416">
+                    
+                    <a name="M001416"></a><b>to_s</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001416_source')" id="l_M001416_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/be017fd7d54c9203dc574d8e1a6f22d80df0e899/activeresource/lib/active_resource/exceptions.rb#L28" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001416_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activeresource/lib/active_resource/exceptions.rb, line 28</span>
+28:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>; <span class="ruby-ivar">@message</span> ;<span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001510">
+                    
+                    <a name="M001510"></a><b>to_s</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001510_source')" id="l_M001510_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/be017fd7d54c9203dc574d8e1a6f22d80df0e899/activeresource/lib/active_resource/connection.rb#L34" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001510_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activeresource/lib/active_resource/connection.rb, line 34</span>
+34:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>; <span class="ruby-ivar">@message</span> ;<span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveResource/SSLError.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+</html>    

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/TestUploadedFile.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+<head>
+    <title>ActionController::TestUploadedFile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::TestUploadedFile 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/actionpack/lib/action_controller/test_process_rb.html">actionpack/lib/action_controller/test_process.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001755">new</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>original_filename</td>
+            <td class='attr-desc'><p>
+The filename, <b>not</b> including the path, of the &#8220;uploaded&#8221;
+file
+</p></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>content_type</td>
+            <td class='attr-desc'><p>
+The content type of the &#8220;uploaded&#8221; file
+</p></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001755">
+                    
+                    <a name="M001755"></a><b>new</b>(path, content_type = Mime::TEXT, binary = false)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001755_source')" id="l_M001755_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/cddd4746f9a2fba8215d53a0f9ac5241f128d07b/actionpack/lib/action_controller/test_process.rb#L373" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001755_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_process.rb, line 373</span>
+373:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">content_type</span> = <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">TEXT</span>, <span class="ruby-identifier">binary</span> = <span class="ruby-keyword kw">false</span>)
+374:       <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;#{path} file does not exist&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>)
+375:       <span class="ruby-ivar">@content_type</span> = <span class="ruby-identifier">content_type</span>
+376:       <span class="ruby-ivar">@original_filename</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/^.*#{File::SEPARATOR}([^#{File::SEPARATOR}]+)$/</span>) { <span class="ruby-identifier">$1</span> }
+377:       <span class="ruby-ivar">@tempfile</span> = <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@original_filename</span>)
+378:       <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">set_encoding</span>(<span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">BINARY</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:set_encoding</span>)
+379:       <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">binmode</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">binary</span>
+380:       <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">copy_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">path</span>)
+381:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/TestUploadedFile.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+</html>    

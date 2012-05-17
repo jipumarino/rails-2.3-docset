@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/RequestForgeryProtection.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:06 GMT -->
+<head>
+    <title>ActionController::RequestForgeryProtection</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::RequestForgeryProtection 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/actionpack/lib/action_controller/request_forgery_protection_rb.html">actionpack/lib/action_controller/request_forgery_protection.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001642">form_authenticity_param</a>,</li>
+                
+                <li><a href="#M001644">form_authenticity_token</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001638">included</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001645">protect_against_forgery?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>V</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001643">verifiable_request_format?</a>,</li>
+                
+                <li><a href="#M001641">verified_request?</a>,</li>
+                
+                <li><a href="#M001640">verify_authenticity_token</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="RequestForgeryProtection/ClassMethods.html">ActionController::RequestForgeryProtection::ClassMethods</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001638">
+                    
+                    <a name="M001638"></a><b>included</b>(base)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001638_source')" id="l_M001638_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a942d66597166ed6ad087733416b148cf21193e3/actionpack/lib/action_controller/request_forgery_protection.rb#L6" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001638_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request_forgery_protection.rb, line 6</span>
+ 6:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+ 7:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+ 8:         <span class="ruby-identifier">helper_method</span> <span class="ruby-identifier">:form_authenticity_token</span>
+ 9:         <span class="ruby-identifier">helper_method</span> <span class="ruby-identifier">:protect_against_forgery?</span>
+10:       <span class="ruby-keyword kw">end</span>
+11:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">ClassMethods</span>)
+12:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001642">
+                    
+                    <a name="M001642"></a><b>form_authenticity_param</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001642_source')" id="l_M001642_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a942d66597166ed6ad087733416b148cf21193e3/actionpack/lib/action_controller/request_forgery_protection.rb#L95" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001642_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request_forgery_protection.rb, line 95</span>
+95:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">form_authenticity_param</span>
+96:         <span class="ruby-identifier">params</span>[<span class="ruby-identifier">request_forgery_protection_token</span>]
+97:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001644">
+                    
+                    <a name="M001644"></a><b>form_authenticity_token</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the token value for the current session. Pass a <tt>:secret</tt>
+option in <tt>protect_from_forgery</tt> to add a custom salt to the hash.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001644_source')" id="l_M001644_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a942d66597166ed6ad087733416b148cf21193e3/actionpack/lib/action_controller/request_forgery_protection.rb#L105" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001644_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request_forgery_protection.rb, line 105</span>
+105:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">form_authenticity_token</span>
+106:         <span class="ruby-identifier">session</span>[<span class="ruby-identifier">:_csrf_token</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">base64</span>(<span class="ruby-value">32</span>)
+107:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001645">
+                    
+                    <a name="M001645"></a><b>protect_against_forgery?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001645_source')" id="l_M001645_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a942d66597166ed6ad087733416b148cf21193e3/actionpack/lib/action_controller/request_forgery_protection.rb#L109" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001645_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request_forgery_protection.rb, line 109</span>
+109:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">protect_against_forgery?</span>
+110:         <span class="ruby-identifier">allow_forgery_protection</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">request_forgery_protection_token</span>
+111:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001643">
+                    
+                    <a name="M001643"></a><b>verifiable_request_format?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001643_source')" id="l_M001643_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a942d66597166ed6ad087733416b148cf21193e3/actionpack/lib/action_controller/request_forgery_protection.rb#L99" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001643_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request_forgery_protection.rb, line 99</span>
+ 99:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">verifiable_request_format?</span>
+100:         <span class="ruby-operator">!</span><span class="ruby-identifier">request</span>.<span class="ruby-identifier">content_type</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">content_type</span>.<span class="ruby-identifier">verify_request?</span>
+101:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001641">
+                    
+                    <a name="M001641"></a><b>verified_request?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns true or false if a request is verified. Checks:
+</p>
+<ul>
+<li>is the format restricted? By default, only HTML requests are checked.
+
+</li>
+<li>is it a GET request? Gets should be safe and idempotent
+
+</li>
+<li>Does the <a
+href="RequestForgeryProtection.html#M001644">form_authenticity_token</a>
+match the given token value from the params?
+
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001641_source')" id="l_M001641_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a942d66597166ed6ad087733416b148cf21193e3/actionpack/lib/action_controller/request_forgery_protection.rb#L87" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001641_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request_forgery_protection.rb, line 87</span>
+87:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">verified_request?</span>
+88:         <span class="ruby-operator">!</span><span class="ruby-identifier">protect_against_forgery?</span>     <span class="ruby-operator">||</span>
+89:           <span class="ruby-identifier">request</span>.<span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:get</span>      <span class="ruby-operator">||</span>
+90:           <span class="ruby-identifier">request</span>.<span class="ruby-identifier">xhr?</span>                <span class="ruby-operator">||</span>
+91:           <span class="ruby-operator">!</span><span class="ruby-identifier">verifiable_request_format?</span> <span class="ruby-operator">||</span>
+92:           <span class="ruby-identifier">form_authenticity_token</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">form_authenticity_param</span>
+93:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001640">
+                    
+                    <a name="M001640"></a><b>verify_authenticity_token</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+The actual before_filter that is used. Modify this to change how you handle
+unverified requests.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001640_source')" id="l_M001640_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a942d66597166ed6ad087733416b148cf21193e3/actionpack/lib/action_controller/request_forgery_protection.rb#L78" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001640_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request_forgery_protection.rb, line 78</span>
+78:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">verify_authenticity_token</span>
+79:         <span class="ruby-identifier">verified_request?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidAuthenticityToken</span>)
+80:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/RequestForgeryProtection.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:07 GMT -->
+</html>    

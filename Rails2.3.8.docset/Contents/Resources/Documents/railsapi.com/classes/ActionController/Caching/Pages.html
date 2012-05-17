@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Pages.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:40 GMT -->
+<head>
+    <title>ActionController::Caching::Pages</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Caching::Pages 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/caching/pages_rb.html">actionpack/lib/action_controller/caching/pages.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Page caching is an approach to caching where the entire action output of is
+stored as a HTML file that the web server can serve without going through
+Action Pack. This is the fastest way to cache your content as opposed to
+going dynamically through the process of generating the content.
+Unfortunately, this incredible speed-up is only available to stateless
+pages where all visitors are treated the same. Content management systems
+&#8212; including weblogs and wikis &#8212; have many pages that are a
+great fit for this approach, but account-based systems where people log in
+and manipulate their own data are often less likely candidates.
+</p>
+<p>
+Specifying which actions to cache is done through the <tt>caches_page</tt>
+class method:
+</p>
+<pre>
+  class WeblogController &lt; ActionController::Base
+    caches_page :show, :new
+  end
+</pre>
+<p>
+This will generate cache files such as <tt>weblog/show/5.html</tt> and
+<tt>weblog/new.html</tt>, which match the URLs used to trigger the dynamic
+generation. This is how the web server is able pick up a cache file when it
+exists and otherwise let the request pass on to Action Pack to generate it.
+</p>
+<p>
+Expiration of the cache is handled by deleting the cached file, which
+results in a lazy regeneration approach where the cache is not restored
+before another hit is made against it. The API for doing so mimics the
+options from <tt>url_for</tt> and friends:
+</p>
+<pre>
+  class WeblogController &lt; ActionController::Base
+    def update
+      List.update(params[:list][:id], params[:list])
+      expire_page :action =&gt; &quot;show&quot;, :id =&gt; params[:list][:id]
+      redirect_to :action =&gt; &quot;show&quot;, :id =&gt; params[:list][:id]
+    end
+  end
+</pre>
+<p>
+Additionally, you can expire caches using Sweepers that act on changes in
+the model to determine when a cache is supposed to be expired.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001593">cache_page</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001592">expire_page</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Pages/ClassMethods.html">ActionController::Caching::Pages::ClassMethods</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001593">
+                    
+                    <a name="M001593"></a><b>cache_page</b>(content = nil, options = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Manually cache the <tt>content</tt> in the key determined by
+<tt>options</tt>. If no content is provided, the contents of response.body
+is used If no options are provided, the requested url is used. Example:
+</p>
+<pre>
+  cache_page &quot;I'm the cached content&quot;, :controller =&gt; &quot;lists&quot;, :action =&gt; &quot;show&quot;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001593_source')" id="l_M001593_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/3da1b94d07fbbd6cff342a822af1631ae167a9b8/actionpack/lib/action_controller/caching/pages.rb#L131" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001593_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/pages.rb, line 131</span>
+131:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache_page</span>(<span class="ruby-identifier">content</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+132:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">perform_caching</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">caching_allowed</span>
+133: 
+134:         <span class="ruby-identifier">path</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">options</span>
+135:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Hash</span>
+136:             <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:only_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">:skip_relative_url_root</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">:format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:format</span>]))
+137:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>
+138:             <span class="ruby-identifier">options</span>
+139:           <span class="ruby-keyword kw">else</span>
+140:             <span class="ruby-identifier">request</span>.<span class="ruby-identifier">path</span>
+141:         <span class="ruby-keyword kw">end</span>
+142: 
+143:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">cache_page</span>(<span class="ruby-identifier">content</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>, <span class="ruby-identifier">path</span>)
+144:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001592">
+                    
+                    <a name="M001592"></a><b>expire_page</b>(options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Expires the page that was cached with the <tt>options</tt> as a key.
+Example:
+</p>
+<pre>
+  expire_page :controller =&gt; &quot;lists&quot;, :action =&gt; &quot;show&quot;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001592_source')" id="l_M001592_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/3da1b94d07fbbd6cff342a822af1631ae167a9b8/actionpack/lib/action_controller/caching/pages.rb#L112" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001592_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/pages.rb, line 112</span>
+112:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">expire_page</span>(<span class="ruby-identifier">options</span> = {})
+113:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">perform_caching</span>
+114: 
+115:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+116:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:action</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+117:             <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:action</span>].<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">action</span><span class="ruby-operator">|</span>
+118:               <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">expire_page</span>(<span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:only_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">:skip_relative_url_root</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span>)))
+119:             <span class="ruby-keyword kw">end</span>
+120:           <span class="ruby-keyword kw">else</span>
+121:             <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">expire_page</span>(<span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">:only_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>, <span class="ruby-identifier">:skip_relative_url_root</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>)))
+122:           <span class="ruby-keyword kw">end</span>
+123:         <span class="ruby-keyword kw">else</span>
+124:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">expire_page</span>(<span class="ruby-identifier">options</span>)
+125:         <span class="ruby-keyword kw">end</span>
+126:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Pages.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:40 GMT -->
+</html>    

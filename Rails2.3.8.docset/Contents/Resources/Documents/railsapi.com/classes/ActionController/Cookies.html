@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Cookies.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:56 GMT -->
+<head>
+    <title>ActionController::Cookies</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Cookies 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/actionpack/lib/action_controller/cookies_rb.html">actionpack/lib/action_controller/cookies.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a href="Cookies.html">Cookies</a> are read and written through
+ActionController#cookies.
+</p>
+<p>
+The cookies being read are the ones received along with the request, the
+cookies being written will be sent out with the response. Reading a cookie
+does not get the cookie object itself back, just the value it holds.
+</p>
+<p>
+Examples for writing:
+</p>
+<pre>
+  # Sets a simple session cookie.
+  cookies[:user_name] = &quot;david&quot;
+
+  # Sets a cookie that expires in 1 hour.
+  cookies[:login] = { :value =&gt; &quot;XJ-122&quot;, :expires =&gt; 1.hour.from_now }
+</pre>
+<p>
+Examples for reading:
+</p>
+<pre>
+  cookies[:user_name] # =&gt; &quot;david&quot;
+  cookies.size        # =&gt; 2
+</pre>
+<p>
+Example for deleting:
+</p>
+<pre>
+  cookies.delete :user_name
+</pre>
+<p>
+Please note that if you specify a :domain when setting a cookie, you must
+also specify the domain when deleting the cookie:
+</p>
+<pre>
+ cookies[:key] = {
+   :value =&gt; 'a yummy cookie',
+   :expires =&gt; 1.year.from_now,
+   :domain =&gt; 'domain.com'
+ }
+
+ cookies.delete(:key, :domain =&gt; 'domain.com')
+</pre>
+<p>
+The option symbols for setting cookies are:
+</p>
+<ul>
+<li><tt>:value</tt> - The cookie&#8217;s value or list of values (as an array).
+
+</li>
+<li><tt>:path</tt> - The path for which this cookie applies. Defaults to the
+root of the application.
+
+</li>
+<li><tt>:domain</tt> - The domain for which this cookie applies.
+
+</li>
+<li><tt>:expires</tt> - The time at which this cookie expires, as a Time
+object.
+
+</li>
+<li><tt>:secure</tt> - Whether this cookie is a only transmitted to HTTPS
+servers. Default is <tt>false</tt>.
+
+</li>
+<li><tt>:httponly</tt> - Whether this cookie is accessible via scripting or
+only HTTP. Defaults to <tt>false</tt>.
+
+</li>
+</ul>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001747">cookies</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001746">included</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001746">
+                    
+                    <a name="M001746"></a><b>included</b>(base)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001746_source')" id="l_M001746_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1229ef7bf329cd09ed0a1bbe39530ccc69795995/actionpack/lib/action_controller/cookies.rb#L47" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001746_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/cookies.rb, line 47</span>
+47:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+48:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">helper_method</span> <span class="ruby-identifier">:cookies</span>
+49:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">cattr_accessor</span> <span class="ruby-identifier">:cookie_verifier_secret</span>
+50:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001747">
+                    
+                    <a name="M001747"></a><b>cookies</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the cookie container, which operates as described above.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001747_source')" id="l_M001747_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1229ef7bf329cd09ed0a1bbe39530ccc69795995/actionpack/lib/action_controller/cookies.rb#L54" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001747_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/cookies.rb, line 54</span>
+54:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cookies</span>
+55:         <span class="ruby-ivar">@cookies</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">CookieJar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+56:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Cookies.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:56 GMT -->
+</html>    

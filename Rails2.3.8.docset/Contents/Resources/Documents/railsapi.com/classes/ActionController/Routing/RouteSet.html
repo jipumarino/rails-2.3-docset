@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Routing/RouteSet.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:44 GMT -->
+<head>
+    <title>ActionController::Routing::RouteSet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::Routing::RouteSet 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/routing/recognition_optimisation_rb.html">actionpack/lib/action_controller/routing/recognition_optimisation.rb</a></li>
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/routing/route_set_rb.html">actionpack/lib/action_controller/routing/route_set.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+BEFORE: 0.191446860631307 ms/url AFTER: 0.029847304022858 ms/url Speed up:
+6.4 times
+</p>
+<p>
+Route recognition is slow due to one-by-one iterating over a whole routeset
+(each map.resources generates at least 14 routes) and matching weird
+regexps on each step.
+</p>
+<p>
+We optimize this by skipping all URI segments that 100% sure can&#8217;t be
+matched, moving deeper in a tree of routes (where node == segment) until
+first possible match is accured. In such case, we start walking a flat list
+of routes, matching them with accurate matcher. So, first step: search a
+segment tree for the first relevant index. Second step: iterate routes
+starting with that index.
+</p>
+<p>
+How tree is walked? We can do a recursive tests, but it&#8217;s smarter: We
+just create a tree of if-s and elsif-s matching segments.
+</p>
+<p>
+We have segments of 3 flavors: 1) nil (no segment, route finished) 2)
+const-dot-dynamic (like &#8220;/posts.:xml&#8221;,
+&#8220;/preview.:size.jpg&#8220;) 3) const (like &#8220;/posts&#8221;,
+&#8220;/comments&#8221;) 4) dynamic (&#8220;/:id&#8221;,
+&#8220;file.:size.:extension&#8221;)
+</p>
+<p>
+We split incoming string into segments and iterate over them. When segment
+is nil, we drop immediately, on a current node index. When segment is equal
+to some const, we step into branch. If none constants matched, we step into
+&#8216;dynamic&#8217; branch (it&#8217;s a last). If we can&#8217;t match
+anything, we drop to last index on a level.
+</p>
+<p>
+Note: we maintain the original routes order, so we finish building
+</p>
+<pre>
+      steps on a first dynamic segment.
+</pre>
+<p>
+Example. Given the routes:
+</p>
+<pre>
+  0 /posts/
+  1 /posts/:id
+  2 /posts/:id/comments
+  3 /posts/blah
+  4 /users/
+  5 /users/:id
+  6 /users/:id/profile
+</pre>
+<p>
+request_uri = /users/123
+</p>
+<p>
+There will be only 4 iterations:
+</p>
+<pre>
+ 1) segm test for /posts prefix, skip all /posts/* routes
+ 2) segm test for /users/
+ 3) segm test for /users/:id
+    (jump to list index = 5)
+ 4) full test for /users/:id =&gt; here we are!
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="RouteSet/Mapper.html">ActionController::Routing::RouteSet::Mapper</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="RouteSet/NamedRouteCollection.html">ActionController::Routing::RouteSet::NamedRouteCollection</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Routing/RouteSet.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:44 GMT -->
+</html>    

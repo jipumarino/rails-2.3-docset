@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/TemplateHandlers/RJS.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:46 GMT -->
+<head>
+    <title>ActionView::TemplateHandlers::RJS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionView::TemplateHandlers::RJS 
+            
+                <span class="parent">&lt; 
+                    
+                    TemplateHandler
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_view/template_handlers/rjs_rb.html">actionpack/lib/action_view/template_handlers/rjs.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002150">compile</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="../TemplateHandlers.html">ActionView::TemplateHandlers</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002150">
+                    
+                    <a name="M002150"></a><b>compile</b>(template)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002150_source')" id="l_M002150_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/148aff2097890a81e874a7c60bae5fa3b2a4d1fd/actionpack/lib/action_view/template_handlers/rjs.rb#L6" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002150_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/template_handlers/rjs.rb, line 6</span>
+ 6:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compile</span>(<span class="ruby-identifier">template</span>)
+ 7:         <span class="ruby-value str">&quot;@template_format = :html;&quot;</span> <span class="ruby-operator">+</span>
+ 8:         <span class="ruby-value str">&quot;controller.response.content_type ||= Mime::JS;&quot;</span> <span class="ruby-operator">+</span>
+ 9:           <span class="ruby-node">&quot;update_page do |page|;#{template.source}\nend&quot;</span>
+10:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/TemplateHandlers/RJS.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:46 GMT -->
+</html>    

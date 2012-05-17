@@ -1,0 +1,1195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/AbstractAdapter.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+<head>
+    <title>ActiveRecord::ConnectionAdapters::AbstractAdapter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::ConnectionAdapters::AbstractAdapter 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/connection_adapters/abstract_adapter_rb.html">activerecord/lib/active_record/connection_adapters/abstract_adapter.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+ActiveRecord supports multiple database systems. <a
+href="AbstractAdapter.html">AbstractAdapter</a> and related classes form
+the abstraction layer which makes this possible. An <a
+href="AbstractAdapter.html">AbstractAdapter</a> represents a connection to
+a database, and provides an abstract interface for database-specific
+functionality such as establishing a connection, escaping values, building
+the right SQL fragments for &#8217;:offset&#8217; and &#8217;:limit&#8217;
+options, etc.
+</p>
+<p>
+All the concrete database adapters follow the interface laid down in this
+class. <a href="../Base.html#M000680">ActiveRecord::Base.connection</a>
+returns an <a href="AbstractAdapter.html">AbstractAdapter</a> object, which
+you can use.
+</p>
+<p>
+Most of the methods in the adapter are useful during migrations. Most
+notably, the instance methods provided by SchemaStatement are very useful.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000797">active?</a>,</li>
+                
+                <li><a href="#M000787">adapter_name</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000814">create_savepoint</a>,</li>
+                
+                <li><a href="#M000817">current_savepoint_name</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000812">decrement_open_transactions</a>,</li>
+                
+                <li><a href="#M000796">disable_referential_integrity</a>,</li>
+                
+                <li><a href="#M000799">disconnect!</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000820">format_log_entry</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000811">increment_open_transactions</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>L</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000819">log</a>,</li>
+                
+                <li><a href="#M000818">log_info</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>O</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000810">open_transactions</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000793">prefetch_primary_key?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>Q</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000795">quote_table_name</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000803">raw_connection</a>,</li>
+                
+                <li><a href="#M000798">reconnect!</a>,</li>
+                
+                <li><a href="#M000816">release_savepoint</a>,</li>
+                
+                <li><a href="#M000801">requires_reloading?</a>,</li>
+                
+                <li><a href="#M000800">reset!</a>,</li>
+                
+                <li><a href="#M000815">rollback_to_savepoint</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000790">supports_count_distinct?</a>,</li>
+                
+                <li><a href="#M000791">supports_ddl_transactions?</a>,</li>
+                
+                <li><a href="#M000788">supports_migrations?</a>,</li>
+                
+                <li><a href="#M000789">supports_primary_key?</a>,</li>
+                
+                <li><a href="#M000792">supports_savepoints?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000813">transaction_joinable=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>V</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000802">verify!</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="../ConnectionAdapters.html">ActiveRecord::ConnectionAdapters</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="../ConnectionAdapters.html">ActiveRecord::ConnectionAdapters</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="../ConnectionAdapters.html">ActiveRecord::ConnectionAdapters</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="../ConnectionAdapters.html">ActiveRecord::ConnectionAdapters</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="../../ActiveRecord.html">ActiveRecord</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="../../ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000797">
+                    
+                    <a name="M000797"></a><b>active?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Checks whether the connection to the database is still active. This
+includes checking whether the database is actually capable of responding,
+i.e. whether the connection isn&#8217;t stale.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000797_source')" id="l_M000797_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L117" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000797_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 117</span>
+117:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active?</span>
+118:         <span class="ruby-ivar">@active</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">false</span>
+119:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000787">
+                    
+                    <a name="M000787"></a><b>adapter_name</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the human-readable name of the adapter. Use mixed case - one can
+always use downcase if needed.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000787_source')" id="l_M000787_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L49" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000787_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 49</span>
+49:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">adapter_name</span>
+50:         <span class="ruby-value str">'Abstract'</span>
+51:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000814">
+                    
+                    <a name="M000814"></a><b>create_savepoint</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000814_source')" id="l_M000814_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L182" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000814_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 182</span>
+182:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_savepoint</span>
+183:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000817">
+                    
+                    <a name="M000817"></a><b>current_savepoint_name</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000817_source')" id="l_M000817_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L191" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000817_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 191</span>
+191:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">current_savepoint_name</span>
+192:         <span class="ruby-node">&quot;active_record_#{open_transactions}&quot;</span>
+193:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000812">
+                    
+                    <a name="M000812"></a><b>decrement_open_transactions</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000812_source')" id="l_M000812_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L174" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000812_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 174</span>
+174:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrement_open_transactions</span>
+175:         <span class="ruby-ivar">@open_transactions</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+176:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000796">
+                    
+                    <a name="M000796"></a><b>disable_referential_integrity</b>(&amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Override to turn off referential integrity while executing
+<tt>&amp;block</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000796_source')" id="l_M000796_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L108" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000796_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 108</span>
+108:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">disable_referential_integrity</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+109:         <span class="ruby-keyword kw">yield</span>
+110:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000799">
+                    
+                    <a name="M000799"></a><b>disconnect!</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Disconnects from the database if already connected. Otherwise, this method
+does nothing.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000799_source')" id="l_M000799_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L129" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000799_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 129</span>
+129:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">disconnect!</span>
+130:         <span class="ruby-ivar">@active</span> = <span class="ruby-keyword kw">false</span>
+131:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000811">
+                    
+                    <a name="M000811"></a><b>increment_open_transactions</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000811_source')" id="l_M000811_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L169" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000811_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 169</span>
+169:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">increment_open_transactions</span>
+170:         <span class="ruby-ivar">@open_transactions</span> <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
+171:         <span class="ruby-ivar">@open_transactions</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+172:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000818">
+                    
+                    <a name="M000818"></a><b>log_info</b>(sql, name, ms)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000818_source')" id="l_M000818_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L195" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000818_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 195</span>
+195:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log_info</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">ms</span>)
+196:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@logger</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug?</span>
+197:           <span class="ruby-identifier">name</span> = <span class="ruby-value str">'%s (%.1fms)'</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">name</span> <span class="ruby-operator">||</span> <span class="ruby-value str">'SQL'</span>, <span class="ruby-identifier">ms</span>]
+198:           <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-identifier">format_log_entry</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">sql</span>.<span class="ruby-identifier">squeeze</span>(<span class="ruby-value str">' '</span>)))
+199:         <span class="ruby-keyword kw">end</span>
+200:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000810">
+                    
+                    <a name="M000810"></a><b>open_transactions</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000810_source')" id="l_M000810_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L165" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000810_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 165</span>
+165:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">open_transactions</span>
+166:         <span class="ruby-ivar">@open_transactions</span> <span class="ruby-operator">||=</span> <span class="ruby-value">0</span>
+167:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000793">
+                    
+                    <a name="M000793"></a><b>prefetch_primary_key?</b>(table_name = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Should primary key values be selected from their corresponding sequence
+before the insert statement? If true, next_sequence_value is called before
+each insert to set the record&#8217;s primary key. This is false for all
+adapters but Firebird.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000793_source')" id="l_M000793_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L89" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000793_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 89</span>
+89:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prefetch_primary_key?</span>(<span class="ruby-identifier">table_name</span> = <span class="ruby-keyword kw">nil</span>)
+90:         <span class="ruby-keyword kw">false</span>
+91:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000795">
+                    
+                    <a name="M000795"></a><b>quote_table_name</b>(name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Override to return the quoted table name. Defaults to column quoting.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000795_source')" id="l_M000795_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L101" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000795_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 101</span>
+101:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quote_table_name</span>(<span class="ruby-identifier">name</span>)
+102:         <span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">name</span>)
+103:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000803">
+                    
+                    <a name="M000803"></a><b>raw_connection</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Provides access to the underlying database driver for this adapter. For
+example, this method returns a Mysql object in case of <a
+href="MysqlAdapter.html">MysqlAdapter</a>, and a PGconn object in case of
+<a href="PostgreSQLAdapter.html">PostgreSQLAdapter</a>.
+</p>
+<p>
+This is useful for when you need to call a proprietary method such as
+PostgreSQL&#8217;s lo_* methods.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000803_source')" id="l_M000803_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L161" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000803_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 161</span>
+161:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">raw_connection</span>
+162:         <span class="ruby-ivar">@connection</span>
+163:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000798">
+                    
+                    <a name="M000798"></a><b>reconnect!</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Disconnects from the database if already connected, and establishes a new
+connection with the database.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000798_source')" id="l_M000798_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L123" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000798_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 123</span>
+123:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reconnect!</span>
+124:         <span class="ruby-ivar">@active</span> = <span class="ruby-keyword kw">true</span>
+125:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000816">
+                    
+                    <a name="M000816"></a><b>release_savepoint</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000816_source')" id="l_M000816_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L188" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000816_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 188</span>
+188:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">release_savepoint</span>
+189:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000801">
+                    
+                    <a name="M000801"></a><b>requires_reloading?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns true if its safe to reload the connection between requests for
+development mode.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000801_source')" id="l_M000801_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L144" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000801_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 144</span>
+144:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">requires_reloading?</span>
+145:         <span class="ruby-keyword kw">true</span>
+146:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000800">
+                    
+                    <a name="M000800"></a><b>reset!</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Reset the state of this connection, directing the DBMS to clear
+transactions and other connection-related server-side state. Usually a
+database-dependent operation.
+</p>
+<p>
+The default implementation does nothing; the implementation should be
+overridden by concrete adapters.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000800_source')" id="l_M000800_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L139" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000800_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 139</span>
+139:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reset!</span>
+140:         <span class="ruby-comment cmt"># this should be overridden by concrete adapters</span>
+141:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000815">
+                    
+                    <a name="M000815"></a><b>rollback_to_savepoint</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000815_source')" id="l_M000815_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L185" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000815_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 185</span>
+185:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rollback_to_savepoint</span>
+186:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000790">
+                    
+                    <a name="M000790"></a><b>supports_count_distinct?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Does this adapter support using DISTINCT within COUNT? This is
+<tt>true</tt> for all adapters except sqlite.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000790_source')" id="l_M000790_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L68" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000790_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 68</span>
+68:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">supports_count_distinct?</span>
+69:         <span class="ruby-keyword kw">true</span>
+70:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000791">
+                    
+                    <a name="M000791"></a><b>supports_ddl_transactions?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Does this adapter support DDL rollbacks in transactions? That is, would
+CREATE TABLE or ALTER TABLE get rolled back by a transaction? PostgreSQL,
+SQL Server, and others support this. MySQL and others do not.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000791_source')" id="l_M000791_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L75" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000791_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 75</span>
+75:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">supports_ddl_transactions?</span>
+76:         <span class="ruby-keyword kw">false</span>
+77:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000788">
+                    
+                    <a name="M000788"></a><b>supports_migrations?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Does this adapter support migrations? Backend specific, as the abstract
+adapter always returns <tt>false</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000788_source')" id="l_M000788_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L55" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000788_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 55</span>
+55:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">supports_migrations?</span>
+56:         <span class="ruby-keyword kw">false</span>
+57:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000789">
+                    
+                    <a name="M000789"></a><b>supports_primary_key?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Can this adapter determine the primary key for tables not attached to an
+ActiveRecord class, such as join tables? Backend specific, as the abstract
+adapter always returns <tt>false</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000789_source')" id="l_M000789_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L62" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000789_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 62</span>
+62:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">supports_primary_key?</span>
+63:         <span class="ruby-keyword kw">false</span>
+64:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000792">
+                    
+                    <a name="M000792"></a><b>supports_savepoints?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Does this adapter support savepoints? PostgreSQL and MySQL do, SQLite does
+not.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000792_source')" id="l_M000792_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L81" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000792_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 81</span>
+81:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">supports_savepoints?</span>
+82:         <span class="ruby-keyword kw">false</span>
+83:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000813">
+                    
+                    <a name="M000813"></a><b>transaction_joinable=</b>(joinable)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000813_source')" id="l_M000813_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L178" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000813_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 178</span>
+178:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">transaction_joinable=</span>(<span class="ruby-identifier">joinable</span>)
+179:         <span class="ruby-ivar">@transaction_joinable</span> = <span class="ruby-identifier">joinable</span>
+180:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000802">
+                    
+                    <a name="M000802"></a><b>verify!</b>(*ignored)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Checks whether the connection to the database is still active (i.e. not
+stale). This is done under the hood by calling <tt>active?</tt>. If the
+connection is no longer active, then this method will reconnect to the
+database.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000802_source')" id="l_M000802_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L151" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000802_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 151</span>
+151:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">verify!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">ignored</span>)
+152:         <span class="ruby-identifier">reconnect!</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">active?</span>
+153:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000820">
+                    
+                    <a name="M000820"></a><b>format_log_entry</b>(message, dump = nil)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000820_source')" id="l_M000820_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L224" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000820_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 224</span>
+224:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format_log_entry</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">dump</span> = <span class="ruby-keyword kw">nil</span>)
+225:           <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">colorize_logging</span>
+226:             <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@@row_even</span>
+227:               <span class="ruby-ivar">@@row_even</span> = <span class="ruby-keyword kw">false</span>
+228:               <span class="ruby-identifier">message_color</span>, <span class="ruby-identifier">dump_color</span> = <span class="ruby-value str">&quot;4;36;1&quot;</span>, <span class="ruby-value str">&quot;0;1&quot;</span>
+229:             <span class="ruby-keyword kw">else</span>
+230:               <span class="ruby-ivar">@@row_even</span> = <span class="ruby-keyword kw">true</span>
+231:               <span class="ruby-identifier">message_color</span>, <span class="ruby-identifier">dump_color</span> = <span class="ruby-value str">&quot;4;35;1&quot;</span>, <span class="ruby-value str">&quot;0&quot;</span>
+232:             <span class="ruby-keyword kw">end</span>
+233: 
+234:             <span class="ruby-identifier">log_entry</span> = <span class="ruby-node">&quot;  \e[#{message_color}m#{message}\e[0m   &quot;</span>
+235:             <span class="ruby-identifier">log_entry</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;\e[#{dump_color}m%#{String === dump ? 's' : 'p'}\e[0m&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">dump</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">dump</span>
+236:             <span class="ruby-identifier">log_entry</span>
+237:           <span class="ruby-keyword kw">else</span>
+238:             <span class="ruby-value str">&quot;%s  %s&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">message</span>, <span class="ruby-identifier">dump</span>]
+239:           <span class="ruby-keyword kw">end</span>
+240:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000819">
+                    
+                    <a name="M000819"></a><b>log</b>(sql, name)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000819_source')" id="l_M000819_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract_adapter.rb#L203" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000819_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract_adapter.rb, line 203</span>
+203:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">log</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>)
+204:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+205:             <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">nil</span>
+206:             <span class="ruby-identifier">ms</span> = <span class="ruby-constant">Benchmark</span>.<span class="ruby-identifier">ms</span> { <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">yield</span> }
+207:             <span class="ruby-ivar">@runtime</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">ms</span>
+208:             <span class="ruby-identifier">log_info</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">ms</span>)
+209:             <span class="ruby-identifier">result</span>
+210:           <span class="ruby-keyword kw">else</span>
+211:             <span class="ruby-identifier">log_info</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-value">0</span>)
+212:             <span class="ruby-keyword kw">nil</span>
+213:           <span class="ruby-keyword kw">end</span>
+214:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+215:           <span class="ruby-comment cmt"># Log message and raise exception.</span>
+216:           <span class="ruby-comment cmt"># Set last_verification to 0, so that connection gets verified</span>
+217:           <span class="ruby-comment cmt"># upon reentering the request loop</span>
+218:           <span class="ruby-ivar">@last_verification</span> = <span class="ruby-value">0</span>
+219:           <span class="ruby-identifier">message</span> = <span class="ruby-node">&quot;#{e.class.name}: #{e.message}: #{sql}&quot;</span>
+220:           <span class="ruby-identifier">log_info</span>(<span class="ruby-identifier">message</span>, <span class="ruby-identifier">name</span>, <span class="ruby-value">0</span>)
+221:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">StatementInvalid</span>, <span class="ruby-identifier">message</span>
+222:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/AbstractAdapter.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+</html>    

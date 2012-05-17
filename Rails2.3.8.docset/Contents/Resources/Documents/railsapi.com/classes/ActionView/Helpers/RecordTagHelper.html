@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/Helpers/RecordTagHelper.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+<head>
+    <title>ActionView::Helpers::RecordTagHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::RecordTagHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_view/helpers/record_tag_helper_rb.html">actionpack/lib/action_view/helpers/record_tag_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002376">content_tag_for</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002375">div_for</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002376">
+                    
+                    <a name="M002376"></a><b>content_tag_for</b>(tag_name, record, *args, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+<a href="RecordTagHelper.html#M002376">content_tag_for</a> creates an HTML
+element with id and class parameters that relate to the specified Active
+Record object. For example:
+</p>
+<pre>
+   &lt;% content_tag_for(:tr, @person) do %&gt;
+     &lt;td&gt;&lt;%=h @person.first_name %&gt;&lt;/td&gt;
+     &lt;td&gt;&lt;%=h @person.last_name %&gt;&lt;/td&gt;
+   &lt;% end %&gt;
+</pre>
+<p>
+would produce the following HTML (assuming @person is an instance of a
+Person object, with an id value of 123):
+</p>
+<pre>
+   &lt;tr id=&quot;person_123&quot; class=&quot;person&quot;&gt;....&lt;/tr&gt;
+</pre>
+<p>
+If you require the HTML id attribute to have a prefix, you can specify it:
+</p>
+<pre>
+   &lt;% content_tag_for(:tr, @person, :foo) do %&gt; ...
+</pre>
+<p>
+produces:
+</p>
+<pre>
+   &lt;tr id=&quot;foo_person_123&quot; class=&quot;person&quot;&gt;...
+</pre>
+<p>
+<a href="RecordTagHelper.html#M002376">content_tag_for</a> also accepts a
+hash of options, which will be converted to additional HTML attributes. If
+you specify a <tt>:class</tt> value, it will be combined with the default
+class name for your object. For example:
+</p>
+<pre>
+   &lt;% content_tag_for(:li, @person, :class =&gt; &quot;bar&quot;) %&gt;...
+</pre>
+<p>
+produces:
+</p>
+<pre>
+   &lt;li id=&quot;person_123&quot; class=&quot;person bar&quot;&gt;...
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002376_source')" id="l_M002376_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/db26b47b9f4dbebd478a5fe6c0dcd38b8697939a/actionpack/lib/action_view/helpers/record_tag_helper.rb#L50" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002376_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/record_tag_helper.rb, line 50</span>
+50:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">content_tag_for</span>(<span class="ruby-identifier">tag_name</span>, <span class="ruby-identifier">record</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+51:         <span class="ruby-identifier">prefix</span>  = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">shift</span>
+52:         <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+53:         <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge!</span>({ <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{dom_class(record)} #{options[:class]}&quot;</span>.<span class="ruby-identifier">strip</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">dom_id</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span>) })
+54:         <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">tag_name</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+55:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002375">
+                    
+                    <a name="M002375"></a><b>div_for</b>(record, *args, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Produces a wrapper DIV element with id and class parameters that relate to
+the specified Active Record object. Usage example:
+</p>
+<pre>
+   &lt;% div_for(@person, :class =&gt; &quot;foo&quot;) do %&gt;
+      &lt;%=h @person.name %&gt;
+   &lt;% end %&gt;
+</pre>
+<p>
+produces:
+</p>
+<pre>
+   &lt;div id=&quot;person_123&quot; class=&quot;person foo&quot;&gt; Joe Bloggs &lt;/div&gt;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002375_source')" id="l_M002375_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/db26b47b9f4dbebd478a5fe6c0dcd38b8697939a/actionpack/lib/action_view/helpers/record_tag_helper.rb#L15" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002375_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/record_tag_helper.rb, line 15</span>
+15:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">div_for</span>(<span class="ruby-identifier">record</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+16:         <span class="ruby-identifier">content_tag_for</span>(<span class="ruby-identifier">:div</span>, <span class="ruby-identifier">record</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+17:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/Helpers/RecordTagHelper.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+</html>    

@@ -1,0 +1,1487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+<head>
+    <title>ActiveRecord::ConnectionAdapters::SchemaStatements</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionAdapters::SchemaStatements 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/connection_adapters/abstract/schema_statements_rb.html">activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000607">add_column</a>,</li>
+                
+                <li><a href="#M000613">add_index</a>,</li>
+                
+                <li><a href="#M000636">add_order_by_for_association_limiting!</a>,</li>
+                
+                <li><a href="#M000637">add_timestamps</a>,</li>
+                
+                <li><a href="#M000622">assume_migrated_upto_version</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000610">change_column</a>,</li>
+                
+                <li><a href="#M000611">change_column_default</a>,</li>
+                
+                <li><a href="#M000604">change_table</a>,</li>
+                
+                <li><a href="#M000598">columns</a>,</li>
+                
+                <li><a href="#M000603">create_table</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000635">distinct</a>,</li>
+                
+                <li><a href="#M000606">drop_table</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000618">index_exists?</a>,</li>
+                
+                <li><a href="#M000621">initialize_schema_migrations_table</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000595">native_database_types</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>O</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000640">options_include_default?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>Q</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000639">quoted_columns_for_index</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000608">remove_column</a>,</li>
+                
+                <li><a href="#M000609">remove_columns</a>,</li>
+                
+                <li><a href="#M000614">remove_index</a>,</li>
+                
+                <li><a href="#M000638">remove_timestamps</a>,</li>
+                
+                <li><a href="#M000612">rename_column</a>,</li>
+                
+                <li><a href="#M000616">rename_index</a>,</li>
+                
+                <li><a href="#M000605">rename_table</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000619">structure_dump</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000596">table_alias_for</a>,</li>
+                
+                <li><a href="#M000597">table_exists?</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000607">
+                    
+                    <a name="M000607"></a><b>add_column</b>(table_name, column_name, type, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Adds a new column to the named table. See <a
+href="TableDefinition.html#M000573">TableDefinition#column</a> for details
+of the options you can use.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000607_source')" id="l_M000607_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L187" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000607_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 187</span>
+187:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_column</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
+188:         <span class="ruby-identifier">add_column_sql</span> = <span class="ruby-node">&quot;ALTER TABLE #{quote_table_name(table_name)} ADD #{quote_column_name(column_name)} #{type_to_sql(type, options[:limit], options[:precision], options[:scale])}&quot;</span>
+189:         <span class="ruby-identifier">add_column_options!</span>(<span class="ruby-identifier">add_column_sql</span>, <span class="ruby-identifier">options</span>)
+190:         <span class="ruby-identifier">execute</span>(<span class="ruby-identifier">add_column_sql</span>)
+191:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000613">
+                    
+                    <a name="M000613"></a><b>add_index</b>(table_name, column_name, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Adds a new index to the table. <tt>column_name</tt> can be a single Symbol,
+or an Array of Symbols.
+</p>
+<p>
+The index will be named after the table and the first column name, unless
+you pass <tt>:name</tt> as an option.
+</p>
+<p>
+When creating an index on multiple columns, the first column is used as a
+name for the index. For example, when you specify an index on two columns
+[<tt>:first</tt>, <tt>:last</tt>], the DBMS creates an index for both
+columns as well as an index for the first column <tt>:first</tt>. Using
+just the first name for this index makes sense, because you will never have
+to create a singular index with this name.
+</p>
+<h5>Examples</h5>
+<h6>Creating a simple index</h6>
+<pre>
+ add_index(:suppliers, :name)
+</pre>
+<p>
+generates
+</p>
+<pre>
+ CREATE INDEX suppliers_name_index ON suppliers(name)
+</pre>
+<h6>Creating a unique index</h6>
+<pre>
+ add_index(:accounts, [:branch_id, :party_id], :unique =&gt; true)
+</pre>
+<p>
+generates
+</p>
+<pre>
+ CREATE UNIQUE INDEX accounts_branch_id_party_id_index ON accounts(branch_id, party_id)
+</pre>
+<h6>Creating a named index</h6>
+<pre>
+ add_index(:accounts, [:branch_id, :party_id], :unique =&gt; true, :name =&gt; 'by_branch_party')
+</pre>
+<p>
+generates
+</p>
+<pre>
+ CREATE UNIQUE INDEX by_branch_party ON accounts(branch_id, party_id)
+</pre>
+<h6>Creating an index with specific key length</h6>
+<pre>
+ add_index(:accounts, :name, :name =&gt; 'by_name', :length =&gt; 10)
+</pre>
+<p>
+generates
+</p>
+<pre>
+ CREATE INDEX by_name ON accounts(name(10))
+
+ add_index(:accounts, [:name, :surname], :name =&gt; 'by_name_surname', :length =&gt; {:name =&gt; 10, :surname =&gt; 15})
+</pre>
+<p>
+generates
+</p>
+<pre>
+ CREATE INDEX by_name_surname ON accounts(name(10), surname(15))
+</pre>
+<p>
+Note: SQLite doesn&#8217;t support index length
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000613_source')" id="l_M000613_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L270" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000613_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 270</span>
+270:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_index</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {})
+271:         <span class="ruby-identifier">column_names</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">column_name</span>)
+272:         <span class="ruby-identifier">index_name</span>   = <span class="ruby-identifier">index_name</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">:column</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">column_names</span>)
+273: 
+274:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Hash</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">options</span> <span class="ruby-comment cmt"># legacy support, since this param was a string</span>
+275:           <span class="ruby-identifier">index_type</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:unique</span>] <span class="ruby-operator">?</span> <span class="ruby-value str">&quot;UNIQUE&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;&quot;</span>
+276:           <span class="ruby-identifier">index_name</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">index_name</span>
+277:         <span class="ruby-keyword kw">else</span>
+278:           <span class="ruby-identifier">index_type</span> = <span class="ruby-identifier">options</span>
+279:         <span class="ruby-keyword kw">end</span>
+280: 
+281:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">index_name</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">index_name_length</span>
+282:           <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-node">&quot;Index name '#{index_name}' on table '#{table_name}' is too long; the limit is #{index_name_length} characters. Skipping.&quot;</span>)
+283:           <span class="ruby-keyword kw">return</span>
+284:         <span class="ruby-keyword kw">end</span>
+285:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">index_exists?</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">index_name</span>, <span class="ruby-keyword kw">false</span>)
+286:           <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-node">&quot;Index name '#{index_name}' on table '#{table_name}' already exists. Skipping.&quot;</span>)
+287:           <span class="ruby-keyword kw">return</span>
+288:         <span class="ruby-keyword kw">end</span>
+289:         <span class="ruby-identifier">quoted_column_names</span> = <span class="ruby-identifier">quoted_columns_for_index</span>(<span class="ruby-identifier">column_names</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;, &quot;</span>)
+290: 
+291:         <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;CREATE #{index_type} INDEX #{quote_column_name(index_name)} ON #{quote_table_name(table_name)} (#{quoted_column_names})&quot;</span>
+292:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000636">
+                    
+                    <a name="M000636"></a><b>add_order_by_for_association_limiting!</b>(sql, options)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+ORDER BY clause for the passed order option. PostgreSQL overrides this due
+to its stricter standards compliance.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000636_source')" id="l_M000636_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L457" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000636_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 457</span>
+457:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_order_by_for_association_limiting!</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">options</span>)
+458:         <span class="ruby-identifier">sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; ORDER BY #{options[:order]}&quot;</span>
+459:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000637">
+                    
+                    <a name="M000637"></a><b>add_timestamps</b>(table_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Adds timestamps (created_at and updated_at) columns to the named table.
+</p>
+<h5>Examples</h5>
+<pre>
+ add_timestamps(:suppliers)
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000637_source')" id="l_M000637_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L464" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000637_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 464</span>
+464:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_timestamps</span>(<span class="ruby-identifier">table_name</span>)
+465:         <span class="ruby-identifier">add_column</span> <span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">:created_at</span>, <span class="ruby-identifier">:datetime</span>
+466:         <span class="ruby-identifier">add_column</span> <span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">:updated_at</span>, <span class="ruby-identifier">:datetime</span>
+467:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000622">
+                    
+                    <a name="M000622"></a><b>assume_migrated_upto_version</b>(version, migrations_path = ActiveRecord::Migrator.migrations_path)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000622_source')" id="l_M000622_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L388" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000622_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 388</span>
+388:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assume_migrated_upto_version</span>(<span class="ruby-identifier">version</span>, <span class="ruby-identifier">migrations_path</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migrator</span>.<span class="ruby-identifier">migrations_path</span>)
+389:         <span class="ruby-identifier">version</span> = <span class="ruby-identifier">version</span>.<span class="ruby-identifier">to_i</span>
+390:         <span class="ruby-identifier">sm_table</span> = <span class="ruby-identifier">quote_table_name</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migrator</span>.<span class="ruby-identifier">schema_migrations_table_name</span>)
+391: 
+392:         <span class="ruby-identifier">migrated</span> = <span class="ruby-identifier">select_values</span>(<span class="ruby-node">&quot;SELECT version FROM #{sm_table}&quot;</span>).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">:to_i</span>)
+393:         <span class="ruby-identifier">versions</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-node">&quot;#{migrations_path}/[0-9]*_*.rb&quot;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filename</span><span class="ruby-operator">|</span>
+394:           <span class="ruby-identifier">filename</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'/'</span>).<span class="ruby-identifier">last</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'_'</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_i</span>
+395:         <span class="ruby-keyword kw">end</span>
+396: 
+397:         <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">migrated</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">version</span>)
+398:           <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;INSERT INTO #{sm_table} (version) VALUES ('#{version}')&quot;</span>
+399:         <span class="ruby-keyword kw">end</span>
+400: 
+401:         <span class="ruby-identifier">inserted</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+402:         (<span class="ruby-identifier">versions</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">migrated</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+403:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">inserted</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">v</span>)
+404:             <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Duplicate migration #{v}. Please renumber your migrations to resolve the conflict.&quot;</span>
+405:           <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">version</span>
+406:             <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;INSERT INTO #{sm_table} (version) VALUES ('#{v}')&quot;</span>
+407:             <span class="ruby-identifier">inserted</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">v</span>
+408:           <span class="ruby-keyword kw">end</span>
+409:         <span class="ruby-keyword kw">end</span>
+410:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000610">
+                    
+                    <a name="M000610"></a><b>change_column</b>(table_name, column_name, type, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Changes the column&#8217;s definition according to the new options. See <a
+href="TableDefinition.html#M000573">TableDefinition#column</a> for details
+of the options you can use.
+</p>
+<h5>Examples</h5>
+<pre>
+ change_column(:suppliers, :name, :string, :limit =&gt; 80)
+ change_column(:accounts, :description, :text)
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000610_source')" id="l_M000610_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L209" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000610_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 209</span>
+209:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">change_column</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
+210:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-value str">&quot;change_column is not implemented&quot;</span>
+211:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000611">
+                    
+                    <a name="M000611"></a><b>change_column_default</b>(table_name, column_name, default)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets a new default value for a column. If you want to set the default value
+to <tt>NULL</tt>, you are out of luck. You need to <a
+href="DatabaseStatements.html#M000646">DatabaseStatements#execute</a> the
+appropriate SQL statement yourself.
+</p>
+<h5>Examples</h5>
+<pre>
+ change_column_default(:suppliers, :qualification, 'new')
+ change_column_default(:accounts, :authorized, 1)
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000611_source')" id="l_M000611_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L219" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000611_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 219</span>
+219:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">change_column_default</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">default</span>)
+220:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-value str">&quot;change_column_default is not implemented&quot;</span>
+221:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000604">
+                    
+                    <a name="M000604"></a><b>change_table</b>(table_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+A block for changing columns in <tt>table</tt>.
+</p>
+<h3>Example</h3>
+<pre>
+ # change_table() yields a Table instance
+ change_table(:suppliers) do |t|
+   t.column :name, :string, :limit =&gt; 60
+   # Other column alterations here
+ end
+</pre>
+<h5>Examples</h5>
+<h6>Add a column</h6>
+<pre>
+ change_table(:suppliers) do |t|
+   t.column :name, :string, :limit =&gt; 60
+ end
+</pre>
+<h6>Add 2 integer columns</h6>
+<pre>
+ change_table(:suppliers) do |t|
+   t.integer :width, :height, :null =&gt; false, :default =&gt; 0
+ end
+</pre>
+<h6>Add created_at/updated_at columns</h6>
+<pre>
+ change_table(:suppliers) do |t|
+   t.timestamps
+ end
+</pre>
+<h6>Add a foreign key column</h6>
+<pre>
+ change_table(:suppliers) do |t|
+   t.references :company
+ end
+</pre>
+<p>
+Creates a <tt>company_id(integer)</tt> column
+</p>
+<h6>Add a polymorphic foreign key column</h6>
+<pre>
+ change_table(:suppliers) do |t|
+   t.belongs_to :company, :polymorphic =&gt; true
+ end
+</pre>
+<p>
+Creates <tt>company_type(varchar)</tt> and <tt>company_id(integer)</tt>
+columns
+</p>
+<h6>Remove a column</h6>
+<pre>
+ change_table(:suppliers) do |t|
+   t.remove :company
+ end
+</pre>
+<h6>Remove several columns</h6>
+<pre>
+ change_table(:suppliers) do |t|
+   t.remove :company_id
+   t.remove :width, :height
+ end
+</pre>
+<h6>Remove an index</h6>
+<pre>
+ change_table(:suppliers) do |t|
+   t.remove_index :company_id
+ end
+</pre>
+<p>
+See also <a href="Table.html">Table</a> for details on all of the various
+column transformation
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000604_source')" id="l_M000604_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L169" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000604_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 169</span>
+169:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">change_table</span>(<span class="ruby-identifier">table_name</span>)
+170:         <span class="ruby-keyword kw">yield</span> <span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-keyword kw">self</span>)
+171:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000598">
+                    
+                    <a name="M000598"></a><b>columns</b>(table_name, name = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns an array of <a href="Column.html">Column</a> objects for the table
+specified by <tt>table_name</tt>. See the concrete implementation for
+details on the expected parameter values.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000598_source')" id="l_M000598_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L27" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000598_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 27</span>
+27:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword kw">nil</span>) <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000603">
+                    
+                    <a name="M000603"></a><b>create_table</b>(table_name, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Creates a new table with the name <tt>table_name</tt>. <tt>table_name</tt>
+may either be a String or a Symbol.
+</p>
+<p>
+There are two ways to work with <tt><a
+href="SchemaStatements.html#M000603">create_table</a></tt>. You can use the
+block form or the regular form, like this:
+</p>
+<h3>Block form</h3>
+<pre>
+ # create_table() passes a TableDefinition object to the block.
+ # This form will not only create the table, but also columns for the
+ # table.
+ create_table(:suppliers) do |t|
+   t.column :name, :string, :limit =&gt; 60
+   # Other fields here
+ end
+</pre>
+<h3>Regular form</h3>
+<pre>
+ # Creates a table called 'suppliers' with no columns.
+ create_table(:suppliers)
+ # Add a column to 'suppliers'.
+ add_column(:suppliers, :name, :string, {:limit =&gt; 60})
+</pre>
+<p>
+The <tt>options</tt> hash can include the following keys:
+</p>
+<dl>
+<dt><tt>:id</tt></dt><dd>Whether to automatically add a primary key column. Defaults to true. Join
+tables for <tt>has_and_belongs_to_many</tt> should set <tt>:id =&gt;
+false</tt>.
+
+</dd>
+<dt><tt>:primary_key</tt></dt><dd>The name of the primary key, if one is to be added automatically. Defaults
+to <tt>id</tt>.
+
+</dd>
+<dt><tt>:options</tt></dt><dd>Any extra options you want appended to the table definition.
+
+</dd>
+<dt><tt>:temporary</tt></dt><dd>Make a temporary table.
+
+</dd>
+<dt><tt>:force</tt></dt><dd>Set to true to drop the table before creating it. Defaults to false.
+
+</dd>
+</dl>
+<h5>Examples</h5>
+<h6>Add a backend specific option to the generated SQL (MySQL)</h6>
+<pre>
+ create_table(:suppliers, :options =&gt; 'ENGINE=InnoDB DEFAULT CHARSET=utf8')
+</pre>
+<p>
+generates:
+</p>
+<pre>
+ CREATE TABLE suppliers (
+   id int(11) DEFAULT NULL auto_increment PRIMARY KEY
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+</pre>
+<h6>Rename the primary key column</h6>
+<pre>
+ create_table(:objects, :primary_key =&gt; 'guid') do |t|
+   t.column :name, :string, :limit =&gt; 80
+ end
+</pre>
+<p>
+generates:
+</p>
+<pre>
+ CREATE TABLE objects (
+   guid int(11) DEFAULT NULL auto_increment PRIMARY KEY,
+   name varchar(80)
+ )
+</pre>
+<h6>Do not add a primary key column</h6>
+<pre>
+ create_table(:categories_suppliers, :id =&gt; false) do |t|
+   t.column :category_id, :integer
+   t.column :supplier_id, :integer
+ end
+</pre>
+<p>
+generates:
+</p>
+<pre>
+ CREATE TABLE categories_suppliers (
+   category_id int,
+   supplier_id int
+ )
+</pre>
+<p>
+See also <a href="TableDefinition.html#M000573">TableDefinition#column</a>
+for details on how to create columns.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000603_source')" id="l_M000603_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L95" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000603_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 95</span>
+ 95:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_table</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">options</span> = {})
+ 96:         <span class="ruby-identifier">table_definition</span> = <span class="ruby-constant">TableDefinition</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+ 97:         <span class="ruby-identifier">table_definition</span>.<span class="ruby-identifier">primary_key</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:primary_key</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Base</span>.<span class="ruby-identifier">get_primary_key</span>(<span class="ruby-identifier">table_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">singularize</span>)) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:id</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>
+ 98: 
+ 99:         <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">table_definition</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+100: 
+101:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:force</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">table_exists?</span>(<span class="ruby-identifier">table_name</span>)
+102:           <span class="ruby-identifier">drop_table</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">options</span>)
+103:         <span class="ruby-keyword kw">end</span>
+104: 
+105:         <span class="ruby-identifier">create_sql</span> = <span class="ruby-node">&quot;CREATE#{' TEMPORARY' if options[:temporary]} TABLE &quot;</span>
+106:         <span class="ruby-identifier">create_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{quote_table_name(table_name)} (&quot;</span>
+107:         <span class="ruby-identifier">create_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">table_definition</span>.<span class="ruby-identifier">to_sql</span>
+108:         <span class="ruby-identifier">create_sql</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;) #{options[:options]}&quot;</span>
+109:         <span class="ruby-identifier">execute</span> <span class="ruby-identifier">create_sql</span>
+110:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000635">
+                    
+                    <a name="M000635"></a><b>distinct</b>(columns, order_by)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+SELECT DISTINCT clause for a given set of columns and a given ORDER BY
+clause. Both PostgreSQL and Oracle overrides this for custom DISTINCT
+syntax.
+</p>
+<pre>
+  distinct(&quot;posts.id&quot;, &quot;posts.created_at desc&quot;)
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000635_source')" id="l_M000635_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L451" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000635_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 451</span>
+451:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">distinct</span>(<span class="ruby-identifier">columns</span>, <span class="ruby-identifier">order_by</span>)
+452:         <span class="ruby-node">&quot;DISTINCT #{columns}&quot;</span>
+453:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000606">
+                    
+                    <a name="M000606"></a><b>drop_table</b>(table_name, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Drops a table from the database.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000606_source')" id="l_M000606_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L181" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000606_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 181</span>
+181:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">drop_table</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">options</span> = {})
+182:         <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;DROP TABLE #{quote_table_name(table_name)}&quot;</span>
+183:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000618">
+                    
+                    <a name="M000618"></a><b>index_exists?</b>(table_name, index_name, default)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Verify the existence of an index.
+</p>
+<p>
+The default argument is returned if the underlying implementation does not
+define the indexes method, as there&#8217;s no way to determine the correct
+answer in that case.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000618_source')" id="l_M000618_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L347" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000618_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 347</span>
+347:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index_exists?</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">index_name</span>, <span class="ruby-identifier">default</span>)
+348:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">default</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:indexes</span>)
+349:         <span class="ruby-identifier">indexes</span>(<span class="ruby-identifier">table_name</span>).<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">index_name</span> }
+350:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000621">
+                    
+                    <a name="M000621"></a><b>initialize_schema_migrations_table</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Should not be called normally, but this operation is non-destructive. The
+migrations module handles this automatically.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000621_source')" id="l_M000621_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L365" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000621_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 365</span>
+365:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_schema_migrations_table</span>
+366:         <span class="ruby-identifier">sm_table</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migrator</span>.<span class="ruby-identifier">schema_migrations_table_name</span>
+367: 
+368:         <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">tables</span>.<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">sm_table</span> }
+369:           <span class="ruby-identifier">create_table</span>(<span class="ruby-identifier">sm_table</span>, <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">schema_migrations_table</span><span class="ruby-operator">|</span>
+370:             <span class="ruby-identifier">schema_migrations_table</span>.<span class="ruby-identifier">column</span> <span class="ruby-identifier">:version</span>, <span class="ruby-identifier">:string</span>, <span class="ruby-identifier">:null</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+371:           <span class="ruby-keyword kw">end</span>
+372:           <span class="ruby-identifier">add_index</span> <span class="ruby-identifier">sm_table</span>, <span class="ruby-identifier">:version</span>, <span class="ruby-identifier">:unique</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+373:             <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{Base.table_name_prefix}unique_schema_migrations#{Base.table_name_suffix}&quot;</span>
+374: 
+375:           <span class="ruby-comment cmt"># Backwards-compatibility: if we find schema_info, assume we've</span>
+376:           <span class="ruby-comment cmt"># migrated up to that point:</span>
+377:           <span class="ruby-identifier">si_table</span> = <span class="ruby-constant">Base</span>.<span class="ruby-identifier">table_name_prefix</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'schema_info'</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Base</span>.<span class="ruby-identifier">table_name_suffix</span>
+378: 
+379:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">tables</span>.<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">si_table</span> }
+380: 
+381:             <span class="ruby-identifier">old_version</span> = <span class="ruby-identifier">select_value</span>(<span class="ruby-node">&quot;SELECT version FROM #{quote_table_name(si_table)}&quot;</span>).<span class="ruby-identifier">to_i</span>
+382:             <span class="ruby-identifier">assume_migrated_upto_version</span>(<span class="ruby-identifier">old_version</span>)
+383:             <span class="ruby-identifier">drop_table</span>(<span class="ruby-identifier">si_table</span>)
+384:           <span class="ruby-keyword kw">end</span>
+385:         <span class="ruby-keyword kw">end</span>
+386:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000595">
+                    
+                    <a name="M000595"></a><b>native_database_types</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns a Hash of mappings from the abstract data types to the native
+database types. See <a
+href="TableDefinition.html#M000573">TableDefinition#column</a> for details
+on the recognized abstract data types.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000595_source')" id="l_M000595_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L7" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000595_source" class="dyn-source">
+                        <pre>   <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 7</span>
+7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">native_database_types</span>
+8:         {}
+9:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000608">
+                    
+                    <a name="M000608"></a><b>remove_column</b>(table_name, *column_names)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Removes the column(s) from the table definition.
+</p>
+<h5>Examples</h5>
+<pre>
+ remove_column(:suppliers, :qualification)
+ remove_columns(:suppliers, :qualification, :experience)
+</pre>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="SchemaStatements.html#M000609">remove_columns</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000608_source')" id="l_M000608_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L197" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000608_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 197</span>
+197:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_column</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">column_names</span>)
+198:         <span class="ruby-identifier">column_names</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">column_name</span><span class="ruby-operator">|</span>
+199:           <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;ALTER TABLE #{quote_table_name(table_name)} DROP #{quote_column_name(column_name)}&quot;</span>
+200:         <span class="ruby-keyword kw">end</span>
+201:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000609">
+                    
+                    <a name="M000609"></a><b>remove_columns</b>(table_name, *column_names)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="SchemaStatements.html#M000608">remove_column</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000614">
+                    
+                    <a name="M000614"></a><b>remove_index</b>(table_name, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Remove the given index from the table.
+</p>
+<p>
+Remove the suppliers_name_index in the suppliers table.
+</p>
+<pre>
+  remove_index :suppliers, :name
+</pre>
+<p>
+Remove the index named accounts_branch_id_index in the accounts table.
+</p>
+<pre>
+  remove_index :accounts, :column =&gt; :branch_id
+</pre>
+<p>
+Remove the index named accounts_branch_id_party_id_index in the accounts
+table.
+</p>
+<pre>
+  remove_index :accounts, :column =&gt; [:branch_id, :party_id]
+</pre>
+<p>
+Remove the index named by_branch_party in the accounts table.
+</p>
+<pre>
+  remove_index :accounts, :name =&gt; :by_branch_party
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000614_source')" id="l_M000614_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L304" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000614_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 304</span>
+304:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_index</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">options</span> = {})
+305:         <span class="ruby-identifier">index_name</span> = <span class="ruby-identifier">index_name</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">options</span>)
+306:         <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">index_exists?</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">index_name</span>, <span class="ruby-keyword kw">true</span>)
+307:           <span class="ruby-ivar">@logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-node">&quot;Index name '#{index_name}' on table '#{table_name}' does not exist. Skipping.&quot;</span>)
+308:           <span class="ruby-keyword kw">return</span>
+309:         <span class="ruby-keyword kw">end</span>
+310:         <span class="ruby-identifier">remove_index!</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">index_name</span>)
+311:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000638">
+                    
+                    <a name="M000638"></a><b>remove_timestamps</b>(table_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Removes the timestamp columns (created_at and updated_at) from the table
+definition.
+</p>
+<h5>Examples</h5>
+<pre>
+ remove_timestamps(:suppliers)
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000638_source')" id="l_M000638_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L472" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000638_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 472</span>
+472:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove_timestamps</span>(<span class="ruby-identifier">table_name</span>)
+473:         <span class="ruby-identifier">remove_column</span> <span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">:updated_at</span>
+474:         <span class="ruby-identifier">remove_column</span> <span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">:created_at</span>
+475:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000612">
+                    
+                    <a name="M000612"></a><b>rename_column</b>(table_name, column_name, new_column_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Renames a column.
+</p>
+<h5>Example</h5>
+<pre>
+ rename_column(:suppliers, :description, :name)
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000612_source')" id="l_M000612_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L226" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000612_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 226</span>
+226:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rename_column</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">new_column_name</span>)
+227:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-value str">&quot;rename_column is not implemented&quot;</span>
+228:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000616">
+                    
+                    <a name="M000616"></a><b>rename_index</b>(table_name, old_name, new_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Rename an index.
+</p>
+<p>
+Rename the index_people_on_last_name index to index_users_on_last_name
+</p>
+<pre>
+  rename_index :people, 'index_people_on_last_name', 'index_users_on_last_name'
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000616_source')" id="l_M000616_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L321" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000616_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 321</span>
+321:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rename_index</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">old_name</span>, <span class="ruby-identifier">new_name</span>)
+322:         <span class="ruby-comment cmt"># this is a naive implementation; some DBs may support this more efficiently (Postgres, for instance)</span>
+323:         <span class="ruby-identifier">old_index_def</span> = <span class="ruby-identifier">indexes</span>(<span class="ruby-identifier">table_name</span>).<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">old_name</span> }
+324:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">old_index_def</span>
+325:         <span class="ruby-identifier">remove_index</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">old_name</span>)
+326:         <span class="ruby-identifier">add_index</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">old_index_def</span>.<span class="ruby-identifier">columns</span>, <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">new_name</span>, <span class="ruby-identifier">:unique</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">old_index_def</span>.<span class="ruby-identifier">unique</span>)
+327:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000605">
+                    
+                    <a name="M000605"></a><b>rename_table</b>(table_name, new_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Renames a table.
+</p>
+<h5>Example</h5>
+<pre>
+ rename_table('octopuses', 'octopi')
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000605_source')" id="l_M000605_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L176" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000605_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 176</span>
+176:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rename_table</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">new_name</span>)
+177:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-value str">&quot;rename_table is not implemented&quot;</span>
+178:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000619">
+                    
+                    <a name="M000619"></a><b>structure_dump</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns a string of <tt>CREATE TABLE</tt> SQL statement(s) for recreating
+the entire structure of the database.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000619_source')" id="l_M000619_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L354" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000619_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 354</span>
+354:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">structure_dump</span>
+355:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000596">
+                    
+                    <a name="M000596"></a><b>table_alias_for</b>(table_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Truncates a table alias according to the limits of the current adapter.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000596_source')" id="l_M000596_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L12" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000596_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 12</span>
+12:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">table_alias_for</span>(<span class="ruby-identifier">table_name</span>)
+13:         <span class="ruby-identifier">table_name</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">table_alias_length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\./</span>, <span class="ruby-value str">'_'</span>)
+14:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000597">
+                    
+                    <a name="M000597"></a><b>table_exists?</b>(table_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+def tables(name = nil) end
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000597_source')" id="l_M000597_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L18" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000597_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 18</span>
+18:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">table_exists?</span>(<span class="ruby-identifier">table_name</span>)
+19:         <span class="ruby-identifier">tables</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">table_name</span>.<span class="ruby-identifier">to_s</span>)
+20:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000640">
+                    
+                    <a name="M000640"></a><b>options_include_default?</b>(options)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000640_source')" id="l_M000640_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L483" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000640_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 483</span>
+483:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">options_include_default?</span>(<span class="ruby-identifier">options</span>)
+484:           <span class="ruby-identifier">options</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">:default</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:null</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:default</span>].<span class="ruby-identifier">nil?</span>)
+485:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000639">
+                    
+                    <a name="M000639"></a><b>quoted_columns_for_index</b>(column_names, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Overridden by the mysql adapter for supporting index lengths
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000639_source')" id="l_M000639_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L479" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000639_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb, line 479</span>
+479:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quoted_columns_for_index</span>(<span class="ruby-identifier">column_names</span>, <span class="ruby-identifier">options</span> = {})
+480:           <span class="ruby-identifier">column_names</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">name</span>) }
+481:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/SchemaStatements.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+</html>    

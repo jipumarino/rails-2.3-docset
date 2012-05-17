@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Fragments.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:40 GMT -->
+<head>
+    <title>ActionController::Caching::Fragments</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Caching::Fragments 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/caching/fragments_rb.html">actionpack/lib/action_controller/caching/fragments.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Fragment caching is used for caching various blocks within templates
+without caching the entire action as a whole. This is useful when certain
+elements of an action change frequently or depend on complicated state
+while other parts rarely change or can be shared amongst multiple parties.
+The caching is done using the cache helper available in the Action View. A
+template with caching might look something like:
+</p>
+<pre>
+  &lt;b&gt;Hello &lt;%= @name %&gt;&lt;/b&gt;
+  &lt;% cache do %&gt;
+    All the topics in the system:
+    &lt;%= render :partial =&gt; &quot;topic&quot;, :collection =&gt; Topic.find(:all) %&gt;
+  &lt;% end %&gt;
+</pre>
+<p>
+This cache will bind to the name of the action that called it, so if this
+code was part of the view for the topics/list action, you would be able to
+invalidate it using <tt><a
+href="Fragments.html#M001577">expire_fragment</a>(:controller =&gt;
+&quot;topics&quot;, :action =&gt; &quot;list&quot;)</tt>.
+</p>
+<p>
+This default behavior is of limited use if you need to cache multiple
+fragments per action or if the action itself is cached using
+<tt>caches_action</tt>, so we also have the option to qualify the name of
+the cached fragment with something like:
+</p>
+<pre>
+  &lt;% cache(:action =&gt; &quot;list&quot;, :action_suffix =&gt; &quot;all_topics&quot;) do %&gt;
+</pre>
+<p>
+That would result in a name such as &#8220;/topics/list/all_topics&#8220;,
+avoiding conflicts with the action cache and with any fragments that use a
+different suffix. Note that the URL doesn&#8217;t have to really exist or
+be callable - the url_for system is just used to generate unique cache
+names that we can refer to when we need to expire the cache.
+</p>
+<p>
+The expiration call for this example is:
+</p>
+<pre>
+  expire_fragment(:controller =&gt; &quot;topics&quot;, :action =&gt; &quot;list&quot;, :action_suffix =&gt; &quot;all_topics&quot;)
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001577">expire_fragment</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001572">fragment_cache_key</a>,</li>
+                
+                <li><a href="#M001576">fragment_exist?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001575">read_fragment</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>W</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001574">write_fragment</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001577">
+                    
+                    <a name="M001577"></a><b>expire_fragment</b>(key, options = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Removes fragments from the cache.
+</p>
+<p>
+<tt>key</tt> can take one of three forms:
+</p>
+<ul>
+<li>String - This would normally take the form of a path, like
+<tt>&quot;pages/45/notes&quot;</tt>.
+
+</li>
+<li>Hash - Treated as an implicit call to <tt>url_for</tt>, like
+<tt>{:controller =&gt; &quot;pages&quot;, :action =&gt; &quot;notes&quot;,
+:id =&gt; 45}</tt>
+
+</li>
+<li>Regexp - Will remove any fragment that matches, so
+<tt>%r{pages/d*/notes}</tt> might remove all notes. Make sure you
+don&#8217;t use anchors in the regex (<tt>^</tt> or <tt>$</tt>) because the
+actual filename matched looks like <tt>./cache/filename/path.cache</tt>.
+Note: Regexp expiration is only supported on caches that can iterate over
+all keys (unlike memcached).
+
+</li>
+</ul>
+<p>
+<tt>options</tt> is passed through to the cache store&#8217;s
+<tt>delete</tt> method (or <tt>delete_matched</tt>, for Regexp keys.)
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001577_source')" id="l_M001577_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/86f028799365dc670c9aeb3386eefb5fceafe433/actionpack/lib/action_controller/caching/fragments.rb#L103" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001577_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/fragments.rb, line 103</span>
+103:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">expire_fragment</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+104:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">cache_configured?</span>
+105: 
+106:         <span class="ruby-identifier">key</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">fragment_cache_key</span>(<span class="ruby-identifier">key</span>)
+107: 
+108:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>)
+109:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">benchmark</span> <span class="ruby-node">&quot;Expired fragments matching: #{key.source}&quot;</span> <span class="ruby-keyword kw">do</span>
+110:             <span class="ruby-identifier">cache_store</span>.<span class="ruby-identifier">delete_matched</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>)
+111:           <span class="ruby-keyword kw">end</span>
+112:         <span class="ruby-keyword kw">else</span>
+113:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">benchmark</span> <span class="ruby-node">&quot;Expired fragment: #{key}&quot;</span> <span class="ruby-keyword kw">do</span>
+114:             <span class="ruby-identifier">cache_store</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>)
+115:           <span class="ruby-keyword kw">end</span>
+116:         <span class="ruby-keyword kw">end</span>
+117:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001572">
+                    
+                    <a name="M001572"></a><b>fragment_cache_key</b>(key)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Given a key (as described in <tt><a
+href="Fragments.html#M001577">expire_fragment</a></tt>), returns a key
+suitable for use in reading, writing, or expiring a cached fragment. If the
+key is a hash, the generated key is the return value of url_for on that
+hash (without the protocol). All keys are prefixed with
+&#8220;views/&#8221; and uses <a
+href="../../ActiveSupport/Cache.html#M003367">ActiveSupport::Cache.expand_cache_key</a>
+for the expansion.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001572_source')" id="l_M001572_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/86f028799365dc670c9aeb3386eefb5fceafe433/actionpack/lib/action_controller/caching/fragments.rb#L33" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001572_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/fragments.rb, line 33</span>
+33:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fragment_cache_key</span>(<span class="ruby-identifier">key</span>)
+34:         <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span>.<span class="ruby-identifier">expand_cache_key</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;://&quot;</span>).<span class="ruby-identifier">last</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>, <span class="ruby-identifier">:views</span>)
+35:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001576">
+                    
+                    <a name="M001576"></a><b>fragment_exist?</b>(key, options = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Check if a cached fragment from the location signified by <tt>key</tt>
+exists (see <tt><a href="Fragments.html#M001577">expire_fragment</a></tt>
+for acceptable formats)
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001576_source')" id="l_M001576_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/86f028799365dc670c9aeb3386eefb5fceafe433/actionpack/lib/action_controller/caching/fragments.rb#L76" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001576_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/fragments.rb, line 76</span>
+76:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fragment_exist?</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+77:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">cache_configured?</span>
+78: 
+79:         <span class="ruby-identifier">key</span> = <span class="ruby-identifier">fragment_cache_key</span>(<span class="ruby-identifier">key</span>)
+80: 
+81:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">benchmark</span> <span class="ruby-node">&quot;Cached fragment exists?: #{key}&quot;</span> <span class="ruby-keyword kw">do</span>
+82:           <span class="ruby-identifier">cache_store</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>)
+83:         <span class="ruby-keyword kw">end</span>
+84:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001575">
+                    
+                    <a name="M001575"></a><b>read_fragment</b>(key, options = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Reads a cached fragment from the location signified by <tt>key</tt> (see
+<tt><a href="Fragments.html#M001577">expire_fragment</a></tt> for
+acceptable formats)
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001575_source')" id="l_M001575_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/86f028799365dc670c9aeb3386eefb5fceafe433/actionpack/lib/action_controller/caching/fragments.rb#L65" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001575_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/fragments.rb, line 65</span>
+65:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read_fragment</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+66:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">cache_configured?</span>
+67: 
+68:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">benchmark</span> <span class="ruby-node">&quot;Cached fragment hit: #{key}&quot;</span> <span class="ruby-keyword kw">do</span>
+69:           <span class="ruby-identifier">key</span> = <span class="ruby-identifier">fragment_cache_key</span>(<span class="ruby-identifier">key</span>)
+70:           <span class="ruby-identifier">result</span> = <span class="ruby-identifier">cache_store</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>)
+71:           <span class="ruby-identifier">result</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:html_safe</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>
+72:         <span class="ruby-keyword kw">end</span>
+73:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001574">
+                    
+                    <a name="M001574"></a><b>write_fragment</b>(key, content, options = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Writes <tt>content</tt> to the location signified by <tt>key</tt> (see
+<tt><a href="Fragments.html#M001577">expire_fragment</a></tt> for
+acceptable formats)
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001574_source')" id="l_M001574_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/86f028799365dc670c9aeb3386eefb5fceafe433/actionpack/lib/action_controller/caching/fragments.rb#L52" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001574_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/fragments.rb, line 52</span>
+52:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_fragment</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">content</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+53:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">content</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">cache_configured?</span>
+54: 
+55:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">benchmark</span> <span class="ruby-node">&quot;Cached fragment miss: #{key}&quot;</span> <span class="ruby-keyword kw">do</span>
+56:           <span class="ruby-identifier">key</span> = <span class="ruby-identifier">fragment_cache_key</span>(<span class="ruby-identifier">key</span>)
+57:           <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">html_safe</span>.<span class="ruby-identifier">to_str</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">content</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:html_safe</span>)
+58:           <span class="ruby-identifier">cache_store</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">content</span>, <span class="ruby-identifier">options</span>)
+59:         <span class="ruby-keyword kw">end</span>
+60: 
+61:         <span class="ruby-identifier">content</span>
+62:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Fragments.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:40 GMT -->
+</html>    

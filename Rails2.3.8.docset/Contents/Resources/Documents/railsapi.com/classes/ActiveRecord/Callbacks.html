@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Callbacks.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:12 GMT -->
+<head>
+    <title>ActiveRecord::Callbacks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Callbacks 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activerecord/lib/active_record/callbacks_rb.html">activerecord/lib/active_record/callbacks.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a href="Callbacks.html">Callbacks</a> are hooks into the lifecycle of an
+Active Record object that allow you to trigger logic before or after an
+alteration of the object state. This can be used to make sure that
+associated and dependent objects are deleted when <tt>destroy</tt> is
+called (by overwriting <tt><a
+href="Callbacks.html#M001205">before_destroy</a></tt>) or to massage
+attributes before they&#8217;re validated (by overwriting <tt><a
+href="Callbacks.html#M001198">before_validation</a></tt>). As an example of
+the callbacks initiated, consider the <tt><a
+href="Base.html#M001108">Base#save</a></tt> call for a new record:
+</p>
+<ul>
+<li>(-) <tt>save</tt>
+
+</li>
+<li>(-) <tt>valid</tt>
+
+</li>
+<li>(1) <tt><a href="Callbacks.html#M001198">before_validation</a></tt>
+
+</li>
+<li>(2) <tt><a
+href="Callbacks.html#M001200">before_validation_on_create</a></tt>
+
+</li>
+<li>(-) <tt>validate</tt>
+
+</li>
+<li>(-) <tt>validate_on_create</tt>
+
+</li>
+<li>(3) <tt><a href="Callbacks.html#M001199">after_validation</a></tt>
+
+</li>
+<li>(4) <tt><a
+href="Callbacks.html#M001201">after_validation_on_create</a></tt>
+
+</li>
+<li>(5) <tt><a href="Callbacks.html#M001189">before_save</a></tt>
+
+</li>
+<li>(6) <tt><a href="Callbacks.html#M001192">before_create</a></tt>
+
+</li>
+<li>(-) <tt>create</tt>
+
+</li>
+<li>(7) <tt><a href="Callbacks.html#M001193">after_create</a></tt>
+
+</li>
+<li>(8) <tt><a href="Callbacks.html#M001190">after_save</a></tt>
+
+</li>
+</ul>
+<p>
+That&#8217;s a total of eight callbacks, which gives you immense power to
+react and prepare for each state in the Active Record lifecycle. The
+sequence for calling <tt><a href="Base.html#M001108">Base#save</a></tt> an
+existing record is similar, except that each <tt>_on_create</tt> callback
+is replaced by the corresponding <tt>_on_update</tt> callback.
+</p>
+<p>
+Examples:
+</p>
+<pre>
+  class CreditCard &lt; ActiveRecord::Base
+    # Strip everything but digits, so the user can specify &quot;555 234 34&quot; or
+    # &quot;5552-3434&quot; or both will mean &quot;55523434&quot;
+    def before_validation_on_create
+      self.number = number.gsub(/[^0-9]/, &quot;&quot;) if attribute_present?(&quot;number&quot;)
+    end
+  end
+
+  class Subscription &lt; ActiveRecord::Base
+    before_create :record_signup
+
+    private
+      def record_signup
+        self.signed_up_on = Date.today
+      end
+  end
+
+  class Firm &lt; ActiveRecord::Base
+    # Destroys the associated clients and people when the firm is destroyed
+    before_destroy { |record| Person.destroy_all &quot;firm_id = #{record.id}&quot;   }
+    before_destroy { |record| Client.destroy_all &quot;client_of = #{record.id}&quot; }
+  end
+</pre>
+<h2>Inheritable callback queues</h2>
+<p>
+Besides the overwritable callback methods, it&#8217;s also possible to
+register callbacks through the use of the callback macros. Their main
+advantage is that the macros add behavior into a callback queue that is
+kept intact down through an inheritance hierarchy. Example:
+</p>
+<pre>
+  class Topic &lt; ActiveRecord::Base
+    before_destroy :destroy_author
+  end
+
+  class Reply &lt; Topic
+    before_destroy :destroy_readers
+  end
+</pre>
+<p>
+Now, when <tt>Topic#destroy</tt> is run only <tt>destroy_author</tt> is
+called. When <tt>Reply#destroy</tt> is run, both <tt>destroy_author</tt>
+and <tt>destroy_readers</tt> are called. Contrast this to the situation
+where we&#8217;ve implemented the save behavior through overwriteable
+methods:
+</p>
+<pre>
+  class Topic &lt; ActiveRecord::Base
+    def before_destroy() destroy_author end
+  end
+
+  class Reply &lt; Topic
+    def before_destroy() destroy_readers end
+  end
+</pre>
+<p>
+In that case, <tt>Reply#destroy</tt> would only run
+<tt>destroy_readers</tt> and <em>not</em> <tt>destroy_author</tt>. So, use
+the callback macros when you want to ensure that a certain callback is
+called for the entire hierarchy, and use the regular overwriteable methods
+when you want to leave it up to each descendant to decide whether they want
+to call <tt>super</tt> and trigger the inherited callbacks.
+</p>
+<p>
+<b>IMPORTANT:</b> In order for inheritance to work for the callback queues,
+you must specify the callbacks before specifying the associations.
+Otherwise, you might trigger the loading of a child before the parent has
+registered the callbacks and they won&#8217;t be inherited.
+</p>
+<h2>Types of callbacks</h2>
+<p>
+There are four types of callbacks accepted by the callback macros: Method
+references (symbol), callback objects, inline methods (using a proc), and
+inline eval methods (using a string). Method references and callback
+objects are the recommended approaches, inline methods using a proc are
+sometimes appropriate (such as for creating mix-ins), and inline eval
+methods are deprecated.
+</p>
+<p>
+The method reference callbacks work by specifying a protected or private
+method available in the object, like this:
+</p>
+<pre>
+  class Topic &lt; ActiveRecord::Base
+    before_destroy :delete_parents
+
+    private
+      def delete_parents
+        self.class.delete_all &quot;parent_id = #{id}&quot;
+      end
+  end
+</pre>
+<p>
+The callback objects have methods named after the callback called with the
+record as the only parameter, such as:
+</p>
+<pre>
+  class BankAccount &lt; ActiveRecord::Base
+    before_save      EncryptionWrapper.new
+    after_save       EncryptionWrapper.new
+    after_initialize EncryptionWrapper.new
+  end
+
+  class EncryptionWrapper
+    def before_save(record)
+      record.credit_card_number = encrypt(record.credit_card_number)
+    end
+
+    def after_save(record)
+      record.credit_card_number = decrypt(record.credit_card_number)
+    end
+
+    alias_method :after_find, :after_save
+
+    private
+      def encrypt(value)
+        # Secrecy is committed
+      end
+
+      def decrypt(value)
+        # Secrecy is unveiled
+      end
+  end
+</pre>
+<p>
+So you specify the object you want messaged on a given callback. When that
+callback is triggered, the object has a method by the name of the callback
+messaged. You can make these callbacks more flexible by passing in other
+initialization data such as the name of the attribute to work with:
+</p>
+<pre>
+  class BankAccount &lt; ActiveRecord::Base
+    before_save      EncryptionWrapper.new(&quot;credit_card_number&quot;)
+    after_save       EncryptionWrapper.new(&quot;credit_card_number&quot;)
+    after_initialize EncryptionWrapper.new(&quot;credit_card_number&quot;)
+  end
+
+  class EncryptionWrapper
+    def initialize(attribute)
+      @attribute = attribute
+    end
+
+    def before_save(record)
+      record.send(&quot;#{@attribute}=&quot;, encrypt(record.send(&quot;#{@attribute}&quot;)))
+    end
+
+    def after_save(record)
+      record.send(&quot;#{@attribute}=&quot;, decrypt(record.send(&quot;#{@attribute}&quot;)))
+    end
+
+    alias_method :after_find, :after_save
+
+    private
+      def encrypt(value)
+        # Secrecy is committed
+      end
+
+      def decrypt(value)
+        # Secrecy is unveiled
+      end
+  end
+</pre>
+<p>
+The callback macros usually accept a symbol for the method they&#8217;re
+supposed to run, but you can also pass a &#8220;method string&#8221;, which
+will then be evaluated within the binding of the callback. Example:
+</p>
+<pre>
+  class Topic &lt; ActiveRecord::Base
+    before_destroy 'self.class.delete_all &quot;parent_id = #{id}&quot;'
+  end
+</pre>
+<p>
+Notice that single quotes (&#8217;) are used so the <tt>#{id}</tt> part
+isn&#8217;t evaluated until the callback is triggered. Also note that these
+inline callbacks can be stacked just like the regular ones:
+</p>
+<pre>
+  class Topic &lt; ActiveRecord::Base
+    before_destroy 'self.class.delete_all &quot;parent_id = #{id}&quot;',
+                   'puts &quot;Evaluated after parents are destroyed&quot;'
+  end
+</pre>
+<h2>The <tt>after_find</tt> and <tt>after_initialize</tt> exceptions</h2>
+<p>
+Because <tt>after_find</tt> and <tt>after_initialize</tt> are called for
+each object found and instantiated by a finder, such as <tt><a
+href="Base.html#M000963">Base.find</a>(:all)</tt>, we&#8217;ve had to
+implement a simple performance constraint (50% more speed on a simple test
+case). Unlike all the other callbacks, <tt>after_find</tt> and
+<tt>after_initialize</tt> will only be run if an explicit implementation is
+defined (<tt>def after_find</tt>). In that case, all of the callback types
+will be called.
+</p>
+<h2><tt><a href="Callbacks.html#M001198">before_validation</a>*</tt> returning statements</h2>
+<p>
+If the returning value of a <tt><a
+href="Callbacks.html#M001198">before_validation</a></tt> callback can be
+evaluated to <tt>false</tt>, the process will be aborted and <tt><a
+href="Base.html#M001108">Base#save</a></tt> will return <tt>false</tt>. If
+<a href="Base.html#M001109">Base#save!</a> is called it will raise a <a
+href="RecordInvalid.html">ActiveRecord::RecordInvalid</a> exception.
+Nothing will be appended to the errors object.
+</p>
+<h2>Canceling callbacks</h2>
+<p>
+If a <tt>before_*</tt> callback returns <tt>false</tt>, all the later
+callbacks and the associated action are cancelled. If an <tt>after_*</tt>
+callback returns <tt>false</tt>, all the later callbacks are cancelled. <a
+href="Callbacks.html">Callbacks</a> are generally run in the order they are
+defined, with the exception of callbacks defined as methods on the model,
+which are called last.
+</p>
+<h2><a href="Transactions.html">Transactions</a></h2>
+<p>
+The entire callback chain of a <tt>save</tt>, <tt>save!</tt>, or
+<tt>destroy</tt> call runs within a transaction. That includes
+<tt>after_*</tt> hooks. If everything goes fine a COMMIT is executed once
+the chain has been completed.
+</p>
+<p>
+If a <tt>before_*</tt> callback cancels the action a ROLLBACK is issued.
+You can also trigger a ROLLBACK raising an exception in any of the
+callbacks, including <tt>after_*</tt> hooks. Note, however, that in that
+case the client needs to be aware of it because an ordinary <tt>save</tt>
+will raise such exception instead of quietly returning <tt>false</tt>.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001193">after_create</a>,</li>
+                
+                <li><a href="#M001206">after_destroy</a>,</li>
+                
+                <li><a href="#M001190">after_save</a>,</li>
+                
+                <li><a href="#M001196">after_update</a>,</li>
+                
+                <li><a href="#M001199">after_validation</a>,</li>
+                
+                <li><a href="#M001201">after_validation_on_create</a>,</li>
+                
+                <li><a href="#M001203">after_validation_on_update</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>B</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001192">before_create</a>,</li>
+                
+                <li><a href="#M001205">before_destroy</a>,</li>
+                
+                <li><a href="#M001189">before_save</a>,</li>
+                
+                <li><a href="#M001195">before_update</a>,</li>
+                
+                <li><a href="#M001198">before_validation</a>,</li>
+                
+                <li><a href="#M001200">before_validation_on_create</a>,</li>
+                
+                <li><a href="#M001202">before_validation_on_update</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">CALLBACKS</td>
+            <td>=</td>
+            <td class="attr-value">%w(       after_find after_initialize before_save after_save before_create after_create before_update after_update before_validation       after_validation before_validation_on_create after_validation_on_create before_validation_on_update       after_validation_on_update before_destroy after_destroy     )</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001193">
+                    
+                    <a name="M001193"></a><b>after_create</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>after</em> <tt><a href="Base.html#M001108">Base.save</a></tt>
+on new objects that haven&#8217;t been saved yet (no record exists). Note
+that this callback is still wrapped in the transaction around
+<tt>save</tt>. For example, if you invoke an external indexer at this point
+it won&#8217;t see the changes in the database.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001193_source')" id="l_M001193_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L263" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001193_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 263</span>
+263:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_create</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001206">
+                    
+                    <a name="M001206"></a><b>after_destroy</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>after</em> <tt><a
+href="Base.html#M000972">Base.destroy</a></tt> (and all the attributes have
+been frozen).
+</p>
+<pre>
+ class Contact &lt; ActiveRecord::Base
+   after_destroy { |record| logger.info( &quot;Contact #{record.id} was destroyed.&quot; ) }
+ end
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001206_source')" id="l_M001206_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L334" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001206_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 334</span>
+334:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_destroy</span>()  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001190">
+                    
+                    <a name="M001190"></a><b>after_save</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>after</em> <tt><a href="Base.html#M001108">Base.save</a></tt>
+(regardless of whether it&#8217;s a <tt>create</tt> or <tt>update</tt>
+save). Note that this callback is still wrapped in the transaction around
+<tt>save</tt>. For example, if you invoke an external indexer at this point
+it won&#8217;t see the changes in the database.
+</p>
+<pre>
+ class Contact &lt; ActiveRecord::Base
+   after_save { logger.info( 'New contact saved!' ) }
+ end
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001190_source')" id="l_M001190_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L247" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001190_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 247</span>
+247:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_save</span>()  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001196">
+                    
+                    <a name="M001196"></a><b>after_update</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>after</em> <tt><a href="Base.html#M001108">Base.save</a></tt>
+on existing objects that have a record. Note that this callback is still
+wrapped in the transaction around <tt>save</tt>. For example, if you invoke
+an external indexer at this point it won&#8217;t see the changes in the
+database.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001196_source')" id="l_M001196_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L278" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001196_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 278</span>
+278:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_update</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001199">
+                    
+                    <a name="M001199"></a><b>after_validation</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>after</em> <tt><a
+href="Validations.html#M001321">Validations.validate</a></tt> (which is
+part of the <tt><a href="Base.html#M001108">Base.save</a></tt> call).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001199_source')" id="l_M001199_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L292" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001199_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 292</span>
+292:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_validation</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001201">
+                    
+                    <a name="M001201"></a><b>after_validation_on_create</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>after</em> <tt><a
+href="Validations.html#M001321">Validations.validate</a></tt> (which is
+part of the <tt><a href="Base.html#M001108">Base.save</a></tt> call) on new
+objects that haven&#8217;t been saved yet (no record exists).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001201_source')" id="l_M001201_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L300" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001201_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 300</span>
+300:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_validation_on_create</span>()  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001203">
+                    
+                    <a name="M001203"></a><b>after_validation_on_update</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>after</em> <tt><a
+href="Validations.html#M001321">Validations.validate</a></tt> (which is
+part of the <tt><a href="Base.html#M001108">Base.save</a></tt> call) on
+existing objects that have a record.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001203_source')" id="l_M001203_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L308" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001203_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 308</span>
+308:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_validation_on_update</span>()  <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001192">
+                    
+                    <a name="M001192"></a><b>before_create</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>before</em> <tt><a
+href="Base.html#M001108">Base.save</a></tt> on new objects that
+haven&#8217;t been saved yet (no record exists).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001192_source')" id="l_M001192_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L258" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001192_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 258</span>
+258:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">before_create</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001205">
+                    
+                    <a name="M001205"></a><b>before_destroy</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>before</em> <tt><a
+href="Base.html#M000972">Base.destroy</a></tt>.
+</p>
+<p>
+Note: If you need to <em>destroy</em> or <em>nullify</em> associated
+records first, use the <tt>:dependent</tt> option on your associations.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001205_source')" id="l_M001205_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L327" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001205_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 327</span>
+327:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">before_destroy</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001189">
+                    
+                    <a name="M001189"></a><b>before_save</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>before</em> <tt><a
+href="Base.html#M001108">Base.save</a></tt> (regardless of whether
+it&#8217;s a <tt>create</tt> or <tt>update</tt> save).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001189_source')" id="l_M001189_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L238" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001189_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 238</span>
+238:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">before_save</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001195">
+                    
+                    <a name="M001195"></a><b>before_update</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>before</em> <tt><a
+href="Base.html#M001108">Base.save</a></tt> on existing objects that have a
+record.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001195_source')" id="l_M001195_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L273" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001195_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 273</span>
+273:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">before_update</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001198">
+                    
+                    <a name="M001198"></a><b>before_validation</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>before</em> <tt><a
+href="Validations.html#M001321">Validations.validate</a></tt> (which is
+part of the <tt><a href="Base.html#M001108">Base.save</a></tt> call).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001198_source')" id="l_M001198_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L289" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001198_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 289</span>
+289:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">before_validation</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001200">
+                    
+                    <a name="M001200"></a><b>before_validation_on_create</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>before</em> <tt><a
+href="Validations.html#M001321">Validations.validate</a></tt> (which is
+part of the <tt><a href="Base.html#M001108">Base.save</a></tt> call) on new
+objects that haven&#8217;t been saved yet (no record exists).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001200_source')" id="l_M001200_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L296" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001200_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 296</span>
+296:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">before_validation_on_create</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001202">
+                    
+                    <a name="M001202"></a><b>before_validation_on_update</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is called <em>before</em> <tt><a
+href="Validations.html#M001321">Validations.validate</a></tt> (which is
+part of the <tt><a href="Base.html#M001108">Base.save</a></tt> call) on
+existing objects that have a record.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001202_source')" id="l_M001202_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53cd102b39eb62567298430cbd94e40dd78d46a0/activerecord/lib/active_record/callbacks.rb#L304" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001202_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/callbacks.rb, line 304</span>
+304:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">before_validation_on_update</span>() <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Callbacks.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:15 GMT -->
+</html>    

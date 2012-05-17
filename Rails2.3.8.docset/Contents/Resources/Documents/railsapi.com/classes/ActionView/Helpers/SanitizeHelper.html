@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/Helpers/SanitizeHelper.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+<head>
+    <title>ActionView::Helpers::SanitizeHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::SanitizeHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_view/helpers/sanitize_helper_rb.html">actionpack/lib/action_view/helpers/sanitize_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+The <a href="SanitizeHelper.html">SanitizeHelper</a> module provides a set
+of methods for scrubbing text of undesired HTML elements. These helper
+methods extend ActionView making them callable within your template files.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002402">sanitize</a>,</li>
+                
+                <li><a href="#M002403">sanitize_css</a>,</li>
+                
+                <li><a href="#M002405">strip_links</a>,</li>
+                
+                <li><a href="#M002404">strip_tags</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="SanitizeHelper/ClassMethods.html">ActionView::Helpers::SanitizeHelper::ClassMethods</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002402">
+                    
+                    <a name="M002402"></a><b>sanitize</b>(html, options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+This <tt>sanitize</tt> helper will html encode all tags and strip all
+attributes that aren&#8217;t specifically allowed. It also strips href/src
+tags with invalid protocols, like javascript: especially. It does its best
+to counter any tricks that hackers may use, like throwing in
+unicode/ascii/hex values to get past the javascript: filters. Check out the
+extensive test suite.
+</p>
+<pre>
+  &lt;%= sanitize @article.body %&gt;
+</pre>
+<p>
+You can add or remove tags/attributes if you want to customize it a bit.
+See <a href="../Base.html">ActionView::Base</a> for full docs on the
+available options. You can add tags/attributes for single uses of
+<tt>sanitize</tt> by passing either the <tt>:attributes</tt> or
+<tt>:tags</tt> options:
+</p>
+<p>
+Normal Use
+</p>
+<pre>
+  &lt;%= sanitize @article.body %&gt;
+</pre>
+<p>
+Custom Use (only the mentioned tags and attributes are allowed, nothing
+else)
+</p>
+<pre>
+  &lt;%= sanitize @article.body, :tags =&gt; %w(table tr td), :attributes =&gt; %w(id class style)
+</pre>
+<p>
+Add table tags to the default allowed tags
+</p>
+<pre>
+  Rails::Initializer.run do |config|
+    config.action_view.sanitized_allowed_tags = 'table', 'tr', 'td'
+  end
+</pre>
+<p>
+Remove tags to the default allowed tags
+</p>
+<pre>
+  Rails::Initializer.run do |config|
+    config.after_initialize do
+      ActionView::Base.sanitized_allowed_tags.delete 'div'
+    end
+  end
+</pre>
+<p>
+Change allowed default attributes
+</p>
+<pre>
+  Rails::Initializer.run do |config|
+    config.action_view.sanitized_allowed_attributes = 'id', 'class', 'style'
+  end
+</pre>
+<p>
+Please note that sanitizing user-provided text does not guarantee that the
+resulting markup is valid (conforming to a document type) or even
+well-formed. The output may still contain e.g. unescaped &#8217;<&#8217;,
+&#8217;>&#8217;, &#8217;&amp;&#8217; characters and confuse browsers.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002402_source')" id="l_M002402_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/9ca6df83f606a0fb8be3815328111d0cdaa7c65b/actionpack/lib/action_view/helpers/sanitize_helper.rb#L51" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002402_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/sanitize_helper.rb, line 51</span>
+51:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sanitize</span>(<span class="ruby-identifier">html</span>, <span class="ruby-identifier">options</span> = {})
+52:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">white_list_sanitizer</span>.<span class="ruby-identifier">sanitize</span>(<span class="ruby-identifier">html</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">try</span>(<span class="ruby-identifier">:html_safe</span>)
+53:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002403">
+                    
+                    <a name="M002403"></a><b>sanitize_css</b>(style)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sanitizes a block of CSS code. Used by <tt>sanitize</tt> when it comes
+across a style attribute.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002403_source')" id="l_M002403_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/9ca6df83f606a0fb8be3815328111d0cdaa7c65b/actionpack/lib/action_view/helpers/sanitize_helper.rb#L56" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002403_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/sanitize_helper.rb, line 56</span>
+56:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sanitize_css</span>(<span class="ruby-identifier">style</span>)
+57:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">white_list_sanitizer</span>.<span class="ruby-identifier">sanitize_css</span>(<span class="ruby-identifier">style</span>)
+58:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002405">
+                    
+                    <a name="M002405"></a><b>strip_links</b>(html)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Strips all link tags from <tt>text</tt> leaving just the link text.
+</p>
+<h4>Examples</h4>
+<pre>
+  strip_links('&lt;a href=&quot;http://www.rubyonrails.org&quot;&gt;Ruby on Rails&lt;/a&gt;')
+  # =&gt; Ruby on Rails
+
+  strip_links('Please e-mail me at &lt;a href=&quot;mailto:me@email.com&quot;&gt;me@email.com&lt;/a&gt;.')
+  # =&gt; Please e-mail me at me@email.com.
+
+  strip_links('Blog: &lt;a href=&quot;http://www.myblog.com/&quot; class=&quot;nav&quot; target=\&quot;_blank\&quot;&gt;Visit&lt;/a&gt;.')
+  # =&gt; Blog: Visit
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002405_source')" id="l_M002405_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/9ca6df83f606a0fb8be3815328111d0cdaa7c65b/actionpack/lib/action_view/helpers/sanitize_helper.rb#L89" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002405_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/sanitize_helper.rb, line 89</span>
+89:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strip_links</span>(<span class="ruby-identifier">html</span>)
+90:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">link_sanitizer</span>.<span class="ruby-identifier">sanitize</span>(<span class="ruby-identifier">html</span>)
+91:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002404">
+                    
+                    <a name="M002404"></a><b>strip_tags</b>(html)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Strips all HTML tags from the <tt>html</tt>, including comments. This uses
+the html-scanner tokenizer and so its HTML parsing ability is limited by
+that of html-scanner.
+</p>
+<h4>Examples</h4>
+<pre>
+  strip_tags(&quot;Strip &lt;i&gt;these&lt;/i&gt; tags!&quot;)
+  # =&gt; Strip these tags!
+
+  strip_tags(&quot;&lt;b&gt;Bold&lt;/b&gt; no more!  &lt;a href='more.html'&gt;See more here&lt;/a&gt;...&quot;)
+  # =&gt; Bold no more!  See more here...
+
+  strip_tags(&quot;&lt;div id='top-bar'&gt;Welcome to my website!&lt;/div&gt;&quot;)
+  # =&gt; Welcome to my website!
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002404_source')" id="l_M002404_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/9ca6df83f606a0fb8be3815328111d0cdaa7c65b/actionpack/lib/action_view/helpers/sanitize_helper.rb#L74" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002404_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_view/helpers/sanitize_helper.rb, line 74</span>
+74:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">strip_tags</span>(<span class="ruby-identifier">html</span>)
+75:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">full_sanitizer</span>.<span class="ruby-identifier">sanitize</span>(<span class="ruby-identifier">html</span>).<span class="ruby-identifier">try</span>(<span class="ruby-identifier">:html_safe</span>)
+76:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionView/Helpers/SanitizeHelper.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+</html>    

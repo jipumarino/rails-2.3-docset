@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/DateTime.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:11 GMT -->
+<head>
+    <title>DateTime</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            DateTime 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/activesupport/lib/active_support/json/encoders/date_time_rb.html">activesupport/lib/active_support/json/encoders/date_time.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/date_time_rb.html">activesupport/lib/active_support/core_ext/date_time.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002811">as_json</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002811">
+                    
+                    <a name="M002811"></a><b>as_json</b>(options = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Coerces the datetime to a string for JSON encoding.
+</p>
+<p>
+ISO 8601 format is used if
+ActiveSupport::JSON::Encoding.use_standard_json_time_format is set.
+</p>
+<h4>Examples</h4>
+<pre>
+  # With ActiveSupport::JSON::Encoding.use_standard_json_time_format = true
+  DateTime.civil(2005,2,1,15,15,10).to_json
+  # =&gt; &quot;2005-02-01T15:15:10+00:00&quot;
+
+  # With ActiveSupport::JSON::Encoding.use_standard_json_time_format = false
+  DateTime.civil(2005,2,1,15,15,10).to_json
+  # =&gt; &quot;2005/02/01 15:15:10 +0000&quot;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002811_source')" id="l_M002811_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a69ee11968bfd3113e32feea26f7c39c0ba51d8a/activesupport/lib/active_support/json/encoders/date_time.rb#L15" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002811_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/json/encoders/date_time.rb, line 15</span>
+15:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+16:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span><span class="ruby-operator">::</span><span class="ruby-constant">Encoding</span>.<span class="ruby-identifier">use_standard_json_time_format</span>
+17:       <span class="ruby-identifier">xmlschema</span>
+18:     <span class="ruby-keyword kw">else</span>
+19:       <span class="ruby-identifier">strftime</span>(<span class="ruby-value str">'%Y/%m/%d %H:%M:%S %z'</span>)
+20:     <span class="ruby-keyword kw">end</span>
+21:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/DateTime.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:11 GMT -->
+</html>    

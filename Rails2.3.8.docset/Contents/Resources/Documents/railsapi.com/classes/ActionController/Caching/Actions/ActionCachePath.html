@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Actions/ActionCachePath.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:08 GMT -->
+<head>
+    <title>ActionController::Caching::Actions::ActionCachePath</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::Caching::Actions::ActionCachePath 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/actionpack/lib/action_controller/caching/actions_rb.html">actionpack/lib/action_controller/caching/actions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001582">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001581">path_for</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>path</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>extension</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001582">
+                    
+                    <a name="M001582"></a><b>new</b>(controller, options = {}, infer_extension = true)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+When true, infer_extension will look up the cache path extension from the
+request&#8217;s path &amp; format. This is desirable when reading and
+writing the cache, but not when expiring the cache - expire_action should
+expire the same files regardless of the request format.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001582_source')" id="l_M001582_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d1d1894c2f38b7b116a2f756fb879ef0e68ade3f/actionpack/lib/action_controller/caching/actions.rb#L148" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001582_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/actions.rb, line 148</span>
+148:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">infer_extension</span> = <span class="ruby-keyword kw">true</span>)
+149:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">infer_extension</span>
+150:             <span class="ruby-identifier">extract_extension</span>(<span class="ruby-identifier">controller</span>.<span class="ruby-identifier">request</span>)
+151:             <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge</span>(<span class="ruby-identifier">:format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@extension</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+152:           <span class="ruby-keyword kw">end</span>
+153: 
+154:           <span class="ruby-identifier">path</span> = <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">'://'</span>).<span class="ruby-identifier">last</span>
+155:           <span class="ruby-identifier">normalize!</span>(<span class="ruby-identifier">path</span>)
+156:           <span class="ruby-identifier">add_extension!</span>(<span class="ruby-identifier">path</span>, <span class="ruby-ivar">@extension</span>)
+157:           <span class="ruby-ivar">@path</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">path</span>)
+158:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001581">
+                    
+                    <a name="M001581"></a><b>path_for</b>(controller, options, infer_extension = true)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001581_source')" id="l_M001581_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d1d1894c2f38b7b116a2f756fb879ef0e68ade3f/actionpack/lib/action_controller/caching/actions.rb#L140" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001581_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/caching/actions.rb, line 140</span>
+140:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">path_for</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">infer_extension</span> = <span class="ruby-keyword kw">true</span>)
+141:             <span class="ruby-identifier">new</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">infer_extension</span>).<span class="ruby-identifier">path</span>
+142:           <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Actions/ActionCachePath.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:08 GMT -->
+</html>    

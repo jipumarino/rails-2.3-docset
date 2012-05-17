@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/files/activesupport/lib/active_support/xml_mini/rexml_rb.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:23 GMT -->
+<head>
+    <title>rexml.rb</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            rexml.rb
+        </h1>
+        <ul class="files">
+            <li>activesupport/lib/active_support/xml_mini/rexml.rb</li>
+            <li>Last modified: 2010-05-28 13:24:19 +0000</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <h1>XmlMini ReXML implementation</h1>
+<hr size="1"></hr><h1>XmlMini JRuby JDOM implementation</h1>
+<hr size="1"></hr><h1>XmlMini Nokogiri implementation using a SAX-based parser</h1>
+<hr size="1"></hr><h1>XmlMini Nokogiri implementation</h1>
+<hr size="1"></hr><h1>XmlMini <a href="../../../../../classes/LibXML.html">LibXML</a> implementation</h1>
+<hr size="1"></hr><h1>XmlMini <a href="../../../../../classes/LibXML.html">LibXML</a> implementation using a SAX-based parser</h1>
+<hr size="1"></hr><p>
+A base class with no predefined methods that tries to behave like
+Builder&#8217;s BlankSlate in Ruby 1.9. In Ruby pre-1.9, this is actually
+the Builder::BlankSlate class.
+</p>
+<p>
+Ruby 1.9 introduces BasicObject which differs slightly from Builder&#8217;s
+BlankSlate that has been used so far. <a
+href="../../../../../classes/ActiveSupport/BasicObject.html">ActiveSupport::BasicObject</a>
+provides a barebones base class that emulates Builder::BlankSlate while
+still relying on Ruby 1.9&#8217;s BasicObject in Ruby 1.9.
+</p>
+<hr size="1"></hr><p>
+encoding: utf-8
+</p>
+<hr size="1"></hr><p>
+encoding: utf-8
+</p>
+<hr size="1"></hr><p>
+encoding: utf-8
+</p>
+<hr size="1"></hr><p>
+encoding: utf-8
+</p>
+<hr size="1"></hr><p>
+OrderedHash is namespaced to prevent conflicts with other implementations
+</p>
+<hr size="1"></hr><p>
+The TimeZone class serves as a wrapper around TZInfo::Timezone instances.
+It allows us to do the following:
+</p>
+<ul>
+<li>Limit the set of zones provided by TZInfo to a meaningful subset of 142
+zones.
+
+</li>
+<li>Retrieve and display zones with a friendlier name (e.g., &#8220;Eastern
+Time (US &amp; Canada)&#8221; instead of &#8220;America/New_York&#8220;).
+
+</li>
+<li>Lazily load TZInfo::Timezone instances only when they&#8217;re needed.
+
+</li>
+<li>Create <a
+href="../../../../../classes/ActiveSupport/TimeWithZone.html">ActiveSupport::TimeWithZone</a>
+instances via TimeZone&#8217;s <tt>local</tt>, <tt>parse</tt>, <tt>at</tt>
+and <tt>now</tt> methods.
+
+</li>
+</ul>
+<p>
+If you set <tt>config.time_zone</tt> in the <a
+href="../../../../../classes/Rails.html">Rails</a> Initializer, you can
+access this TimeZone object via <tt>Time.zone</tt>:
+</p>
+<pre>
+  # environment.rb:
+  Rails::Initializer.run do |config|
+    config.time_zone = &quot;Eastern Time (US &amp; Canada)&quot;
+  end
+
+  Time.zone       # =&gt; #&lt;TimeZone:0x514834...&gt;
+  Time.zone.name  # =&gt; &quot;Eastern Time (US &amp; Canada)&quot;
+  Time.zone.now   # =&gt; Sun, 18 May 2008 14:30:44 EDT -04:00
+</pre>
+<p>
+The version of TZInfo bundled with Active Support only includes the
+definitions necessary to support the zones defined by the TimeZone class.
+If you need to use zones that aren&#8217;t defined by TimeZone,
+you&#8217;ll need to install the TZInfo gem (if a recent version of the gem
+is installed locally, this will be used instead of the bundled version.)
+</p>
+<hr size="1"></hr><p>
+encoding: utf-8
+</p>
+<hr size="1"></hr><p>
+encoding: utf-8
+</p>
+
+    </div>
+    
+
+    
+    <div class="sectiontitle">Required Files</div>
+    <ul>
+        
+        <li>rexml/document</li>
+        
+    </ul>
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="../../../../../classes/ActiveSupport.html">ActiveSupport</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/files/activesupport/lib/active_support/xml_mini/rexml_rb.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:23 GMT -->
+</html>

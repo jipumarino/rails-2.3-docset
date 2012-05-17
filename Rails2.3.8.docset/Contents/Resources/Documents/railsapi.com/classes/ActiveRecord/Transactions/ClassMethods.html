@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Transactions/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+<head>
+    <title>ActiveRecord::Transactions::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Transactions::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/transactions_rb.html">activerecord/lib/active_record/transactions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a href="../Transactions.html">Transactions</a> are protective blocks where
+SQL statements are only permanent if they can all succeed as one atomic
+action. The classic example is a transfer between two accounts where you
+can only have a deposit if the withdrawal succeeded and vice versa. <a
+href="../Transactions.html">Transactions</a> enforce the integrity of the
+database and guard the data against program errors or database break-downs.
+So basically you should use transaction blocks whenever you have a number
+of statements that must be executed together or not at all. Example:
+</p>
+<pre>
+  ActiveRecord::Base.transaction do
+    david.withdrawal(100)
+    mary.deposit(100)
+  end
+</pre>
+<p>
+This example will only take money from David and give to Mary if neither
+<tt>withdrawal</tt> nor <tt>deposit</tt> raises an exception. Exceptions
+will force a ROLLBACK that returns the database to the state before the
+transaction was begun. Be aware, though, that the objects will <em>not</em>
+have their instance data returned to their pre-transactional state.
+</p>
+<h2>Different Active Record classes in a single transaction</h2>
+<p>
+Though the transaction class method is called on some Active Record class,
+the objects within the transaction block need not all be instances of that
+class. This is because transactions are per-database connection, not
+per-model.
+</p>
+<p>
+In this example a <tt>Balance</tt> record is transactionally saved even
+though <tt>transaction</tt> is called on the <tt>Account</tt> class:
+</p>
+<pre>
+  Account.transaction do
+    balance.save!
+    account.save!
+  end
+</pre>
+<p>
+Note that the <tt>transaction</tt> method is also available as a model
+instance method. For example, you can also do this:
+</p>
+<pre>
+  balance.transaction do
+    balance.save!
+    account.save!
+  end
+</pre>
+<h2><a href="../Transactions.html">Transactions</a> are not distributed across database connections</h2>
+<p>
+A transaction acts on a single database connection. If you have multiple
+class-specific databases, the transaction will not protect interaction
+among them. One workaround is to begin a transaction on each class whose
+models you alter:
+</p>
+<pre>
+  Student.transaction do
+    Course.transaction do
+      course.enroll(student)
+      student.units += course.units
+    end
+  end
+</pre>
+<p>
+This is a poor solution, but full distributed transactions are beyond the
+scope of Active Record.
+</p>
+<h2>Save and destroy are automatically wrapped in a transaction</h2>
+<p>
+Both <a href="../Base.html#M001108">Base#save</a> and <a
+href="../Base.html#M000972">Base#destroy</a> come wrapped in a transaction
+that ensures that whatever you do in validations or callbacks will happen
+under the protected cover of a transaction. So you can use validations to
+check for values that the transaction depends on or you can raise
+exceptions in the callbacks to rollback, including <tt>after_*</tt>
+callbacks.
+</p>
+<h2>Exception handling and rolling back</h2>
+<p>
+Also have in mind that exceptions thrown within a transaction block will be
+propagated (after triggering the ROLLBACK), so you should be ready to catch
+those in your application code.
+</p>
+<p>
+One exception is the <a href="../Rollback.html">ActiveRecord::Rollback</a>
+exception, which will trigger a ROLLBACK when raised, but not be re-raised
+by the transaction block.
+</p>
+<p>
+<b>Warning</b>: one should not catch <a
+href="../StatementInvalid.html">ActiveRecord::StatementInvalid</a>
+exceptions inside a transaction block. <a
+href="../StatementInvalid.html">StatementInvalid</a> exceptions indicate
+that an error occurred at the database level, for example when a unique
+constraint is violated. On some database systems, such as PostgreSQL,
+database errors inside a transaction causes the entire transaction to
+become unusable until it&#8217;s restarted from the beginning. Here is an
+example which demonstrates the problem:
+</p>
+<pre>
+  # Suppose that we have a Number model with a unique column called 'i'.
+  Number.transaction do
+    Number.create(:i =&gt; 0)
+    begin
+      # This will raise a unique constraint error...
+      Number.create(:i =&gt; 0)
+    rescue ActiveRecord::StatementInvalid
+      # ...which we ignore.
+    end
+
+    # On PostgreSQL, the transaction is now unusable. The following
+    # statement will cause a PostgreSQL error, even though the unique
+    # constraint is no longer violated:
+    Number.create(:i =&gt; 1)
+    # =&gt; &quot;PGError: ERROR:  current transaction is aborted, commands
+    #     ignored until end of transaction block&quot;
+  end
+</pre>
+<p>
+One should restart the entire transaction if a StatementError occurred.
+</p>
+<h2>Nested transactions</h2>
+<p>
+<a href="ClassMethods.html#M000822">transaction</a> calls can be nested. By
+default, this makes all database statements in the nested transaction block
+become part of the parent transaction. For example:
+</p>
+<pre>
+  User.transaction do
+    User.create(:username =&gt; 'Kotori')
+    User.transaction do
+      User.create(:username =&gt; 'Nemu')
+      raise ActiveRecord::Rollback
+    end
+  end
+
+  User.find(:all)  # =&gt; empty
+</pre>
+<p>
+It is also possible to requires a sub-transaction by passing
+<tt>:requires_new =&gt; true</tt>. If anything goes wrong, the database
+rolls back to the beginning of the sub-transaction without rolling back the
+parent transaction. For example:
+</p>
+<pre>
+  User.transaction do
+    User.create(:username =&gt; 'Kotori')
+    User.transaction(:requires_new =&gt; true) do
+      User.create(:username =&gt; 'Nemu')
+      raise ActiveRecord::Rollback
+    end
+  end
+
+  User.find(:all)  # =&gt; Returns only Kotori
+</pre>
+<p>
+Most databases don&#8217;t support true nested transactions. At the time of
+writing, the only database that we&#8217;re aware of that supports true
+nested transactions, is MS-SQL. Because of this, Active Record emulates
+nested transactions by using savepoints. See <a
+href="http://dev.mysql.com/doc/refman/5.0/en/savepoints.html">dev.mysql.com/doc/refman/5.0/en/savepoints.html</a>
+for more information about savepoints.
+</p>
+<h3>Caveats</h3>
+<p>
+If you&#8217;re on MySQL, then do not use DDL operations in nested
+transactions blocks that are emulated with savepoints. That is, do not
+execute statements like &#8216;CREATE TABLE&#8217; inside such blocks. This
+is because MySQL automatically releases all savepoints upon executing a DDL
+operation. When <a href="ClassMethods.html#M000822">transaction</a> is
+finished and tries to release the savepoint it created earlier, a database
+error will occur because the savepoint has already been automatically
+released. The following example demonstrates the problem:
+</p>
+<pre>
+  Model.connection.transaction do                           # BEGIN
+    Model.connection.transaction(:requires_new =&gt; true) do  # CREATE SAVEPOINT active_record_1
+      Model.connection.create_table(...)                    # active_record_1 now automatically released
+    end                                                     # RELEASE savepoint active_record_1
+                                                            # ^^^^ BOOM! database error!
+  end
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000822">transaction</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000822">
+                    
+                    <a name="M000822"></a><b>transaction</b>(options = {}, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+See <a
+href="ClassMethods.html">ActiveRecord::Transactions::ClassMethods</a> for
+detailed documentation.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000822_source')" id="l_M000822_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/06040849b5a680c2a87893699580f9b9b80f72e4/activerecord/lib/active_record/transactions.rb#L180" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000822_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/transactions.rb, line 180</span>
+180:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">transaction</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+181:         <span class="ruby-comment cmt"># See the ConnectionAdapters::DatabaseStatements#transaction API docs.</span>
+182:         <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">transaction</span>(<span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+183:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Transactions/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+</html>    

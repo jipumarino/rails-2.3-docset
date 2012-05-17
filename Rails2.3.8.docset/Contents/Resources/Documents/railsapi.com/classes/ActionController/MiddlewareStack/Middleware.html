@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/MiddlewareStack/Middleware.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+<head>
+    <title>ActionController::MiddlewareStack::Middleware</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::MiddlewareStack::Middleware 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/middleware_stack_rb.html">actionpack/lib/action_controller/middleware_stack.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>#</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001924">==</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001923">active?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>B</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001926">build</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001925">inspect</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>K</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001922">klass</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001921">new</a>,</li>
+                
+                <li><a href="#M001920">new</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>args</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>block</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001920">
+                    
+                    <a name="M001920"></a><b>new</b>(klass, *args, &amp;block)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001920_source')" id="l_M001920_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53fe301a42f9d18b4a8a475e9babf64c621369ae/actionpack/lib/action_controller/middleware_stack.rb#L4" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001920_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/middleware_stack.rb, line 4</span>
+ 4:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+ 5:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword kw">self</span>)
+ 6:           <span class="ruby-identifier">klass</span>
+ 7:         <span class="ruby-keyword kw">else</span>
+ 8:           <span class="ruby-keyword kw">super</span>
+ 9:         <span class="ruby-keyword kw">end</span>
+10:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001921">
+                    
+                    <a name="M001921"></a><b>new</b>(klass, *args, &amp;block)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001921_source')" id="l_M001921_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53fe301a42f9d18b4a8a475e9babf64c621369ae/actionpack/lib/action_controller/middleware_stack.rb#L14" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001921_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/middleware_stack.rb, line 14</span>
+14:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+15:         <span class="ruby-ivar">@klass</span> = <span class="ruby-identifier">klass</span>
+16: 
+17:         <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+18:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:if</span>)
+19:           <span class="ruby-ivar">@conditional</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:if</span>)
+20:         <span class="ruby-keyword kw">else</span>
+21:           <span class="ruby-ivar">@conditional</span> = <span class="ruby-keyword kw">true</span>
+22:         <span class="ruby-keyword kw">end</span>
+23:         <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span>
+24: 
+25:         <span class="ruby-ivar">@args</span> = <span class="ruby-identifier">args</span>
+26:         <span class="ruby-ivar">@block</span> = <span class="ruby-identifier">block</span>
+27:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001924">
+                    
+                    <a name="M001924"></a><b>==</b>(middleware)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001924_source')" id="l_M001924_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53fe301a42f9d18b4a8a475e9babf64c621369ae/actionpack/lib/action_controller/middleware_stack.rb#L51" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001924_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/middleware_stack.rb, line 51</span>
+51:       <span class="ruby-keyword kw">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">middleware</span>)
+52:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">middleware</span>
+53:         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Middleware</span>
+54:           <span class="ruby-identifier">klass</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">middleware</span>.<span class="ruby-identifier">klass</span>
+55:         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Class</span>
+56:           <span class="ruby-identifier">klass</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">middleware</span>
+57:         <span class="ruby-keyword kw">else</span>
+58:           <span class="ruby-identifier">klass</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">middleware</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">constantize</span>
+59:         <span class="ruby-keyword kw">end</span>
+60:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001923">
+                    
+                    <a name="M001923"></a><b>active?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001923_source')" id="l_M001923_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53fe301a42f9d18b4a8a475e9babf64c621369ae/actionpack/lib/action_controller/middleware_stack.rb#L41" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001923_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/middleware_stack.rb, line 41</span>
+41:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">active?</span>
+42:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">klass</span>
+43: 
+44:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@conditional</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>)
+45:           <span class="ruby-ivar">@conditional</span>.<span class="ruby-identifier">call</span>
+46:         <span class="ruby-keyword kw">else</span>
+47:           <span class="ruby-ivar">@conditional</span>
+48:         <span class="ruby-keyword kw">end</span>
+49:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001926">
+                    
+                    <a name="M001926"></a><b>build</b>(app)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001926_source')" id="l_M001926_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53fe301a42f9d18b4a8a475e9babf64c621369ae/actionpack/lib/action_controller/middleware_stack.rb#L68" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001926_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/middleware_stack.rb, line 68</span>
+68:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">build</span>(<span class="ruby-identifier">app</span>)
+69:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
+70:           <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">app</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">build_args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+71:         <span class="ruby-keyword kw">else</span>
+72:           <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">app</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">build_args</span>)
+73:         <span class="ruby-keyword kw">end</span>
+74:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001925">
+                    
+                    <a name="M001925"></a><b>inspect</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001925_source')" id="l_M001925_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53fe301a42f9d18b4a8a475e9babf64c621369ae/actionpack/lib/action_controller/middleware_stack.rb#L62" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001925_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/middleware_stack.rb, line 62</span>
+62:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>
+63:         <span class="ruby-identifier">str</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">to_s</span>
+64:         <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;, #{arg.inspect}&quot;</span> }
+65:         <span class="ruby-identifier">str</span>
+66:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001922">
+                    
+                    <a name="M001922"></a><b>klass</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001922_source')" id="l_M001922_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/53fe301a42f9d18b4a8a475e9babf64c621369ae/actionpack/lib/action_controller/middleware_stack.rb#L29" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001922_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/middleware_stack.rb, line 29</span>
+29:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">klass</span>
+30:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:call</span>)
+31:           <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">call</span>
+32:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Class</span>)
+33:           <span class="ruby-ivar">@klass</span>
+34:         <span class="ruby-keyword kw">else</span>
+35:           <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">constantize</span>
+36:         <span class="ruby-keyword kw">end</span>
+37:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">NameError</span>
+38:         <span class="ruby-ivar">@klass</span>
+39:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/MiddlewareStack/Middleware.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:45 GMT -->
+</html>    

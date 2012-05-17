@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Testing/Assertions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:35 GMT -->
+<head>
+    <title>ActiveSupport::Testing::Assertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Testing::Assertions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activesupport/lib/active_support/testing/assertions_rb.html">activesupport/lib/active_support/testing/assertions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003307">assert_blank</a>,</li>
+                
+                <li><a href="#M003305">assert_difference</a>,</li>
+                
+                <li><a href="#M003306">assert_no_difference</a>,</li>
+                
+                <li><a href="#M003308">assert_present</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003307">
+                    
+                    <a name="M003307"></a><b>assert_blank</b>(object)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+<a href="../../Test.html">Test</a> if an expression is blank. Passes if
+object.blank? is true.
+</p>
+<pre>
+  assert_blank [] # =&gt; true
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003307_source')" id="l_M003307_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/4b08679ba9627884d531cf59a9bb2fd1d2c86d62/activesupport/lib/active_support/testing/assertions.rb#L67" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003307_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/assertions.rb, line 67</span>
+67:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_blank</span>(<span class="ruby-identifier">object</span>)
+68:         <span class="ruby-identifier">assert</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">blank?</span>, <span class="ruby-node">&quot;#{object.inspect} is not blank&quot;</span>
+69:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003305">
+                    
+                    <a name="M003305"></a><b>assert_difference</b>(expression, difference = 1, message = nil, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+<a href="../../Test.html">Test</a> numeric difference between the return
+value of an expression as a result of what is evaluated in the yielded
+block.
+</p>
+<pre>
+  assert_difference 'Article.count' do
+    post :create, :article =&gt; {...}
+  end
+</pre>
+<p>
+An arbitrary expression is passed in and evaluated.
+</p>
+<pre>
+  assert_difference 'assigns(:article).comments(:reload).size' do
+    post :create, :comment =&gt; {...}
+  end
+</pre>
+<p>
+An arbitrary positive or negative difference can be specified. The default
+is +1.
+</p>
+<pre>
+  assert_difference 'Article.count', -1 do
+    post :delete, :id =&gt; ...
+  end
+</pre>
+<p>
+An array of expressions can also be passed in and evaluated.
+</p>
+<pre>
+  assert_difference [ 'Article.count', 'Post.count' ], +2 do
+    post :create, :article =&gt; {...}
+  end
+</pre>
+<p>
+A error message can be specified.
+</p>
+<pre>
+  assert_difference 'Article.count', -1, &quot;An Article should be destroyed&quot; do
+    post :delete, :id =&gt; ...
+  end
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003305_source')" id="l_M003305_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/4b08679ba9627884d531cf59a9bb2fd1d2c86d62/activesupport/lib/active_support/testing/assertions.rb#L34" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003305_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/assertions.rb, line 34</span>
+34:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">difference</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+35:         <span class="ruby-identifier">b</span> = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:binding</span>)
+36:         <span class="ruby-identifier">exps</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">expression</span>)
+37:         <span class="ruby-identifier">before</span> = <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">b</span>) }
+38: 
+39:         <span class="ruby-keyword kw">yield</span>
+40: 
+41:         <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+42:           <span class="ruby-identifier">error</span> = <span class="ruby-node">&quot;#{e.inspect} didn't change by #{difference}&quot;</span>
+43:           <span class="ruby-identifier">error</span> = <span class="ruby-node">&quot;#{message}.\n#{error}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">message</span>
+44:           <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">before</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">difference</span>, <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">b</span>), <span class="ruby-identifier">error</span>)
+45:         <span class="ruby-keyword kw">end</span>
+46:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003306">
+                    
+                    <a name="M003306"></a><b>assert_no_difference</b>(expression, message = nil, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Assertion that the numeric result of evaluating an expression is not
+changed before and after invoking the passed in block.
+</p>
+<pre>
+  assert_no_difference 'Article.count' do
+    post :create, :article =&gt; invalid_attributes
+  end
+</pre>
+<p>
+A error message can be specified.
+</p>
+<pre>
+  assert_no_difference 'Article.count', &quot;An Article should not be destroyed&quot; do
+    post :create, :article =&gt; invalid_attributes
+  end
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003306_source')" id="l_M003306_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/4b08679ba9627884d531cf59a9bb2fd1d2c86d62/activesupport/lib/active_support/testing/assertions.rb#L60" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003306_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/assertions.rb, line 60</span>
+60:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_no_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+61:         <span class="ruby-identifier">assert_difference</span> <span class="ruby-identifier">expression</span>, <span class="ruby-value">0</span>, <span class="ruby-identifier">message</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
+62:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003308">
+                    
+                    <a name="M003308"></a><b>assert_present</b>(object)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+<a href="../../Test.html">Test</a> if an expression is not blank. Passes if
+object.present? is true.
+</p>
+<pre>
+  assert_present {:data =&gt; 'x' } # =&gt; true
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003308_source')" id="l_M003308_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/4b08679ba9627884d531cf59a9bb2fd1d2c86d62/activesupport/lib/active_support/testing/assertions.rb#L74" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003308_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/assertions.rb, line 74</span>
+74:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_present</span>(<span class="ruby-identifier">object</span>)
+75:         <span class="ruby-identifier">assert</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">present?</span>, <span class="ruby-node">&quot;#{object.inspect} is blank&quot;</span>
+76:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Testing/Assertions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:35 GMT -->
+</html>    

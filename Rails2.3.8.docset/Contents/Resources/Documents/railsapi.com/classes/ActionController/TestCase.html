@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/TestCase.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:15 GMT -->
+<head>
+    <title>ActionController::TestCase</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::TestCase 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../ActiveSupport/TestCase.html">ActiveSupport::TestCase</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/actionpack/lib/action_controller/test_case_rb.html">actionpack/lib/action_controller/test_case.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Superclass for ActionController functional tests. Functional tests allow
+you to test a single controller action per test method. This should not be
+confused with integration tests (see <a
+href="IntegrationTest.html">ActionController::IntegrationTest</a>), which
+are more like &#8220;stories&#8221; that can involve multiple controllers
+and mutliple actions (i.e. multiple different HTTP requests).
+</p>
+<h2>Basic example</h2>
+<p>
+Functional tests are written as follows:
+</p>
+<ol>
+<li>First, one uses the <tt>get</tt>, <tt>post</tt>, <tt>put</tt>,
+<tt>delete</tt> or <tt>head</tt> method to simulate an HTTP request.
+
+</li>
+<li>Then, one asserts whether the current state is as expected.
+&#8220;State&#8221; can be anything: the controller&#8217;s HTTP response,
+the database contents, etc.
+
+</li>
+</ol>
+<p>
+For example:
+</p>
+<pre>
+  class BooksControllerTest &lt; ActionController::TestCase
+    def test_create
+      # Simulate a POST response with the given HTTP parameters.
+      post(:create, :book =&gt; { :title =&gt; &quot;Love Hina&quot; })
+
+      # Assert that the controller tried to redirect us to
+      # the created book's URI.
+      assert_response :found
+
+      # Assert that the controller really put the book in the database.
+      assert_not_nil Book.find_by_title(&quot;Love Hina&quot;)
+    end
+  end
+</pre>
+<h2>Special instance variables</h2>
+<p>
+<a href="TestCase.html">ActionController::TestCase</a> will also
+automatically provide the following instance variables for use in the
+tests:
+</p>
+<table>
+<tr><td valign="top"><b>@controller</b>:</td><td>The controller instance that will be tested.
+
+</td></tr>
+<tr><td valign="top"><b>@request</b>:</td><td>An ActionController::TestRequest, representing the current HTTP request.
+You can modify this object before sending the HTTP request. For example,
+you might want to set some session properties before sending a GET request.
+
+</td></tr>
+<tr><td valign="top"><b>@response</b>:</td><td>An <a href="TestResponse.html">ActionController::TestResponse</a> object,
+representing the response of the last HTTP response. In the above example,
+<tt>@response</tt> becomes valid after calling <tt>post</tt>. If the
+various assert methods are not sufficient, then you may use this object to
+inspect the HTTP response in detail.
+
+</td></tr>
+</table>
+<p>
+(Earlier versions of <a href="../Rails.html">Rails</a> required each
+functional test to subclass Test::Unit::TestCase and define @controller,
+@request, @response in <tt>setup</tt>.)
+</p>
+<h2>Controller is automatically inferred</h2>
+<p>
+<a href="TestCase.html">ActionController::TestCase</a> will automatically
+infer the controller under test from the test class name. If the controller
+cannot be inferred from the test class name, you can explicity set it with
+<tt>tests</tt>.
+</p>
+<pre>
+  class SpecialEdgeCaseWidgetsControllerTest &lt; ActionController::TestCase
+    tests WidgetController
+  end
+</pre>
+<h2>Testing controller internals</h2>
+<p>
+In addition to these specific assertions, you also have easy access to
+various collections that the regular test/unit assertions can be used
+against. These collections are:
+</p>
+<ul>
+<li>assigns: Instance variables assigned in the action that are available for
+the view.
+
+</li>
+<li>session: Objects being saved in the session.
+
+</li>
+<li>flash: The flash objects currently in the session.
+
+</li>
+<li>cookies: <a href="Cookies.html">Cookies</a> being sent to the user on this
+request.
+
+</li>
+</ul>
+<p>
+These collections can be used just like any other hash:
+</p>
+<pre>
+  assert_not_nil assigns(:person) # makes sure that a @person instance variable was set
+  assert_equal &quot;Dave&quot;, cookies[:name] # makes sure that a cookie called :name was set as &quot;Dave&quot;
+  assert flash.empty? # makes sure that there's nothing in the flash
+</pre>
+<p>
+For historic reasons, the assigns hash uses string-based keys. So
+assigns[:person] won&#8217;t work, but assigns[&#8220;person&#8221;] will.
+To appease our yearning for symbols, though, an alternative accessor has
+been devised using a method call instead of index referencing. So
+assigns(:person) will work just like assigns[&#8220;person&#8221;], but
+again, assigns[:person] will not work.
+</p>
+<p>
+On top of the collections, you have the complete url that a given action
+redirected to available in redirect_to_url.
+</p>
+<p>
+For redirects within the same controller, you can even call follow_redirect
+and the redirect will be followed, triggering another action call which can
+then be asserted against.
+</p>
+<h2>Manipulating the request collections</h2>
+<p>
+The collections described above link to the response, so you can test if
+what the actions were expected to do happened. But sometimes you also want
+to manipulate these collections in the incoming request. This is really
+only relevant for sessions and cookies, though. For sessions, you just do:
+</p>
+<pre>
+  @request.session[:key] = &quot;value&quot;
+  @request.cookies[&quot;key&quot;] = &quot;value&quot;
+</pre>
+<h2>Testing named routes</h2>
+<p>
+If you&#8217;re using named routes, they can be easily tested using the
+original named routes&#8217; methods straight in the test case. Example:
+</p>
+<pre>
+ assert_redirected_to page_url(:title =&gt; 'foo')
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001741">controller_class</a>,</li>
+                
+                <li><a href="#M001740">controller_class=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001742">determine_default_controller_class</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001735">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001743">prepare_controller_class</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001745">rescue_action_in_public!</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001744">setup_controller_request_and_response</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001739">tests</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="../ActionController.html">ActionController</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="../ActionController.html">ActionController</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="TestCase/Assertions.html">ActionController::TestCase::Assertions</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="TestCase/RaiseActionExceptions.html">ActionController::TestCase::RaiseActionExceptions</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001741">
+                    
+                    <a name="M001741"></a><b>controller_class</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001741_source')" id="l_M001741_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L170" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001741_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 170</span>
+170:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">controller_class</span>
+171:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">current_controller_class</span> = <span class="ruby-identifier">read_inheritable_attribute</span>(<span class="ruby-identifier">:controller_class</span>)
+172:           <span class="ruby-identifier">current_controller_class</span>
+173:         <span class="ruby-keyword kw">else</span>
+174:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">controller_class</span> = <span class="ruby-identifier">determine_default_controller_class</span>(<span class="ruby-identifier">name</span>)
+175:         <span class="ruby-keyword kw">end</span>
+176:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001740">
+                    
+                    <a name="M001740"></a><b>controller_class=</b>(new_class)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001740_source')" id="l_M001740_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L165" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001740_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 165</span>
+165:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">controller_class=</span>(<span class="ruby-identifier">new_class</span>)
+166:         <span class="ruby-identifier">prepare_controller_class</span>(<span class="ruby-identifier">new_class</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">new_class</span>
+167:         <span class="ruby-identifier">write_inheritable_attribute</span>(<span class="ruby-identifier">:controller_class</span>, <span class="ruby-identifier">new_class</span>)
+168:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001742">
+                    
+                    <a name="M001742"></a><b>determine_default_controller_class</b>(name)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001742_source')" id="l_M001742_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L178" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001742_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 178</span>
+178:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">determine_default_controller_class</span>(<span class="ruby-identifier">name</span>)
+179:         <span class="ruby-identifier">name</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/Test$/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">constantize</span>
+180:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">NameError</span>
+181:         <span class="ruby-keyword kw">nil</span>
+182:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001735">
+                    
+                    <a name="M001735"></a><b>new</b>(*args)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001735_source')" id="l_M001735_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L108" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001735_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 108</span>
+108:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+109:       <span class="ruby-keyword kw">super</span>
+110:       <span class="ruby-ivar">@controller</span> = <span class="ruby-keyword kw">nil</span>
+111:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001743">
+                    
+                    <a name="M001743"></a><b>prepare_controller_class</b>(new_class)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001743_source')" id="l_M001743_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L184" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001743_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 184</span>
+184:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepare_controller_class</span>(<span class="ruby-identifier">new_class</span>)
+185:         <span class="ruby-identifier">new_class</span>.<span class="ruby-identifier">send</span> <span class="ruby-identifier">:include</span>, <span class="ruby-constant">RaiseActionExceptions</span>
+186:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001739">
+                    
+                    <a name="M001739"></a><b>tests</b>(controller_class)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the controller class name. Useful if the name can&#8217;t be inferred
+from test class. Expects <tt><a
+href="TestCase.html#M001741">controller_class</a></tt> as a constant.
+Example: <tt>tests WidgetController</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001739_source')" id="l_M001739_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L161" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001739_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 161</span>
+161:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tests</span>(<span class="ruby-identifier">controller_class</span>)
+162:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">controller_class</span> = <span class="ruby-identifier">controller_class</span>
+163:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001745">
+                    
+                    <a name="M001745"></a><b>rescue_action_in_public!</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Cause the action to be rescued according to the regular rules for
+rescue_action when the visitor is not local
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001745_source')" id="l_M001745_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L205" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001745_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 205</span>
+205:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_action_in_public!</span>
+206:       <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">remote_addr</span> = <span class="ruby-value str">'208.77.188.166'</span> <span class="ruby-comment cmt"># example.com</span>
+207:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001744">
+                    
+                    <a name="M001744"></a><b>setup_controller_request_and_response</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001744_source')" id="l_M001744_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17fda24523f05a9cd5bc5115fd00cf55e33c0b4a/actionpack/lib/action_controller/test_case.rb#L189" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001744_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/test_case.rb, line 189</span>
+189:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_controller_request_and_response</span>
+190:       <span class="ruby-ivar">@request</span> = <span class="ruby-constant">TestRequest</span>.<span class="ruby-identifier">new</span>
+191:       <span class="ruby-ivar">@response</span> = <span class="ruby-constant">TestResponse</span>.<span class="ruby-identifier">new</span>
+192: 
+193:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">controller_class</span>
+194:         <span class="ruby-ivar">@controller</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+195:       <span class="ruby-keyword kw">end</span>
+196: 
+197:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@controller</span>
+198:         <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">request</span> = <span class="ruby-ivar">@request</span>
+199:         <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">params</span> = {}
+200:         <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:initialize_current_url</span>)
+201:       <span class="ruby-keyword kw">end</span>
+202:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/TestCase.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+</html>    

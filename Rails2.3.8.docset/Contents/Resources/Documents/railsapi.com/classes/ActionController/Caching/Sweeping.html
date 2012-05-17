@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Sweeping.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:40 GMT -->
+<head>
+    <title>ActionController::Caching::Sweeping</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Caching::Sweeping 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/actionpack/lib/action_controller/caching/sweeping_rb.html">actionpack/lib/action_controller/caching/sweeping.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Sweepers are the terminators of the caching world and responsible for
+expiring caches when model objects change. They do this by being
+half-observers, half-filters and implementing callbacks for both roles. A
+Sweeper example:
+</p>
+<pre>
+  class ListSweeper &lt; ActionController::Caching::Sweeper
+    observe List, Item
+
+    def after_save(record)
+      list = record.is_a?(List) ? record : record.list
+      expire_page(:controller =&gt; &quot;lists&quot;, :action =&gt; %w( show public feed ), :id =&gt; list.id)
+      expire_action(:controller =&gt; &quot;lists&quot;, :action =&gt; &quot;all&quot;)
+      list.shares.each { |share| expire_page(:controller =&gt; &quot;lists&quot;, :action =&gt; &quot;show&quot;, :id =&gt; share.url_key) }
+    end
+  end
+</pre>
+<p>
+The sweeper is assigned in the controllers that wish to have its job
+performed using the <tt>cache_sweeper</tt> class method:
+</p>
+<pre>
+  class ListsController &lt; ApplicationController
+    caches_action :index, :show, :public, :feed
+    cache_sweeper :list_sweeper, :only =&gt; [ :edit, :destroy, :share ]
+  end
+</pre>
+<p>
+In the example above, four actions are cached and three actions are
+responsible for expiring those caches.
+</p>
+<p>
+You can also name an explicit class in the declaration of a sweeper, which
+is needed if the sweeper is in a module:
+</p>
+<pre>
+  class ListsController &lt; ApplicationController
+    caches_action :index, :show, :public, :feed
+    cache_sweeper OpenBar::Sweeper, :only =&gt; [ :edit, :destroy, :share ]
+  end
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Sweeping/ClassMethods.html">ActionController::Caching::Sweeping::ClassMethods</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Caching/Sweeping.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:40 GMT -->
+</html>    

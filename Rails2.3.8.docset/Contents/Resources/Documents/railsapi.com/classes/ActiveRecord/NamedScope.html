@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/NamedScope.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:57 GMT -->
+<head>
+    <title>ActiveRecord::NamedScope</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::NamedScope 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activerecord/lib/active_record/named_scope_rb.html">activerecord/lib/active_record/named_scope.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000829">included</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="NamedScope/ClassMethods.html">ActiveRecord::NamedScope::ClassMethods</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="NamedScope/Scope.html">ActiveRecord::NamedScope::Scope</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000829">
+                    
+                    <a name="M000829"></a><b>included</b>(base)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+All subclasses of <a href="Base.html">ActiveRecord::Base</a> have one named
+scope:
+</p>
+<ul>
+<li><tt>scoped</tt> - which allows for the creation of anonymous scopes, on the
+fly: <tt>Shirt.scoped(:conditions =&gt; {:color =&gt;
+'red'}).scoped(:include =&gt; :washing_instructions)</tt>
+
+</li>
+</ul>
+<p>
+These anonymous scopes tend to be useful when procedurally generating
+complex queries, where passing intermediate values (scopes) around as
+first-class objects is convenient.
+</p>
+<p>
+You can define a scope that applies to all finders using <a
+href="Base.html#M001077">ActiveRecord::Base.default_scope</a>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000829_source')" id="l_M000829_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/17f336e2f00f419a41eb7effb817bd7ad3e84f0d/activerecord/lib/active_record/named_scope.rb#L10" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000829_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/named_scope.rb, line 10</span>
+10:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+11:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+12:         <span class="ruby-identifier">extend</span> <span class="ruby-constant">ClassMethods</span>
+13:         <span class="ruby-identifier">named_scope</span> <span class="ruby-identifier">:scoped</span>, <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">scope</span><span class="ruby-operator">|</span> <span class="ruby-identifier">scope</span> }
+14:       <span class="ruby-keyword kw">end</span>
+15:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/NamedScope.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:58 GMT -->
+</html>    

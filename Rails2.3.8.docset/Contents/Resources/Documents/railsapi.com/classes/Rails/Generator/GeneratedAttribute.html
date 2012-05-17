@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Rails/Generator/GeneratedAttribute.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:10:43 GMT -->
+<head>
+    <title>Rails::Generator::GeneratedAttribute</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Rails::Generator::GeneratedAttribute 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/railties/lib/rails_generator/generated_attribute_rb.html">railties/lib/rails_generator/generated_attribute.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000334">default</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000333">field_type</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000332">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000335">reference?</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>name</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>type</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>column</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000332">
+                    
+                    <a name="M000332"></a><b>new</b>(name, type)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000332_source')" id="l_M000332_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/3568c5cee0f37f3302d739472be7477bee1b0d2a/railties/lib/rails_generator/generated_attribute.rb#L8" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000332_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File railties/lib/rails_generator/generated_attribute.rb, line 8</span>
+ 8:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>)
+ 9:         <span class="ruby-ivar">@name</span>, <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span>
+10:         <span class="ruby-ivar">@column</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ConnectionAdapters</span><span class="ruby-operator">::</span><span class="ruby-constant">Column</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-ivar">@type</span>)
+11:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000334">
+                    
+                    <a name="M000334"></a><b>default</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000334_source')" id="l_M000334_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/3568c5cee0f37f3302d739472be7477bee1b0d2a/railties/lib/rails_generator/generated_attribute.rb#L27" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000334_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File railties/lib/rails_generator/generated_attribute.rb, line 27</span>
+27:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default</span>
+28:         <span class="ruby-ivar">@default</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+29:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:integer</span>                     <span class="ruby-keyword kw">then</span> <span class="ruby-value">1</span>
+30:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:float</span>                       <span class="ruby-keyword kw">then</span> <span class="ruby-value">1.5</span>
+31:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:decimal</span>                     <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;9.99&quot;</span>
+32:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:datetime</span>, <span class="ruby-identifier">:timestamp</span>, <span class="ruby-identifier">:time</span> <span class="ruby-keyword kw">then</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-identifier">:db</span>)
+33:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:date</span>                        <span class="ruby-keyword kw">then</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-identifier">:db</span>)
+34:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:string</span>                      <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;MyString&quot;</span>
+35:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:text</span>                        <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;MyText&quot;</span>
+36:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:boolean</span>                     <span class="ruby-keyword kw">then</span> <span class="ruby-keyword kw">false</span>
+37:           <span class="ruby-keyword kw">else</span>
+38:             <span class="ruby-value str">&quot;&quot;</span>
+39:         <span class="ruby-keyword kw">end</span>      
+40:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000333">
+                    
+                    <a name="M000333"></a><b>field_type</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000333_source')" id="l_M000333_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/3568c5cee0f37f3302d739472be7477bee1b0d2a/railties/lib/rails_generator/generated_attribute.rb#L13" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000333_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File railties/lib/rails_generator/generated_attribute.rb, line 13</span>
+13:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">field_type</span>
+14:         <span class="ruby-ivar">@field_type</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">type</span>
+15:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:integer</span>, <span class="ruby-identifier">:float</span>, <span class="ruby-identifier">:decimal</span> <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">:text_field</span>
+16:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:time</span>                      <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">:time_select</span>
+17:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:datetime</span>, <span class="ruby-identifier">:timestamp</span>      <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">:datetime_select</span>
+18:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:date</span>                      <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">:date_select</span>
+19:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:string</span>                    <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">:text_field</span>
+20:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:text</span>                      <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">:text_area</span>
+21:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:boolean</span>                   <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">:check_box</span>
+22:           <span class="ruby-keyword kw">else</span>
+23:             <span class="ruby-identifier">:text_field</span>
+24:         <span class="ruby-keyword kw">end</span>      
+25:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000335">
+                    
+                    <a name="M000335"></a><b>reference?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000335_source')" id="l_M000335_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/3568c5cee0f37f3302d739472be7477bee1b0d2a/railties/lib/rails_generator/generated_attribute.rb#L42" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000335_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File railties/lib/rails_generator/generated_attribute.rb, line 42</span>
+42:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reference?</span>
+43:         [ <span class="ruby-identifier">:references</span>, <span class="ruby-identifier">:belongs_to</span> ].<span class="ruby-identifier">include?</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">type</span>)
+44:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Rails/Generator/GeneratedAttribute.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:10:43 GMT -->
+</html>    

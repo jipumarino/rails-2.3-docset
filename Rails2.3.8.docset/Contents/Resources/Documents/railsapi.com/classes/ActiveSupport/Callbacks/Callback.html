@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Callbacks/Callback.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:12 GMT -->
+<head>
+    <title>ActiveSupport::Callbacks::Callback</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::Callbacks::Callback 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activesupport/lib/active_support/callbacks_rb.html">activesupport/lib/active_support/callbacks.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>#</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003273">==</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003277">call</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003275">dup</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003274">eql?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>H</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003276">hash</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003272">new</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>kind</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>method</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>identifier</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>options</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003272">
+                    
+                    <a name="M003272"></a><b>new</b>(kind, method, options = {})
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003272_source')" id="l_M003272_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1e45818a622405e720a4529795f8be2f11660361/activesupport/lib/active_support/callbacks.rb#L133" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003272_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/callbacks.rb, line 133</span>
+133:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">options</span> = {})
+134:         <span class="ruby-ivar">@kind</span>       = <span class="ruby-identifier">kind</span>
+135:         <span class="ruby-ivar">@method</span>     = <span class="ruby-identifier">method</span>
+136:         <span class="ruby-ivar">@identifier</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:identifier</span>]
+137:         <span class="ruby-ivar">@options</span>    = <span class="ruby-identifier">options</span>
+138:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003273">
+                    
+                    <a name="M003273"></a><b>==</b>(other)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003273_source')" id="l_M003273_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1e45818a622405e720a4529795f8be2f11660361/activesupport/lib/active_support/callbacks.rb#L140" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003273_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/callbacks.rb, line 140</span>
+140:       <span class="ruby-keyword kw">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">other</span>)
+141:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">other</span>
+142:         <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Callback</span>
+143:           (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">identifier</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">identifier</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">identifier</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">method</span>
+144:         <span class="ruby-keyword kw">else</span>
+145:           (<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">identifier</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">identifier</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>
+146:         <span class="ruby-keyword kw">end</span>
+147:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003277">
+                    
+                    <a name="M003277"></a><b>call</b>(*args, &amp;block)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003277_source')" id="l_M003277_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1e45818a622405e720a4529795f8be2f11660361/activesupport/lib/active_support/callbacks.rb#L165" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003277_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/callbacks.rb, line 165</span>
+165:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+166:         <span class="ruby-identifier">evaluate_method</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">should_run_callback?</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+167:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LocalJumpError</span>
+168:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
+169:           <span class="ruby-value str">&quot;Cannot yield from a Proc type filter. The Proc must take two &quot;</span> <span class="ruby-operator">+</span>
+170:           <span class="ruby-value str">&quot;arguments and execute #call on the second argument.&quot;</span>
+171:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003275">
+                    
+                    <a name="M003275"></a><b>dup</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003275_source')" id="l_M003275_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1e45818a622405e720a4529795f8be2f11660361/activesupport/lib/active_support/callbacks.rb#L153" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003275_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/callbacks.rb, line 153</span>
+153:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dup</span>
+154:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@kind</span>, <span class="ruby-ivar">@method</span>, <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">dup</span>)
+155:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003274">
+                    
+                    <a name="M003274"></a><b>eql?</b>(other)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003274_source')" id="l_M003274_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1e45818a622405e720a4529795f8be2f11660361/activesupport/lib/active_support/callbacks.rb#L149" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003274_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/callbacks.rb, line 149</span>
+149:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">other</span>)
+150:         <span class="ruby-keyword kw">self</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>
+151:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003276">
+                    
+                    <a name="M003276"></a><b>hash</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003276_source')" id="l_M003276_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1e45818a622405e720a4529795f8be2f11660361/activesupport/lib/active_support/callbacks.rb#L157" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003276_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/callbacks.rb, line 157</span>
+157:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">hash</span>
+158:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@identifier</span>
+159:           <span class="ruby-ivar">@identifier</span>.<span class="ruby-identifier">hash</span>
+160:         <span class="ruby-keyword kw">else</span>
+161:           <span class="ruby-ivar">@method</span>.<span class="ruby-identifier">hash</span>
+162:         <span class="ruby-keyword kw">end</span>
+163:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Callbacks/Callback.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:12 GMT -->
+</html>    

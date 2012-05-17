@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/AttributeMethods/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+<head>
+    <title>ActiveRecord::AttributeMethods::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::AttributeMethods::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/attribute_methods_rb.html">activerecord/lib/active_record/attribute_methods.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Declare and check for suffixed attribute methods.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001171">attribute_method_suffix</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001180">cache_attribute?</a>,</li>
+                
+                <li><a href="#M001178">cache_attributes</a>,</li>
+                
+                <li><a href="#M001179">cached_attributes</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001175">define_attribute_methods</a>,</li>
+                
+                <li><a href="#M001177">define_read_methods</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>G</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001174">generated_methods?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001176">instance_method_already_implemented?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001172">match_attribute_method?</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001171">
+                    
+                    <a name="M001171"></a><b>attribute_method_suffix</b>(*suffixes)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Declares a method available for all attributes with the given suffix. Uses
+<tt>method_missing</tt> and <tt>respond_to?</tt> to rewrite the method
+</p>
+<pre>
+  #{attr}#{suffix}(*args, &amp;block)
+</pre>
+<p>
+to
+</p>
+<pre>
+  attribute#{suffix}(#{attr}, *args, &amp;block)
+</pre>
+<p>
+An <tt>attribute#{suffix}</tt> instance method must exist and accept at
+least the <tt>attr</tt> argument.
+</p>
+<p>
+For example:
+</p>
+<pre>
+  class Person &lt; ActiveRecord::Base
+    attribute_method_suffix '_changed?'
+
+    private
+      def attribute_changed?(attr)
+        ...
+      end
+  end
+
+  person = Person.find(1)
+  person.name_changed?    # =&gt; false
+  person.name = 'Hubert'
+  person.name_changed?    # =&gt; true
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001171_source')" id="l_M001171_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/attribute_methods.rb#L46" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001171_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/attribute_methods.rb, line 46</span>
+46:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attribute_method_suffix</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">suffixes</span>)
+47:         <span class="ruby-identifier">attribute_method_suffixes</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">suffixes</span>
+48:         <span class="ruby-identifier">rebuild_attribute_method_regexp</span>
+49:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001180">
+                    
+                    <a name="M001180"></a><b>cache_attribute?</b>(attr_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns <tt>true</tt> if the provided attribute is being cached.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001180_source')" id="l_M001180_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/attribute_methods.rb#L125" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001180_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/attribute_methods.rb, line 125</span>
+125:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache_attribute?</span>(<span class="ruby-identifier">attr_name</span>)
+126:         <span class="ruby-identifier">cached_attributes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">attr_name</span>)
+127:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001178">
+                    
+                    <a name="M001178"></a><b>cache_attributes</b>(*attribute_names)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+<tt><a href="ClassMethods.html#M001178">cache_attributes</a></tt> allows
+you to declare which converted attribute values should be cached. Usually
+caching only pays off for attributes with expensive conversion methods,
+like time related columns (e.g. <tt>created_at</tt>, <tt>updated_at</tt>).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001178_source')" id="l_M001178_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/attribute_methods.rb#L113" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001178_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/attribute_methods.rb, line 113</span>
+113:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache_attributes</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attribute_names</span>)
+114:         <span class="ruby-identifier">attribute_names</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cached_attributes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">attr</span>.<span class="ruby-identifier">to_s</span>}
+115:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001179">
+                    
+                    <a name="M001179"></a><b>cached_attributes</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the attributes which are cached. By default time related columns
+with datatype <tt>:datetime, :timestamp, :time, :date</tt> are cached.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001179_source')" id="l_M001179_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/attribute_methods.rb#L119" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001179_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/attribute_methods.rb, line 119</span>
+119:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cached_attributes</span>
+120:         <span class="ruby-ivar">@cached_attributes</span> <span class="ruby-operator">||=</span>
+121:           <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">attribute_types_cached_by_default</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>.<span class="ruby-identifier">type</span>)}.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">:name</span>).<span class="ruby-identifier">to_set</span>
+122:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001175">
+                    
+                    <a name="M001175"></a><b>define_attribute_methods</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Generates all the attribute related methods for columns in the database
+accessors, mutators and query methods.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="ClassMethods.html#M001177">define_read_methods</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001175_source')" id="l_M001175_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/attribute_methods.rb#L69" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001175_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/attribute_methods.rb, line 69</span>
+69:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">define_attribute_methods</span>
+70:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">generated_methods?</span>
+71:         <span class="ruby-identifier">columns_hash</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">column</span><span class="ruby-operator">|</span>
+72:           <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">instance_method_already_implemented?</span>(<span class="ruby-identifier">name</span>)
+73:             <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">serialized_attributes</span>[<span class="ruby-identifier">name</span>]
+74:               <span class="ruby-identifier">define_read_method_for_serialized_attribute</span>(<span class="ruby-identifier">name</span>)
+75:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">create_time_zone_conversion_attribute?</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">column</span>)
+76:               <span class="ruby-identifier">define_read_method_for_time_zone_conversion</span>(<span class="ruby-identifier">name</span>)
+77:             <span class="ruby-keyword kw">else</span>
+78:               <span class="ruby-identifier">define_read_method</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">column</span>)
+79:             <span class="ruby-keyword kw">end</span>
+80:           <span class="ruby-keyword kw">end</span>
+81: 
+82:           <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">instance_method_already_implemented?</span>(<span class="ruby-node">&quot;#{name}=&quot;</span>)
+83:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">create_time_zone_conversion_attribute?</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">column</span>)
+84:               <span class="ruby-identifier">define_write_method_for_time_zone_conversion</span>(<span class="ruby-identifier">name</span>)
+85:             <span class="ruby-keyword kw">else</span>  
+86:               <span class="ruby-identifier">define_write_method</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>)
+87:             <span class="ruby-keyword kw">end</span>
+88:           <span class="ruby-keyword kw">end</span>
+89: 
+90:           <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">instance_method_already_implemented?</span>(<span class="ruby-node">&quot;#{name}?&quot;</span>)
+91:             <span class="ruby-identifier">define_question_method</span>(<span class="ruby-identifier">name</span>)
+92:           <span class="ruby-keyword kw">end</span>
+93:         <span class="ruby-keyword kw">end</span>
+94:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001177">
+                    
+                    <a name="M001177"></a><b>define_read_methods</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="ClassMethods.html#M001175">define_attribute_methods</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001174">
+                    
+                    <a name="M001174"></a><b>generated_methods?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001174_source')" id="l_M001174_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/attribute_methods.rb#L63" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001174_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/attribute_methods.rb, line 63</span>
+63:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generated_methods?</span>
+64:         <span class="ruby-operator">!</span><span class="ruby-identifier">generated_methods</span>.<span class="ruby-identifier">empty?</span>
+65:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001176">
+                    
+                    <a name="M001176"></a><b>instance_method_already_implemented?</b>(method_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Checks whether the method is defined in the model or any of its subclasses
+that also derive from Active Record. Raises <a
+href="../DangerousAttributeError.html">DangerousAttributeError</a> if the
+method is defined by Active Record though.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001176_source')" id="l_M001176_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/attribute_methods.rb#L99" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001176_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activerecord/lib/active_record/attribute_methods.rb, line 99</span>
+ 99:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">instance_method_already_implemented?</span>(<span class="ruby-identifier">method_name</span>)
+100:         <span class="ruby-identifier">method_name</span> = <span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">to_s</span>
+101:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">method_name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^id(=$|\?$|$)/</span>
+102:         <span class="ruby-ivar">@_defined_class_methods</span>         <span class="ruby-operator">||=</span> <span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">first</span>(<span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>)).<span class="ruby-identifier">sum</span>([]) { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">public_instance_methods</span>(<span class="ruby-keyword kw">false</span>) <span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">private_instance_methods</span>(<span class="ruby-keyword kw">false</span>) <span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">protected_instance_methods</span>(<span class="ruby-keyword kw">false</span>) }.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">:to_s</span>).<span class="ruby-identifier">to_set</span>
+103:         <span class="ruby-ivar">@@_defined_activerecord_methods</span> <span class="ruby-operator">||=</span> (<span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">public_instance_methods</span>(<span class="ruby-keyword kw">false</span>) <span class="ruby-operator">|</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">private_instance_methods</span>(<span class="ruby-keyword kw">false</span>) <span class="ruby-operator">|</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">protected_instance_methods</span>(<span class="ruby-keyword kw">false</span>)).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">:to_s</span>).<span class="ruby-identifier">to_set</span>
+104:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">DangerousAttributeError</span>, <span class="ruby-node">&quot;#{method_name} is defined by ActiveRecord&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@@_defined_activerecord_methods</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">method_name</span>)
+105:         <span class="ruby-ivar">@_defined_class_methods</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">method_name</span>)
+106:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001172">
+                    
+                    <a name="M001172"></a><b>match_attribute_method?</b>(method_name)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns MatchData if method_name is an attribute method.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001172_source')" id="l_M001172_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activerecord/lib/active_record/attribute_methods.rb#L52" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001172_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/attribute_methods.rb, line 52</span>
+52:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">match_attribute_method?</span>(<span class="ruby-identifier">method_name</span>)
+53:         <span class="ruby-identifier">rebuild_attribute_method_regexp</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@@attribute_method_regexp</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@@attribute_method_regexp</span>
+54:         <span class="ruby-ivar">@@attribute_method_regexp</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">method_name</span>)
+55:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/AttributeMethods/ClassMethods.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+</html>    

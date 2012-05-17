@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Testing/Performance.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:35 GMT -->
+<head>
+    <title>ActiveSupport::Testing::Performance</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Testing::Performance 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activesupport/lib/active_support/testing/performance_rb.html">activesupport/lib/active_support/testing/performance.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003314">full_test_name</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003313">included</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003315">run</a>,</li>
+                
+                <li><a href="#M003318">run_profile</a>,</li>
+                
+                <li><a href="#M003316">run_test</a>,</li>
+                
+                <li><a href="#M003317">run_warmup</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Performance/Metrics.html">ActiveSupport::Testing::Performance::Metrics</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Performance/Benchmarker.html">ActiveSupport::Testing::Performance::Benchmarker</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Performance/Performer.html">ActiveSupport::Testing::Performance::Performer</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Performance/Profiler.html">ActiveSupport::Testing::Performance::Profiler</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">DEFAULTS</td>
+            <td>=</td>
+            <td class="attr-value">if benchmark = ARGV.include?('--benchmark')  # HAX for rake test           { :benchmark =&gt; true,             :runs =&gt; 4,             :metrics =&gt; [:wall_time, :memory, :objects, :gc_runs, :gc_time],             :output =&gt; 'tmp/performance' }         else           { :benchmark =&gt; false,             :runs =&gt; 1,             :min_percent =&gt; 0.01,             :metrics =&gt; [:process_time, :memory, :objects],             :formats =&gt; [:flat, :graph_html, :call_tree],             :output =&gt; 'tmp/performance' }         end.freeze</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003313">
+                    
+                    <a name="M003313"></a><b>included</b>(base)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003313_source')" id="l_M003313_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/e0fa041fce963744eaa4ef98a55d90ed895a6a00/activesupport/lib/active_support/testing/performance.rb#L26" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003313_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/performance.rb, line 26</span>
+26:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+27:         <span class="ruby-identifier">base</span>.<span class="ruby-identifier">superclass_delegating_accessor</span> <span class="ruby-identifier">:profile_options</span>
+28:         <span class="ruby-identifier">base</span>.<span class="ruby-identifier">profile_options</span> = <span class="ruby-constant">DEFAULTS</span>
+29:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003314">
+                    
+                    <a name="M003314"></a><b>full_test_name</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003314_source')" id="l_M003314_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/e0fa041fce963744eaa4ef98a55d90ed895a6a00/activesupport/lib/active_support/testing/performance.rb#L31" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003314_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/performance.rb, line 31</span>
+31:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">full_test_name</span>
+32:         <span class="ruby-node">&quot;#{self.class.name}##{method_name}&quot;</span>
+33:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003315">
+                    
+                    <a name="M003315"></a><b>run</b>(result)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003315_source')" id="l_M003315_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/e0fa041fce963744eaa4ef98a55d90ed895a6a00/activesupport/lib/active_support/testing/performance.rb#L35" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003315_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/performance.rb, line 35</span>
+35:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">result</span>)
+36:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">method_name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^default_test$/</span>
+37: 
+38:         <span class="ruby-keyword kw">yield</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">STARTED</span>, <span class="ruby-identifier">name</span>)
+39:         <span class="ruby-ivar">@_result</span> = <span class="ruby-identifier">result</span>
+40: 
+41:         <span class="ruby-identifier">run_warmup</span>
+42:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">profile_options</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">metrics</span> = <span class="ruby-identifier">profile_options</span>[<span class="ruby-identifier">:metrics</span>]
+43:           <span class="ruby-identifier">metrics</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">metric_name</span><span class="ruby-operator">|</span>
+44:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Metrics</span>[<span class="ruby-identifier">metric_name</span>.<span class="ruby-identifier">to_sym</span>]
+45:               <span class="ruby-identifier">run_profile</span>(<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>)
+46:               <span class="ruby-identifier">result</span>.<span class="ruby-identifier">add_run</span>
+47:             <span class="ruby-keyword kw">end</span>
+48:           <span class="ruby-keyword kw">end</span>
+49:         <span class="ruby-keyword kw">end</span>
+50: 
+51:         <span class="ruby-keyword kw">yield</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">FINISHED</span>, <span class="ruby-identifier">name</span>)
+52:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003316">
+                    
+                    <a name="M003316"></a><b>run_test</b>(metric, mode)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003316_source')" id="l_M003316_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/e0fa041fce963744eaa4ef98a55d90ed895a6a00/activesupport/lib/active_support/testing/performance.rb#L54" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003316_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/performance.rb, line 54</span>
+54:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_test</span>(<span class="ruby-identifier">metric</span>, <span class="ruby-identifier">mode</span>)
+55:         <span class="ruby-identifier">run_callbacks</span> <span class="ruby-identifier">:setup</span>
+56:         <span class="ruby-identifier">setup</span>
+57:         <span class="ruby-identifier">metric</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">mode</span>) { <span class="ruby-identifier">__send__</span> <span class="ruby-ivar">@method_name</span> }
+58:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Test</span><span class="ruby-operator">::</span><span class="ruby-constant">Unit</span><span class="ruby-operator">::</span><span class="ruby-constant">AssertionFailedError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+59:         <span class="ruby-identifier">add_failure</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>)
+60:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">StandardError</span>, <span class="ruby-constant">ScriptError</span>
+61:         <span class="ruby-identifier">add_error</span>(<span class="ruby-identifier">$!</span>)
+62:       <span class="ruby-keyword kw">ensure</span>
+63:         <span class="ruby-keyword kw">begin</span>
+64:           <span class="ruby-identifier">teardown</span>
+65:           <span class="ruby-identifier">run_callbacks</span> <span class="ruby-identifier">:teardown</span>, <span class="ruby-identifier">:enumerator</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:reverse_each</span>
+66:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-operator">::</span><span class="ruby-constant">Test</span><span class="ruby-operator">::</span><span class="ruby-constant">Unit</span><span class="ruby-operator">::</span><span class="ruby-constant">AssertionFailedError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+67:           <span class="ruby-identifier">add_failure</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>)
+68:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">StandardError</span>, <span class="ruby-constant">ScriptError</span>
+69:           <span class="ruby-identifier">add_error</span>(<span class="ruby-identifier">$!</span>)
+70:         <span class="ruby-keyword kw">end</span>
+71:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Protected methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003318">
+                    
+                    <a name="M003318"></a><b>run_profile</b>(metric)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003318_source')" id="l_M003318_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/e0fa041fce963744eaa4ef98a55d90ed895a6a00/activesupport/lib/active_support/testing/performance.rb#L84" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003318_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/performance.rb, line 84</span>
+84:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_profile</span>(<span class="ruby-identifier">metric</span>)
+85:           <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">profile_options</span>[<span class="ruby-identifier">:benchmark</span>] <span class="ruby-operator">?</span> <span class="ruby-constant">Benchmarker</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Profiler</span>
+86:           <span class="ruby-identifier">performer</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">metric</span>)
+87: 
+88:           <span class="ruby-identifier">performer</span>.<span class="ruby-identifier">run</span>
+89:           <span class="ruby-identifier">puts</span> <span class="ruby-identifier">performer</span>.<span class="ruby-identifier">report</span>
+90:           <span class="ruby-identifier">performer</span>.<span class="ruby-identifier">record</span>
+91:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003317">
+                    
+                    <a name="M003317"></a><b>run_warmup</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003317_source')" id="l_M003317_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/e0fa041fce963744eaa4ef98a55d90ed895a6a00/activesupport/lib/active_support/testing/performance.rb#L74" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003317_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/testing/performance.rb, line 74</span>
+74:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_warmup</span>
+75:           <span class="ruby-constant">GC</span>.<span class="ruby-identifier">start</span>
+76: 
+77:           <span class="ruby-identifier">time</span> = <span class="ruby-constant">Metrics</span><span class="ruby-operator">::</span><span class="ruby-constant">Time</span>.<span class="ruby-identifier">new</span>
+78:           <span class="ruby-identifier">run_test</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">:benchmark</span>)
+79:           <span class="ruby-identifier">puts</span> <span class="ruby-value str">&quot;%s (%s warmup)&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">full_test_name</span>, <span class="ruby-identifier">time</span>.<span class="ruby-identifier">format</span>(<span class="ruby-identifier">time</span>.<span class="ruby-identifier">total</span>)]
+80: 
+81:           <span class="ruby-constant">GC</span>.<span class="ruby-identifier">start</span>
+82:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Testing/Performance.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:36 GMT -->
+</html>    

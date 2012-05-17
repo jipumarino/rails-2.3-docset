@@ -1,0 +1,2329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Request.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:15 GMT -->
+<head>
+    <title>ActionController::Request</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::Request 
+            
+                <span class="parent">&lt; 
+                    
+                    Rack::Request
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/actionpack/lib/action_controller/request_rb.html">actionpack/lib/action_controller/request.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>G</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002035">GET</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002037">POST</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001999">accepts</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>B</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002033">body</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002008">cache_format</a>,</li>
+                
+                <li><a href="#M001996">content_length</a>,</li>
+                
+                <li><a href="#M001997">content_type</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001993">delete?</a>,</li>
+                
+                <li><a href="#M002022">domain</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002003">etag_matches?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002034">form_data?</a>,</li>
+                
+                <li><a href="#M002005">format</a>,</li>
+                
+                <li><a href="#M002006">format=</a>,</li>
+                
+                <li><a href="#M002004">fresh?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>G</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001990">get?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>H</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001994">head?</a>,</li>
+                
+                <li><a href="#M001995">headers</a>,</li>
+                
+                <li><a href="#M002017">host</a>,</li>
+                
+                <li><a href="#M002018">host_with_port</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002000">if_modified_since</a>,</li>
+                
+                <li><a href="#M002001">if_none_match</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>K</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001987">key?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001998">media_type</a>,</li>
+                
+                <li><a href="#M001989">method</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002002">not_modified?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002028">parameters</a>,</li>
+                
+                <li><a href="#M002029">params</a>,</li>
+                
+                <li><a href="#M002026">path</a>,</li>
+                
+                <li><a href="#M002032">path_parameters</a>,</li>
+                
+                <li><a href="#M002019">port</a>,</li>
+                
+                <li><a href="#M002021">port_string</a>,</li>
+                
+                <li><a href="#M001991">post?</a>,</li>
+                
+                <li><a href="#M002014">protocol</a>,</li>
+                
+                <li><a href="#M001992">put?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>Q</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002036">query_parameters</a>,</li>
+                
+                <li><a href="#M002024">query_string</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002016">raw_host_with_port</a>,</li>
+                
+                <li><a href="#M002027">raw_post</a>,</li>
+                
+                <li><a href="#M002011">remote_ip</a>,</li>
+                
+                <li><a href="#M001988">request_method</a>,</li>
+                
+                <li><a href="#M002038">request_parameters</a>,</li>
+                
+                <li><a href="#M002025">request_uri</a>,</li>
+                
+                <li><a href="#M002042">reset_session</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002045">server_port</a>,</li>
+                
+                <li><a href="#M002012">server_software</a>,</li>
+                
+                <li><a href="#M002040">session</a>,</li>
+                
+                <li><a href="#M002043">session_options</a>,</li>
+                
+                <li><a href="#M002044">session_options=</a>,</li>
+                
+                <li><a href="#M002015">ssl?</a>,</li>
+                
+                <li><a href="#M002020">standard_port</a>,</li>
+                
+                <li><a href="#M002023">subdomains</a>,</li>
+                
+                <li><a href="#M002031">symbolized_path_parameters</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002007">template_format</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>U</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002013">url</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>X</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002010">xhr?</a>,</li>
+                
+                <li><a href="#M002009">xml_http_request?</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">HTTP_METHODS</td>
+            <td>=</td>
+            <td class="attr-value">%w(get head put post delete options)</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">HTTP_METHOD_LOOKUP</td>
+            <td>=</td>
+            <td class="attr-value">HTTP_METHODS.inject({}) { |h, m| h[m] = h[m.upcase] = m.to_sym;</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">TRUSTED_PROXIES</td>
+            <td>=</td>
+            <td class="attr-value">/^127\.0\.0\.1$|^(10|172\.(1[6-9]|2[0-9]|30|31)|192\.168)\./i</td>
+        </tr>
+        
+        <tr valign='top'>
+            <td>&nbsp;</td>
+            <td colspan="2" class="attr-desc"><p>
+Which IP addresses are &#8220;trusted proxies&#8221; that can be stripped
+from the right-hand-side of X-Forwarded-For
+</p>
+</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002035">
+                    
+                    <a name="M002035"></a><b>GET</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Override Rack&#8217;s <a href="Request.html#M002035">GET</a> method to
+support indifferent access
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Request.html#M002036">query_parameters</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002035_source')" id="l_M002035_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L426" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002035_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 426</span>
+426:     <span class="ruby-keyword kw">def</span> <span class="ruby-constant">GET</span>
+427:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">&quot;action_controller.request.query_parameters&quot;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">normalize_parameters</span>(<span class="ruby-keyword kw">super</span>)
+428:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002037">
+                    
+                    <a name="M002037"></a><b>POST</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Override Rack&#8217;s <a href="Request.html#M002037">POST</a> method to
+support indifferent access
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Request.html#M002038">request_parameters</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002037_source')" id="l_M002037_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L432" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002037_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 432</span>
+432:     <span class="ruby-keyword kw">def</span> <span class="ruby-constant">POST</span>
+433:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">&quot;action_controller.request.request_parameters&quot;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">normalize_parameters</span>(<span class="ruby-keyword kw">super</span>)
+434:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001999">
+                    
+                    <a name="M001999"></a><b>accepts</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the accepted MIME type for the request.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001999_source')" id="l_M001999_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L103" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001999_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 103</span>
+103:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">accepts</span>
+104:       <span class="ruby-ivar">@accepts</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">begin</span>
+105:         <span class="ruby-identifier">header</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_ACCEPT'</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
+106: 
+107:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">header</span>.<span class="ruby-identifier">empty?</span>
+108:           [<span class="ruby-identifier">content_type</span>, <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">ALL</span>].<span class="ruby-identifier">compact</span>
+109:         <span class="ruby-keyword kw">else</span>
+110:           <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">header</span>)
+111:         <span class="ruby-keyword kw">end</span>
+112:       <span class="ruby-keyword kw">end</span>
+113:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002033">
+                    
+                    <a name="M002033"></a><b>body</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+The request body is an IO input stream. If the RAW_POST_DATA environment
+variable is already set, wrap it in a StringIO.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002033_source')" id="l_M002033_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L412" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002033_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 412</span>
+412:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">body</span>
+413:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">raw_post</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'RAW_POST_DATA'</span>]
+414:         <span class="ruby-identifier">raw_post</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">BINARY</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">raw_post</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:force_encoding</span>)
+415:         <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">raw_post</span>)
+416:       <span class="ruby-keyword kw">else</span>
+417:         <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'rack.input'</span>]
+418:       <span class="ruby-keyword kw">end</span>
+419:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002008">
+                    
+                    <a name="M002008"></a><b>cache_format</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002008_source')" id="l_M002008_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L199" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002008_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 199</span>
+199:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache_format</span>
+200:       <span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">:format</span>]
+201:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001996">
+                    
+                    <a name="M001996"></a><b>content_length</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the content length of the request as an integer.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001996_source')" id="l_M001996_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L80" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001996_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 80</span>
+80:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">content_length</span>
+81:       <span class="ruby-keyword kw">super</span>.<span class="ruby-identifier">to_i</span>
+82:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001997">
+                    
+                    <a name="M001997"></a><b>content_type</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+The MIME type of the HTTP request, such as Mime::XML.
+</p>
+<p>
+For backward compatibility, the post format is extracted from the
+X-Post-Data-Format HTTP header if present.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001997_source')" id="l_M001997_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L88" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001997_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 88</span>
+88:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">content_type</span>
+89:       <span class="ruby-ivar">@content_type</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">begin</span>
+90:         <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'CONTENT_TYPE'</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^([^,\;]*)/</span>
+91:           <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup</span>(<span class="ruby-identifier">$1</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">downcase</span>)
+92:         <span class="ruby-keyword kw">else</span>
+93:           <span class="ruby-keyword kw">nil</span>
+94:         <span class="ruby-keyword kw">end</span>
+95:       <span class="ruby-keyword kw">end</span>
+96:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001993">
+                    
+                    <a name="M001993"></a><b>delete?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is this a DELETE request? Equivalent to <tt>request.method == :delete</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001993_source')" id="l_M001993_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L62" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001993_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 62</span>
+62:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete?</span>
+63:       <span class="ruby-identifier">request_method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:delete</span>
+64:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002022">
+                    
+                    <a name="M002022"></a><b>domain</b>(tld_length = 1)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the domain part of a host, such as &#8220;rubyonrails.org&#8220; in
+&#8220;<a href="http://www.rubyonrails.org/">www.rubyonrails.org</a>&#8220;.
+You can specify a different <tt>tld_length</tt>, such as 2 to catch
+rubyonrails.co.uk in &#8220;<a
+href="http://www.rubyonrails.co.uk/">www.rubyonrails.co.uk</a>&#8220;.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002022_source')" id="l_M002022_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L320" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002022_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 320</span>
+320:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">domain</span>(<span class="ruby-identifier">tld_length</span> = <span class="ruby-value">1</span>)
+321:       <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">named_host?</span>(<span class="ruby-identifier">host</span>)
+322: 
+323:       <span class="ruby-identifier">host</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>).<span class="ruby-identifier">last</span>(<span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tld_length</span>).<span class="ruby-identifier">join</span>(<span class="ruby-value str">'.'</span>)
+324:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002003">
+                    
+                    <a name="M002003"></a><b>etag_matches?</b>(etag)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002003_source')" id="l_M002003_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L129" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002003_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 129</span>
+129:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">etag_matches?</span>(<span class="ruby-identifier">etag</span>)
+130:       <span class="ruby-identifier">if_none_match</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">if_none_match</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">etag</span>
+131:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002034">
+                    
+                    <a name="M002034"></a><b>form_data?</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002034_source')" id="l_M002034_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L421" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002034_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 421</span>
+421:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">form_data?</span>
+422:       <span class="ruby-constant">FORM_DATA_MEDIA_TYPES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">content_type</span>.<span class="ruby-identifier">to_s</span>)
+423:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002005">
+                    
+                    <a name="M002005"></a><b>format</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the <a href="../Mime.html">Mime</a> type for the format used in the
+request.
+</p>
+<pre>
+  GET /posts/5.xml   | request.format =&gt; Mime::XML
+  GET /posts/5.xhtml | request.format =&gt; Mime::HTML
+  GET /posts/5       | request.format =&gt; Mime::HTML or MIME::JS, or request.accepts.first depending on the value of &lt;tt&gt;ActionController::Base.use_accept_header&lt;/tt&gt;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002005_source')" id="l_M002005_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L154" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002005_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 154</span>
+154:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format</span>
+155:       <span class="ruby-ivar">@format</span> <span class="ruby-operator">||=</span>
+156:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">:format</span>]
+157:           <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup_by_extension</span>(<span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">:format</span>])
+158:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">use_accept_header</span>
+159:           <span class="ruby-identifier">accepts</span>.<span class="ruby-identifier">first</span>
+160:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">xhr?</span>
+161:           <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup_by_extension</span>(<span class="ruby-value str">&quot;js&quot;</span>)
+162:         <span class="ruby-keyword kw">else</span>
+163:           <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup_by_extension</span>(<span class="ruby-value str">&quot;html&quot;</span>)
+164:         <span class="ruby-keyword kw">end</span>
+165:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002006">
+                    
+                    <a name="M002006"></a><b>format=</b>(extension)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the format by string extension, which can be used to force custom
+formats that are not controlled by the extension.
+</p>
+<pre>
+  class ApplicationController &lt; ActionController::Base
+    before_filter :adjust_format_for_iphone
+
+    private
+      def adjust_format_for_iphone
+        request.format = :iphone if request.env[&quot;HTTP_USER_AGENT&quot;][/iPhone/]
+      end
+  end
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002006_source')" id="l_M002006_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L179" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002006_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 179</span>
+179:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format=</span>(<span class="ruby-identifier">extension</span>)
+180:       <span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">:format</span>] = <span class="ruby-identifier">extension</span>.<span class="ruby-identifier">to_s</span>
+181:       <span class="ruby-ivar">@format</span> = <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup_by_extension</span>(<span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">:format</span>])
+182:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002004">
+                    
+                    <a name="M002004"></a><b>fresh?</b>(response)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Check response freshness (Last-Modified and ETag) against request
+If-Modified-Since and If-None-Match conditions. If both headers are
+supplied, both must match, or the request is not considered fresh.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002004_source')" id="l_M002004_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L136" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002004_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 136</span>
+136:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fresh?</span>(<span class="ruby-identifier">response</span>)
+137:       <span class="ruby-keyword kw">case</span>
+138:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">if_modified_since</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">if_none_match</span>
+139:         <span class="ruby-identifier">not_modified?</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">last_modified</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">etag_matches?</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">etag</span>)
+140:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">if_modified_since</span>
+141:         <span class="ruby-identifier">not_modified?</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">last_modified</span>)
+142:       <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">if_none_match</span>
+143:         <span class="ruby-identifier">etag_matches?</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">etag</span>)
+144:       <span class="ruby-keyword kw">else</span>
+145:         <span class="ruby-keyword kw">false</span>
+146:       <span class="ruby-keyword kw">end</span>
+147:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001990">
+                    
+                    <a name="M001990"></a><b>get?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is this a <a href="Request.html#M002035">GET</a> (or HEAD) request?
+Equivalent to <tt>request.method == :get</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001990_source')" id="l_M001990_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L47" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001990_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 47</span>
+47:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get?</span>
+48:       <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:get</span>
+49:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001994">
+                    
+                    <a name="M001994"></a><b>head?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is this a HEAD request? Since <tt>request.method</tt> sees HEAD as
+<tt>:get</tt>, this method checks the actual HTTP method directly.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001994_source')" id="l_M001994_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L68" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001994_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 68</span>
+68:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">head?</span>
+69:       <span class="ruby-identifier">request_method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:head</span>
+70:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001995">
+                    
+                    <a name="M001995"></a><b>headers</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Provides access to the request&#8217;s HTTP headers, for example:
+</p>
+<pre>
+  request.headers[&quot;Content-Type&quot;] # =&gt; &quot;text/plain&quot;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001995_source')" id="l_M001995_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L75" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001995_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 75</span>
+75:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">headers</span>
+76:       <span class="ruby-ivar">@headers</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Http</span><span class="ruby-operator">::</span><span class="ruby-constant">Headers</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@env</span>)
+77:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002017">
+                    
+                    <a name="M002017"></a><b>host</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the host for this request, such as example.com.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002017_source')" id="l_M002017_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L285" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002017_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 285</span>
+285:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">host</span>
+286:       <span class="ruby-identifier">raw_host_with_port</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/:\d+$/</span>, <span class="ruby-value str">''</span>)
+287:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002018">
+                    
+                    <a name="M002018"></a><b>host_with_port</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns a host:port string for this request, such as
+&#8220;example.com&#8220; or &#8220;example.com:8080&#8221;.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002018_source')" id="l_M002018_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L291" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002018_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 291</span>
+291:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">host_with_port</span>
+292:       <span class="ruby-node">&quot;#{host}#{port_string}&quot;</span>
+293:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002000">
+                    
+                    <a name="M002000"></a><b>if_modified_since</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002000_source')" id="l_M002000_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L115" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002000_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 115</span>
+115:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">if_modified_since</span>
+116:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">since</span> = <span class="ruby-identifier">env</span>[<span class="ruby-value str">'HTTP_IF_MODIFIED_SINCE'</span>]
+117:         <span class="ruby-constant">Time</span>.<span class="ruby-identifier">rfc2822</span>(<span class="ruby-identifier">since</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+118:       <span class="ruby-keyword kw">end</span>
+119:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002001">
+                    
+                    <a name="M002001"></a><b>if_none_match</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002001_source')" id="l_M002001_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L121" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002001_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 121</span>
+121:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">if_none_match</span>
+122:       <span class="ruby-identifier">env</span>[<span class="ruby-value str">'HTTP_IF_NONE_MATCH'</span>]
+123:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001987">
+                    
+                    <a name="M001987"></a><b>key?</b>(key)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001987_source')" id="l_M001987_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L24" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001987_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 24</span>
+24:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
+25:       <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
+26:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001998">
+                    
+                    <a name="M001998"></a><b>media_type</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001998_source')" id="l_M001998_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L98" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001998_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 98</span>
+ 98:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">media_type</span>
+ 99:       <span class="ruby-identifier">content_type</span>.<span class="ruby-identifier">to_s</span>
+100:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001989">
+                    
+                    <a name="M001989"></a><b>method</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the HTTP request method used for action processing as a lowercase
+symbol, such as <tt>:post</tt>. (Unlike <a
+href="Request.html#M001988">request_method</a>, this method returns
+<tt>:get</tt> for a HEAD request because the two are functionally
+equivalent from the application&#8217;s perspective.)
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001989_source')" id="l_M001989_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L42" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001989_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 42</span>
+42:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method</span>
+43:       <span class="ruby-identifier">request_method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:head</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">:get</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">request_method</span>
+44:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002002">
+                    
+                    <a name="M002002"></a><b>not_modified?</b>(modified_at)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002002_source')" id="l_M002002_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L125" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002002_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 125</span>
+125:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">not_modified?</span>(<span class="ruby-identifier">modified_at</span>)
+126:       <span class="ruby-identifier">if_modified_since</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">modified_at</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">if_modified_since</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">modified_at</span>
+127:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002028">
+                    
+                    <a name="M002028"></a><b>parameters</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns both <a href="Request.html#M002035">GET</a> and <a
+href="Request.html#M002037">POST</a> parameters in a single hash.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Request.html#M002029">params</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002028_source')" id="l_M002028_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L385" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002028_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 385</span>
+385:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parameters</span>
+386:       <span class="ruby-ivar">@parameters</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">request_parameters</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">query_parameters</span>).<span class="ruby-identifier">update</span>(<span class="ruby-identifier">path_parameters</span>).<span class="ruby-identifier">with_indifferent_access</span>
+387:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002029">
+                    
+                    <a name="M002029"></a><b>params</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Request.html#M002028">parameters</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002026">
+                    
+                    <a name="M002026"></a><b>path</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the interpreted path to requested resource after all the
+installation directory of this application was taken into account.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002026_source')" id="l_M002026_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L368" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002026_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 368</span>
+368:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">path</span>
+369:       <span class="ruby-identifier">path</span> = <span class="ruby-identifier">request_uri</span>.<span class="ruby-identifier">to_s</span>[<span class="ruby-regexp re">/\A[^\?]*/</span>]
+370:       <span class="ruby-identifier">path</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-node">/\A#{ActionController::Base.relative_url_root}/</span>, <span class="ruby-value str">''</span>)
+371:       <span class="ruby-identifier">path</span>
+372:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002032">
+                    
+                    <a name="M002032"></a><b>path_parameters</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns a hash with the parameters used to form the path of the request.
+Returned hash keys are strings:
+</p>
+<pre>
+  {'action' =&gt; 'my_action', 'controller' =&gt; 'my_controller'}
+</pre>
+<p>
+See <tt><a href="Request.html#M002031">symbolized_path_parameters</a></tt>
+for symbolized keys.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002032_source')" id="l_M002032_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L406" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002032_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 406</span>
+406:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">path_parameters</span>
+407:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">&quot;action_controller.request.path_parameters&quot;</span>] <span class="ruby-operator">||=</span> {}
+408:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002019">
+                    
+                    <a name="M002019"></a><b>port</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the port number of this request as an integer.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002019_source')" id="l_M002019_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L296" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002019_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 296</span>
+296:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">port</span>
+297:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">raw_host_with_port</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/:(\d+)$/</span>
+298:         <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">to_i</span>
+299:       <span class="ruby-keyword kw">else</span>
+300:         <span class="ruby-identifier">standard_port</span>
+301:       <span class="ruby-keyword kw">end</span>
+302:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002021">
+                    
+                    <a name="M002021"></a><b>port_string</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns a port suffix like &#8220;:8080&#8221; if the port number of this
+request is not the default HTTP port 80 or HTTPS port 443.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002021_source')" id="l_M002021_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L314" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002021_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 314</span>
+314:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">port_string</span>
+315:       <span class="ruby-identifier">port</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">standard_port</span> <span class="ruby-value">? </span><span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;:#{port}&quot;</span>
+316:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001991">
+                    
+                    <a name="M001991"></a><b>post?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is this a <a href="Request.html#M002037">POST</a> request? Equivalent to
+<tt>request.method == :post</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001991_source')" id="l_M001991_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L52" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001991_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 52</span>
+52:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">post?</span>
+53:       <span class="ruby-identifier">request_method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:post</span>
+54:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002014">
+                    
+                    <a name="M002014"></a><b>protocol</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns &#8216;https://&#8217; if this is an SSL request and
+&#8216;http://&#8217; otherwise.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002014_source')" id="l_M002014_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L266" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002014_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 266</span>
+266:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">protocol</span>
+267:       <span class="ruby-identifier">ssl?</span> <span class="ruby-value">? </span><span class="ruby-value str">'https://'</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'http://'</span>
+268:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001992">
+                    
+                    <a name="M001992"></a><b>put?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is this a PUT request? Equivalent to <tt>request.method == :put</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001992_source')" id="l_M001992_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L57" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001992_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 57</span>
+57:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">put?</span>
+58:       <span class="ruby-identifier">request_method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:put</span>
+59:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002036">
+                    
+                    <a name="M002036"></a><b>query_parameters</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Request.html#M002035">GET</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002024">
+                    
+                    <a name="M002024"></a><b>query_string</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the query string, accounting for server idiosyncrasies.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002024_source')" id="l_M002024_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L337" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002024_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 337</span>
+337:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">query_string</span>
+338:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'QUERY_STRING'</span>].<span class="ruby-identifier">present?</span> <span class="ruby-value">? </span><span class="ruby-ivar">@env</span>[<span class="ruby-value str">'QUERY_STRING'</span>] <span class="ruby-operator">:</span> (<span class="ruby-ivar">@env</span>[<span class="ruby-value str">'REQUEST_URI'</span>].<span class="ruby-identifier">split</span>(<span class="ruby-value str">'?'</span>, <span class="ruby-value">2</span>)[<span class="ruby-value">1</span>] <span class="ruby-operator">||</span> <span class="ruby-value str">''</span>)
+339:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002016">
+                    
+                    <a name="M002016"></a><b>raw_host_with_port</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the host for this request, such as &#8220;example.com&#8220;.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002016_source')" id="l_M002016_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L276" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002016_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 276</span>
+276:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">raw_host_with_port</span>
+277:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">forwarded</span> = <span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;HTTP_X_FORWARDED_HOST&quot;</span>]
+278:         <span class="ruby-identifier">forwarded</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/,\s?/</span>).<span class="ruby-identifier">last</span>
+279:       <span class="ruby-keyword kw">else</span>
+280:         <span class="ruby-identifier">env</span>[<span class="ruby-value str">'HTTP_HOST'</span>] <span class="ruby-operator">||</span> <span class="ruby-node">&quot;#{env['SERVER_NAME'] || env['SERVER_ADDR']}:#{env['SERVER_PORT']}&quot;</span>
+281:       <span class="ruby-keyword kw">end</span>
+282:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002027">
+                    
+                    <a name="M002027"></a><b>raw_post</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Read the request body. This is useful for web services that need to work
+with raw requests directly.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002027_source')" id="l_M002027_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L376" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002027_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 376</span>
+376:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">raw_post</span>
+377:       <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">include?</span> <span class="ruby-value str">'RAW_POST_DATA'</span>
+378:         <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'RAW_POST_DATA'</span>] = <span class="ruby-identifier">body</span>.<span class="ruby-identifier">read</span>(<span class="ruby-ivar">@env</span>[<span class="ruby-value str">'CONTENT_LENGTH'</span>].<span class="ruby-identifier">to_i</span>)
+379:         <span class="ruby-identifier">body</span>.<span class="ruby-identifier">rewind</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">body</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:rewind</span>)
+380:       <span class="ruby-keyword kw">end</span>
+381:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'RAW_POST_DATA'</span>]
+382:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002011">
+                    
+                    <a name="M002011"></a><b>remote_ip</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Determines originating IP address. REMOTE_ADDR is the standard but will
+fail if the user is behind a proxy. HTTP_CLIENT_IP and/or
+HTTP_X_FORWARDED_FOR are set by proxies so check for these if REMOTE_ADDR
+is a proxy. HTTP_X_FORWARDED_FOR may be a comma- delimited list in the case
+of multiple chained proxies; the last address which is not trusted is the
+originating IP.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002011_source')" id="l_M002011_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L221" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002011_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 221</span>
+221:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remote_ip</span>
+222:       <span class="ruby-identifier">remote_addr_list</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'REMOTE_ADDR'</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'REMOTE_ADDR'</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/[^,\s]+/</span>)
+223: 
+224:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">remote_addr_list</span>.<span class="ruby-identifier">blank?</span>
+225:         <span class="ruby-identifier">not_trusted_addrs</span> = <span class="ruby-identifier">remote_addr_list</span>.<span class="ruby-identifier">reject</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">addr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">addr</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">TRUSTED_PROXIES</span>}
+226:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">not_trusted_addrs</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">not_trusted_addrs</span>.<span class="ruby-identifier">empty?</span>
+227:       <span class="ruby-keyword kw">end</span>
+228:       <span class="ruby-identifier">remote_ips</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_X_FORWARDED_FOR'</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_X_FORWARDED_FOR'</span>].<span class="ruby-identifier">split</span>(<span class="ruby-value str">','</span>)
+229: 
+230:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">include?</span> <span class="ruby-value str">'HTTP_CLIENT_IP'</span>
+231:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">ip_spoofing_check</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">remote_ips</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_CLIENT_IP'</span>])
+232:           <span class="ruby-comment cmt"># We don't know which came from the proxy, and which from the user</span>
+233:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActionControllerError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;IP spoofing attack?!\nHTTP_CLIENT_IP=\#{@env['HTTP_CLIENT_IP'].inspect}\nHTTP_X_FORWARDED_FOR=\#{@env['HTTP_X_FORWARDED_FOR'].inspect}\n&quot;</span>)
+234:         <span class="ruby-keyword kw">end</span>
+235: 
+236:         <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_CLIENT_IP'</span>]
+237:       <span class="ruby-keyword kw">end</span>
+238: 
+239:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">remote_ips</span>
+240:         <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">TRUSTED_PROXIES</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">strip</span>
+241:           <span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">pop</span>
+242:         <span class="ruby-keyword kw">end</span>
+243: 
+244:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">remote_ips</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">strip</span>
+245:       <span class="ruby-keyword kw">end</span>
+246: 
+247:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'REMOTE_ADDR'</span>]
+248:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M001988">
+                    
+                    <a name="M001988"></a><b>request_method</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the true HTTP request method as a lowercase symbol, such as
+<tt>:get</tt>. If the request method is not listed in the <a
+href="Request.html#HTTP_METHODS">HTTP_METHODS</a> constant above, an
+UnknownHttpMethod exception is raised.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001988_source')" id="l_M001988_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L34" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001988_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 34</span>
+34:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">request_method</span>
+35:       <span class="ruby-ivar">@request_method</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">HTTP_METHOD_LOOKUP</span>[<span class="ruby-keyword kw">super</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">UnknownHttpMethod</span>, <span class="ruby-node">&quot;#{super}, accepted HTTP methods are #{HTTP_METHODS.to_sentence(:locale =&gt; :en)}&quot;</span>)
+36:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002038">
+                    
+                    <a name="M002038"></a><b>request_parameters</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Request.html#M002037">POST</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002025">
+                    
+                    <a name="M002025"></a><b>request_uri</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the request URI, accounting for server idiosyncrasies. WEBrick
+includes the full URL. IIS leaves REQUEST_URI blank.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002025_source')" id="l_M002025_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L343" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002025_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 343</span>
+343:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">request_uri</span>
+344:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">uri</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'REQUEST_URI'</span>]
+345:         <span class="ruby-comment cmt"># Remove domain, which webrick puts into the request_uri.</span>
+346:         (<span class="ruby-regexp re">%r{^\w+\://[^/]+(/.*|$)$}</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">uri</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">$1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">uri</span>
+347:       <span class="ruby-keyword kw">else</span>
+348:         <span class="ruby-comment cmt"># Construct IIS missing REQUEST_URI from SCRIPT_NAME and PATH_INFO.</span>
+349:         <span class="ruby-identifier">uri</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'PATH_INFO'</span>].<span class="ruby-identifier">to_s</span>
+350: 
+351:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">script_filename</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'SCRIPT_NAME'</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">%r{[^/]+$}</span>)
+352:           <span class="ruby-identifier">uri</span> = <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/#{script_filename}\//</span>, <span class="ruby-value str">''</span>)
+353:         <span class="ruby-keyword kw">end</span>
+354: 
+355:         <span class="ruby-identifier">env_qs</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'QUERY_STRING'</span>].<span class="ruby-identifier">to_s</span>
+356:         <span class="ruby-identifier">uri</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;?#{env_qs}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">env_qs</span>.<span class="ruby-identifier">empty?</span>
+357: 
+358:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">blank?</span>
+359:           <span class="ruby-ivar">@env</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value str">'REQUEST_URI'</span>)
+360:         <span class="ruby-keyword kw">else</span>
+361:           <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'REQUEST_URI'</span>] = <span class="ruby-identifier">uri</span>
+362:         <span class="ruby-keyword kw">end</span>
+363:       <span class="ruby-keyword kw">end</span>
+364:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002042">
+                    
+                    <a name="M002042"></a><b>reset_session</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002042_source')" id="l_M002042_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L449" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002042_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 449</span>
+449:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reset_session</span>
+450:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'rack.session.options'</span>].<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:id</span>)
+451:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'rack.session'</span>] = {}
+452:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002045">
+                    
+                    <a name="M002045"></a><b>server_port</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002045_source')" id="l_M002045_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L462" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002045_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 462</span>
+462:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">server_port</span>
+463:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'SERVER_PORT'</span>].<span class="ruby-identifier">to_i</span>
+464:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002012">
+                    
+                    <a name="M002012"></a><b>server_software</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the lowercase name of the HTTP server software.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002012_source')" id="l_M002012_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L256" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002012_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 256</span>
+256:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">server_software</span>
+257:       (<span class="ruby-ivar">@env</span>[<span class="ruby-value str">'SERVER_SOFTWARE'</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-regexp re">/^([a-zA-Z]+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'SERVER_SOFTWARE'</span>]) <span class="ruby-operator">?</span> <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+258:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002040">
+                    
+                    <a name="M002040"></a><b>session</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002040_source')" id="l_M002040_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L441" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002040_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 441</span>
+441:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">session</span>
+442:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'rack.session'</span>] <span class="ruby-operator">||=</span> {}
+443:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002043">
+                    
+                    <a name="M002043"></a><b>session_options</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002043_source')" id="l_M002043_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L454" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002043_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 454</span>
+454:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">session_options</span>
+455:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'rack.session.options'</span>] <span class="ruby-operator">||=</span> {}
+456:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002044">
+                    
+                    <a name="M002044"></a><b>session_options=</b>(options)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002044_source')" id="l_M002044_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L458" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002044_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 458</span>
+458:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">session_options=</span>(<span class="ruby-identifier">options</span>)
+459:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'rack.session.options'</span>] = <span class="ruby-identifier">options</span>
+460:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002015">
+                    
+                    <a name="M002015"></a><b>ssl?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Is this an SSL request?
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002015_source')" id="l_M002015_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L271" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002015_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 271</span>
+271:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ssl?</span>
+272:       <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTPS'</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'on'</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_X_FORWARDED_PROTO'</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'https'</span>
+273:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002020">
+                    
+                    <a name="M002020"></a><b>standard_port</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the standard port number for this request&#8217;s protocol.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002020_source')" id="l_M002020_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L305" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002020_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 305</span>
+305:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">standard_port</span>
+306:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">protocol</span>
+307:         <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'https://'</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value">443</span>
+308:         <span class="ruby-keyword kw">else</span> <span class="ruby-value">80</span>
+309:       <span class="ruby-keyword kw">end</span>
+310:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002023">
+                    
+                    <a name="M002023"></a><b>subdomains</b>(tld_length = 1)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns all the subdomains as an array, so <tt>[&quot;dev&quot;,
+&quot;www&quot;]</tt> would be returned for
+&#8220;dev.www.rubyonrails.org&#8220;. You can specify a different
+<tt>tld_length</tt>, such as 2 to catch <tt>[&quot;www&quot;]</tt> instead
+of <tt>[&quot;www&quot;, &quot;rubyonrails&quot;]</tt> in &#8220;<a
+href="http://www.rubyonrails.co.uk/">www.rubyonrails.co.uk</a>&#8220;.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002023_source')" id="l_M002023_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L330" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002023_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 330</span>
+330:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">subdomains</span>(<span class="ruby-identifier">tld_length</span> = <span class="ruby-value">1</span>)
+331:       <span class="ruby-keyword kw">return</span> [] <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">named_host?</span>(<span class="ruby-identifier">host</span>)
+332:       <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">host</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'.'</span>)
+333:       <span class="ruby-identifier">parts</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-identifier">tld_length</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>)]
+334:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002031">
+                    
+                    <a name="M002031"></a><b>symbolized_path_parameters</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+The same as <tt><a href="Request.html#M002032">path_parameters</a></tt>
+with explicitly symbolized keys.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002031_source')" id="l_M002031_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L396" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002031_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 396</span>
+396:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">symbolized_path_parameters</span>
+397:       <span class="ruby-ivar">@symbolized_path_parameters</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">path_parameters</span>.<span class="ruby-identifier">symbolize_keys</span>
+398:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002007">
+                    
+                    <a name="M002007"></a><b>template_format</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns a symbolized version of the <tt>:format</tt> parameter of the
+request. If no format is given it returns <tt>:js</tt>for Ajax requests and
+<tt>:html</tt> otherwise.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002007_source')" id="l_M002007_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L187" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002007_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 187</span>
+187:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">template_format</span>
+188:       <span class="ruby-identifier">parameter_format</span> = <span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">:format</span>]
+189: 
+190:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parameter_format</span>
+191:         <span class="ruby-identifier">parameter_format</span>
+192:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">xhr?</span>
+193:         <span class="ruby-identifier">:js</span>
+194:       <span class="ruby-keyword kw">else</span>
+195:         <span class="ruby-identifier">:html</span>
+196:       <span class="ruby-keyword kw">end</span>
+197:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002013">
+                    
+                    <a name="M002013"></a><b>url</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the complete URL used for this request.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002013_source')" id="l_M002013_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L261" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002013_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 261</span>
+261:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">url</span>
+262:       <span class="ruby-identifier">protocol</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">host_with_port</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">request_uri</span>
+263:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002010">
+                    
+                    <a name="M002010"></a><b>xhr?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Request.html#M002009">xml_http_request?</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002009">
+                    
+                    <a name="M002009"></a><b>xml_http_request?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns true if the request&#8217;s &#8220;X-Requested-With&#8221; header
+contains &#8220;XMLHttpRequest&#8221;. (The Prototype Javascript library
+sends this header with every Ajax request.)
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Request.html#M002010">xhr?</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002009_source')" id="l_M002009_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/0f0f977625d9f8a1577ed2cd092a1d19e2e8340a/actionpack/lib/action_controller/request.rb#L206" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002009_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File actionpack/lib/action_controller/request.rb, line 206</span>
+206:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">xml_http_request?</span>
+207:       <span class="ruby-operator">!</span>(<span class="ruby-ivar">@env</span>[<span class="ruby-value str">'HTTP_X_REQUESTED_WITH'</span>] <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/XMLHttpRequest/i</span>)
+208:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Request.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:15 GMT -->
+</html>    

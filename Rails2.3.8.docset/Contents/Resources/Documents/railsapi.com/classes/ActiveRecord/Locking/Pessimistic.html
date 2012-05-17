@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Locking/Pessimistic.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+<head>
+    <title>ActiveRecord::Locking::Pessimistic</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Locking::Pessimistic 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/locking/pessimistic_rb.html">activerecord/lib/active_record/locking/pessimistic.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a href="Pessimistic.html">Locking::Pessimistic</a> provides support for
+row-level locking using SELECT &#8230; FOR UPDATE and other lock types.
+</p>
+<p>
+Pass <tt>:lock =&gt; true</tt> to <a
+href="../Base.html#M000963">ActiveRecord::Base.find</a> to obtain an
+exclusive lock on the selected rows:
+</p>
+<pre>
+  # select * from accounts where id=1 for update
+  Account.find(1, :lock =&gt; true)
+</pre>
+<p>
+Pass <tt>:lock =&gt; 'some locking clause'</tt> to give a database-specific
+locking clause of your own such as &#8216;LOCK IN SHARE MODE&#8217; or
+&#8216;FOR UPDATE NOWAIT&#8217;.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  Account.transaction do
+    # select * from accounts where name = 'shugo' limit 1 for update
+    shugo = Account.find(:first, :conditions =&gt; &quot;name = 'shugo'&quot;, :lock =&gt; true)
+    yuko = Account.find(:first, :conditions =&gt; &quot;name = 'yuko'&quot;, :lock =&gt; true)
+    shugo.balance -= 100
+    shugo.save!
+    yuko.balance += 100
+    yuko.save!
+  end
+</pre>
+<p>
+You can also use ActiveRecord::Base#lock! method to lock one record by id.
+This may be better if you don&#8217;t need to lock every row. Example:
+</p>
+<pre>
+  Account.transaction do
+    # select * from accounts where ...
+    accounts = Account.find(:all, :conditions =&gt; ...)
+    account1 = accounts.detect { |account| ... }
+    account2 = accounts.detect { |account| ... }
+    # select * from accounts where id=? for update
+    account1.lock!
+    account2.lock!
+    account1.balance -= 100
+    account1.save!
+    account2.balance += 100
+    account2.save!
+  end
+</pre>
+<p>
+Database-specific information on row locking:
+</p>
+<pre>
+  MySQL: http://dev.mysql.com/doc/refman/5.1/en/innodb-locking-reads.html
+  PostgreSQL: http://www.postgresql.org/docs/8.1/interactive/sql-select.html#SQL-FOR-UPDATE-SHARE
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>L</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001345">lock!</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001345">
+                    
+                    <a name="M001345"></a><b>lock!</b>(lock = true)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Obtain a row lock on this record. Reloads the record to obtain the
+requested lock. Pass an SQL locking clause to append the end of the SELECT
+statement or pass true for &#8220;FOR UPDATE&#8221; (the default, an
+exclusive row lock). Returns the locked record.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001345_source')" id="l_M001345_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/d2cf33e903bdbeff6e7e696fd20b23b0e6f3a077/activerecord/lib/active_record/locking/pessimistic.rb#L49" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001345_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/locking/pessimistic.rb, line 49</span>
+49:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lock!</span>(<span class="ruby-identifier">lock</span> = <span class="ruby-keyword kw">true</span>)
+50:         <span class="ruby-identifier">reload</span>(<span class="ruby-identifier">:lock</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">lock</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">new_record?</span>
+51:         <span class="ruby-keyword kw">self</span>
+52:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Locking/Pessimistic.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:10 GMT -->
+</html>    

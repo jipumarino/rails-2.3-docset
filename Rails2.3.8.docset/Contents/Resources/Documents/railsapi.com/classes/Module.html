@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Module.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:37 GMT -->
+<head>
+    <title>Module</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Module 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/module_rb.html">activesupport/lib/active_support/core_ext/module.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/module/attribute_accessors_rb.html">activesupport/lib/active_support/core_ext/module/attribute_accessors.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/module/attr_accessor_with_default_rb.html">activesupport/lib/active_support/core_ext/module/attr_accessor_with_default.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/module/inclusion_rb.html">activesupport/lib/active_support/core_ext/module/inclusion.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/module/loading_rb.html">activesupport/lib/active_support/core_ext/module/loading.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/module/attr_internal_rb.html">activesupport/lib/active_support/core_ext/module/attr_internal.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/module/delegation_rb.html">activesupport/lib/active_support/core_ext/module/delegation.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/core_ext/module/synchronization_rb.html">activesupport/lib/active_support/core_ext/module/synchronization.rb</a></li>
+            
+            <li><a href="../files/activesupport/lib/active_support/deprecation_rb.html">activesupport/lib/active_support/deprecation.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Extends the module object with module and instance accessors for class
+attributes, just like the native attr* accessors for instance attributes.
+</p>
+<pre>
+ module AppConfiguration
+   mattr_accessor :google_api_key
+   self.google_api_key = &quot;123456789&quot;
+
+   mattr_accessor :paypal_url
+   self.paypal_url = &quot;www.sandbox.paypal.com&quot;
+ end
+
+ AppConfiguration.google_api_key = &quot;overriding the api key!&quot;
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003010">as_load_path</a>,</li>
+                
+                <li><a href="#M003008">attr_accessor_with_default</a>,</li>
+                
+                <li><a href="#M003016">attr_internal</a>,</li>
+                
+                <li><a href="#M003015">attr_internal_accessor</a>,</li>
+                
+                <li><a href="#M003013">attr_internal_reader</a>,</li>
+                
+                <li><a href="#M003014">attr_internal_writer</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003018">delegate</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003009">included_in_classes</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003007">mattr_accessor</a>,</li>
+                
+                <li><a href="#M003005">mattr_reader</a>,</li>
+                
+                <li><a href="#M003006">mattr_writer</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003019">synchronize</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+        <li>
+            
+            <a href="ActiveSupport.html">ActiveSupport</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003010">
+                    
+                    <a name="M003010"></a><b>as_load_path</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns String#underscore applied to the module name minus trailing
+classes.
+</p>
+<pre>
+  ActiveRecord.as_load_path               # =&gt; &quot;active_record&quot;
+  ActiveRecord::Associations.as_load_path # =&gt; &quot;active_record/associations&quot;
+  ActiveRecord::Base.as_load_path         # =&gt; &quot;active_record&quot; (Base is a class)
+</pre>
+<p>
+The <a href="Kernel.html">Kernel</a> module gives an empty string by
+definition.
+</p>
+<pre>
+  Kernel.as_load_path # =&gt; &quot;&quot;
+  Math.as_load_path   # =&gt; &quot;math&quot;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003010_source')" id="l_M003010_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/ca9413674ea70dc67ab517734af2e40dac21beef/activesupport/lib/active_support/core_ext/module/loading.rb#L12" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003010_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/loading.rb, line 12</span>
+12:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">as_load_path</span>
+13:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Object</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Kernel</span>
+14:       <span class="ruby-value str">''</span>
+15:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Class</span>
+16:       <span class="ruby-identifier">parent</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">self</span> <span class="ruby-operator">?</span> <span class="ruby-value str">''</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">parent</span>.<span class="ruby-identifier">as_load_path</span>
+17:     <span class="ruby-keyword kw">else</span>
+18:       <span class="ruby-identifier">name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'::'</span>).<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">word</span><span class="ruby-operator">|</span>
+19:         <span class="ruby-identifier">word</span>.<span class="ruby-identifier">underscore</span>
+20:       <span class="ruby-keyword kw">end</span> <span class="ruby-operator">*</span> <span class="ruby-value str">'/'</span>
+21:     <span class="ruby-keyword kw">end</span>
+22:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003008">
+                    
+                    <a name="M003008"></a><b>attr_accessor_with_default</b>(sym, default = nil, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Declare an attribute accessor with an initial default return value.
+</p>
+<p>
+To give attribute <tt>:age</tt> the initial value <tt>25</tt>:
+</p>
+<pre>
+  class Person
+    attr_accessor_with_default :age, 25
+  end
+
+  some_person.age
+  =&gt; 25
+  some_person.age = 26
+  some_person.age
+  =&gt; 26
+</pre>
+<p>
+To give attribute <tt>:element_name</tt> a dynamic default value, evaluated
+in scope of self:
+</p>
+<pre>
+  attr_accessor_with_default(:element_name) { name.underscore }
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003008_source')" id="l_M003008_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activesupport/lib/active_support/core_ext/module/attr_accessor_with_default.rb#L21" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003008_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/attr_accessor_with_default.rb, line 21</span>
+21:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attr_accessor_with_default</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+22:     <span class="ruby-identifier">raise</span> <span class="ruby-value str">'Default value or block required'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-operator">!</span><span class="ruby-identifier">default</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>
+23:     <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-identifier">block_given?</span> <span class="ruby-value">? </span><span class="ruby-identifier">block</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> { <span class="ruby-identifier">default</span> })
+24:     <span class="ruby-identifier">module_eval</span>(<span class="ruby-value str">&quot;def \#{sym}=(value)                        # def age=(value)\nclass &lt;&lt; self; attr_reader :\#{sym} end  #   class &lt;&lt; self; attr_reader :age end\n@\#{sym} = value                         #   @age = value\nend                                       # end\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+25:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003016">
+                    
+                    <a name="M003016"></a><b>attr_internal</b>(*attrs)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Module.html#M003015">attr_internal_accessor</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003015">
+                    
+                    <a name="M003015"></a><b>attr_internal_accessor</b>(*attrs)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Declares an attribute reader and writer backed by an internally-named
+instance variable.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Module.html#M003016">attr_internal</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003015_source')" id="l_M003015_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/46f30f902fb5e705683dea19ec22179c61e5f208/activesupport/lib/active_support/core_ext/module/attr_internal.rb#L18" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003015_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/attr_internal.rb, line 18</span>
+18:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attr_internal_accessor</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>)
+19:     <span class="ruby-identifier">attr_internal_reader</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>)
+20:     <span class="ruby-identifier">attr_internal_writer</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>)
+21:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003013">
+                    
+                    <a name="M003013"></a><b>attr_internal_reader</b>(*attrs)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Declares an attribute reader backed by an internally-named instance
+variable.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003013_source')" id="l_M003013_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/46f30f902fb5e705683dea19ec22179c61e5f208/activesupport/lib/active_support/core_ext/module/attr_internal.rb#L3" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003013_source" class="dyn-source">
+                        <pre>   <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/attr_internal.rb, line 3</span>
+3:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attr_internal_reader</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>)
+4:     <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span>
+5:       <span class="ruby-identifier">module_eval</span> <span class="ruby-node">&quot;def #{attr}() #{attr_internal_ivar_name(attr)} end&quot;</span>
+6:     <span class="ruby-keyword kw">end</span>
+7:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003014">
+                    
+                    <a name="M003014"></a><b>attr_internal_writer</b>(*attrs)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Declares an attribute writer backed by an internally-named instance
+variable.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003014_source')" id="l_M003014_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/46f30f902fb5e705683dea19ec22179c61e5f208/activesupport/lib/active_support/core_ext/module/attr_internal.rb#L10" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003014_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/attr_internal.rb, line 10</span>
+10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attr_internal_writer</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attrs</span>)
+11:     <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span>
+12:       <span class="ruby-identifier">module_eval</span> <span class="ruby-node">&quot;def #{attr}=(v) #{attr_internal_ivar_name(attr)} = v end&quot;</span>
+13:     <span class="ruby-keyword kw">end</span>
+14:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003018">
+                    
+                    <a name="M003018"></a><b>delegate</b>(*methods)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Provides a delegate class method to easily expose contained objects&#8217;
+methods as your own. Pass one or more methods (specified as symbols or
+strings) and the name of the target object as the final <tt>:to</tt> option
+(also a symbol or string). At least one method and the <tt>:to</tt> option
+are required.
+</p>
+<p>
+Delegation is particularly useful with Active Record associations:
+</p>
+<pre>
+  class Greeter &lt; ActiveRecord::Base
+    def hello()   &quot;hello&quot;   end
+    def goodbye() &quot;goodbye&quot; end
+  end
+
+  class Foo &lt; ActiveRecord::Base
+    belongs_to :greeter
+    delegate :hello, :to =&gt; :greeter
+  end
+
+  Foo.new.hello   # =&gt; &quot;hello&quot;
+  Foo.new.goodbye # =&gt; NoMethodError: undefined method `goodbye' for #&lt;Foo:0x1af30c&gt;
+</pre>
+<p>
+Multiple delegates to the same target are allowed:
+</p>
+<pre>
+  class Foo &lt; ActiveRecord::Base
+    belongs_to :greeter
+    delegate :hello, :goodbye, :to =&gt; :greeter
+  end
+
+  Foo.new.goodbye # =&gt; &quot;goodbye&quot;
+</pre>
+<p>
+Methods can be delegated to instance variables, class variables, or
+constants by providing them as a symbols:
+</p>
+<pre>
+  class Foo
+    CONSTANT_ARRAY = [0,1,2,3]
+    @@class_array  = [4,5,6,7]
+
+    def initialize
+      @instance_array = [8,9,10,11]
+    end
+    delegate :sum, :to =&gt; :CONSTANT_ARRAY
+    delegate :min, :to =&gt; :@@class_array
+    delegate :max, :to =&gt; :@instance_array
+  end
+
+  Foo.new.sum # =&gt; 6
+  Foo.new.min # =&gt; 4
+  Foo.new.max # =&gt; 11
+</pre>
+<p>
+Delegates can optionally be prefixed using the <tt>:prefix</tt> option. If
+the value is <tt>true</tt>, the delegate methods are prefixed with the name
+of the object being delegated to.
+</p>
+<pre>
+  Person = Struct.new(:name, :address)
+
+  class Invoice &lt; Struct.new(:client)
+    delegate :name, :address, :to =&gt; :client, :prefix =&gt; true
+  end
+
+  john_doe = Person.new(&quot;John Doe&quot;, &quot;Vimmersvej 13&quot;)
+  invoice = Invoice.new(john_doe)
+  invoice.client_name    # =&gt; &quot;John Doe&quot;
+  invoice.client_address # =&gt; &quot;Vimmersvej 13&quot;
+</pre>
+<p>
+It is also possible to supply a custom prefix.
+</p>
+<pre>
+  class Invoice &lt; Struct.new(:client)
+    delegate :name, :address, :to =&gt; :client, :prefix =&gt; :customer
+  end
+
+  invoice = Invoice.new(john_doe)
+  invoice.customer_name    # =&gt; &quot;John Doe&quot;
+  invoice.customer_address # =&gt; &quot;Vimmersvej 13&quot;
+</pre>
+<p>
+If the object to which you delegate can be nil, you may want to use the
+:allow_nil option. In that case, it returns nil instead of raising a
+NoMethodError exception:
+</p>
+<pre>
+ class Foo
+   attr_accessor :bar
+   def initialize(bar = nil)
+     @bar = bar
+   end
+   delegate :zoo, :to =&gt; :bar
+ end
+
+ Foo.new.zoo   # raises NoMethodError exception (you called nil.zoo)
+
+ class Foo
+   attr_accessor :bar
+   def initialize(bar = nil)
+     @bar = bar
+   end
+   delegate :zoo, :to =&gt; :bar, :allow_nil =&gt; true
+ end
+
+ Foo.new.zoo   # returns nil
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003018_source')" id="l_M003018_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/e82b43599e53b8d1998f8b385c061153719781c0/activesupport/lib/active_support/core_ext/module/delegation.rb#L99" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003018_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/delegation.rb, line 99</span>
+ 99:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delegate</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">methods</span>)
+100:     <span class="ruby-identifier">options</span> = <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">pop</span>
+101:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">to</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:to</span>]
+102:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;Delegation needs a target. Supply an options hash with a :to key as the last argument (e.g. delegate :hello, :to =&gt; :greeter).&quot;</span>
+103:     <span class="ruby-keyword kw">end</span>
+104: 
+105:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:prefix</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">true</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:to</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^[^a-z_]/</span>
+106:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;Can only automatically set the delegation prefix when delegating to a method.&quot;</span>
+107:     <span class="ruby-keyword kw">end</span>
+108: 
+109:     <span class="ruby-identifier">prefix</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:prefix</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-node">&quot;#{options[:prefix] == true ? to : options[:prefix]}_&quot;</span>
+110: 
+111:     <span class="ruby-identifier">file</span>, <span class="ruby-identifier">line</span> = <span class="ruby-identifier">caller</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">':'</span>, <span class="ruby-value">2</span>)
+112:     <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">to_i</span>
+113: 
+114:     <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">method</span><span class="ruby-operator">|</span>
+115:       <span class="ruby-identifier">on_nil</span> =
+116:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:allow_nil</span>]
+117:           <span class="ruby-value str">'return'</span>
+118:         <span class="ruby-keyword kw">else</span>
+119:           <span class="ruby-node">%(raise &quot;#{prefix}#{method} delegated to #{to}.#{method}, but #{to} is nil: \#{self.inspect}&quot;)</span>
+120:         <span class="ruby-keyword kw">end</span>
+121: 
+122:       <span class="ruby-identifier">module_eval</span>(<span class="ruby-value str">&quot;def \#{prefix}\#{method}(*args, &amp;block)               # def customer_name(*args, &amp;block)\n\#{to}.__send__(\#{method.inspect}, *args, &amp;block)  #   client.__send__(:name, *args, &amp;block)\nrescue NoMethodError                                # rescue NoMethodError\nif \#{to}.nil?                                     #   if client.nil?\n\#{on_nil}\nelse                                              #   else\nraise                                           #     raise\nend                                               #   end\nend                                                 # end\n&quot;</span>, <span class="ruby-identifier">file</span>, <span class="ruby-identifier">line</span>)
+123:     <span class="ruby-keyword kw">end</span>
+124:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003009">
+                    
+                    <a name="M003009"></a><b>included_in_classes</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the classes in the current ObjectSpace where this module has been
+mixed in according to Module#included_modules.
+</p>
+<pre>
+  module M
+  end
+
+  module N
+    include M
+  end
+
+  class C
+    include M
+  end
+
+  class D &lt; C
+  end
+
+  p M.included_in_classes # =&gt; [C, D]
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003009_source')" id="l_M003009_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/ca9413674ea70dc67ab517734af2e40dac21beef/activesupport/lib/active_support/core_ext/module/inclusion.rb#L21" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003009_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/inclusion.rb, line 21</span>
+21:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">included_in_classes</span>
+22:     <span class="ruby-identifier">classes</span> = []
+23:     <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">each_object</span>(<span class="ruby-constant">Class</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">k</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">included_modules</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword kw">self</span>) }
+24: 
+25:     <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">inject</span>([]) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">unique_classes</span>, <span class="ruby-identifier">klass</span><span class="ruby-operator">|</span> 
+26:       <span class="ruby-identifier">unique_classes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">klass</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">unique_classes</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span> }.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">to_s</span>)
+27:       <span class="ruby-identifier">unique_classes</span>
+28:     <span class="ruby-keyword kw">end</span>
+29:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003007">
+                    
+                    <a name="M003007"></a><b>mattr_accessor</b>(*syms)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003007_source')" id="l_M003007_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/bc2af911f9f85191b573975c8421591d6f68c567/activesupport/lib/active_support/core_ext/module/attribute_accessors.rb#L67" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003007_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/attribute_accessors.rb, line 67</span>
+67:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mattr_accessor</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">syms</span>)
+68:     <span class="ruby-identifier">mattr_reader</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">syms</span>)
+69:     <span class="ruby-identifier">mattr_writer</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">syms</span>)
+70:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003005">
+                    
+                    <a name="M003005"></a><b>mattr_reader</b>(*syms)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003005_source')" id="l_M003005_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/bc2af911f9f85191b573975c8421591d6f68c567/activesupport/lib/active_support/core_ext/module/attribute_accessors.rb#L16" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003005_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/attribute_accessors.rb, line 16</span>
+16:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mattr_reader</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">syms</span>)
+17:     <span class="ruby-identifier">options</span> = <span class="ruby-identifier">syms</span>.<span class="ruby-identifier">extract_options!</span>
+18:     <span class="ruby-identifier">syms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sym</span><span class="ruby-operator">|</span>
+19:       <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sym</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+20:       <span class="ruby-identifier">class_eval</span>(<span class="ruby-value str">&quot;unless defined? @@\#{sym}\n@@\#{sym} = nil\nend\n\ndef self.\#{sym}\n@@\#{sym}\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+21: 
+22:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:instance_reader</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>
+23:         <span class="ruby-identifier">class_eval</span>(<span class="ruby-value str">&quot;def \#{sym}\n@@\#{sym}\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+24:       <span class="ruby-keyword kw">end</span>
+25:     <span class="ruby-keyword kw">end</span>
+26:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003006">
+                    
+                    <a name="M003006"></a><b>mattr_writer</b>(*syms)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003006_source')" id="l_M003006_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/bc2af911f9f85191b573975c8421591d6f68c567/activesupport/lib/active_support/core_ext/module/attribute_accessors.rb#L42" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003006_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/attribute_accessors.rb, line 42</span>
+42:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mattr_writer</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">syms</span>)
+43:     <span class="ruby-identifier">options</span> = <span class="ruby-identifier">syms</span>.<span class="ruby-identifier">extract_options!</span>
+44:     <span class="ruby-identifier">syms</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sym</span><span class="ruby-operator">|</span>
+45:       <span class="ruby-identifier">class_eval</span>(<span class="ruby-value str">&quot;unless defined? @@\#{sym}\n@@\#{sym} = nil\nend\n\ndef self.\#{sym}=(obj)\n@@\#{sym} = obj\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+46: 
+47:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:instance_writer</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">false</span>
+48:         <span class="ruby-identifier">class_eval</span>(<span class="ruby-value str">&quot;def \#{sym}=(obj)\n@@\#{sym} = obj\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+49:       <span class="ruby-keyword kw">end</span>
+50:     <span class="ruby-keyword kw">end</span>
+51:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003019">
+                    
+                    <a name="M003019"></a><b>synchronize</b>(*methods)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Synchronize access around a method, delegating synchronization to a
+particular mutex. A mutex (either a Mutex, or any object that responds to
+<a href="Module.html#M003019">synchronize</a> and yields to a block) must
+be provided as a final :with option. The :with option should be a symbol or
+string, and can represent a method, constant, or instance or class
+variable. Example:
+</p>
+<pre>
+  class SharedCache
+    @@lock = Mutex.new
+    def expire
+      ...
+    end
+    synchronize :expire, :with =&gt; :@@lock
+  end
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003019_source')" id="l_M003019_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/958b0e977a263100e3767d749afc08986acc4e7e/activesupport/lib/active_support/core_ext/module/synchronization.rb#L15" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003019_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/module/synchronization.rb, line 15</span>
+15:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">synchronize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">methods</span>)
+16:     <span class="ruby-identifier">options</span> = <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">extract_options!</span>
+17:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">with</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:with</span>]
+18:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;Synchronization needs a mutex. Supply an options hash with a :with key as the last argument (e.g. synchronize :hello, :with =&gt; :@mutex).&quot;</span>
+19:     <span class="ruby-keyword kw">end</span>
+20: 
+21:     <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">method</span><span class="ruby-operator">|</span>
+22:       <span class="ruby-identifier">aliased_method</span>, <span class="ruby-identifier">punctuation</span> = <span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/([?!=])$/</span>, <span class="ruby-value str">''</span>), <span class="ruby-identifier">$1</span>
+23: 
+24:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">method_defined?</span>(<span class="ruby-node">&quot;#{aliased_method}_without_synchronization#{punctuation}&quot;</span>)
+25:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;#{method} is already synchronized. Double synchronization is not currently supported.&quot;</span>
+26:       <span class="ruby-keyword kw">end</span>
+27: 
+28:       <span class="ruby-identifier">module_eval</span>(<span class="ruby-value str">&quot;def \#{aliased_method}_with_synchronization\#{punctuation}(*args, &amp;block)     # def expire_with_synchronization(*args, &amp;block)\n\#{with}.synchronize do                                                    #   @@lock.synchronize do\n\#{aliased_method}_without_synchronization\#{punctuation}(*args, &amp;block)  #     expire_without_synchronization(*args, &amp;block)\nend                                                                       #   end\nend                                                                         # end\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+29: 
+30:       <span class="ruby-identifier">alias_method_chain</span> <span class="ruby-identifier">method</span>, <span class="ruby-identifier">:synchronization</span>
+31:     <span class="ruby-keyword kw">end</span>
+32:   <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Module.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:38 GMT -->
+</html>    

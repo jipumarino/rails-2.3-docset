@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Timestamp.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:02 GMT -->
+<head>
+    <title>ActiveRecord::Timestamp</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Timestamp 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activerecord/lib/active_record/timestamp_rb.html">activerecord/lib/active_record/timestamp.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Active Record automatically timestamps create and update operations if the
+table has fields named created_at/created_on or updated_at/updated_on.
+</p>
+<p>
+Timestamping can be turned off by setting
+</p>
+<pre>
+  &lt;tt&gt;ActiveRecord::Base.record_timestamps = false&lt;/tt&gt;
+</pre>
+<p>
+Timestamps are in the local timezone by default but you can use UTC by
+setting
+</p>
+<pre>
+  &lt;tt&gt;ActiveRecord::Base.default_timezone = :utc&lt;/tt&gt;
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001379">touch</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001379">
+                    
+                    <a name="M001379"></a><b>touch</b>(attribute = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Saves the record with the updated_at/on attributes set to the current time.
+If the save fails because of validation errors, an <a
+href="RecordInvalid.html">ActiveRecord::RecordInvalid</a> exception is
+raised. If an attribute name is passed, that attribute is used for the
+touch instead of the updated_at/on attributes.
+</p>
+<p>
+Examples:
+</p>
+<pre>
+  product.touch               # updates updated_at
+  product.touch(:designed_at) # updates the designed_at attribute
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001379_source')" id="l_M001379_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/fa750e08a8d8c9f07afd88e616284549598926e2/activerecord/lib/active_record/timestamp.rb#L27" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001379_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/timestamp.rb, line 27</span>
+27:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">touch</span>(<span class="ruby-identifier">attribute</span> = <span class="ruby-keyword kw">nil</span>)
+28:       <span class="ruby-identifier">current_time</span> = <span class="ruby-identifier">current_time_from_proper_timezone</span>
+29: 
+30:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">attribute</span>
+31:         <span class="ruby-identifier">write_attribute</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">current_time</span>)
+32:       <span class="ruby-keyword kw">else</span>
+33:         <span class="ruby-identifier">write_attribute</span>(<span class="ruby-value str">'updated_at'</span>, <span class="ruby-identifier">current_time</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:updated_at</span>)
+34:         <span class="ruby-identifier">write_attribute</span>(<span class="ruby-value str">'updated_on'</span>, <span class="ruby-identifier">current_time</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:updated_on</span>)
+35:       <span class="ruby-keyword kw">end</span>
+36: 
+37:       <span class="ruby-identifier">save!</span>
+38:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/Timestamp.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:02 GMT -->
+</html>    

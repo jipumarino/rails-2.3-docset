@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Commands/Unsource.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+<head>
+    <title>Commands::Unsource</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Commands::Unsource 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/railties/lib/commands/plugin_rb.html">railties/lib/commands/plugin.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000197">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>O</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000198">options</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000199">parse!</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000197">
+                    
+                    <a name="M000197"></a><b>new</b>(base_command)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000197_source')" id="l_M000197_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L647" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000197_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 647</span>
+647:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">base_command</span>)
+648:       <span class="ruby-ivar">@base_command</span> = <span class="ruby-identifier">base_command</span>
+649:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000198">
+                    
+                    <a name="M000198"></a><b>options</b>()
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000198_source')" id="l_M000198_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L651" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000198_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 651</span>
+651:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">options</span>
+652:       <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+653:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">set_summary_indent</span>(<span class="ruby-value str">'  '</span>)
+654:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">banner</span> =    <span class="ruby-node">&quot;Usage: #{@base_command.script_name} unsource URI [URI [URI]...]&quot;</span>
+655:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">define_head</span> <span class="ruby-value str">&quot;Remove repositories from the default search list.&quot;</span>
+656:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span> <span class="ruby-value str">&quot;&quot;</span>
+657:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on_tail</span>(<span class="ruby-value str">&quot;-h&quot;</span>, <span class="ruby-value str">&quot;--help&quot;</span>, <span class="ruby-value str">&quot;Show this help message.&quot;</span>) { <span class="ruby-identifier">puts</span> <span class="ruby-identifier">o</span>; <span class="ruby-identifier">exit</span> }
+658:       <span class="ruby-keyword kw">end</span>
+659:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000199">
+                    
+                    <a name="M000199"></a><b>parse!</b>(args)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000199_source')" id="l_M000199_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/c5e3309bb4e63fafb363da8f7eb2364530f9f96f/railties/lib/commands/plugin.rb#L661" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000199_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File railties/lib/commands/plugin.rb, line 661</span>
+661:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">args</span>)
+662:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">args</span>)
+663:       <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>
+664:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">uri</span><span class="ruby-operator">|</span>
+665:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Repositories</span>.<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">remove</span>(<span class="ruby-identifier">uri</span>)
+666:           <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+667:           <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;removed: #{uri.ljust(50)}&quot;</span>
+668:         <span class="ruby-keyword kw">else</span>
+669:           <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;failed: #{uri.ljust(50)}&quot;</span>
+670:         <span class="ruby-keyword kw">end</span>
+671:       <span class="ruby-keyword kw">end</span>
+672:       <span class="ruby-constant">Repositories</span>.<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">save</span>
+673:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Removed #{count} repositories.&quot;</span>
+674:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/Commands/Unsource.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+</html>    

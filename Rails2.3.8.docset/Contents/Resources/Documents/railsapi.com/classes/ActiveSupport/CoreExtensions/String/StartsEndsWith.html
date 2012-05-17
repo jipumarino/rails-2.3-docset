@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/String/StartsEndsWith.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+<head>
+    <title>ActiveSupport::CoreExtensions::String::StartsEndsWith</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::CoreExtensions::String::StartsEndsWith 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/activesupport/lib/active_support/core_ext/string/starts_ends_with_rb.html">activesupport/lib/active_support/core_ext/string/starts_ends_with.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Additional string tests.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002877">append_features</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002879">ends_with?</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002878">starts_with?</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002877">
+                    
+                    <a name="M002877"></a><b>append_features</b>(base)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002877_source')" id="l_M002877_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/4b36dafb35b99c570be853dc18595b3a43bd72a1/activesupport/lib/active_support/core_ext/string/starts_ends_with.rb#L6" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002877_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/string/starts_ends_with.rb, line 6</span>
+ 6:         <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">append_features</span>(<span class="ruby-identifier">base</span>)
+ 7:           <span class="ruby-keyword kw">if</span> <span class="ruby-value str">'1.8.7 and up'</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:start_with?</span>)
+ 8:             <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+ 9:               <span class="ruby-identifier">alias_method</span> <span class="ruby-identifier">:starts_with?</span>, <span class="ruby-identifier">:start_with?</span>
+10:               <span class="ruby-identifier">alias_method</span> <span class="ruby-identifier">:ends_with?</span>, <span class="ruby-identifier">:end_with?</span>
+11:             <span class="ruby-keyword kw">end</span>
+12:           <span class="ruby-keyword kw">else</span>
+13:             <span class="ruby-keyword kw">super</span>
+14:             <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+15:               <span class="ruby-identifier">alias_method</span> <span class="ruby-identifier">:start_with?</span>, <span class="ruby-identifier">:starts_with?</span>
+16:               <span class="ruby-identifier">alias_method</span> <span class="ruby-identifier">:end_with?</span>, <span class="ruby-identifier">:ends_with?</span>
+17:             <span class="ruby-keyword kw">end</span>
+18:           <span class="ruby-keyword kw">end</span>
+19:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002879">
+                    
+                    <a name="M002879"></a><b>ends_with?</b>(suffix)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Does the string end with the specified <tt>suffix</tt>?
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002879_source')" id="l_M002879_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/4b36dafb35b99c570be853dc18595b3a43bd72a1/activesupport/lib/active_support/core_ext/string/starts_ends_with.rb#L27" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002879_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/string/starts_ends_with.rb, line 27</span>
+27:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ends_with?</span>(<span class="ruby-identifier">suffix</span>)
+28:           <span class="ruby-identifier">suffix</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_str</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-operator">-</span><span class="ruby-identifier">suffix</span>.<span class="ruby-identifier">length</span>, <span class="ruby-identifier">suffix</span>.<span class="ruby-identifier">length</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">suffix</span>
+29:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002878">
+                    
+                    <a name="M002878"></a><b>starts_with?</b>(prefix)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Does the string start with the specified <tt>prefix</tt>?
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002878_source')" id="l_M002878_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/4b36dafb35b99c570be853dc18595b3a43bd72a1/activesupport/lib/active_support/core_ext/string/starts_ends_with.rb#L22" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002878_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/string/starts_ends_with.rb, line 22</span>
+22:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">starts_with?</span>(<span class="ruby-identifier">prefix</span>)
+23:           <span class="ruby-identifier">prefix</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_str</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">prefix</span>.<span class="ruby-identifier">length</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">prefix</span>
+24:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/String/StartsEndsWith.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+</html>    

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/Hash/Conversions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+<head>
+    <title>ActiveSupport::CoreExtensions::Hash::Conversions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::CoreExtensions::Hash::Conversions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/activesupport/lib/active_support/core_ext/hash/conversions_rb.html">activesupport/lib/active_support/core_ext/hash/conversions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Conversions/FileLike.html">ActiveSupport::CoreExtensions::Hash::Conversions::FileLike</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">XML_TYPE_NAMES</td>
+            <td>=</td>
+            <td class="attr-value">{           &quot;Symbol&quot;     =&gt; &quot;symbol&quot;,           &quot;Fixnum&quot;     =&gt; &quot;integer&quot;,           &quot;Bignum&quot;     =&gt; &quot;integer&quot;,           &quot;BigDecimal&quot; =&gt; &quot;decimal&quot;,           &quot;Float&quot;      =&gt; &quot;float&quot;,           &quot;TrueClass&quot;  =&gt; &quot;boolean&quot;,           &quot;FalseClass&quot; =&gt; &quot;boolean&quot;,           &quot;Date&quot;       =&gt; &quot;date&quot;,           &quot;DateTime&quot;   =&gt; &quot;datetime&quot;,           &quot;Time&quot;       =&gt; &quot;datetime&quot;,           &quot;ActiveSupport::TimeWithZone&quot; =&gt; &quot;datetime&quot;         } unless defined?(XML_TYPE_NAMES)</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">XML_FORMATTING</td>
+            <td>=</td>
+            <td class="attr-value">{           &quot;symbol&quot;   =&gt; Proc.new { |symbol| symbol.to_s },           &quot;date&quot;     =&gt; Proc.new { |date| date.to_s(:db) },           &quot;datetime&quot; =&gt; Proc.new { |time| time.xmlschema },           &quot;binary&quot;   =&gt; Proc.new { |binary| ActiveSupport::Base64.encode64(binary) },           &quot;yaml&quot;     =&gt; Proc.new { |yaml| yaml.to_yaml }</td>
+        </tr>
+        
+        
+        <tr valign='top'>
+            <td class="attr-name">XML_PARSING</td>
+            <td>=</td>
+            <td class="attr-value">{             &quot;symbol&quot;       =&gt; Proc.new  { |symbol|  symbol.to_sym },             &quot;date&quot;         =&gt; Proc.new  { |date|    ::Date.parse(date) },             &quot;datetime&quot;     =&gt; Proc.new  { |time|    ::Time.parse(time).utc rescue ::DateTime.parse(time).utc },             &quot;integer&quot;      =&gt; Proc.new  { |integer| integer.to_i },             &quot;float&quot;        =&gt; Proc.new  { |float|   float.to_f },             &quot;decimal&quot;      =&gt; Proc.new  { |number|  BigDecimal(number) },             &quot;boolean&quot;      =&gt; Proc.new  { |boolean| %w(1 true).include?(boolean.strip) },             &quot;string&quot;       =&gt; Proc.new  { |string|  string.to_s },             &quot;yaml&quot;         =&gt; Proc.new  { |yaml|    YAML::load(yaml) rescue yaml },             &quot;base64Binary&quot; =&gt; Proc.new  { |bin|     ActiveSupport::Base64.decode64(bin) },             &quot;file&quot;         =&gt; Proc.new do |file, entity|               f = StringIO.new(ActiveSupport::Base64.decode64(file))</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/Hash/Conversions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:04 GMT -->
+</html>    

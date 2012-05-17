@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/DatabaseLimits.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+<head>
+    <title>ActiveRecord::ConnectionAdapters::DatabaseLimits</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionAdapters::DatabaseLimits 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/activerecord/lib/active_record/connection_adapters/abstract/database_limits_rb.html">activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000625">column_name_length</a>,</li>
+                
+                <li><a href="#M000630">columns_per_multicolumn_index</a>,</li>
+                
+                <li><a href="#M000628">columns_per_table</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000631">in_clause_length</a>,</li>
+                
+                <li><a href="#M000627">index_name_length</a>,</li>
+                
+                <li><a href="#M000629">indexes_per_table</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>J</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000633">joins_per_query</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000632">sql_query_length</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000624">table_alias_length</a>,</li>
+                
+                <li><a href="#M000626">table_name_length</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000625">
+                    
+                    <a name="M000625"></a><b>column_name_length</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+the maximum length of a column name
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000625_source')" id="l_M000625_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L11" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000625_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 11</span>
+11:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">column_name_length</span>
+12:         <span class="ruby-value">64</span>
+13:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000630">
+                    
+                    <a name="M000630"></a><b>columns_per_multicolumn_index</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+the maximum number of columns in a multicolumn index
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000630_source')" id="l_M000630_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L36" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000630_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 36</span>
+36:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns_per_multicolumn_index</span>
+37:         <span class="ruby-value">16</span>
+38:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000628">
+                    
+                    <a name="M000628"></a><b>columns_per_table</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+the maximum number of columns per table
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000628_source')" id="l_M000628_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L26" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000628_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 26</span>
+26:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">columns_per_table</span>
+27:         <span class="ruby-value">1024</span>
+28:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000631">
+                    
+                    <a name="M000631"></a><b>in_clause_length</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+the maximum number of elements in an IN (x,y,z) clause
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000631_source')" id="l_M000631_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L41" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000631_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 41</span>
+41:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">in_clause_length</span>
+42:         <span class="ruby-value">65535</span>
+43:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000627">
+                    
+                    <a name="M000627"></a><b>index_name_length</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+the maximum length of an index name
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000627_source')" id="l_M000627_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L21" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000627_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 21</span>
+21:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index_name_length</span>
+22:         <span class="ruby-value">64</span>
+23:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000629">
+                    
+                    <a name="M000629"></a><b>indexes_per_table</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+the maximum number of indexes per table
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000629_source')" id="l_M000629_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L31" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000629_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 31</span>
+31:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">indexes_per_table</span>
+32:         <span class="ruby-value">16</span>
+33:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000633">
+                    
+                    <a name="M000633"></a><b>joins_per_query</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+maximum number of joins in a single query
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000633_source')" id="l_M000633_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L51" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000633_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 51</span>
+51:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">joins_per_query</span>
+52:         <span class="ruby-value">256</span>
+53:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000632">
+                    
+                    <a name="M000632"></a><b>sql_query_length</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+the maximum length of a SQL query
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000632_source')" id="l_M000632_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L46" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000632_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 46</span>
+46:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sql_query_length</span>
+47:         <span class="ruby-value">1048575</span>
+48:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000624">
+                    
+                    <a name="M000624"></a><b>table_alias_length</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+the maximum length of a table alias
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000624_source')" id="l_M000624_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L6" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000624_source" class="dyn-source">
+                        <pre>   <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 6</span>
+6:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">table_alias_length</span>
+7:         <span class="ruby-value">255</span>
+8:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000626">
+                    
+                    <a name="M000626"></a><b>table_name_length</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+the maximum length of a table name
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000626_source')" id="l_M000626_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/99bcce7ec1e7f59db3e6f1e1d3cd02e15eb59602/activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb#L16" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M000626_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activerecord/lib/active_record/connection_adapters/abstract/database_limits.rb, line 16</span>
+16:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">table_name_length</span>
+17:         <span class="ruby-value">64</span>
+18:       <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/ConnectionAdapters/DatabaseLimits.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:16 GMT -->
+</html>    

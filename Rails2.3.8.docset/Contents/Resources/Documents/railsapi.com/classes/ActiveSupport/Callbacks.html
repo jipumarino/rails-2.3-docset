@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Callbacks.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:24 GMT -->
+<head>
+    <title>ActiveSupport::Callbacks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Callbacks 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activesupport/lib/active_support/callbacks_rb.html">activesupport/lib/active_support/callbacks.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a href="Callbacks.html">Callbacks</a> are hooks into the lifecycle of an
+object that allow you to trigger logic before or after an alteration of the
+object state.
+</p>
+<p>
+Mixing in this module allows you to define callbacks in your class.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  class Storage
+    include ActiveSupport::Callbacks
+
+    define_callbacks :before_save, :after_save
+  end
+
+  class ConfigStorage &lt; Storage
+    before_save :saving_message
+    def saving_message
+      puts &quot;saving...&quot;
+    end
+
+    after_save do |object|
+      puts &quot;saved&quot;
+    end
+
+    def save
+      run_callbacks(:before_save)
+      puts &quot;- save&quot;
+      run_callbacks(:after_save)
+    end
+  end
+
+  config = ConfigStorage.new
+  config.save
+</pre>
+<p>
+Output:
+</p>
+<pre>
+  saving...
+  - save
+  saved
+</pre>
+<p>
+<a href="Callbacks.html">Callbacks</a> from parent classes are inherited.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  class Storage
+    include ActiveSupport::Callbacks
+
+    define_callbacks :before_save, :after_save
+
+    before_save :prepare
+    def prepare
+      puts &quot;preparing save&quot;
+    end
+  end
+
+  class ConfigStorage &lt; Storage
+    before_save :saving_message
+    def saving_message
+      puts &quot;saving...&quot;
+    end
+
+    after_save do |object|
+      puts &quot;saved&quot;
+    end
+
+    def save
+      run_callbacks(:before_save)
+      puts &quot;- save&quot;
+      run_callbacks(:after_save)
+    end
+  end
+
+  config = ConfigStorage.new
+  config.save
+</pre>
+<p>
+Output:
+</p>
+<pre>
+  preparing save
+  saving...
+  - save
+  saved
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003280">included</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003282">run_callbacks</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Callbacks/ClassMethods.html">ActiveSupport::Callbacks::ClassMethods</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Callbacks/Callback.html">ActiveSupport::Callbacks::Callback</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Callbacks/CallbackChain.html">ActiveSupport::Callbacks::CallbackChain</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003280">
+                    
+                    <a name="M003280"></a><b>included</b>(base)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003280_source')" id="l_M003280_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1e45818a622405e720a4529795f8be2f11660361/activesupport/lib/active_support/callbacks.rb#L200" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003280_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/callbacks.rb, line 200</span>
+200:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+201:       <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">ClassMethods</span>
+202:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003282">
+                    
+                    <a name="M003282"></a><b>run_callbacks</b>(kind, options = {}, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Runs all the callbacks defined for the given options.
+</p>
+<p>
+If a block is given it will be called after each callback receiving as
+arguments:
+</p>
+<pre>
+ * the result from the callback
+ * the object which has the callback
+</pre>
+<p>
+If the result from the block evaluates to false, the callback chain is
+stopped.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  class Storage
+    include ActiveSupport::Callbacks
+
+    define_callbacks :before_save, :after_save
+  end
+
+  class ConfigStorage &lt; Storage
+    before_save :pass
+    before_save :pass
+    before_save :stop
+    before_save :pass
+
+    def pass
+      puts &quot;pass&quot;
+    end
+
+    def stop
+      puts &quot;stop&quot;
+      return false
+    end
+
+    def save
+      result = run_callbacks(:before_save) { |result, object| result == false }
+      puts &quot;- save&quot; if result
+    end
+  end
+
+  config = ConfigStorage.new
+  config.save
+</pre>
+<p>
+Output:
+</p>
+<pre>
+  pass
+  pass
+  stop
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003282_source')" id="l_M003282_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1e45818a622405e720a4529795f8be2f11660361/activesupport/lib/active_support/callbacks.rb#L276" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003282_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/callbacks.rb, line 276</span>
+276:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_callbacks</span>(<span class="ruby-identifier">kind</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+277:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{kind}_callback_chain&quot;</span>).<span class="ruby-identifier">run</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+278:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Callbacks.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:25 GMT -->
+</html>    

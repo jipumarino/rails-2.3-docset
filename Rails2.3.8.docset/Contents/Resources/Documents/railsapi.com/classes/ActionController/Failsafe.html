@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Failsafe.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:14 GMT -->
+<head>
+    <title>ActionController::Failsafe</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::Failsafe 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/actionpack/lib/action_controller/failsafe_rb.html">actionpack/lib/action_controller/failsafe.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+The <a href="Failsafe.html">Failsafe</a> middleware is usually the top-most
+middleware in the Rack middleware chain. It returns the underlying
+middleware&#8217;s response, but if the underlying middle raises an
+exception then <a href="Failsafe.html">Failsafe</a> will log the exception
+into the <a href="../Rails.html">Rails</a> log file, and will attempt to
+return an error message response.
+</p>
+<p>
+<a href="Failsafe.html">Failsafe</a> is a last resort for logging errors
+and for telling the HTTP client that something went wrong. Do not confuse
+this with the <a href="Rescue.html">ActionController::Rescue</a> module,
+which is responsible for catching exceptions at deeper levels. Unlike <a
+href="Failsafe.html">Failsafe</a>, which is as simple as possible, <a
+href="Rescue.html">Rescue</a> provides features that allow developers to
+hook into the error handling logic, and can customize the error message
+response based on the HTTP client&#8217;s IP.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001885">call</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M001884">new</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001884">
+                    
+                    <a name="M001884"></a><b>new</b>(app)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001884_source')" id="l_M001884_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1012dec88fcaf084d76f4ec19092de1461dee486/actionpack/lib/action_controller/failsafe.rb#L21" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001884_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/failsafe.rb, line 21</span>
+21:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">app</span>)
+22:       <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span>
+23:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M001885">
+                    
+                    <a name="M001885"></a><b>call</b>(env)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M001885_source')" id="l_M001885_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/1012dec88fcaf084d76f4ec19092de1461dee486/actionpack/lib/action_controller/failsafe.rb#L25" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M001885_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File actionpack/lib/action_controller/failsafe.rb, line 25</span>
+25:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+26:       <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+27:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">exception</span>
+28:       <span class="ruby-comment cmt"># Reraise exception in test environment</span>
+29:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">Rails</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span>.<span class="ruby-identifier">test?</span>
+30:         <span class="ruby-identifier">raise</span> <span class="ruby-identifier">exception</span>
+31:       <span class="ruby-keyword kw">else</span>
+32:         <span class="ruby-identifier">failsafe_response</span>(<span class="ruby-identifier">exception</span>)
+33:       <span class="ruby-keyword kw">end</span>
+34:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController/Failsafe.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:14:14 GMT -->
+</html>    

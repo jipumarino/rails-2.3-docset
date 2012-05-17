@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/SessionStore.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:11:51 GMT -->
+<head>
+    <title>ActiveRecord::SessionStore</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::SessionStore 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../ActionController/Session/AbstractStore.html">ActionController::Session::AbstractStore</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activerecord/lib/active_record/session_store_rb.html">activerecord/lib/active_record/session_store.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+A session store backed by an Active Record class. A default class is
+provided, but any object duck-typing to an Active Record <a
+href="SessionStore/Session.html">Session</a> class with text
+<tt>session_id</tt> and <tt>data</tt> attributes is sufficient.
+</p>
+<p>
+The default assumes a <tt>sessions</tt> tables with columns:
+</p>
+<pre>
+  +id+ (numeric primary key),
+  +session_id+ (text, or longtext if your session data exceeds 65K), and
+  +data+ (text or longtext; careful if your session data exceeds 65KB).
+</pre>
+<p>
+The <tt>session_id</tt> column should always be indexed for speedy lookups.
+<a href="SessionStore/Session.html">Session</a> data is marshaled to the
+<tt>data</tt> column in Base64 format. If the data you write is larger than
+the column&#8217;s size limit, ActionController::SessionOverflowError will
+be raised.
+</p>
+<p>
+You may configure the table name, primary key, and data column. For
+example, at the end of <tt>config/environment.rb</tt>:
+</p>
+<pre>
+  ActiveRecord::SessionStore::Session.table_name = 'legacy_session_table'
+  ActiveRecord::SessionStore::Session.primary_key = 'session_id'
+  ActiveRecord::SessionStore::Session.data_column_name = 'legacy_session_data'
+</pre>
+<p>
+Note that setting the primary key to the <tt>session_id</tt> frees you from
+having a separate <tt>id</tt> column if you don&#8217;t want it. However,
+you must set <tt>session.model.id = session.session_id</tt> by hand! A
+before filter on ApplicationController is a good place.
+</p>
+<p>
+Since the default class is a simple Active Record, you get timestamps for
+free if you add <tt>created_at</tt> and <tt>updated_at</tt> datetime
+columns to the <tt>sessions</tt> table, making periodic session expiration
+a snap.
+</p>
+<p>
+You may provide your own session class implementation, whether a
+feature-packed Active Record or a bare-metal high-performance SQL store, by
+setting
+</p>
+<pre>
+  ActiveRecord::SessionStore.session_class = MySessionClass
+</pre>
+<p>
+You must implement these methods:
+</p>
+<pre>
+  self.find_by_session_id(session_id)
+  initialize(hash_of_session_id_and_data)
+  attr_reader :session_id
+  attr_accessor :data
+  save
+  destroy
+</pre>
+<p>
+The example <a href="SessionStore/SqlBypass.html">SqlBypass</a> class is a
+generic SQL session store. You may use it as a basis for high-performance
+database-specific stores.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="SessionStore/Session.html">ActiveRecord::SessionStore::Session</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="SessionStore/SqlBypass.html">ActiveRecord::SessionStore::SqlBypass</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">SESSION_RECORD_KEY</td>
+            <td>=</td>
+            <td class="attr-value">'rack.session.record'.freeze</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveRecord/SessionStore.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:11:52 GMT -->
+</html>    

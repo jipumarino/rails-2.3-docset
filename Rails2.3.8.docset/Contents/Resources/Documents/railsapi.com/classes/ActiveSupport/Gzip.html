@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Gzip.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:32 GMT -->
+<head>
+    <title>ActiveSupport::Gzip</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Gzip 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activesupport/lib/active_support/gzip_rb.html">activesupport/lib/active_support/gzip.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+A convenient wrapper for the zlib standard library that allows
+compression/decompression of strings with gzip.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>C</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002833">compress</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M002832">decompress</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="Gzip/Stream.html">ActiveSupport::Gzip::Stream</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M002833">
+                    
+                    <a name="M002833"></a><b>compress</b>(source)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Compresses a string using gzip.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002833_source')" id="l_M002833_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/ca9413674ea70dc67ab517734af2e40dac21beef/activesupport/lib/active_support/gzip.rb#L17" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002833_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/gzip.rb, line 17</span>
+17:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">compress</span>(<span class="ruby-identifier">source</span>)
+18:       <span class="ruby-identifier">output</span> = <span class="ruby-constant">Stream</span>.<span class="ruby-identifier">new</span>
+19:       <span class="ruby-identifier">gz</span> = <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipWriter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">output</span>)
+20:       <span class="ruby-identifier">gz</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">source</span>)
+21:       <span class="ruby-identifier">gz</span>.<span class="ruby-identifier">close</span>
+22:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">string</span>
+23:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M002832">
+                    
+                    <a name="M002832"></a><b>decompress</b>(source)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Decompresses a gzipped string.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M002832_source')" id="l_M002832_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/ca9413674ea70dc67ab517734af2e40dac21beef/activesupport/lib/active_support/gzip.rb#L12" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M002832_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/gzip.rb, line 12</span>
+12:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">decompress</span>(<span class="ruby-identifier">source</span>)
+13:       <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipReader</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source</span>)).<span class="ruby-identifier">read</span>
+14:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Gzip.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:33 GMT -->
+</html>    

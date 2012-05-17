@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/files/activesupport/lib/active_support/whiny_nil_rb.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:38 GMT -->
+<head>
+    <title>whiny_nil.rb</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            whiny_nil.rb
+        </h1>
+        <ul class="files">
+            <li>activesupport/lib/active_support/whiny_nil.rb</li>
+            <li>Last modified: 2010-05-28 13:24:19 +0000</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+Extensions to <tt>nil</tt> which allow for more helpful error messages for
+people who are new to <a href="../../../../classes/Rails.html">Rails</a>.
+</p>
+<p>
+Ruby raises NoMethodError if you invoke a method on an object that does not
+respond to it:
+</p>
+<pre>
+  $ ruby -e nil.destroy
+  -e:1: undefined method `destroy' for nil:NilClass (NoMethodError)
+</pre>
+<p>
+With these extensions, if the method belongs to the public interface of the
+classes in NilClass::WHINERS the error message suggests which could be the
+actual intended class:
+</p>
+<pre>
+  $ script/runner nil.destroy
+  ...
+  You might have expected an instance of ActiveRecord::Base.
+  ...
+</pre>
+<p>
+NilClass#id exists in Ruby 1.8 (though it is deprecated). Since <tt>id</tt>
+is a fundamental method of Active Record models NilClass#id is redefined as
+well to raise a RuntimeError and warn the user. She probably wanted a model
+database identifier and the 4 returned by the original method could result
+in obscure bugs.
+</p>
+<p>
+The flag <tt>config.whiny_nils</tt> determines whether this feature is
+enabled. By default it is on in development and test modes, and it is off
+in production mode.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">CLASS</span> <a href="../../../../classes/NilClass.html">NilClass</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/files/activesupport/lib/active_support/whiny_nil_rb.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:15:38 GMT -->
+</html>

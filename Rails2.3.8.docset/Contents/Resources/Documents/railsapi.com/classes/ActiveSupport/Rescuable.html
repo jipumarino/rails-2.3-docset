@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Rescuable.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:38 GMT -->
+<head>
+    <title>ActiveSupport::Rescuable</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Rescuable 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/activesupport/lib/active_support/rescuable_rb.html">activesupport/lib/active_support/rescuable.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+<a href="Rescuable.html">Rescuable</a> module adds support for easier
+exception handling.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>H</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003304">handler_for_rescue</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003303">rescue_with_handler</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Rescuable/ClassMethods.html">ActiveSupport::Rescuable::ClassMethods</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003304">
+                    
+                    <a name="M003304"></a><b>handler_for_rescue</b>(exception)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003304_source')" id="l_M003304_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/983dc8078708fff5d99fc31eb5eac8b532e950b3/activesupport/lib/active_support/rescuable.rb#L78" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003304_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/rescuable.rb, line 78</span>
+ 78:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handler_for_rescue</span>(<span class="ruby-identifier">exception</span>)
+ 79:       <span class="ruby-comment cmt"># We go from right to left because pairs are pushed onto rescue_handlers</span>
+ 80:       <span class="ruby-comment cmt"># as rescue_from declarations are found.</span>
+ 81:       <span class="ruby-identifier">_</span>, <span class="ruby-identifier">rescuer</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">rescue_handlers</span>).<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">detect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass_name</span>, <span class="ruby-identifier">handler</span><span class="ruby-operator">|</span>
+ 82:         <span class="ruby-comment cmt"># The purpose of allowing strings in rescue_from is to support the</span>
+ 83:         <span class="ruby-comment cmt"># declaration of handler associations for exception classes whose</span>
+ 84:         <span class="ruby-comment cmt"># definition is yet unknown.</span>
+ 85:         <span class="ruby-comment cmt">#</span>
+ 86:         <span class="ruby-comment cmt"># Since this loop needs the constants it would be inconsistent to</span>
+ 87:         <span class="ruby-comment cmt"># assume they should exist at this point. An early raised exception</span>
+ 88:         <span class="ruby-comment cmt"># could trigger some other handler and the array could include</span>
+ 89:         <span class="ruby-comment cmt"># precisely a string whose corresponding constant has not yet been</span>
+ 90:         <span class="ruby-comment cmt"># seen. This is why we are tolerant to unknown constants.</span>
+ 91:         <span class="ruby-comment cmt">#</span>
+ 92:         <span class="ruby-comment cmt"># Note that this tolerance only matters if the exception was given as</span>
+ 93:         <span class="ruby-comment cmt"># a string, otherwise a NameError will be raised by the interpreter</span>
+ 94:         <span class="ruby-comment cmt"># itself when rescue_from CONSTANT is executed.</span>
+ 95:         <span class="ruby-identifier">klass</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">klass_name</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+ 96:         <span class="ruby-identifier">klass</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">klass_name</span>.<span class="ruby-identifier">constantize</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+ 97:         <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-identifier">klass</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span>
+ 98:       <span class="ruby-keyword kw">end</span>
+ 99: 
+100:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">rescuer</span>
+101:       <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Symbol</span>
+102:         <span class="ruby-identifier">method</span>(<span class="ruby-identifier">rescuer</span>)
+103:       <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Proc</span>
+104:         <span class="ruby-identifier">rescuer</span>.<span class="ruby-identifier">bind</span>(<span class="ruby-keyword kw">self</span>)
+105:       <span class="ruby-keyword kw">end</span>
+106:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003303">
+                    
+                    <a name="M003303"></a><b>rescue_with_handler</b>(exception)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Tries to rescue the exception by looking up and calling a registered
+handler.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003303_source')" id="l_M003303_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/983dc8078708fff5d99fc31eb5eac8b532e950b3/activesupport/lib/active_support/rescuable.rb#L71" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003303_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/rescuable.rb, line 71</span>
+71:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_with_handler</span>(<span class="ruby-identifier">exception</span>)
+72:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">handler</span> = <span class="ruby-identifier">handler_for_rescue</span>(<span class="ruby-identifier">exception</span>)
+73:         <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">exception</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">call</span>
+74:         <span class="ruby-keyword kw">true</span> <span class="ruby-comment cmt"># don't rely on the return value of the handler</span>
+75:       <span class="ruby-keyword kw">end</span>
+76:     <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/Rescuable.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:13:38 GMT -->
+</html>    

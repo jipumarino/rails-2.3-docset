@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/Array/Conversions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+<head>
+    <title>ActiveSupport::CoreExtensions::Array::Conversions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::CoreExtensions::Array::Conversions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/activesupport/lib/active_support/core_ext/array/conversions_rb.html">activesupport/lib/active_support/core_ext/array/conversions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M003037">to_formatted_s</a>,</li>
+                
+                <li><a href="#M003034">to_param</a>,</li>
+                
+                <li><a href="#M003035">to_query</a>,</li>
+                
+                <li><a href="#M003033">to_sentence</a>,</li>
+                
+                <li><a href="#M003038">to_xml</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M003037">
+                    
+                    <a name="M003037"></a><b>to_formatted_s</b>(format = :default)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Converts a collection of elements into a formatted string by calling
+<tt>to_s</tt> on all elements and joining them:
+</p>
+<pre>
+  Blog.find(:all).to_formatted_s # =&gt; &quot;First PostSecond PostThird Post&quot;
+</pre>
+<p>
+Adding in the <tt>:db</tt> argument as the format yields a prettier output:
+</p>
+<pre>
+  Blog.find(:all).to_formatted_s(:db) # =&gt; &quot;First Post,Second Post,Third Post&quot;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003037_source')" id="l_M003037_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a84e9b4f31ac39b0e466f8f0efc507a52dbb02c0/activesupport/lib/active_support/core_ext/array/conversions.rb#L74" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003037_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/array/conversions.rb, line 74</span>
+74:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_formatted_s</span>(<span class="ruby-identifier">format</span> = <span class="ruby-identifier">:default</span>)
+75:           <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">format</span>
+76:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:db</span>
+77:               <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:empty?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">empty?</span>
+78:                 <span class="ruby-value str">&quot;null&quot;</span>
+79:               <span class="ruby-keyword kw">else</span>
+80:                 <span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">element</span><span class="ruby-operator">|</span> <span class="ruby-identifier">element</span>.<span class="ruby-identifier">id</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;,&quot;</span>)
+81:               <span class="ruby-keyword kw">end</span>
+82:             <span class="ruby-keyword kw">else</span>
+83:               <span class="ruby-identifier">to_default_s</span>
+84:           <span class="ruby-keyword kw">end</span>
+85:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003034">
+                    
+                    <a name="M003034"></a><b>to_param</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Calls <tt><a href="Conversions.html#M003034">to_param</a></tt> on all its
+elements and joins the result with slashes. This is used by
+<tt>url_for</tt> in Action Pack.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003034_source')" id="l_M003034_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a84e9b4f31ac39b0e466f8f0efc507a52dbb02c0/activesupport/lib/active_support/core_ext/array/conversions.rb#L45" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003034_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/array/conversions.rb, line 45</span>
+45:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_param</span>
+46:           <span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_param</span> }.<span class="ruby-identifier">join</span> <span class="ruby-value str">'/'</span>
+47:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003035">
+                    
+                    <a name="M003035"></a><b>to_query</b>(key)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Converts an array into a string suitable for use as a URL query string,
+using the given <tt>key</tt> as the param name.
+</p>
+<pre>
+  ['Rails', 'coding'].to_query('hobbies') # =&gt; &quot;hobbies%5B%5D=Rails&amp;hobbies%5B%5D=coding&quot;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003035_source')" id="l_M003035_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a84e9b4f31ac39b0e466f8f0efc507a52dbb02c0/activesupport/lib/active_support/core_ext/array/conversions.rb#L53" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003035_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/array/conversions.rb, line 53</span>
+53:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_query</span>(<span class="ruby-identifier">key</span>)
+54:           <span class="ruby-identifier">prefix</span> = <span class="ruby-node">&quot;#{key}[]&quot;</span>
+55:           <span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_query</span>(<span class="ruby-identifier">prefix</span>) }.<span class="ruby-identifier">join</span> <span class="ruby-value str">'&amp;'</span>
+56:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003033">
+                    
+                    <a name="M003033"></a><b>to_sentence</b>(options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Converts the array to a comma-separated sentence where the last element is
+joined by the connector word. Options:
+</p>
+<ul>
+<li><tt>:words_connector</tt> - The sign or word used to join the elements in
+arrays with two or more elements (default: &#8220;, &#8220;)
+
+</li>
+<li><tt>:two_words_connector</tt> - The sign or word used to join the elements
+in arrays with two elements (default: &#8220; and &#8220;)
+
+</li>
+<li><tt>:last_word_connector</tt> - The sign or word used to join the last
+element in arrays with three or more elements (default: &#8220;, and
+&#8220;)
+
+</li>
+</ul>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003033_source')" id="l_M003033_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a84e9b4f31ac39b0e466f8f0efc507a52dbb02c0/activesupport/lib/active_support/core_ext/array/conversions.rb#L9" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003033_source" class="dyn-source">
+                        <pre>    <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/array/conversions.rb, line 9</span>
+ 9:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_sentence</span>(<span class="ruby-identifier">options</span> = {})
+10:           <span class="ruby-identifier">default_words_connector</span>     = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">:'support.array.words_connector'</span>,     <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>])
+11:           <span class="ruby-identifier">default_two_words_connector</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">:'support.array.two_words_connector'</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>])
+12:           <span class="ruby-identifier">default_last_word_connector</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">:'support.array.last_word_connector'</span>, <span class="ruby-identifier">:locale</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:locale</span>])
+13: 
+14:           <span class="ruby-comment cmt"># Try to emulate to_senteces previous to 2.3</span>
+15:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:connector</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:skip_last_comma</span>)
+16:             <span class="ruby-operator">::</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-value str">&quot;:connector has been deprecated. Use :words_connector instead&quot;</span>, <span class="ruby-identifier">caller</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">:connector</span>
+17:             <span class="ruby-operator">::</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-value str">&quot;:skip_last_comma has been deprecated. Use :last_word_connector instead&quot;</span>, <span class="ruby-identifier">caller</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-identifier">:skip_last_comma</span>
+18: 
+19:             <span class="ruby-identifier">skip_last_comma</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">:skip_last_comma</span>
+20:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">connector</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:connector</span>)
+21:               <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:last_word_connector</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">skip_last_comma</span> <span class="ruby-value">? </span><span class="ruby-identifier">connector</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;, #{connector}&quot;</span>
+22:             <span class="ruby-keyword kw">else</span>
+23:               <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:last_word_connector</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">skip_last_comma</span> <span class="ruby-value">? </span><span class="ruby-identifier">default_two_words_connector</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">default_last_word_connector</span>
+24:             <span class="ruby-keyword kw">end</span>
+25:           <span class="ruby-keyword kw">end</span>
+26:           
+27:           <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-identifier">:words_connector</span>, <span class="ruby-identifier">:two_words_connector</span>, <span class="ruby-identifier">:last_word_connector</span>, <span class="ruby-identifier">:locale</span>)       
+28:           <span class="ruby-identifier">options</span>.<span class="ruby-identifier">reverse_merge!</span> <span class="ruby-identifier">:words_connector</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_words_connector</span>, <span class="ruby-identifier">:two_words_connector</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_two_words_connector</span>, <span class="ruby-identifier">:last_word_connector</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_last_word_connector</span>
+29:           
+30:           <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">length</span>
+31:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">0</span>
+32:               <span class="ruby-value str">&quot;&quot;</span>
+33:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">1</span>
+34:               <span class="ruby-keyword kw">self</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span>
+35:             <span class="ruby-keyword kw">when</span> <span class="ruby-value">2</span>
+36:               <span class="ruby-node">&quot;#{self[0]}#{options[:two_words_connector]}#{self[1]}&quot;</span>
+37:             <span class="ruby-keyword kw">else</span>
+38:               <span class="ruby-node">&quot;#{self[0...-1].join(options[:words_connector])}#{options[:last_word_connector]}#{self[-1]}&quot;</span>
+39:           <span class="ruby-keyword kw">end</span>
+40:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M003038">
+                    
+                    <a name="M003038"></a><b>to_xml</b>(options = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns a string that represents this array in XML by sending <tt><a
+href="Conversions.html#M003038">to_xml</a></tt> to each element. Active
+Record collections delegate their representation in XML to this method.
+</p>
+<p>
+All elements are expected to respond to <tt><a
+href="Conversions.html#M003038">to_xml</a></tt>, if any of them does not an
+exception is raised.
+</p>
+<p>
+The root node reflects the class name of the first element in plural if all
+elements belong to the same type and that&#8217;s not Hash:
+</p>
+<pre>
+  customer.projects.to_xml
+
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;projects type=&quot;array&quot;&gt;
+    &lt;project&gt;
+      &lt;amount type=&quot;decimal&quot;&gt;20000.0&lt;/amount&gt;
+      &lt;customer-id type=&quot;integer&quot;&gt;1567&lt;/customer-id&gt;
+      &lt;deal-date type=&quot;date&quot;&gt;2008-04-09&lt;/deal-date&gt;
+      ...
+    &lt;/project&gt;
+    &lt;project&gt;
+      &lt;amount type=&quot;decimal&quot;&gt;57230.0&lt;/amount&gt;
+      &lt;customer-id type=&quot;integer&quot;&gt;1567&lt;/customer-id&gt;
+      &lt;deal-date type=&quot;date&quot;&gt;2008-04-15&lt;/deal-date&gt;
+      ...
+    &lt;/project&gt;
+  &lt;/projects&gt;
+</pre>
+<p>
+Otherwise the root element is &#8220;records&#8221;:
+</p>
+<pre>
+  [{:foo =&gt; 1, :bar =&gt; 2}, {:baz =&gt; 3}].to_xml
+
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;records type=&quot;array&quot;&gt;
+    &lt;record&gt;
+      &lt;bar type=&quot;integer&quot;&gt;2&lt;/bar&gt;
+      &lt;foo type=&quot;integer&quot;&gt;1&lt;/foo&gt;
+    &lt;/record&gt;
+    &lt;record&gt;
+      &lt;baz type=&quot;integer&quot;&gt;3&lt;/baz&gt;
+    &lt;/record&gt;
+  &lt;/records&gt;
+</pre>
+<p>
+If the collection is empty the root element is &#8220;nil-classes&#8221; by
+default:
+</p>
+<pre>
+  [].to_xml
+
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;nil-classes type=&quot;array&quot;/&gt;
+</pre>
+<p>
+To ensure a meaningful root element use the <tt>:root</tt> option:
+</p>
+<pre>
+  customer_with_no_projects.projects.to_xml(:root =&gt; &quot;projects&quot;)
+
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;projects type=&quot;array&quot;/&gt;
+</pre>
+<p>
+By default root children have as node name the one of the root
+singularized. You can change it with the <tt>:children</tt> option.
+</p>
+<p>
+The <tt>options</tt> hash is passed downwards:
+</p>
+<pre>
+  Message.all.to_xml(:skip_types =&gt; true)
+
+  &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+  &lt;messages&gt;
+    &lt;message&gt;
+      &lt;created-at&gt;2008-03-07T09:58:18+01:00&lt;/created-at&gt;
+      &lt;id&gt;1&lt;/id&gt;
+      &lt;name&gt;1&lt;/name&gt;
+      &lt;updated-at&gt;2008-03-07T09:58:18+01:00&lt;/updated-at&gt;
+      &lt;user-id&gt;1&lt;/user-id&gt;
+    &lt;/message&gt;
+  &lt;/messages&gt;
+</pre>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M003038_source')" id="l_M003038_source">show</a>
+                        
+                        | <a href="http://github.com/rails/rails/blob/a84e9b4f31ac39b0e466f8f0efc507a52dbb02c0/activesupport/lib/active_support/core_ext/array/conversions.rb#L162" target="_blank" class="github_url">on GitHub</a>
+                        
+                    </p>
+                    <div id="M003038_source" class="dyn-source">
+                        <pre>     <span class="ruby-comment cmt"># File activesupport/lib/active_support/core_ext/array/conversions.rb, line 162</span>
+162:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_xml</span>(<span class="ruby-identifier">options</span> = {})
+163:           <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Not all elements respond to to_xml&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">:to_xml</span> }
+164:           <span class="ruby-identifier">require</span> <span class="ruby-value str">'builder'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">Builder</span>)
+165: 
+166:           <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
+167:           <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:root</span>]     <span class="ruby-operator">||=</span> <span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-identifier">first</span>.<span class="ruby-identifier">class</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">first</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">!=</span> <span class="ruby-value str">&quot;Hash&quot;</span> } <span class="ruby-operator">?</span> <span class="ruby-identifier">first</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">underscore</span>.<span class="ruby-identifier">pluralize</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-value str">'/'</span>, <span class="ruby-value str">'-'</span>) <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;records&quot;</span>
+168:           <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:children</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:root</span>].<span class="ruby-identifier">singularize</span>
+169:           <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:indent</span>]   <span class="ruby-operator">||=</span> <span class="ruby-value">2</span>
+170:           <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:builder</span>]  <span class="ruby-operator">||=</span> <span class="ruby-constant">Builder</span><span class="ruby-operator">::</span><span class="ruby-constant">XmlMarkup</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:indent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:indent</span>])
+171: 
+172:           <span class="ruby-identifier">root</span>     = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:root</span>).<span class="ruby-identifier">to_s</span>
+173:           <span class="ruby-identifier">children</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:children</span>)
+174: 
+175:           <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:dasherize</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:dasherize</span>]
+176:             <span class="ruby-identifier">root</span> = <span class="ruby-identifier">root</span>.<span class="ruby-identifier">dasherize</span>
+177:           <span class="ruby-keyword kw">end</span>
+178: 
+179:           <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:builder</span>].<span class="ruby-identifier">instruct!</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:skip_instruct</span>)
+180: 
+181:           <span class="ruby-identifier">opts</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>({ <span class="ruby-identifier">:root</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">children</span> })
+182: 
+183:           <span class="ruby-identifier">xml</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:builder</span>]
+184:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">empty?</span>
+185:             <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">tag!</span>(<span class="ruby-identifier">root</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:skip_types</span>] <span class="ruby-operator">?</span> {} <span class="ruby-operator">:</span> {<span class="ruby-identifier">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;array&quot;</span>})
+186:           <span class="ruby-keyword kw">else</span>
+187:             <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">tag!</span>(<span class="ruby-identifier">root</span>, <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:skip_types</span>] <span class="ruby-operator">?</span> {} <span class="ruby-operator">:</span> {<span class="ruby-identifier">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;array&quot;</span>}) {
+188:               <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">xml</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+189:               <span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_xml</span>(<span class="ruby-identifier">opts</span>.<span class="ruby-identifier">merge</span>({ <span class="ruby-identifier">:skip_instruct</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span> })) }
+190:             }
+191:           <span class="ruby-keyword kw">end</span>
+192:         <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActiveSupport/CoreExtensions/Array/Conversions.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:16:03 GMT -->
+</html>    

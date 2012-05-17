@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:11:52 GMT -->
+<head>
+    <title>ActionController</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            ActionController 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/actionpack/lib/action_controller/caching/fragments_rb.html">actionpack/lib/action_controller/caching/fragments.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/caching/actions_rb.html">actionpack/lib/action_controller/caching/actions.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/caching/sweeper_rb.html">actionpack/lib/action_controller/caching/sweeper.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/caching/pages_rb.html">actionpack/lib/action_controller/caching/pages.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/caching/sweeping_rb.html">actionpack/lib/action_controller/caching/sweeping.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/layout_rb.html">actionpack/lib/action_controller/layout.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/polymorphic_routes_rb.html">actionpack/lib/action_controller/polymorphic_routes.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/streaming_rb.html">actionpack/lib/action_controller/streaming.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/caching_rb.html">actionpack/lib/action_controller/caching.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/dispatcher_rb.html">actionpack/lib/action_controller/dispatcher.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/routing_rb.html">actionpack/lib/action_controller/routing.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/verification_rb.html">actionpack/lib/action_controller/verification.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/request_forgery_protection_rb.html">actionpack/lib/action_controller/request_forgery_protection.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/benchmarking_rb.html">actionpack/lib/action_controller/benchmarking.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/http_authentication_rb.html">actionpack/lib/action_controller/http_authentication.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/session/cookie_store_rb.html">actionpack/lib/action_controller/session/cookie_store.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/session/abstract_store_rb.html">actionpack/lib/action_controller/session/abstract_store.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/assertions/response_assertions_rb.html">actionpack/lib/action_controller/assertions/response_assertions.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/session/mem_cache_store_rb.html">actionpack/lib/action_controller/session/mem_cache_store.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/assertions/tag_assertions_rb.html">actionpack/lib/action_controller/assertions/tag_assertions.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/assertions/model_assertions_rb.html">actionpack/lib/action_controller/assertions/model_assertions.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/assertions/routing_assertions_rb.html">actionpack/lib/action_controller/assertions/routing_assertions.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/assertions/selector_assertions_rb.html">actionpack/lib/action_controller/assertions/selector_assertions.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/assertions/dom_assertions_rb.html">actionpack/lib/action_controller/assertions/dom_assertions.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/headers_rb.html">actionpack/lib/action_controller/headers.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/test_case_rb.html">actionpack/lib/action_controller/test_case.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/cookies_rb.html">actionpack/lib/action_controller/cookies.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/uploaded_file_rb.html">actionpack/lib/action_controller/uploaded_file.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/cgi_process_rb.html">actionpack/lib/action_controller/cgi_process.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/status_codes_rb.html">actionpack/lib/action_controller/status_codes.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/test_process_rb.html">actionpack/lib/action_controller/test_process.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/base_rb.html">actionpack/lib/action_controller/base.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/integration_rb.html">actionpack/lib/action_controller/integration.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/translation_rb.html">actionpack/lib/action_controller/translation.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/mime_responds_rb.html">actionpack/lib/action_controller/mime_responds.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/failsafe_rb.html">actionpack/lib/action_controller/failsafe.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/response_rb.html">actionpack/lib/action_controller/response.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/middleware_stack_rb.html">actionpack/lib/action_controller/middleware_stack.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/cgi_ext/stdinput_rb.html">actionpack/lib/action_controller/cgi_ext/stdinput.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/flash_rb.html">actionpack/lib/action_controller/flash.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/helpers_rb.html">actionpack/lib/action_controller/helpers.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/record_identifier_rb.html">actionpack/lib/action_controller/record_identifier.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/request_rb.html">actionpack/lib/action_controller/request.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/session_management_rb.html">actionpack/lib/action_controller/session_management.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/filters_rb.html">actionpack/lib/action_controller/filters.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/reloader_rb.html">actionpack/lib/action_controller/reloader.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/string_coercion_rb.html">actionpack/lib/action_controller/string_coercion.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/routing/builder_rb.html">actionpack/lib/action_controller/routing/builder.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/routing/recognition_optimisation_rb.html">actionpack/lib/action_controller/routing/recognition_optimisation.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/routing/route_rb.html">actionpack/lib/action_controller/routing/route.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/routing/optimisations_rb.html">actionpack/lib/action_controller/routing/optimisations.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/routing/segments_rb.html">actionpack/lib/action_controller/routing/segments.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/routing/route_set_rb.html">actionpack/lib/action_controller/routing/route_set.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/url_rewriter_rb.html">actionpack/lib/action_controller/url_rewriter.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/performance_test_rb.html">actionpack/lib/action_controller/performance_test.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/resources_rb.html">actionpack/lib/action_controller/resources.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/rescue_rb.html">actionpack/lib/action_controller/rescue.rb</a></li>
+            
+            <li><a href="../files/actionpack/lib/action_controller/params_parser_rb.html">actionpack/lib/action_controller/params_parser.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <hr size="1"></hr><p>
+FIXME: helper { &#8230; } is broken on Ruby 1.9
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Assertions.html">ActionController::Assertions</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Benchmarking.html">ActionController::Benchmarking</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Caching.html">ActionController::Caching</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/CgiExt.html">ActionController::CgiExt</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Cookies.html">ActionController::Cookies</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Filters.html">ActionController::Filters</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Flash.html">ActionController::Flash</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Helpers.html">ActionController::Helpers</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Http.html">ActionController::Http</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/HttpAuthentication.html">ActionController::HttpAuthentication</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Integration.html">ActionController::Integration</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Layout.html">ActionController::Layout</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/MimeResponds.html">ActionController::MimeResponds</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/PolymorphicRoutes.html">ActionController::PolymorphicRoutes</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/ProcessWithTest.html">ActionController::ProcessWithTest</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/RecordIdentifier.html">ActionController::RecordIdentifier</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/RequestForgeryProtection.html">ActionController::RequestForgeryProtection</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Rescue.html">ActionController::Rescue</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Resources.html">ActionController::Resources</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Routing.html">ActionController::Routing</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Session.html">ActionController::Session</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/SessionManagement.html">ActionController::SessionManagement</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/StatusCodes.html">ActionController::StatusCodes</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Streaming.html">ActionController::Streaming</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/TestProcess.html">ActionController::TestProcess</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/TestResponseBehavior.html">ActionController::TestResponseBehavior</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Translation.html">ActionController::Translation</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/UploadedFile.html">ActionController::UploadedFile</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/UrlWriter.html">ActionController::UrlWriter</a></li>
+        
+        <li><span class="type">MODULE</span> <a href="ActionController/Verification.html">ActionController::Verification</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/ActionControllerError.html">ActionController::ActionControllerError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/Base.html">ActionController::Base</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/CGIHandler.html">ActionController::CGIHandler</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/CgiRequest.html">ActionController::CgiRequest</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/CookieJar.html">ActionController::CookieJar</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/Dispatcher.html">ActionController::Dispatcher</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/DoubleRenderError.html">ActionController::DoubleRenderError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/Failsafe.html">ActionController::Failsafe</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/IntegrationTest.html">ActionController::IntegrationTest</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/InvalidAuthenticityToken.html">ActionController::InvalidAuthenticityToken</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/MethodNotAllowed.html">ActionController::MethodNotAllowed</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/MiddlewareStack.html">ActionController::MiddlewareStack</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/MissingFile.html">ActionController::MissingFile</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/NotImplemented.html">ActionController::NotImplemented</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/ParamsParser.html">ActionController::ParamsParser</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/PerformanceTest.html">ActionController::PerformanceTest</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/PermanentCookieJar.html">ActionController::PermanentCookieJar</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/RedirectBackError.html">ActionController::RedirectBackError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/Reloader.html">ActionController::Reloader</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/RenderError.html">ActionController::RenderError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/Request.html">ActionController::Request</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/Response.html">ActionController::Response</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/RoutingError.html">ActionController::RoutingError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/SessionOverflowError.html">ActionController::SessionOverflowError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/SessionRestoreError.html">ActionController::SessionRestoreError</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/SignedCookieJar.html">ActionController::SignedCookieJar</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/StringCoercion.html">ActionController::StringCoercion</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/TestCase.html">ActionController::TestCase</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/TestRequest.html">ActionController::TestRequest</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/TestResponse.html">ActionController::TestResponse</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/TestSession.html">ActionController::TestSession</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/TestUploadedFile.html">ActionController::TestUploadedFile</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/UnknownAction.html">ActionController::UnknownAction</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/UnknownController.html">ActionController::UnknownController</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/UnknownHttpMethod.html">ActionController::UnknownHttpMethod</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/UploadedStringIO.html">ActionController::UploadedStringIO</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/UploadedTempfile.html">ActionController::UploadedTempfile</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="ActionController/UrlRewriter.html">ActionController::UrlRewriter</a></li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+</div>
+    </div>
+  </body>
+
+<!-- Mirrored from railsapi.com/doc/rails-v2.3.8/classes/ActionController.html by HTTrack Website Copier/3.x [XR&CO'2010], Thu, 17 May 2012 15:12:29 GMT -->
+</html>    
