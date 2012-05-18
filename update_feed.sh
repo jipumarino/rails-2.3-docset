@@ -1,4 +1,4 @@
-version=`date +'%Y%m%d%H%M'`
+version=`date -u +'%Y%m%d%H%M'`
 tar --exclude='.DS_Store' -czf feed/Rails2.3.tgz Rails2.3.docset
 cat > feed/Rails2.3.xml <<FEED_XML
 <entry>
