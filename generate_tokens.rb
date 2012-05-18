@@ -1,16 +1,21 @@
+#!/usr/bin/env ruby
+
 require 'find'
 require 'nokogiri'
 require 'cgi'
 
-$tokens_file = open('Tokens.xml', 'w')
+resources_dir = File.dirname(__FILE__)+'/Rails2.3.docset/Contents/Resources/'
+documents_dir = resources_dir+'Documents'
+
+$tokens_file = open(resources_dir+'Tokens.xml', 'w')
 $tokens_file.puts "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Tokens version=\"1.0\">";
 
-paths = Find.find(File.dirname(__FILE__))
+paths = Find.find(documents_dir)
 paths = paths.select{|path| path =~ /\.html$/}
 
 paths.map do |path|
   dom = Nokogiri::HTML(open path)
-  file = path.gsub(/^\.\/Resources\/Documents\//,"")   
+  file = path.gsub(/^.*\/Resources\/Documents\//,"")   
   title = dom.at_css("title").text
   type = 'cl'
   next if title =~ /404 not found/i
