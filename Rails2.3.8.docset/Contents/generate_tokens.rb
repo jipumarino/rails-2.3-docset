@@ -5,38 +5,34 @@ require 'cgi'
 $tokens_file = open('Tokens.xml', 'w')
 $tokens_file.puts "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Tokens version=\"1.0\">";
 
-def parse_html(path)
-  if path =~ /\.html$/
-    dom = Nokogiri::HTML(open path)
-    file = path.gsub(/^\.\/Resources\/Documents\//,"")   
-    title = dom.at_css("title").text
-    type = 'cl'
-    return if title =~ /404 not found/i
-    type_span = dom.at_css('.type')
-    return if type_span.nil?
-    type_spam = type_span.text
-    type = 'cat' if type_span == 'Module'
-    methods = dom.css('a')
-    methods.each do |method|
-      href = method['href']
-      if href =~ /^#M/
-        mtype = 'instm' #TODO: distinguir
-        anchor = href[1,href.size-1]   
-        method_name = "#{title}::#{method.text}"
-        method_name = CGI.escapeHTML(method_name)
-        $tokens_file.puts "<File path=\"#{file}\"><Token><TokenIdentifier>//apple_ref/cpp/#{mtype}/#{method_name}</TokenIdentifier><Anchor>#{anchor}</Anchor></Token></File>\n"
-      end
+paths = Find.find(File.dirname(__FILE__))
+paths = paths.select{|path| path =~ /\.html$/}
+
+paths.map do |path|
+  dom = Nokogiri::HTML(open path)
+  file = path.gsub(/^\.\/Resources\/Documents\//,"")   
+  title = dom.at_css("title").text
+  type = 'cl'
+  next if title =~ /404 not found/i
+  type_span = dom.at_css('.type')
+  next if type_span.nil?
+  type_spam = type_span.text
+  type = 'cat' if type_span == 'Module'
+  methods = dom.css('a')
+  methods.each do |method|
+    href = method['href']
+    if href =~ /^#M/
+      mtype = 'instm' #TODO: class vs instance methods
+      anchor = href[1,href.size-1]
+      method_name = "#{title}::#{method.text}"
+      method_name = CGI.escapeHTML(method_name)
+      $tokens_file.puts "<File path=\"#{file}\"><Token><TokenIdentifier>//apple_ref/cpp/#{mtype}/#{method_name}</TokenIdentifier><Anchor>#{anchor}</Anchor></Token></File>\n"
     end
-
-    title = CGI.escapeHTML(title)
-    $tokens_file.puts "<File path=\"#{file}\"><Token><TokenIdentifier>//apple_ref/cpp/#{type}/#{title}</TokenIdentifier></Token></File>\n";
-
   end
-end
 
+  title = CGI.escapeHTML(title)
 
-Find.find(File.dirname(__FILE__)) do |path|
-  parse_html path
+  $tokens_file.puts "<File path=\"#{file}\"><Token><TokenIdentifier>//apple_ref/cpp/#{type}/#{title}</TokenIdentifier></Token></File>";
 end
 
 $tokens_file.puts "</Tokens>"
