@@ -8,5 +8,7 @@
 	<string>Ruby on Rails 2.3</string>
 	<key>DocSetPlatformFamily</key>
 	<string>rails</string>
+	<key>isJavaScriptEnabled</key>
+	<true/>
 </dict>
 </plist>
